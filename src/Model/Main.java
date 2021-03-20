@@ -12,10 +12,6 @@ public class Main {
 
         int input;
 
-
-
-
-
     }
 
 

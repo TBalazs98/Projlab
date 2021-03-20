@@ -3,9 +3,9 @@ package Model;
 import java.util.*;
 
 /**
- * 
+ *
  */
-public class TeleportGate {
+public class TeleportGate implements DestinationObject {
     public TeleportGate() {
     }
 
@@ -14,49 +14,58 @@ public class TeleportGate {
     private Settler creator;
     private TeleportGate pair;
     private Asteroid asteroid;
+    private Inventory iv;
 
-//    public void TeleportGate(Inventory inventory, Settler s) {
-//        // TODO implement here
-//    }
+    public TeleportGate(Inventory inventory, Settler s) {
+        this.creator = s;
+        this.pair = new TeleportGate();
+         /*   if(inventory.ContainsAllElementsIn(iv))
+            {
+            }*/
+    }
 
     public void Accept(Character c) {
-        // TODO implement here
+        if (isActive) {
+            pair.GetAsteroid().Accept(c);
+        }
     }
 
     public void Place(Asteroid asteroid) {
-        // TODO implement here
+        this.asteroid = creator.getAsteroid();
+        if (this.GetPlaced()) {
+            this.GetPair().Activate();
+            this.Activate();
+        }
     }
 
-//    public boolean GetPlaced() {
-//        // TODO implement here
-//        return null;
-//    }
+    public boolean GetPlaced() {
+        return pair.isPlaced;
+    }
 
-
-    public Asteroid GetAstroid() {
-        // TODO implement here
-        return null;
+    public Asteroid GetAsteroid() {
+        return this.asteroid;
     }
 
     public TeleportGate GetPair() {
-        // TODO implement here
-        return null;
+        return this.pair;
     }
 
     public void Activate() {
-        // TODO implement here
+        this.isActive = true;
     }
 
     public void Deactivate() {
-        // TODO implement here
+        this.isActive = false;
     }
 
     public void HitByExplosion(Asteroid a) {
-        // TODO implement here
+        this.Destroy();
+        this.GetPair().Deactivate();
     }
 
     public void Destroy() {
-        // TODO implement here
+        this.isPlaced = false;
+
     }
 
 }
