@@ -10,12 +10,16 @@ public class Game {
 
     private Game(){}
 
-
+    private static final Game game = new Game();
     private int rounds;
     private ArrayList<Steppable> steppables;
 
     public void StartGame() {
         // TODO implement here
+    }
+
+    public static Game getInstance() {
+        return game;
     }
 
     public void WinGame() {
