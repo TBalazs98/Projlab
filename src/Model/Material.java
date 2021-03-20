@@ -7,13 +7,14 @@ public class Material  {
     NormalMaterialName name;
     public Material() { }
 
-    public void Add(HashMap list) {
+    public void Add(Inventory inventory) {
+        inventory.Add(this.name);
     }
 
-    public void Hit(Asteroid a) { }
+    public void Hit(Asteroid a) {}
 
-    public void Remove(HashMap list) {
-
+    public void Remove(Inventory inventory) {
+        inventory.Remove(this.name);
     }
 
     public void setName(NormalMaterialName n){
