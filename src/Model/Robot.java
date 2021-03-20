@@ -10,7 +10,7 @@ public class Robot extends Worker {
     }
 
 
-    public void Robot(Inventory inventory , Asteroid a) {
+    public Robot(Inventory inventory , Asteroid a) {
         // TODO implement here
     }
 

@@ -8,6 +8,7 @@ import java.util.*;
 public class Settler extends Worker {
 
     public Settler() {
+        super();
     }
 
     private ArrayList<TeleportGate> gates;
@@ -15,7 +16,9 @@ public class Settler extends Worker {
     private Inventory inventory;
 
     public void Mine() {
-
+        Material m = asteroid.Mined();
+        if(m != null)
+            inventory.Add(m.name);
     }
 
     public void BuildBase() {
@@ -30,9 +33,10 @@ public class Settler extends Worker {
         Robot r = new Robot(inventory, asteroid);
     }
 
-//    public void PlaceMaterial(Material m) {
-//        // TODO implement here
-//    }
+    public void PlaceMaterial(Material m) {
+        if(asteroid.AddMaterial(m))
+            inventory.Remove(m.name);
+    }
 
 
     public void Explode() {

@@ -15,9 +15,9 @@ public class TeleportGate {
     private TeleportGate pair;
     private Asteroid asteroid;
 
-//    public void TeleportGate(Inventory inventory, Settler s) {
-//        // TODO implement here
-//    }
+    public TeleportGate(Inventory inventory, Settler s) {
+        // TODO implement here
+    }
 
     public void Accept(Character c) {
         // TODO implement here
