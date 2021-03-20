@@ -2,30 +2,46 @@ package Model;
 
 import java.util.*;
 
-/**
- *
- */
+
 public class Inventory {
+    public HashMap<MaterialName, Integer > inventory;
+
+
     public Inventory() {
+        inventory = new HashMap<MaterialName, Integer>();
     }
-   // public HashMap<Material, Integer > inventory;
 
-//    public void Add(Material m) {
-//        // TODO implement here
-//    }
+    //TODO NEW
+    public Integer get_amount(MaterialName m) {
+        return inventory.get(m);
+    }
 
-//    public void Remove(Material m) {
-//        // TODO implement here
-//    }
+    public void Add(Material m) {
+        if(this.inventory.size()<25)
+           this.inventory.put(m.name,this.inventory.get(m)+1);                         //todo így csak 1 re állítja, az kell hogy get(m.name).value +1 legyen
+    }
+
+    public void Remove(MaterialName m) {
+        if(this.inventory.get(m)>0){
+            this.inventory.put(m,this.inventory.get(m)-1);
+        }
+    }
 
     public boolean ContainsAllElementsIn(Inventory i ) {
-        // TODO implement here
-        return true;
+        for(MaterialName  m : this.inventory.keySet() ){    //végigmegyünk az összes materiálunkon
+            if(i.inventory.get(m) < this.inventory.get(m)){ //ha a paraméterként kapott inventoryban kevesebb van ( mint amennyire szükség lenne)
+                return false;                               //akkor építkezés no-no
+            }
+        }
+        return true;                                        //amúgy zsa
     }
 
     public int Size() {
-        // TODO implement here
-        return 0;
+        int size=0;
+        for(MaterialName m : this.inventory.keySet()){      //végigmegyünk az összes nálunk lévő materiálon
+            size+=this.inventory.get(m);                    //és az adott materiálhoz tartozó mennyiséget returnoljuk
+        }
+        return size;
     }
 
 }
