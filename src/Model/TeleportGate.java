@@ -8,10 +8,10 @@ public class TeleportGate implements DestinationObject {
     private boolean isPlaced;
     private TeleportGate pair;
     private Asteroid asteroid;
-    private static Inventory iv;
+    private static final Inventory inv = new Inventory();
 
     public TeleportGate(Inventory inventory, Settler s) {
-           if(iv.ContainsAllElementsIn(inventory))
+           if(inv.ContainsAllElementsIn(inventory))
             {
                 this.pair = new TeleportGate();
                 this.isPlaced = false;
@@ -19,7 +19,18 @@ public class TeleportGate implements DestinationObject {
                 this.asteroid = s.getAsteroid();
                 this.Place(this.asteroid);
                 s.AddGate(this);
+                this.setInventory();
             }
+    }
+
+    private void setInventory()
+    {
+        for(int i =0; i<2;i++)
+        {
+            inv.Add(NormalMaterialName.IRON);
+        }
+        inv.Add(SublimableMaterialName.ICEWATER);
+        inv.Add(RadioactiveMaterialName.URAN);
     }
 
     public Asteroid Accept(Character c) {
@@ -60,7 +71,6 @@ public class TeleportGate implements DestinationObject {
     public void HitByExplosion(Asteroid a) {
         this.Destroy();
         this.GetPair().Deactivate();
-
     }
 
     public void Destroy() {
