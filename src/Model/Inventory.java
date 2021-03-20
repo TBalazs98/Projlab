@@ -20,8 +20,12 @@ public class Inventory {
         inventory.putAll(m);
     }
     public void Add(MaterialName m) {
-        if(this.inventory.size()<10)
-           this.inventory.put(m,this.inventory.get(m)+1);                         //todo így csak 1 re állítja, az kell hogy get(m.name).value +1 legyen
+        if(this.inventory.size()<10) {
+            int n = 0;                          //segédváltozó ahhoz, hogy mennyi keyhez tartozó value van
+            if(inventory.containsKey(m))        //muszáj ellenőrizni, hogy létezik e már, mert ha nem akkor
+                n = inventory.get(m) + 1;       //nullexception hibát dob
+            this.inventory.put(m,n);                         //todo így csak 1 re állítja, az kell hogy get(m.name).value +1 legyen
+        }
     }
 
     public void Remove(MaterialName m) {

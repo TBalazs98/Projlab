@@ -13,12 +13,15 @@ public class Settler extends Worker {
 
     private ArrayList<TeleportGate> gates;
 
-    private Inventory inventory;
+    private Inventory inventory = new Inventory();
 
     public void Mine() {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name);
         Material m = asteroid.Mined();
         if(m != null)
             inventory.Add(m.name);
+        Logger.getInstance().printReturnCommand();
     }
 
     public void BuildBase() {
@@ -34,8 +37,12 @@ public class Settler extends Worker {
     }
 
     public void PlaceMaterial(Material m) {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name, m.name.toString());
         if(asteroid.AddMaterial(m))
             inventory.Remove(m.name);
+        //System.out.printf("hello");
+        Logger.getInstance().printReturnCommand();
     }
 
 
