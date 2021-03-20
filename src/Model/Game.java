@@ -1,32 +1,33 @@
 package Model;
 
 import java.util.*;
+import java.util.ArrayList;
 
 /**
  * 
  */
 public class Game {
-    private static final Game game = new Game();
 
     private Game(){}
 
-    public static Game getInstance(){
-        return game;
-    }
 
     private int rounds;
-    private Set<Steppable> steppable;
+    private ArrayList<Steppable> steppables;
+
     public void StartGame() {
         // TODO implement here
     }
+
     public void WinGame() {
-        // TODO implement here
+        System.out.println("Settlers have won the game");
     }
+
     public void LoseGame() {
-        // TODO implement here
+        System.out.println("Settlers have lost the game");
     }
+
     public void NextRound() {
-        // TODO implement here
+        steppables.forEach(s -> s.Step());
     }
 
 }
