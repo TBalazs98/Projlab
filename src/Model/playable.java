@@ -5,11 +5,10 @@ import java.util.*;
 /**
  * 
  */
-public class playable {
-    public playable() {
-    }
-    public void Playermoves() {
-        // TODO implement here
-    }
+public interface playable {
+
+    public void Playermoves();
+
+
 
 }
