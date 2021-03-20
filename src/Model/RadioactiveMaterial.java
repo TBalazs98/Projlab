@@ -11,11 +11,16 @@ public class RadioactiveMaterial extends Material {
 
 
     public RadioactiveMaterial() {
+        name = RadioactiveMaterialName.URAN;
     }
 
 
     public void Hit(Asteroid a) {
-        // TODO implement here
+        if(a.GetSunProximity() == true && a.getLayers() == 0) a.Explode();
+    }
+
+    public void setName(RadioactiveMaterialName rname){
+        name = rname;
     }
 
 }

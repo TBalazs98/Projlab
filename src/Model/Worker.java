@@ -5,15 +5,18 @@ import java.util.*;
 /**
  * 
  */
-public abstract class Worker extends Character {
+public abstract class Worker extends Character implements drillable {
 
     public Worker() {
+        super();
     }
 
     public void Drill() {
-        // TODO implement here
+        super.getAsteroid().Drilled();
     }
 
-    public abstract void Explode();
+   // public abstract void Explode();   //Mivel a worker osztály még absztrakt
+                                         //ezért itt nem fontos ezt implementálni,
+                                        // csak a Settlerben meg a robotban
 
 }
