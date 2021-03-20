@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Inventory {
     public HashMap<MaterialName, Integer > inventory;
-
+//asd
 
     public Inventory() {
         inventory = new HashMap<MaterialName, Integer>();
