@@ -7,8 +7,7 @@ public class Material  {
     NormalMaterialName name;
     public Material() { }
 
-    public void Add(Inventory inventory) {
-        inventory.Add(this);
+    public void Add(HashMap list) {
     }
 
     public void Hit(Asteroid a) { }
