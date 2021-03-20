@@ -22,10 +22,11 @@ public class TeleportGate implements DestinationObject {
             }
     }
 
-    public void Accept(Character c) {
+    public Asteroid Accept(Character c) {
         if (isActive) {
             pair.GetAsteroid().Accept(c);
         }
+        return this.pair.GetAsteroid();
     }
 
     public void Place(Asteroid asteroid) {
