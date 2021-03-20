@@ -11,6 +11,7 @@ public class TeleportGate implements DestinationObject {
     private static final Inventory inv = new Inventory();
 
     public TeleportGate(Inventory inventory, Settler s) {
+        this.setInventory();
            if(inv.ContainsAllElementsIn(inventory))
             {
                 this.pair = new TeleportGate();
@@ -19,7 +20,6 @@ public class TeleportGate implements DestinationObject {
                 this.asteroid = s.getAsteroid();
                 this.Place(this.asteroid);
                 s.AddGate(this);
-                this.setInventory();
             }
     }
 
