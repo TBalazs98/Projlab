@@ -3,7 +3,7 @@ package Model;
 /**
  * 
  */
-enum NormalMaterialName implements MaterialName{
+public enum NormalMaterialName implements MaterialName{
     IRON,
     COAL
 }
