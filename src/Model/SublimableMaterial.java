@@ -18,4 +18,8 @@ public class SublimableMaterial extends Material {
             a.RemoveMaterial(a.getMaterial());
     }
 
+    public void setName(SublimableMaterialName name){
+        sname = name;
+    }
+
 }
