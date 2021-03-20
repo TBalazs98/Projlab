@@ -16,6 +16,9 @@ public class Inventory {
         return inventory.get(m);
     }
 
+    public void init(HashMap<MaterialName, Integer> m) {
+        inventory.putAll(m);
+    }
     public void Add(MaterialName m) {
         if(this.inventory.size()<10)
            this.inventory.put(m,this.inventory.get(m)+1);                         //todo így csak 1 re állítja, az kell hogy get(m.name).value +1 legyen

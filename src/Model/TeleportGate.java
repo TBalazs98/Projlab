@@ -1,36 +1,37 @@
 package Model;
 
+import java.util.HashMap;
+
 public class TeleportGate implements DestinationObject {
     public TeleportGate() {
+        setInventory();
     }
 
     private boolean isActive;
     private boolean isPlaced;
     private TeleportGate pair;
     private Asteroid asteroid;
-    private static final Inventory inv = new Inventory();
+    private static final Inventory inventory = new Inventory();
 
-    public TeleportGate(Inventory inventory, Settler s) {
-           if(inv.ContainsAllElementsIn(inventory))
+    public TeleportGate(Inventory i, Settler s) {
+        setInventory();
+        if(inventory.ContainsAllElementsIn(i))
             {
                 this.pair = new TeleportGate();
                 this.isPlaced = false;
                 this.isActive = false;
-                this.asteroid = s.getAsteroid();
-                this.Place(this.asteroid);
                 s.AddGate(this);
-                this.setInventory();
             }
+
     }
 
-    private void setInventory()
-    {
-        for(int i =0; i<2;i++)
-        {
-            inv.Add(NormalMaterialName.IRON);
-        }
-        inv.Add(SublimableMaterialName.ICEWATER);
-        inv.Add(RadioactiveMaterialName.URAN);
+    private void setInventory() {
+        HashMap<MaterialName, Integer> m = new HashMap<MaterialName, Integer>();
+        m.put(NormalMaterialName.IRON, 2);
+        m.put(SublimableMaterialName.ICEWATER, 1);
+        m.put(RadioactiveMaterialName.URAN, 1);
+
+        inventory.init(m);
     }
 
     public Asteroid Accept(Character c) {
@@ -42,8 +43,9 @@ public class TeleportGate implements DestinationObject {
 
     public void Place(Asteroid asteroid) {
         this.asteroid = asteroid;
-        if (this.GetPlaced()) {
-            this.GetPair().Activate();
+        isPlaced = true;
+        if (pair.GetPlaced()) {
+            this.pair.Activate();
             this.Activate();
         }
     }
