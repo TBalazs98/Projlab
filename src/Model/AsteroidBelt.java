@@ -1,28 +1,37 @@
 package Model;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
- * 
+ * proba
  */
 public class AsteroidBelt {
-    public AsteroidBelt() {
-    }
 
     private int settlersAlive;
 
+    private ArrayList<Asteroid> asteroids;
+
+    public AsteroidBelt() {
+    }
 
     public void Step() {
-        // TODO implement here
+        this.StartStorm();
     }
+
     public void StartStorm() {
-        // TODO implement here
+        asteroids.forEach(a -> a.HitBySunstorm());
     }
+
     public void RemoveAsteroid(Asteroid a) {
-        // TODO implement here
+        this.asteroids.remove(a);
     }
+
+    public void AddAsteroid(Asteroid a) {
+        this.asteroids.add(a);
+    }
+
     public void SetSettlersAlive() {
-        // TODO implement here
+        this.settlersAlive--;
     }
 
 }
