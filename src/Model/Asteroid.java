@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  *
  */
-public class Asteroid {
+public class Asteroid implements DestinationObject {
 
     private boolean isEmpty;
 
@@ -60,6 +60,7 @@ public class Asteroid {
     }
 
     public void Drilled() {
+
         this.layers--;
     }
 

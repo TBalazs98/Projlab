@@ -6,6 +6,8 @@ import java.util.*;
  * 
  */
 public class Base {
+
+    public HashMap<Inventory,Material> inventory;
     public Base() {
     }
 
