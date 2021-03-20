@@ -45,8 +45,9 @@ public class Asteroid implements DestinationObject {
         neighbours.add(d);
     };
 
-    public void Accept(Character c) {
+    public Asteroid Accept(Character c) {
         characters.add(c);
+        return this;
     }
 
     public void Remove(Character c) {

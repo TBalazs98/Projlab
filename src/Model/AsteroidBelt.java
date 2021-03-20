@@ -7,11 +7,17 @@ import java.util.ArrayList;
  */
 public class AsteroidBelt {
 
-    private int settlersAlive;
+    public int settlersAlive;
+
+    private static final AsteroidBelt ab = new AsteroidBelt();
 
     private ArrayList<Asteroid> asteroids;
 
-    public AsteroidBelt() {
+    private AsteroidBelt() {
+    }
+
+    public static AsteroidBelt getInstance() {
+        return ab;
     }
 
     public void Step() {
@@ -32,6 +38,8 @@ public class AsteroidBelt {
 
     public void SetSettlersAlive() {
         this.settlersAlive--;
+        if(settlersAlive == 0)
+            Game.getInstance().LoseGame();
     }
 
 }

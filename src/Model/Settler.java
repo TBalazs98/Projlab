@@ -10,24 +10,24 @@ public class Settler extends Worker {
     public Settler() {
     }
 
-    private TeleportGate gates;
+    private ArrayList<TeleportGate> gates;
 
-    //private Inventory inventory;
+    private Inventory inventory;
 
     public void Mine() {
-        // TODO implement here
+
     }
 
     public void BuildBase() {
-        // TODO implement here
+        Base base = new Base(inventory);
     }
 
     public void BuildGate() {
-        // TODO implement here
+        TeleportGate g1 = new TeleportGate(inventory, this);
     }
 
     public void BuildRobot() {
-        // TODO implement here
+        Robot r = new Robot(inventory, asteroid);
     }
 
 //    public void PlaceMaterial(Material m) {
@@ -36,22 +36,22 @@ public class Settler extends Worker {
 
 
     public void Explode() {
-        // TODO implement here
+        Die();
     }
 
 
     public void Die() {
-        // TODO implement here
-        System.out.println("anyad");
+        asteroid.Remove(this);
+        AsteroidBelt.getInstance().SetSettlersAlive();
     }
 
     public void AddGate(TeleportGate t) {
-        // TODO implement here
+        gates.add(t);
     }
 
 
     public void PlaceGate(TeleportGate t) {
-        // TODO implement here
+        t.Place(asteroid);
     }
 
 }
