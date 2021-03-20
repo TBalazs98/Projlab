@@ -43,14 +43,15 @@ public class Asteroid implements DestinationObject {
 
     public void setNeighbour(DestinationObject d){
         neighbours.add(d);
-    };
+    }
 
     public int getLayers() { return  this.layers; }
 
     public Material getMaterial() {return  this.material; }
 
-    public void Accept(Character c) {
+    public Asteroid Accept(Character c) {
         characters.add(c);
+        return this;
     }
 
     public void Remove(Character c) {

@@ -19,4 +19,8 @@ public class RadioactiveMaterial extends Material {
         if(a.GetSunProximity() == true && a.getLayers() == 0) a.Explode();
     }
 
+    public void setName(RadioactiveMaterialName rname){
+        name = rname;
+    }
+
 }

@@ -7,7 +7,7 @@ import java.util.*;
  */
 public abstract class Character {
 
-    private Asteroid asteroid;
+    protected Asteroid asteroid;
 
     public Character() {
     }
@@ -15,11 +15,10 @@ public abstract class Character {
     public void Die() {}
     public abstract void Explode();
 
-    //FATAL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4
     public void Move(int idx) {
-       // asteroid.GetNeighbour(idx);
         asteroid.Remove(this);
-        asteroid = (Asteroid)asteroid.GetNeighbour(idx);
+        DestinationObject goingTo = asteroid.GetNeighbour(idx);
+        asteroid = (Asteroid) goingTo.Accept(this); //fixen asteroid lesz, mivel a DestinationObject minden implementálásánál Asteroiddal tér vissza
     }
 
     public void addAsteroid(Asteroid a){
