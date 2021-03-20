@@ -15,6 +15,7 @@ public class Robot extends Worker {
     public Robot(Inventory i, Asteroid a) {
         setInventory();
         if(inventory.ContainsAllElementsIn(i)) {
+            asteroid=a;
             a.Accept(this);
         }
     }
