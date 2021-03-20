@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Inventory {
     public HashMap<MaterialName, Integer > inventory;
-
+//asd
 
     public Inventory() {
         inventory = new HashMap<MaterialName, Integer>();
@@ -16,9 +16,9 @@ public class Inventory {
         return inventory.get(m);
     }
 
-    public void Add(Material m) {
-        if(this.inventory.size()<25)
-           this.inventory.put(m.name,this.inventory.get(m)+1);                         //todo így csak 1 re állítja, az kell hogy get(m.name).value +1 legyen
+    public void Add(MaterialName m) {
+        if(this.inventory.size()<10)
+           this.inventory.put(m,this.inventory.get(m)+1);                         //todo így csak 1 re állítja, az kell hogy get(m.name).value +1 legyen
     }
 
     public void Remove(MaterialName m) {
