@@ -45,6 +45,10 @@ public class Asteroid implements DestinationObject {
         neighbours.add(d);
     };
 
+    public int getLayers() { return  this.layers; }
+
+    public Material getMaterial() {return  this.material; }
+
     public void Accept(Character c) {
         characters.add(c);
     }
