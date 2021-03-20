@@ -1,27 +1,25 @@
 package Model;
 
-import java.util.*;
-
-/**
- *
- */
 public class TeleportGate implements DestinationObject {
     public TeleportGate() {
     }
 
     private boolean isActive;
     private boolean isPlaced;
-    private Settler creator;
     private TeleportGate pair;
     private Asteroid asteroid;
-    private Inventory iv;
+    private static Inventory iv;
 
     public TeleportGate(Inventory inventory, Settler s) {
-        this.creator = s;
-        this.pair = new TeleportGate();
-         /*   if(inventory.ContainsAllElementsIn(iv))
+           if(iv.ContainsAllElementsIn(inventory))
             {
-            }*/
+                this.pair = new TeleportGate();
+                this.isPlaced = false;
+                this.isActive = false;
+                this.asteroid = s.getAsteroid();
+                this.Place(this.asteroid);
+                s.AddGate(this);
+            }
     }
 
     public void Accept(Character c) {
@@ -31,7 +29,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     public void Place(Asteroid asteroid) {
-        this.asteroid = creator.getAsteroid();
+        this.asteroid = asteroid;
         if (this.GetPlaced()) {
             this.GetPair().Activate();
             this.Activate();
@@ -61,11 +59,12 @@ public class TeleportGate implements DestinationObject {
     public void HitByExplosion(Asteroid a) {
         this.Destroy();
         this.GetPair().Deactivate();
+
     }
 
     public void Destroy() {
+        this.Deactivate();
         this.isPlaced = false;
-
     }
 
 }
