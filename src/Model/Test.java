@@ -134,6 +134,7 @@ public class Test {
     void DrillLayerandReachSublimableMaterial() {                   //1.
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
+        SublimableMaterial m = new SublimableMaterial();
 
         asteroid.setLayer(1);
         asteroid.setCharacter(s);
