@@ -65,15 +65,14 @@ public class Settler extends Worker {
     }
 
     public void AddGate(TeleportGate t) {
-        Object[] p = {t};
+        Object[] p = {t.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         gates.add(t);
         Logger.getInstance().printReturnCommand();
     }
 
-
     public void PlaceGate(TeleportGate t) {
-        Object[] p = {t};
+        Object[] p = {t.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         t.Place(asteroid);
         Logger.getInstance().printReturnCommand();
