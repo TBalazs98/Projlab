@@ -1,4 +1,6 @@
 package Model;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -100,10 +102,30 @@ public class Asteroid implements DestinationObject {
 
     public void Drilled() {
         Logger.getInstance().printCommandCall(this);
-        this.layers--;
-        if(!isEmpty && layers == 0) {
+
+        //függvény lefutása felhasználói beavatkozással
+        System.out.print("How many layers does the asteroid have after drilling?\t(Y)es / (N)o \t");
+        InputStreamReader br = new InputStreamReader(System.in);
+        char ch = ' ';
+        int layers = 0;
+        try {
+            layers = br.read();
+            System.out.print("Is the asteroid empty?\t(Y)es / (N)o\t");
+            ch = (char)br.read();
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if((ch=='y' || ch=='Y' ) && layers == 0) {
             material.Hit(this);
         }
+
+        //függvény lefutása tagváltozó lekérdezésével
+        /*this.layers--;
+        if(!isEmpty && layers == 0) {
+            material.Hit(this);
+        }*/
+
         Logger.getInstance().printReturnCommand();
     }
 
