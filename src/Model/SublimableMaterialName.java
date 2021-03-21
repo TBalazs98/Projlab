@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Az elpárolgó nyersanyagok neveit tárolja.
+ * Az elparolgo nyersanyagok neveit tarolja.
  */
 public enum SublimableMaterialName implements MaterialName{
     ICEWATER

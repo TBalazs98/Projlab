@@ -1,13 +1,13 @@
 package Model;
 
 /**
- * Egy interfész, ami minden olyan dolgot reprezentál, amely körönként automatikusan csinál
+ * Egy interfesz, ami minden olyan dolgot reprezental, amely koronkent automatikusan csinal
  * valamit.
  */
 public interface Steppable {
 
     /**
-     * Az adott körben végrehajtandó művelet.
+     * Az adott korben vegrehajtando muvelet.
      */
     public void Step() ;
 
