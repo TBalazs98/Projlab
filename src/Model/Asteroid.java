@@ -20,6 +20,7 @@ public class Asteroid implements DestinationObject {
     private ArrayList<DestinationObject> neighbours;
 
     public Asteroid(){
+
         this.layers = 0;
         this.isEmpty = true;
         this.material = null;
@@ -45,7 +46,8 @@ public class Asteroid implements DestinationObject {
         neighbours.add(d);
     }
 
-    public int getLayers() { return  this.layers; }
+    public int getLayers() {
+        return  this.layers; }
 
     public Material getMaterial() {return  this.material; }
 
@@ -70,9 +72,13 @@ public class Asteroid implements DestinationObject {
     }
 
     public Material Mined() {
+        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name);
         if(!isEmpty) {
+            Logger.getInstance().printReturnCommand();
             return material;
         }
+        Logger.getInstance().printReturnCommand();
         return null;
     }
 
@@ -88,6 +94,7 @@ public class Asteroid implements DestinationObject {
 
     public boolean AddMaterial(Material m) {
         if(isEmpty) {
+            isEmpty = false;
             this.material = m;
             return true;
         }
