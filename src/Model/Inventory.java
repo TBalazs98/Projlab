@@ -29,9 +29,15 @@ public class Inventory {
     }
 
     public void Remove(MaterialName m) {
-        if(this.inventory.get(m)>0){
-            this.inventory.put(m,this.inventory.get(m)-1);
+        String[] p = {m.toString()};
+        Logger.getInstance().printCommandCall(this, p);
+        if(this.inventory.size()<10) {
+            int n = 0;                          //segédváltozó ahhoz, hogy mennyi keyhez tartozó value van
+            if(inventory.containsKey(m))        //muszáj ellenőrizni, hogy létezik e már, mert ha nem akkor
+                n = inventory.get(m) - 1;       //nullexception hibát dob
+            this.inventory.put(m,n);                         //todo így csak 1 re állítja, az kell hogy get(m.name).value +1 legyen
         }
+        Logger.getInstance().printReturnCommand();
     }
 
     public boolean ContainsAllElementsIn(Inventory i ) {

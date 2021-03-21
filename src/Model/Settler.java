@@ -16,53 +16,67 @@ public class Settler extends Worker {
     private Inventory inventory = new Inventory();
 
     public void Mine() {
-        String name = new Object(){}.getClass().getEnclosingMethod().getName();
-        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name);
+        Logger.getInstance().printCommandCall(this);
         Material m = asteroid.Mined();
         if(m != null)
-            inventory.Add(m.name);
+            m.Add(inventory);
         Logger.getInstance().printReturnCommand();
     }
 
     public void BuildBase() {
+        Logger.getInstance().printCommandCall(this);
         Base base = new Base(inventory);
+        Logger.getInstance().printReturnCommand();
     }
 
     public void BuildGate() {
+        Logger.getInstance().printCommandCall(this);
         TeleportGate g1 = new TeleportGate(inventory, this);
+        Logger.getInstance().printReturnCommand();
     }
 
     public void BuildRobot() {
+        Logger.getInstance().printCommandCall(this);
         Robot r = new Robot(inventory, asteroid);
+        Logger.getInstance().printReturnCommand();
     }
 
     public void PlaceMaterial(Material m) {
-        String name = new Object(){}.getClass().getEnclosingMethod().getName();
-        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name, m.name.toString());
+        Object[] p = {m.name};
+        Logger.getInstance().printCommandCall(this, p);
         if(asteroid.AddMaterial(m))
-            inventory.Remove(m.name);
-        //System.out.printf("hello");
+            m.Remove(inventory);
         Logger.getInstance().printReturnCommand();
     }
 
 
     public void Explode() {
+        Logger.getInstance().printCommandCall(this);
         Die();
+        Logger.getInstance().printReturnCommand();
     }
 
 
     public void Die() {
+        Logger.getInstance().printCommandCall(this);
         asteroid.Remove(this);
         AsteroidBelt.getInstance().SetSettlersAlive();
+        Logger.getInstance().printReturnCommand();
     }
 
     public void AddGate(TeleportGate t) {
+        Object[] p = {t};
+        Logger.getInstance().printCommandCall(this, p);
         gates.add(t);
+        Logger.getInstance().printReturnCommand();
     }
 
 
     public void PlaceGate(TeleportGate t) {
+        Object[] p = {t};
+        Logger.getInstance().printCommandCall(this, p);
         t.Place(asteroid);
+        Logger.getInstance().printReturnCommand();
     }
 
 }
