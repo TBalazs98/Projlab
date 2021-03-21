@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 /**
@@ -21,11 +23,29 @@ public class Robot extends Worker {
         super();
         Logger.getInstance().printCommandCall(this);
 
-        setInventory();
-        if(inventory.ContainsAllElementsIn(i)) {
-            asteroid=a;
-            a.Accept(this);
-        }
+        //függvény lefutása felhasználói beavatkozással
+            System.out.println("\nDo we have enough materials to build a robot");
+            System.out.println(" (Y)es / (N)o");
+            InputStreamReader br = new InputStreamReader(System.in);
+            char ch = ' ';
+            try {
+                ch=(char)br.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(ch=='y' || ch=='Y' ) {
+                asteroid = a;
+                a.Accept(this);
+            }
+
+        //függvény lefutása tagváltozó lekérdezésével
+        /*  setInventory();
+            if(inventory.ContainsAllElementsIn(i)) {
+                asteroid=a;
+                a.Accept(this);
+            }*/
+
         Logger.getInstance().printReturnCommand();
     }
 
@@ -40,6 +60,7 @@ public class Robot extends Worker {
 
         Logger.getInstance().printReturnCommand();
     }
+
     public void Step() {
         Logger.getInstance().printCommandCall(this);
 
@@ -57,7 +78,27 @@ public class Robot extends Worker {
     public void Explode() {
         Logger.getInstance().printCommandCall(this);
 
-        int id = asteroid.GetRandNeighbour();
+        //függvény lefutása felhasználói beavatkozással
+            System.out.println("\nDo we have enough materials to build a pair of teleportgates?");
+            System.out.println(" (A)steroid / (T)eleportgate");
+            InputStreamReader br = new InputStreamReader(System.in);
+            char ch = ' ';
+            try {
+                ch=(char)br.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int id = 0;
+            if(ch=='a' || ch=='A' ) {
+                id = 0;
+            } else if(ch == 't' || ch == 'T') {
+                id = 1;
+            }
+
+        //függvény lefutása tagváltozó lekérdezésével
+        /*int id = asteroid.GetRandNeighbour();
+        * */
         Move(id);
 
         Logger.getInstance().printReturnCommand();

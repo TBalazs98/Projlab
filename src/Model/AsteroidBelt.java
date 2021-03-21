@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -24,35 +26,62 @@ public class AsteroidBelt {
 
     public void Step() {
         Logger.getInstance().printCommandCall(this);
+
         this.StartStorm();
+
         Logger.getInstance().printReturnCommand();
     }
 
     public void StartStorm() {
         Logger.getInstance().printCommandCall(this);
+
         asteroids.forEach(a -> a.HitBySunstorm());
+
         Logger.getInstance().printReturnCommand();
     }
 
     public void RemoveAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
+
         this.asteroids.remove(a);
+
         Logger.getInstance().printReturnCommand();
     }
 
     public void AddAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
+
         this.asteroids.add(a);
+
         Logger.getInstance().printReturnCommand();
     }
 
     public void SetSettlersAlive() {
         Logger.getInstance().printCommandCall(this);
-        this.settlersAlive--;
+
+        //függvény lefutása felhasználói beavatkozással
+            System.out.println("\nAre there any settlers alive?");
+            System.out.println(" (Y)es / (N)o");
+            InputStreamReader br = new InputStreamReader(System.in);
+            char ch = ' ';
+            try {
+                ch=(char)br.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(ch=='n' || ch=='N' ) {
+                Game.getInstance().LoseGame();
+            }
+
+        //függvény lefutása tagváltozó lekérdezésével
+        /*this.settlersAlive--;
         if(settlersAlive == 0)
             Game.getInstance().LoseGame();
+        */
+
         Logger.getInstance().printReturnCommand();
     }
 

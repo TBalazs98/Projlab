@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class TeleportGate implements DestinationObject {
@@ -15,14 +17,35 @@ public class TeleportGate implements DestinationObject {
 
     public TeleportGate(Inventory i, Settler s) {
         Logger.getInstance().printCommandCall(this);
-        setInventory();
+
+        //függvény lefutása felhasználói beavatkozással
+            System.out.println("\nDo we have enough materials to build a pair of teleportgates?");
+            System.out.println(" (Y)es / (N)o");
+            InputStreamReader br = new InputStreamReader(System.in);
+            char ch = ' ';
+            try {
+                ch=(char)br.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(ch=='y' || ch=='Y' ) {
+                this.pair = new TeleportGate();
+                this.isPlaced = false;
+                this.isActive = false;
+                s.AddGate(this);
+            }
+
+        //függvény lefutása tagváltozó lekérdezésével
+        /*setInventory();
         if(inventory.ContainsAllElementsIn(i))
             {
                 this.pair = new TeleportGate();
                 this.isPlaced = false;
                 this.isActive = false;
                 s.AddGate(this);
-            }
+            }*/
+
         Logger.getInstance().printReturnCommand();
     }
 
@@ -42,9 +65,25 @@ public class TeleportGate implements DestinationObject {
     public Asteroid Accept(Character c) {
         Logger.getInstance().printCommandCall(this);
 
-        if (isActive) {
+        //függvény lefutása felhasználói beavatkozással
+            System.out.println("\nIs the teleportgate active?");
+            System.out.println(" (Y)es / (N)o");
+            InputStreamReader br = new InputStreamReader(System.in);
+            char ch = ' ';
+            try {
+                ch=(char)br.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(ch=='y' || ch=='Y' ) {
+                pair.GetAsteroid().Accept(c);
+            }
+
+        //függvény lefutása tagváltozó lekérdezésével
+        /*if (isActive) {
             pair.GetAsteroid().Accept(c);
-        }
+        }*/
 
         Logger.getInstance().printReturnCommand(pair.GetAsteroid().getClass().getSimpleName());
         return this.pair.GetAsteroid();
@@ -54,11 +93,28 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printCommandCall(this);
 
         this.asteroid = asteroid;
-        isPlaced = true;
+        //függvény lefutása felhasználói beavatkozással
+            System.out.println("\nIs the pair of the teleportgate placed, and can we activate the gates?");
+            System.out.println(" (Y)es / (N)o");
+            InputStreamReader br = new InputStreamReader(System.in);
+            char ch = ' ';
+            try {
+                ch=(char)br.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(ch=='y' || ch=='Y' ) {
+                pair.Activate();
+                Activate();
+            }
+
+        //függvény lefutása tagváltozó lekérdezésével
+        /*isPlaced = true;
         if (pair.GetPlaced()) {
             this.pair.Activate();
             this.Activate();
-        }
+        }*/
 
         Logger.getInstance().printReturnCommand();
     }
