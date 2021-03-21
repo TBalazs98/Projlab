@@ -63,9 +63,9 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
-    public Asteroid Accept(Character c) {
+    public DestinationObject Accept(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this,p);
+        Logger.getInstance().printCommandCall(this, p);
 //        String name = new Object(){}.getClass().getEnclosingMethod().getName();
 //        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name ,p);
 
@@ -81,7 +81,7 @@ public class TeleportGate implements DestinationObject {
 
             Asteroid a = null;
             if(ch=='y' || ch=='Y' ) {
-                a = this.GetPair().GetAsteroid();
+                a = pair.GetAsteroid();
                 a.Accept(c);
             }
 
