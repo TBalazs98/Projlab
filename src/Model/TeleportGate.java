@@ -16,7 +16,8 @@ public class TeleportGate implements DestinationObject {
     private static final Inventory inventory = new Inventory();
 
     public TeleportGate(Inventory i, Settler s) {
-        Logger.getInstance().printCommandCall(this);
+        Object[] p = {i.getClass().getSimpleName(), s.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this, p);
 
         //függvény lefutása felhasználói beavatkozással
             System.out.println("\nDo we have enough materials to build a pair of teleportgates?");
@@ -63,11 +64,11 @@ public class TeleportGate implements DestinationObject {
     }
 
     public Asteroid Accept(Character c) {
-        Logger.getInstance().printCommandCall(this);
+        Object[] p = {c.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this,p);
 
         //függvény lefutása felhasználói beavatkozással
-            System.out.println("\nIs the teleportgate active?");
-            System.out.println(" (Y)es / (N)o");
+            System.out.print("Is the teleportgate active?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -76,8 +77,10 @@ public class TeleportGate implements DestinationObject {
                 e.printStackTrace();
             }
 
+            Asteroid a = null;
             if(ch=='y' || ch=='Y' ) {
-                pair.GetAsteroid().Accept(c);
+                a = pair.GetAsteroid();
+                a.Accept(c);
             }
 
         //függvény lefutása tagváltozó lekérdezésével
@@ -85,12 +88,13 @@ public class TeleportGate implements DestinationObject {
             pair.GetAsteroid().Accept(c);
         }*/
 
-        Logger.getInstance().printReturnCommand(pair.GetAsteroid().getClass().getSimpleName());
-        return this.pair.GetAsteroid();
+        Logger.getInstance().printReturnCommand(a.getClass().getSimpleName());
+        return a;
     }
 
     public void Place(Asteroid asteroid) {
-        Logger.getInstance().printCommandCall(this);
+        Object[] p = {asteroid.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this,p);
 
         this.asteroid = asteroid;
         //függvény lefutása felhasználói beavatkozással
@@ -133,11 +137,28 @@ public class TeleportGate implements DestinationObject {
         return this.asteroid;
     }
 
+    public void setAsteroid(Asteroid a) {
+        Object[] p = {a.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this,p);
+
+        asteroid = a;
+
+        Logger.getInstance().printReturnCommand();
+    }
+
     public TeleportGate GetPair() {
         Logger.getInstance().printCommandCall(this);
         Logger.getInstance().printReturnCommand(pair.getClass().getSimpleName());
 
         return this.pair;
+    }
+
+    public void setPair(TeleportGate t) {
+        Logger.getInstance().printCommandCall(this);
+
+        this.pair = t;
+
+        Logger.getInstance().printReturnCommand();
     }
 
     public void Activate() {

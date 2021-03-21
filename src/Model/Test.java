@@ -9,7 +9,7 @@ import java.util.Scanner;
 //KEZDETLEGES
 public class Test {
 
-    void menu()  {
+    void menu() {
         System.out.println("1 - Drill Layer and reach Sublime Material");
         System.out.println("2 - Mine Sublime Material");
         System.out.println("3 - Move Settler to Asteroid");
@@ -82,7 +82,11 @@ public class Test {
                 MineNormalMaterial();
                 break;
             case 15 :
-                DrillLayerandreachRadioactiveMaterial();
+                try {
+                    DrillLayerandreachRadioactiveMaterial();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 16 :
                 PlaceMaterialbutAsteroidisnotemptyordrilledthrough();
@@ -170,13 +174,15 @@ public class Test {
         TeleportGate tg = new TeleportGate();
         TeleportGate pair = new TeleportGate();
 
+        tg.setAsteroid(a);
+        pair.setAsteroid(b);
 
         s.setAsteroid(a);
-        //tg.setPair(pair);
-        //pair.setPair(tg);
+        tg.setPair(pair);
+        pair.setPair(tg);
         a.setCharacter(s);
-        a.setNeighbour(b);
-        b.setNeighbour(a);
+        a.setNeighbour(tg);
+        b.setNeighbour(pair);
 
         s.Move(0);
 
