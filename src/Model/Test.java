@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -111,7 +113,7 @@ public class Test {
         }
     }
 
-    void DrillLayerandReachSublimableMaterial() {
+    void DrillLayerandReachSublimableMaterial() {   //1
         Settler s = new Settler();
         SublimableMaterialName subName = SublimableMaterialName.ICEWATER;
         SublimableMaterial m = new SublimableMaterial();
@@ -122,7 +124,7 @@ public class Test {
         menu();
     }
 
-    void MineSublimableMaterial() {
+    void MineSublimableMaterial() {     //2
         Settler s = new Settler();
         SublimableMaterialName subName = SublimableMaterialName.ICEWATER;
         SublimableMaterial material = new SublimableMaterial();
@@ -133,43 +135,137 @@ public class Test {
 
     }
 
-    void MoveSettlertoAsteroid(){    }
+    void MoveSettlertoAsteroid(){       }//3
 
-    void MoveSettlertoTeleportGate(){}
+    void MoveSettlertoTeleportGate(){}  //4
 
-    void MoveSettlerwhilebeinginSunStorm(){    }
+    void MoveSettlerwhilebeinginSunStorm(){    }    //5
 
-    void PlaceSublimeMaterial(){    }
+    void PlaceSublimeMaterial(){    }   //6
 
-    void SettlerPlaceTeleportGate(){    }
+    void SettlerPlaceTeleportGate(){    }   //7
 
-    void BuildBase(){ }
+    void BuildBase(){ } //8
 
-    void BuildRobot(){}
+    void BuildRobot(){} //9
 
-    void BuildTeleportGate(){}
+    void BuildTeleportGate(){}      //10
 
-    void DrillLayerandnotreachCore(){    }
+    void DrillLayerandnotreachCore(){   //11
+        Settler s = new Settler();
+        Asteroid asteroid = new Asteroid();
+        s.setAsteroid(asteroid);
+        asteroid.Accept(s);
+        //asteroid.SetLayer(5); //TODO
+        Material m=new Material();
+        asteroid.AddMaterial(m);
+        s.Drill();
 
-    void DrillLayerandreachemptyCore(){ }
+    }
 
-    void DrillLayerandreachNormalMaterial() {}
+    void DrillLayerandreachemptyCore(){
+        Asteroid a=new Asteroid();
+        Settler s = new Settler();
+        s.setAsteroid(a);
+        a.Accept(s);
+        //s.SetLayer(1) ||  Dávid : szerintem inkább a.SetLayer(1) lehetne inkább :D //TODO
+        s.Drill();
 
-    void MineNormalMaterial() {}
+    }       //12
 
-    void DrillLayerandreachRadioactiveMaterial(){}
+    void DrillLayerandreachNormalMaterial() {
+        Settler s = new Settler();
+        Asteroid a = new Asteroid();
+        Material m = new Material();
+        s.setAsteroid(a);
+        a.Accept(s);
+        //a.SetLayer(1);
+        a.AddMaterial(m);
+        s.Drill();  //-> a.Drilled() -> m.Hit()
 
-    void PlaceMaterialbutAsteroidisnotemptyordrilledthrough(){}
 
-    void MineRadioactiveMaterial(){}
+    }  //13
 
-    void PlaceNormalMaterial(){}
+    void MineNormalMaterial() {
+        Settler s = new Settler();
+        Asteroid a = new Asteroid();
+        Material m = new Material();
+        s.setAsteroid(a);
+        a.Accept(s);
+        //a.setLayer(0);
+        a.AddMaterial(m);
+        s.Mine(); // asteroidban m.hit(asteroid) hiányzik ;
+        m.Add(/* */); //TODO s.getInventory
+        //az addban helyesen futnak le a dolgok
 
-    void PlaceRadioactiveMaterial(){}
 
-    void MinebutCoreisEmpty(){}
+    }        //14
 
-    void MinebutInventoryisFull(){
+    void DrillLayerandreachRadioactiveMaterial() throws IOException {
+        AsteroidBelt ab = AsteroidBelt.getInstance();
+        Asteroid asteroid = new Asteroid();
+        Asteroid a = new Asteroid();
+        Asteroid an = new Asteroid();
+        Settler s = new Settler();
+        Robot r = new Robot();
+        TeleportGate tn = new TeleportGate();
+        TeleportGate pair = new TeleportGate();//8
+        RadioactiveMaterial material = new RadioactiveMaterial();
+        ab.AddAsteroid(asteroid);
+        ab.AddAsteroid(an);
+        ab.AddAsteroid(a);//12
+        asteroid.AddNeighbour(an);
+        an.AddNeighbour(asteroid);
+        //tn.setAsteroid(asteroid);
+        //pair.setAsteroid(a);
+        asteroid.AddNeighbour(tn);
+        a.AddNeighbour(pair);//18
+        s.setAsteroid(asteroid);
+        asteroid.Accept(s);
+        r.setAsteroid(asteroid);
+        asteroid.Accept(r);//22
+        //tn.setPair(pair);
+        asteroid.AddMaterial(material);
+        //asteroid.setLayer(1);
+        tn.Activate();
+        //pair.setPair(tn);//27
+        pair.Activate();
+
+        System.out.println("\nIs the asteroid near to the Sun?\n");
+        System.out.println(" (Y)es / (N)o");
+        InputStreamReader br = new InputStreamReader(System.in);
+        char ch = ' ';
+        ch=(char)br.read();
+
+        if(ch=='y' || ch=='Y' )
+            asteroid.SetSunProximity(); //ide kell valami setter
+
+        s.Drill();
+
+
+    }      //15
+
+    void PlaceMaterialbutAsteroidisnotemptyordrilledthrough(){
+        Settler s = new Settler();
+        Asteroid asteroid = new Asteroid();
+        Material m = new Material();
+        s.setAsteroid(asteroid);
+        asteroid.Accept(s);
+        //asteroid.setLayer(5);
+
+        s.PlaceMaterial(m);
+
+    }     //16
+
+    void MineRadioactiveMaterial(){}        //17
+
+    void PlaceNormalMaterial(){}        //18
+
+    void PlaceRadioactiveMaterial(){}       //19
+
+    void MinebutCoreisEmpty(){}     //20
+
+    void MinebutInventoryisFull(){      //21
         Settler settler = new Settler();
         Asteroid asteroid = new Asteroid();
         Inventory iv = new Inventory();
