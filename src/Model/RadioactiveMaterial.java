@@ -5,12 +5,15 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- *
+ *Radioaktív nyersanyagokat megtestesítő osztály.
  */
 public class RadioactiveMaterial extends Material {
 
     private RadioactiveMaterialName name;
 
+    /**
+     * Pubikus alapértelmezett konstruktor.
+     */
     public RadioactiveMaterial() {
         Logger.getInstance().printCommandCall(this);
 
@@ -19,6 +22,12 @@ public class RadioactiveMaterial extends Material {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * @param a - Asteroid
+     *  Ha az aszteroidát külső behatás éri, ellenőrzi, hogy az adott
+     * aszteroida napközelben van-e, illetve a sziklarétegen teljesen áthatoltak. Ha mindkét állítás
+     * igaz rá, robban.
+     */
     public void Hit(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -46,6 +55,10 @@ public class RadioactiveMaterial extends Material {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * @param rname
+     * A Radioaktív anyag nevének beállítása.
+     */
     public void setName(RadioactiveMaterialName rname){
         Logger.getInstance().printCommandCall(this);
 
