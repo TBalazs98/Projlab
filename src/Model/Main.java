@@ -25,9 +25,25 @@ public class Main {
 //        s.setAsteroid(a);
 //        a.Accept(s);
 //
-//        s.Mine();
+//        Asteroid b = new Asteroid();
+//        TeleportGate tg = new TeleportGate();
+//        TeleportGate pair = new TeleportGate();
 //
-//        s.PlaceMaterial(m);
+//        tg.setAsteroid(a);
+//        pair.setAsteroid(b);
+//
+//        s.setAsteroid(a);
+//        tg.setPair(pair);
+//        pair.setPair(tg);
+//        a.setCharacter(s);
+//        a.setNeighbour(tg);
+//        b.setNeighbour(pair);
+
+        //s.Move(0);
+
+        //s.Mine();
+
+        //s.PlaceMaterial(m);
 
         Test t = new Test();
         t.menu();               //teszt osztály

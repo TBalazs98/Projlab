@@ -37,7 +37,7 @@ public class Test {
 
         int testcase = in.nextInt();
 
-
+        //Logger.getInstance().printCommandCall(this);
         switch (testcase){
             case 1:
                 DrillLayerandReachSublimableMaterial();
@@ -115,6 +115,8 @@ public class Test {
                 menu();
                 break;
         }
+
+        //Logger.getInstance().printReturnCommand();
     }
 
     void DrillLayerandReachSublimableMaterial() {
@@ -168,6 +170,7 @@ public class Test {
     }
 
     void MoveSettlertoTeleportGate(){
+        //Logger.getInstance().printCommandCall(this);
         Settler s = new Settler();
         Asteroid a = new Asteroid();
         Asteroid b = new Asteroid();
@@ -185,7 +188,7 @@ public class Test {
         b.setNeighbour(pair);
 
         s.Move(0);
-
+        //Logger.getInstance().printReturnCommand();
     }
 
     void MoveSettlerwhilebeinginSunStorm(){
