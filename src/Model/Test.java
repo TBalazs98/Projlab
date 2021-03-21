@@ -2,6 +2,8 @@ package Model;
 
 import java.util.Scanner;
 
+
+//KEZDETLEGES
 public class Test {
 
     void menu()  {

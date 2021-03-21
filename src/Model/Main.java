@@ -22,7 +22,7 @@ public class Main {
         s.PlaceMaterial(m);
 
         Test t = new Test();
-        t.menu();
+        t.menu();               //teszt osztály
     }
 
 
