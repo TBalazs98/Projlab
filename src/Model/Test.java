@@ -208,10 +208,15 @@ public class Test {
         AsteroidBelt ab = AsteroidBelt.getInstance();
         Game g = Game.getInstance();
         Asteroid onEmpty = new Asteroid();
+        Asteroid a = new Asteroid();
 
         ab.AddAsteroid(onEmpty);
         s.setAsteroid(onEmpty);
+        onEmpty.AddNeighbour(a);
+        a.AddNeighbour(onEmpty);
         onEmpty.Accept(s);
+
+
         ab.StartStorm();
 
         s.Move(0);
@@ -225,6 +230,7 @@ public class Test {
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
         SublimableMaterial sm = new SublimableMaterial();
+
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
         asteroid.setLayer(0);
