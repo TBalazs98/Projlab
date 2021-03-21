@@ -16,8 +16,10 @@ public class Settler extends Worker {
     private Inventory inventory = new Inventory();
 
     public void Mine() {
-        String name = new Object(){}.getClass().getEnclosingMethod().getName();
-        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name);
+        //class Local {};
+        //String name = Local.class.getEnclosingMethod().getName();
+        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         Material m = asteroid.Mined();
         if(m != null)
             inventory.Add(m.name);
@@ -37,11 +39,10 @@ public class Settler extends Worker {
     }
 
     public void PlaceMaterial(Material m) {
-        String name = new Object(){}.getClass().getEnclosingMethod().getName();
-        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name, m.name.toString());
+        String[] p = {m.name.toString()};
+        Logger.getInstance().printCommandCall(this, p);
         if(asteroid.AddMaterial(m))
             inventory.Remove(m.name);
-        //System.out.printf("hello");
         Logger.getInstance().printReturnCommand();
     }
 
