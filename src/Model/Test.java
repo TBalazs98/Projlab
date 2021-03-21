@@ -33,7 +33,7 @@ public class Test {
         System.out.println("21 - Mine but inventory full");
 
         Scanner in = new Scanner(System.in);
-        System.out.println("\nMelyik tesztesetet futtatná?");
+        System.out.println("\nWhich test case would you like to run?");
 
         int testcase = in.nextInt();
 
