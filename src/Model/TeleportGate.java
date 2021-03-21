@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+/**
+  * A teleportkapukat kezeli. Tárolja a párját, melyik aszteroidán van, illetve a jelenlegi állapotát.
+ */
 public class TeleportGate implements DestinationObject {
     public TeleportGate() {
         setInventory();
@@ -15,6 +18,13 @@ public class TeleportGate implements DestinationObject {
     private Asteroid asteroid;
     private static final Inventory inventory = new Inventory();
 
+
+    /**
+     * A teleportkapu konstuktora.
+     *
+     * @param i   A telepes inventorija, és összehasonlítja, a saját felépítéséhez szükséges inventoryval.
+     * @param s   Telepses, aki felépítené a teleportkaput.
+     */
     public TeleportGate(Inventory i, Settler s) {
         Object[] p = {i.getClass().getSimpleName(), s.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -50,6 +60,10 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+
+    /**
+     * Inicializálja az inventorit, itt tárolja a felépítéséhez szükséges anyagokat.
+     */
     private void setInventory() {
         Logger.getInstance().printCommandCall(this);
 
@@ -63,6 +77,12 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+
+    /**
+     * Felveszi a ré lépő karaktert, majd visszatér az aszteroidával, ahol található.
+     * @param c
+     * @return
+     */
     public Asteroid Accept(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this,p);
@@ -94,6 +114,12 @@ public class TeleportGate implements DestinationObject {
         return a;
     }
 
+
+    /**
+     * Lehelyezzük a teleportkapunkat.
+     *
+     * @param asteroid  Az adott aszteroidára helyezzük le.
+     */
     public void Place(Asteroid asteroid) {
         Object[] p = {asteroid.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this,p);
@@ -125,6 +151,11 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+
+    /**
+     * Visszatér egy logikai értékkel, hogy a kapunkat leraktuk-e.
+     * @return
+     */
     public boolean GetPlaced() {
         Logger.getInstance().printCommandCall(this);
         Logger.getInstance().printReturnCommand(pair.isPlaced);
@@ -132,6 +163,11 @@ public class TeleportGate implements DestinationObject {
         return pair.isPlaced;
     }
 
+
+    /**
+     * Visszatér az aszteroidával, amin a telepes található.
+     * @return
+     */
     public Asteroid GetAsteroid() {
         Logger.getInstance().printCommandCall(this);
         Logger.getInstance().printReturnCommand(asteroid.getClass().getSimpleName());
@@ -139,6 +175,11 @@ public class TeleportGate implements DestinationObject {
         return this.asteroid;
     }
 
+
+    /**
+     * Beállítja az aszteroidát, ahol a kapu található.
+     * @param a
+     */
     public void setAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this,p);
@@ -148,6 +189,11 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+
+    /**
+     * A teleportkapu párját adja vissza.
+     * @return
+     */
     public TeleportGate GetPair() {
         Logger.getInstance().printCommandCall(this);
         Logger.getInstance().printReturnCommand(pair.getClass().getSimpleName());
@@ -155,6 +201,11 @@ public class TeleportGate implements DestinationObject {
         return pair;
     }
 
+
+    /**
+     * Beállítja a teleportkapu párját.
+     * @param t
+     */
     public void setPair(TeleportGate t) {
         Logger.getInstance().printCommandCall(this);
 
@@ -163,6 +214,10 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+
+    /**
+     * Aktiválja a kaput.
+     */
     public void Activate() {
         Logger.getInstance().printCommandCall(this);
 
@@ -171,6 +226,10 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+
+    /**
+     * Deaktiválja a kaput.
+     */
     public void Deactivate() {
         Logger.getInstance().printCommandCall(this);
 
@@ -179,6 +238,12 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+
+    /**
+     * Ha az aszteroida felrobban, amin van, a kaput is
+     * eléri a robbanás és meghívja a destroy függvényt magára és a párjára is.
+     * @param a
+     */
     public void HitByExplosion(Asteroid a) {
         Logger.getInstance().printCommandCall(this);
 
@@ -187,6 +252,10 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+
+    /**
+     * Megsemisűl a teleportkapu.
+     */
     public void Destroy() {
         Logger.getInstance().printCommandCall(this);
 
