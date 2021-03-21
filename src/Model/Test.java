@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -168,6 +169,13 @@ public class Test {
 
     void MinebutCoreisEmpty(){}
 
-    void MinebutInventoryisFull(){}
+    void MinebutInventoryisFull(){
+        Settler settler = new Settler();
+        Asteroid asteroid = new Asteroid();
+        Inventory iv = new Inventory();
+        HashMap<MaterialName, Integer> m = new HashMap<>();
+        m.put(NormalMaterialName.IRON, 10);
+        iv.init(m);
+    }
 
 }
