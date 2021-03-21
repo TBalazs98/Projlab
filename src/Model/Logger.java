@@ -2,6 +2,8 @@ package Model;
 
 import java.lang.reflect.Method;
 
+
+//PLS DONT TOUCH, ITS MAGIC
 public class Logger {
     private Logger() {}
 
@@ -23,6 +25,7 @@ public class Logger {
         return ste[ste.length - 2 - depth].getMethodName();
     }
 
+    //függvényhívás kiírása, ha nincs paraméter
     public void printCommandCall(Object o) {
         for(int i = 0; i < intend; i++) {
             System.out.print("\t");
@@ -37,7 +40,8 @@ public class Logger {
         intend++;
     }
 
-    public void printCommandCall(Object o, String[] params) {
+    //függvényhívás kiírása, ha van paraméter
+    public void printCommandCall(Object o, Object[] params) {
         for(int i = 0; i < intend; i++) {
             System.out.print("\t");
         }
@@ -45,8 +49,10 @@ public class Logger {
         System.out.print(">>");
 
         System.out.print("[:" + getClassName(o) + "]." + getMethodName(intend) + "(");
+
         for(int i = 0; i < params.length; i++) {
-            System.out.print(params[i]);
+            String toPrint = params[i].toString();
+            System.out.print(toPrint);
             if(i == params.length - 1)
                 System.out.print(")");
         }
@@ -56,6 +62,7 @@ public class Logger {
         intend++;
     }
 
+    //függvény visszatérésének kiírása visszatérési érték nélkül
     public void printReturnCommand() {
         intend--;
         for(int i = 0; i < intend; i++) {
@@ -64,4 +71,16 @@ public class Logger {
         System.out.print("<<");
         System.out.println();
     }
+
+    //függvény visszatérésének kiírása visszatérési értékkel
+    public void printReturnCommand(Object value) {
+        intend--;
+        for(int i = 0; i < intend; i++) {
+            System.out.print("\t");
+        }
+        String toPrint = value.toString();
+        System.out.print("<< " + toPrint);
+        System.out.println();
+    }
+
 }

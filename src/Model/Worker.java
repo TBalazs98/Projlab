@@ -12,10 +12,12 @@ public abstract class Worker extends Character implements drillable {
     }
 
     public void Drill() {
-        super.getAsteroid().Drilled();
+        Logger.getInstance().printCommandCall(this);
+        asteroid.Drilled();
+        Logger.getInstance().printReturnCommand();
     }
 
-   // public abstract void Explode();   //Mivel a worker osztály még absztrakt
+    public abstract void Explode();   //Mivel a worker osztály még absztrakt
                                          //ezért itt nem fontos ezt implementálni,
                                         // csak a Settlerben meg a robotban
 
