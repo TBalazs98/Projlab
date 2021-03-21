@@ -36,9 +36,9 @@ public class Main {
 
         //s.Move(0);
 
-        //s.Mine();
-
-        //s.PlaceMaterial(m);
+//        s.Mine();
+//
+//        s.PlaceMaterial(m);
 
         Test t = new Test();
         t.menu();               //teszt osztály

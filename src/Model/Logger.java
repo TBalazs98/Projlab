@@ -25,6 +25,7 @@ public class Logger {
 //        for(int i = 0; i < ste.length; i++) {
 //            System.out.println(ste[i].getMethodName());
 //        }
+//        System.out.println();
         return ste[ste.length - 4 - depth].getMethodName(); //CSAK TESZTELÉSHEZ
         //return ste[ste.length - 2 - depth].getMethodName(); //ÉLESBEN EZ LESZ A JÓ
     }

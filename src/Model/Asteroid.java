@@ -74,7 +74,7 @@ public class Asteroid implements DestinationObject {
         return this.material;
     }
 
-    public Asteroid Accept(Character c) {
+    public DestinationObject Accept(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         characters.add(c);
