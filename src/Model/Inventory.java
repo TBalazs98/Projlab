@@ -23,8 +23,9 @@ public class Inventory {
         if(this.inventory.size()<10) {
             int n = 0;                          //segédváltozó ahhoz, hogy mennyi keyhez tartozó value van
             if(inventory.containsKey(m))        //muszáj ellenőrizni, hogy létezik e már, mert ha nem akkor
-                n = inventory.get(m) + 1;       //nullexception hibát dob
-            this.inventory.put(m,n);                         //todo így csak 1 re állítja, az kell hogy get(m.name).value +1 legyen
+                n = inventory.get(m);           //nullexception hibát dob
+            n++;
+            this.inventory.put(m,n);
         }
     }
 
@@ -33,9 +34,10 @@ public class Inventory {
         Logger.getInstance().printCommandCall(this, p);
         if(this.inventory.size()<10) {
             int n = 0;                          //segédváltozó ahhoz, hogy mennyi keyhez tartozó value van
-            if(inventory.containsKey(m))        //muszáj ellenőrizni, hogy létezik e már, mert ha nem akkor
-                n = inventory.get(m) - 1;       //nullexception hibát dob
-            this.inventory.put(m,n);                         //todo így csak 1 re állítja, az kell hogy get(m.name).value +1 legyen
+            if(inventory.containsKey(m)) {      //muszáj ellenőrizni, hogy létezik e már, mert ha nem akkor
+                n = inventory.get(m);           //nullexception hibát dob
+                this.inventory.put(m,n);
+            }
         }
         Logger.getInstance().printReturnCommand();
     }
