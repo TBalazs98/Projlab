@@ -14,7 +14,6 @@ public class RadioactiveMaterial extends Material {
         name = RadioactiveMaterialName.URAN;
     }
 
-
     public void Hit(Asteroid a) {
         if(a.GetSunProximity() == true && a.getLayers() == 0) a.Explode();
     }
