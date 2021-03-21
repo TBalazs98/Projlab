@@ -28,6 +28,7 @@ public class Test {
         System.out.println("19 - Place Radioactive Material");
         System.out.println("20 - Mine but Core is empty");
         System.out.println("21 - Mine but inventory full");
+        System.out.println("22 - Exit!");
 
         Scanner in = new Scanner(System.in);
         System.out.println("\nMelyik tesztesetet futtatná?");
@@ -99,9 +100,8 @@ public class Test {
             case 21 :
                 MinebutInventoryisFull();
                 break;
-            case 0 :
-                System.out.println("Invalid number!");
-                menu();
+            case 22 :
+                System.out.println("Exited!");
                 break;
             default :
                 System.out.println("Invalid number!");
