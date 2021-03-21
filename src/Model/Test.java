@@ -161,21 +161,101 @@ public class Test {
 
     void PlaceMaterialbutAsteroidisnotemptyordrilledthrough(){}
 
-    void MineRadioactiveMaterial(){}
-
-    void PlaceNormalMaterial(){}
-
-    void PlaceRadioactiveMaterial(){}
-
-    void MinebutCoreisEmpty(){}
-
-    void MinebutInventoryisFull(){
-        Settler settler = new Settler();
+    void MineRadioactiveMaterial(){
+        Game g = Game.getInstance();
+        AsteroidBelt ab = AsteroidBelt.getInstance();
         Asteroid asteroid = new Asteroid();
-        Inventory iv = new Inventory();
-        HashMap<MaterialName, Integer> m = new HashMap<>();
-        m.put(NormalMaterialName.IRON, 10);
-        iv.init(m);
+        Asteroid an = new Asteroid();
+        Settler s = new Settler();
+        RadioactiveMaterial material = new RadioactiveMaterial();
+        RadioactiveMaterialName materialName = RadioactiveMaterialName.URAN;
+        TeleportGate tn = new TeleportGate();
+        TeleportGate pair = new TeleportGate();
+
+        asteroid.Accept(s);
+        asteroid.AddNeighbour(an);
+        asteroid.AddMaterial(material); // SetMaterial()
+        s.setAsteroid(asteroid);
+
+        s.Mine();
+
     }
 
+    void PlaceNormalMaterial(){
+        Settler s = new Settler();
+        // Inventory inventory = new Inventory();
+        Asteroid asteroid = new Asteroid();
+        Material m = new Material();
+        //NormalMaterialName rmn = NormalMaterialName.IRON;
+
+        s.setAsteroid(asteroid);
+        // asteroid.SetLayer(0);
+        asteroid.Accept(s);
+
+
+        s.PlaceMaterial(m);
+
+    }
+
+    void PlaceRadioactiveMaterial(){
+        Asteroid asteroid = new Asteroid();
+        Asteroid a = new Asteroid();
+        Asteroid an = new Asteroid();
+        Settler s = new Settler();
+        RadioactiveMaterial rm = new RadioactiveMaterial();
+        RadioactiveMaterialName rmn = RadioactiveMaterialName.URAN;
+        Robot r = new Robot();
+        AsteroidBelt ab = AsteroidBelt.getInstance();
+        TeleportGate tn = new TeleportGate();
+        TeleportGate pair = new TeleportGate();
+
+        rm.setName(rmn);
+        //asteroid.SetLayer(0);
+        asteroid.AddNeighbour(an);
+        asteroid.AddNeighbour(tn);
+        asteroid.Accept(s);
+        asteroid.AddMaterial(rm);
+        asteroid.Accept(r);
+        r.setAsteroid(asteroid);
+        s.setAsteroid(asteroid);
+        ab.AddAsteroid(asteroid);
+        ab.AddAsteroid(a);
+        ab.AddAsteroid(an);
+        tn.Place(asteroid);
+        //tn.SetPair(pair);
+        tn.Activate();
+        an.AddNeighbour(asteroid);
+        pair.Place(a); //setAsteroid();
+        //tn.SetPair(pair);
+        pair.Activate();
+
+
+        s.PlaceMaterial(rm);
+
+    }
+
+    void MinebutCoreisEmpty(){
+        Asteroid a = new Asteroid();
+        Settler s = new Settler();
+
+        a.Accept(s);
+        s.setAsteroid(a);
+
+        s.Mine();
+
+    }
+
+    void MinebutInventoryisFull(){
+        Settler s = new Settler();
+        Asteroid a = new Asteroid();
+        Inventory inventory = new Inventory();
+        HashMap<MaterialName, Integer> material = new HashMap<>();
+        material.put(NormalMaterialName.IRON, 10);
+        inventory.fill(material);
+
+        s.setAsteroid(a);
+        //s.SetInventory(inventory);
+
+        s.Mine();
+    }
 }
