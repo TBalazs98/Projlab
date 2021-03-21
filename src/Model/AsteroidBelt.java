@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * proba
+ *A jatek palyajat reprezentalja, minden jatekhoz 1 darab tartozik.
  */
 public class AsteroidBelt {
 
@@ -15,6 +15,9 @@ public class AsteroidBelt {
 
     private ArrayList<Asteroid> asteroids;
 
+    /**
+     *Privát konstruktor az aszteroida ovhoz.
+     */
     private AsteroidBelt() {
         Logger.getInstance().printCommandCall(this);
 
@@ -27,6 +30,9 @@ public class AsteroidBelt {
         return ab;
     }
 
+    /**
+     *Az aszteroida ov egy kore, itt idokozonkent indit egy napvihart.
+     */
     public void Step() {
         Logger.getInstance().printCommandCall(this);
 
@@ -35,6 +41,9 @@ public class AsteroidBelt {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * A napvihar elinditása.
+     */
     public void StartStorm() {
         Logger.getInstance().printCommandCall(this);
 
@@ -43,6 +52,10 @@ public class AsteroidBelt {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Aszteroida eltavolitasa az aszteroida mezobol.
+     * @param a
+     */
     public void RemoveAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -52,6 +65,10 @@ public class AsteroidBelt {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Aszteroida felvetele az aszteroida mezobe.
+     * @param a
+     */
     public void AddAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -61,10 +78,13 @@ public class AsteroidBelt {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * eletben levo telepesek allitasa.
+     */
     public void SetSettlersAlive() {
         Logger.getInstance().printCommandCall(this);
 
-        //függvény lefutása felhasználói beavatkozással
+        //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Are there any settlers alive?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
@@ -79,7 +99,7 @@ public class AsteroidBelt {
                 Game.getInstance().LoseGame();
             }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //fuggvény lefutasa tagvaltozo lekerdezesevel
         /*this.settlersAlive--;
         if(settlersAlive == 0)
             Game.getInstance().LoseGame();

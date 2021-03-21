@@ -6,11 +6,15 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 /**
- * 
+ *A játékosok által felépítendő bázist reprezentálja.
  */
 public class Base {
 
     private static final Inventory inventory = new Inventory();
+
+    /**
+     *Konstruktor a bázishoz.
+     */
     public Base() {
         Logger.getInstance().printCommandCall(this);
 
@@ -19,6 +23,10 @@ public class Base {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Konstruktor a bázis építéséhez.
+     * @param i
+     */
     public Base(Inventory i) {
         Object[] p = {i.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -47,6 +55,9 @@ public class Base {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     *Beallítja a bazis inventory-jat, az alapjan, hogy mennyi nyersanyag kell az epiteshez.
+     */
     private void setInventory() {
         Logger.getInstance().printCommandCall(this);
 
@@ -60,6 +71,9 @@ public class Base {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     *Bazis felepitese.
+     */
     public void Build() {
         Logger.getInstance().printCommandCall(this);
 

@@ -4,12 +4,12 @@ import java.util.*;
 import java.util.ArrayList;
 
 /**
- * A játék egy példányát testesít meg, singleton.
+ *A jaték példanyat testesiti meg, egyetlen peldany letezhet belőle egyszerre.
  */
 public class Game {
 
     /**
-     *Privát konstruktor.
+     *Privat konstruktor.
      */
     private Game() {
         Logger.getInstance().printCommandCall(this);
@@ -21,7 +21,7 @@ public class Game {
     private ArrayList<Steppable> steppables;
 
     /**
-     *
+     *Jatek inditasa.
      */
     public void StartGame() {
         // TODO implement here
@@ -32,7 +32,7 @@ public class Game {
     }
 
     /**
-     *Akkor fut le ha a telepesek sikeresen felípítették a bázist.
+     *Jatekosok osszegyujtottek eleg nyersanyagot, felepitik a bazist ezzel nyernek.
      */
     public void WinGame() {
         Logger.getInstance().printCommandCall(this);
@@ -43,8 +43,7 @@ public class Game {
     }
 
     /**
-     *Akkor fut le ha a minden telepes meghalt, vagy nincs elég nyersanyag az aszteroida mezőben a
-     * játék megnyeréséhez.
+     *Minden karakter meghalt vagy nem talalható eleg nyersanyag az aszteroida ovben a bazis felepítesehez.
      */
     public void LoseGame() {
         Logger.getInstance().printCommandCall(this);
@@ -55,7 +54,7 @@ public class Game {
     }
 
     /**
-     *Következő kör kezdése.
+     *Kovetkező kor inditasa.
      */
     public void NextRound() {
         Logger.getInstance().printCommandCall(this);

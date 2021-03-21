@@ -3,15 +3,21 @@ package Model;
 import java.util.*;
 
 /**
- * 
+ *A jatekban talalhato minden karakter ososztalya, olyan tulajdonsagokat valosit meg amely minden karaktertol elvart.
  */
 public abstract class Character {
 
     protected Asteroid asteroid;
 
+    /**
+     * Konstruktor.
+     */
     public Character() {
     }
 
+    /**
+     *Karakter meghal, eltavolitasra kerul a jatekbol.
+     */
     public void Die() {
         Logger.getInstance().printCommandCall(this);
 
@@ -20,8 +26,15 @@ public abstract class Character {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Karakter felrobbant egy aszteroidaval, a tipusanak megfelelő muveletsor tortenik vele.
+     */
     public abstract void Explode();
 
+    /**
+     * Karakter parameternek megfelelő helyre mozog.
+     * @param idx
+     */
     public void Move(int idx) {
         Object[] p = {idx};
         Logger.getInstance().printCommandCall(this, p);
@@ -33,6 +46,10 @@ public abstract class Character {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Karaker aszteroidajanak beallítasa.
+     * @param a
+     */
     public void addAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -42,6 +59,10 @@ public abstract class Character {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Getter az aszteroidajahoz.
+     * @return
+     */
     public Asteroid getAsteroid() {
         Logger.getInstance().printCommandCall(this);
         Logger.getInstance().printReturnCommand(asteroid.getClass().getSimpleName());
@@ -49,6 +70,10 @@ public abstract class Character {
         return asteroid;
     }
 
+    /**
+     * Setter az aszteroidahoz.
+     * @param a
+     */
     public void setAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);

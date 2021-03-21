@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
+ *Egy, az aszteroida ovben talalható aszteroidat reprezentalja.
  */
 public class Asteroid implements DestinationObject {
 
@@ -33,6 +33,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
+     *Konstruktor, amiben beallíthajuk az aszteroida tulajdonsagait.
      * @param layer
      * @param isempty
      * @param isnearsun
@@ -50,6 +51,10 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Karakter felvetele az aszteroidara.
+     * @param c
+     */
     public void setCharacter(Character c){
         Object[] p = {c.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -57,6 +62,10 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Paraméterben megadott objektum felvétele a szomszédok közé.
+     * @param d
+     */
     public void setNeighbour(DestinationObject d){
         Object[] p = {d.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -64,18 +73,32 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Visszater a sziklaretegek szamaval.
+     * @return
+     */
     public int getLayers() {
         Logger.getInstance().printCommandCall(this);
         Logger.getInstance().printReturnCommand(this.layers);
         return this.layers;
     }
 
+    /**
+     * Visszater a magban talalható szersanyaggal.
+     * @return
+     */
     public Material getMaterial() {
         Logger.getInstance().printCommandCall(this);
         Logger.getInstance().printReturnCommand(this.material.name);
         return this.material;
     }
 
+    /**
+     * Karakter elfogadasa az aszteroidara lepeskor.
+     * @param c
+     * @return
+     */
+    public Asteroid Accept(Character c) {
     public DestinationObject Accept(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -84,6 +107,10 @@ public class Asteroid implements DestinationObject {
         return this;
     }
 
+    /**
+     * Karakter eltavolitasa az aszteroidarol.
+     * @param c
+     */
     public void Remove(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -91,6 +118,9 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Az aszteroida egy kore, itt allitja be, hogy az egyes aszteroidak napkozelben, illetve naptavolban legyenek.
+     */
     public void Step() {
         Logger.getInstance().printCommandCall(this);
         this.SetSunProximity();
@@ -100,10 +130,13 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     *A karakter furas metodusa után hivodik meg, és csokkenti a sziklareteget.
+     */
     public void Drilled() {
         Logger.getInstance().printCommandCall(this);
 
-        //függvény lefutása felhasználói beavatkozással
+        //függvény lefutasa felhasznaloi beavatkozassal
         System.out.print("How many layers does the asteroid have after drilling?\t(Y)es / (N)o \t");
         InputStreamReader br = new InputStreamReader(System.in);
         char ch = ' ';
@@ -120,15 +153,18 @@ public class Asteroid implements DestinationObject {
             material.Hit(this);
         }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //függveny lefutasa tagvaltozo lekerdezesevel
         /*this.layers--;
         if(!isEmpty && layers == 0) {
             material.Hit(this);
-        }*/
-
+        }
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * A telepes banyaszas után kiveszi az aszteroidaból a nyersanyagot, visszater vele.
+     * @return
+     */
     public Material Mined() {
         Logger.getInstance().printCommandCall(this);
         if(!isEmpty && layers == 0) {
@@ -141,6 +177,10 @@ public class Asteroid implements DestinationObject {
         return null;
     }
 
+    /**
+     * Parameter hozzaadása a szomszedokhoz.
+     * @param d
+     */
     public void AddNeighbour(DestinationObject d) {
         Object[] p = {d.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -149,6 +189,10 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Parameterul kapott objektum eltavolítasa a szomszedok kozul.
+     * @param d
+     */
     public void RemoveNeighbour(DestinationObject d) {
         Object[] p = {d.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -157,6 +201,11 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Nyersanyag visszahelyezese az aszteroida magjaba.
+     * @param m
+     * @return
+     */
     public boolean AddMaterial(Material m) {
         Object[] p = {m.name};
         Logger.getInstance().printCommandCall(this, p);
@@ -170,6 +219,10 @@ public class Asteroid implements DestinationObject {
         return false;
     }
 
+    /**
+     * Nyersanyag eltavolítsa az aszteroida magjabol.
+     * @param m
+     */
     public void RemoveMaterial(Material m) {
         Object[] p = {m.name};
         Logger.getInstance().printCommandCall(this, p);
@@ -178,6 +231,11 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Parameterul kapott id szerinti aszteroidat adja vissza.
+     * @param id
+     * @return
+     */
     public DestinationObject GetNeighbour(int id) {
         Object[] p = {id};
         Logger.getInstance().printCommandCall(this, p);
@@ -189,6 +247,10 @@ public class Asteroid implements DestinationObject {
         return neighbours.get(id);
     }
 
+    /**
+     * Random szomszedot ad vissza.
+     * @return
+     */
     public int GetRandNeighbour() {
         Logger.getInstance().printCommandCall(this);
         Random rand = new Random();
@@ -197,6 +259,9 @@ public class Asteroid implements DestinationObject {
         return n;
     }
 
+    /**
+     *Napkozel/naptavol allitasa.
+     */
     public void SetSunProximity() {
         Logger.getInstance().printCommandCall(this);
         Random rand = new Random();
@@ -208,12 +273,19 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Visszaadja az aszteroida naphoz viszonyitott elhelyezkedeset.
+     * @return
+     */
     public boolean GetSunProximity() {
         Logger.getInstance().printCommandCall(this);
         Logger.getInstance().printReturnCommand(isEmpty);
         return isEmpty;
     }
 
+    /**
+     *Az aszteroidat napvihar eri el.
+     */
     public void HitBySunstorm() {
         Logger.getInstance().printCommandCall(this);
         if((layers!=0) && (!isEmpty))
@@ -221,17 +293,29 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Az aszteroida szomszedai kozul a parameterül kapott aszteroida felrobban.
+     * @param a
+     */
     public void HitByExplosion(Asteroid a) {
         Logger.getInstance().printCommandCall(this);
         this.neighbours.remove(a);
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     *Az aszteroida felrobban, errol ertesiti a szomszedait, illetve a rajta levő karakterek ennek megfeleloen viselkednek.
+     */
     public void Explode() {
         Logger.getInstance().printCommandCall(this);
         this.neighbours.forEach(n -> n.HitByExplosion(this));
         this.characters.forEach(c -> c.Explode());
         Logger.getInstance().printReturnCommand();
     }
+
+    public void SetLayer(int layer){
+        this.layers = layer;
+    }
+
 
 }
