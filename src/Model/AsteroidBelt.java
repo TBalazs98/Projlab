@@ -17,6 +17,9 @@ public class AsteroidBelt {
 
     private AsteroidBelt() {
         Logger.getInstance().printCommandCall(this);
+
+        asteroids = new ArrayList<Asteroid>();
+
         Logger.getInstance().printReturnCommand();
     }
 
@@ -62,12 +65,12 @@ public class AsteroidBelt {
         Logger.getInstance().printCommandCall(this);
 
         //függvény lefutása felhasználói beavatkozással
-            System.out.println("\nAre there any settlers alive?");
-            System.out.println(" (Y)es / (N)o");
+            System.out.print("Are there any settlers alive?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
                 ch=(char)br.read();
+                br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -11,7 +11,10 @@ public class Game {
     /**
      *Privát konstruktor.
      */
-    private Game(){}
+    private Game() {
+        Logger.getInstance().printCommandCall(this);
+        Logger.getInstance().printReturnCommand();
+    }
 
     private static final Game game = new Game();
     private int rounds;
@@ -33,7 +36,9 @@ public class Game {
      */
     public void WinGame() {
         Logger.getInstance().printCommandCall(this);
+
         System.out.println("Settlers have won the game");
+
         Logger.getInstance().printReturnCommand();
     }
 
@@ -43,7 +48,9 @@ public class Game {
      */
     public void LoseGame() {
         Logger.getInstance().printCommandCall(this);
+
         System.out.println("Settlers have lost the game");
+
         Logger.getInstance().printReturnCommand();
     }
 
@@ -52,7 +59,9 @@ public class Game {
      */
     public void NextRound() {
         Logger.getInstance().printCommandCall(this);
+
         steppables.forEach(s -> s.Step());
+
         Logger.getInstance().printReturnCommand();
     }
 

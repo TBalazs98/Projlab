@@ -32,8 +32,7 @@ public class Robot extends Worker {
         Logger.getInstance().printCommandCall(this);
 
         //függvény lefutása felhasználói beavatkozással
-            System.out.println("\nDo we have enough materials to build a robot");
-            System.out.println(" (Y)es / (N)o");
+            System.out.print("Do we have enough materials to build a robot?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -97,12 +96,12 @@ public class Robot extends Worker {
         Logger.getInstance().printCommandCall(this);
 
         //függvény lefutása felhasználói beavatkozással
-            System.out.println("\nDo we have enough materials to build a pair of teleportgates?");
-            System.out.println(" (A)steroid / (T)eleportgate");
+            System.out.print("Does the robot get thrown to an asteroid or a teleportgate?\t(A)steroid / (T)eleportgate \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
                 ch=(char)br.read();
+                br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

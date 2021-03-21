@@ -33,12 +33,12 @@ public class RadioactiveMaterial extends Material {
         Logger.getInstance().printCommandCall(this, p);
 
         //függvény lefutása felhasználói beavatkozással
-            System.out.println("\nIs the asteroid near the sun?");
-            System.out.println(" (Y)es / (N)o");
+            System.out.print("Is the asteroid near the sun?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
                 ch=(char)br.read();
+                br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
