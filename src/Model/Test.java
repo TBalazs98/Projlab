@@ -107,14 +107,30 @@ public class Test {
                 System.out.println("Invalid number!");
                 menu();
                 break;
-
         }
-
     }
 
-    void DrillLayerandReachSublimableMaterial(){    }
+    void DrillLayerandReachSublimableMaterial() {
+        Settler s = new Settler();
+        SublimableMaterialName subName = SublimableMaterialName.ICEWATER;
+        SublimableMaterial m = new SublimableMaterial();
+        m.setName(subName.ICEWATER);
+        Asteroid asteroid = new Asteroid(0,false,false,m);
+        asteroid.setCharacter(s);
 
-    void MineSublimableMaterial(){    }
+        menu();
+    }
+
+    void MineSublimableMaterial() {
+        Settler s = new Settler();
+        SublimableMaterialName subName = SublimableMaterialName.ICEWATER;
+        SublimableMaterial material = new SublimableMaterial();
+        material.setName(subName.ICEWATER);
+        Asteroid asteroid = new Asteroid(0,false,false,material);
+        asteroid.setCharacter(s);
+        //asdkl
+
+    }
 
     void MoveSettlertoAsteroid(){    }
 
