@@ -467,17 +467,15 @@ public class Test {
         Asteroid an = new Asteroid();
         Settler s = new Settler();
         RadioactiveMaterial rm = new RadioactiveMaterial();
-        RadioactiveMaterialName rmn = RadioactiveMaterialName.URAN;
+        rm.setName(RadioactiveMaterialName.URAN);
         Robot r = new Robot();
         AsteroidBelt ab = AsteroidBelt.getInstance();
         TeleportGate tn = new TeleportGate();
         TeleportGate pair = new TeleportGate();
 
-        rm.setName(rmn);
         asteroid.AddNeighbour(an);
         asteroid.AddNeighbour(tn);
         asteroid.Accept(s);
-        asteroid.AddMaterial(rm);
         asteroid.Accept(r);
         r.setAsteroid(asteroid);
         s.setAsteroid(asteroid);
