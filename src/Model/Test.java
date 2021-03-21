@@ -113,41 +113,165 @@ public class Test {
 
     void DrillLayerandReachSublimableMaterial() {
         Settler s = new Settler();
-        SublimableMaterialName subName = SublimableMaterialName.ICEWATER;
-        SublimableMaterial m = new SublimableMaterial();
-        m.setName(subName.ICEWATER);
-        Asteroid asteroid = new Asteroid(0,false,false,m);
+        Asteroid asteroid;
+
+        int layerr = 2000;          //bekérni
+        boolean isnear = false;     //bekérni
+        boolean isempty = false;    //bekérni
+
+        if(!isempty){
+            SublimableMaterialName subName = SublimableMaterialName.ICEWATER;
+            SublimableMaterial m = new SublimableMaterial();
+            m.setName(subName.ICEWATER);
+            asteroid = new Asteroid(layerr, false, isnear, m);
+        } else {
+            asteroid = new Asteroid(layerr, false, isnear, null);
+        }
+
         asteroid.setCharacter(s);
 
-        menu();
+        s.Drill();
+
     }
 
     void MineSublimableMaterial() {
         Settler s = new Settler();
         SublimableMaterialName subName = SublimableMaterialName.ICEWATER;
+
         SublimableMaterial material = new SublimableMaterial();
         material.setName(subName.ICEWATER);
-        Asteroid asteroid = new Asteroid(0,false,false,material);
+        Asteroid asteroid = new Asteroid();
+        //asteroid.setLayer(0);
+        //asteroid.setMaterial(m);
         asteroid.setCharacter(s);
         //asdkl
 
     }
 
-    void MoveSettlertoAsteroid(){    }
+    void MoveSettlertoAsteroid(){
+        Settler s = new Settler();
+        Asteroid asteroid = new Asteroid();
+        Asteroid goingTO = new Asteroid();
 
-    void MoveSettlertoTeleportGate(){}
+        s.setAsteroid(asteroid);
+        asteroid.Accept(s);
+        asteroid.AddNeighbour(goingTO);
+        goingTO.AddNeighbour(asteroid);
 
-    void MoveSettlerwhilebeinginSunStorm(){    }
+        s.Move(0);
+    }
 
-    void PlaceSublimeMaterial(){    }
+    void MoveSettlertoTeleportGate(){
+        Settler s = new Settler();
+        Asteroid a = new Asteroid();
+        Asteroid b = new Asteroid();
+        TeleportGate tg = new TeleportGate();
+        TeleportGate pair = new TeleportGate();
 
-    void SettlerPlaceTeleportGate(){    }
 
-    void BuildBase(){ }
+        s.setAsteroid(a);
+        //tg.setPair(pair);
+        //pair.setPair(tg);
+        a.setCharacter(s);
+        a.setNeighbour(b);
+        b.setNeighbour(a);
 
-    void BuildRobot(){}
+        s.Move(0);
 
-    void BuildTeleportGate(){}
+    }
+
+    void MoveSettlerwhilebeinginSunStorm(){
+        Settler s = new Settler();
+        AsteroidBelt ab = AsteroidBelt.getInstance();
+        Game g = Game.getInstance();
+        Asteroid onEmpty = new Asteroid();
+        ab.AddAsteroid(onEmpty);
+        s.setAsteroid(onEmpty);
+        onEmpty.Accept(s);
+        ab.StartStorm();
+
+        DestinationObject helper = onEmpty.GetNeighbour(0);
+
+        s.Move(0);
+
+    }
+
+    void PlaceSublimeMaterial(){
+        Settler s = new Settler();
+        Asteroid asteroid = new Asteroid();
+        SublimableMaterial sm = new SublimableMaterial();
+        s.setAsteroid(asteroid);
+        asteroid.Accept(s);
+        //s.AddInventroy(inventroy);
+        //asteroid.setProximity(false);
+        //asteroid.setLayer(0);
+
+        int layer = 0;
+
+        Scanner in = new Scanner(System.in);
+        System.out.println("\nIs the asteroid empty (y/n)?");
+        String isEmpty = in.nextLine();
+
+        Scanner in2 = new Scanner(System.in);
+        System.out.println("\nIs the asteroid near Sun (y/n)?");
+        String isNear = in2.nextLine();
+
+        s.PlaceMaterial(sm);
+
+    }
+
+    void SettlerPlaceTeleportGate(){
+        Settler s = new Settler();
+        Asteroid a = new Asteroid();
+        TeleportGate pair = new TeleportGate();
+        TeleportGate tg = new TeleportGate();
+        Asteroid b = new Asteroid();
+
+        s.setAsteroid(a);
+        a.Accept(s);
+        //pair.setPair(tg);
+        //tg.setPair(pair);
+        //pair.setAsteroid(b);
+
+        s.PlaceGate(tg);
+
+    }
+
+    void BuildBase(){
+        Settler s = new Settler();
+        Settler s2 = new Settler();
+        Asteroid a = new Asteroid();
+        Game g = Game.getInstance();
+
+        s.setAsteroid(a);
+        a.Accept(s);
+        s2.setAsteroid(a);
+        a.Accept(s2);
+
+        //feltölteni azt a két buzit
+
+        s.BuildBase();
+
+    }
+
+    void BuildRobot(){
+        Settler s = new Settler();
+        Asteroid asteroid = new Asteroid();
+        s.setAsteroid(asteroid);
+        asteroid.Accept(s);
+
+        s.BuildRobot();
+    }
+
+    void BuildTeleportGate(){
+        Settler s = new Settler();
+        Asteroid a = new Asteroid();
+        s.setAsteroid(a);
+        a.Accept(s);
+
+        s.BuildGate();
+
+    }
 
     void DrillLayerandnotreachCore(){    }
 
