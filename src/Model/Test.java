@@ -389,7 +389,7 @@ public class Test {
     }
 
     /**
-     * Sima nyersanyag bányászása, de
+     * Sima nyersanyag bányászása.
      */
     void PlaceMaterialbutAsteroidisnotemptyordrilledthrough(){      //16.
         Settler s = new Settler();
