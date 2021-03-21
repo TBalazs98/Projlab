@@ -11,7 +11,10 @@ public class Game {
     /**
      *Privát konstruktor.
      */
-    private Game(){}
+    private Game() {
+        Logger.getInstance().printCommandCall(this);
+        Logger.getInstance().printReturnCommand();
+    }
 
     private static final Game game = new Game();
     private int rounds;
