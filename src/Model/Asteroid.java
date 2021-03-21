@@ -315,7 +315,7 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
-    public void SetLayer(int layer){
+    public void setLayer(int layer){
         this.layers = layer;
     }
 
