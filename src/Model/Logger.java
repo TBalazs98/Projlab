@@ -22,7 +22,8 @@ public class Logger {
     //source: https://stackoverflow.com/questions/442747/getting-the-name-of-the-currently-executing-method
     private static String getMethodName(final int depth) {
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-        return ste[ste.length - 2 - depth].getMethodName();
+        return ste[ste.length - 4 - depth].getMethodName(); //CSAK TESZTELÉSHEZ
+        //return ste[ste.length - 2 - depth].getMethodName(); //ÉLESBEN EZ LESZ A JÓ
     }
 
     //függvényhívás kiírása, ha nincs paraméter
@@ -82,5 +83,4 @@ public class Logger {
         System.out.print("<< " + toPrint);
         System.out.println();
     }
-
 }

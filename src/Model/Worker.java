@@ -13,7 +13,9 @@ public abstract class Worker extends Character implements drillable {
 
     public void Drill() {
         Logger.getInstance().printCommandCall(this);
+
         asteroid.Drilled();
+
         Logger.getInstance().printReturnCommand();
     }
 

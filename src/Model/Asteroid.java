@@ -157,7 +157,7 @@ public class Asteroid implements DestinationObject {
             Logger.getInstance().printReturnCommand();
             return null;
         }
-        Logger.getInstance().printReturnCommand(neighbours.get(id));
+        Logger.getInstance().printReturnCommand(neighbours.get(id).getClass().getSimpleName());
         return neighbours.get(id);
     }
 

@@ -1,6 +1,8 @@
 package Model;
 
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 /**
@@ -21,9 +23,26 @@ public class Base {
         Object[] p = {i.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        setInventory();
+        //függvény lefutása felhasználói beavatkozással
+            System.out.println("\nDo we have enough materials to build the base?");
+            System.out.println(" (Y)es / (N)o");
+            InputStreamReader br = new InputStreamReader(System.in);
+            char ch = ' ';
+            try {
+                ch=(char)br.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(ch=='y' || ch=='Y' ) {
+                Build();
+            }
+
+        //függvény lefutása tagváltozó lekérdezésével
+        /*setInventory();
         if(inventory.ContainsAllElementsIn(i))
             Build();
+        */
 
         Logger.getInstance().printReturnCommand();
     }
