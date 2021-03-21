@@ -89,11 +89,7 @@ public class Test {
                 MineNormalMaterial();
                 break;
             case 15 :
-                try {
-                    DrillLayerandreachRadioactiveMaterial();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                DrillLayerandreachRadioactiveMaterial();
                 break;
             case 16 :
                 PlaceMaterialbutAsteroidisnotemptyordrilledthrough();
@@ -148,12 +144,14 @@ public class Test {
      */
     void MineSublimableMaterial() {                                 //2.
         Settler s = new Settler();
-        SublimableMaterialName subName = SublimableMaterialName.ICEWATER;
-
-        SublimableMaterial material = new SublimableMaterial();
-        material.setName(subName.ICEWATER);
         Asteroid asteroid = new Asteroid();
+        SublimableMaterial material = new SublimableMaterial();
+        material.setName(SublimableMaterialName.ICEWATER);
+
         asteroid.Accept(s);
+        asteroid.AddMaterial(material);
+        s.setAsteroid(asteroid);
+        asteroid.setLayer(0);
 
         s.Mine();
 
@@ -234,6 +232,7 @@ public class Test {
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
         asteroid.setLayer(0);
+        s.AddMaterial(sm);
 
         s.PlaceMaterial(sm);
 
@@ -254,6 +253,8 @@ public class Test {
         pair.setPair(tg);
         tg.setPair(pair);
         pair.setAsteroid(b);
+        b.AddNeighbour(pair);
+        s.AddGate(tg);
 
         s.PlaceGate(tg);
 
@@ -372,7 +373,7 @@ public class Test {
     /**
      * Furunk, ezzel elerjuk a radioaktiv magot.
      */
-    void DrillLayerandreachRadioactiveMaterial() throws IOException {   //15.
+    void DrillLayerandreachRadioactiveMaterial() {   //15.
         AsteroidBelt ab = AsteroidBelt.getInstance();
         Asteroid asteroid = new Asteroid();
         Asteroid a = new Asteroid();
