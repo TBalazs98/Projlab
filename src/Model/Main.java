@@ -18,8 +18,17 @@ public class Main {
         Settler s = new Settler();
         s.setAsteroid(a);
         s.Mine();
+
         s.PlaceMaterial(m);
+
+        Test t = new Test();
+        t.menu();               //teszt osztály
     }
+
+
+
+
+
 
 
 }
