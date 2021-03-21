@@ -528,6 +528,7 @@ public class Test {
         material.put(NormalMaterialName.IRON, 10);
         inventory.fill(material);
 
+        s.setInventory(inventory);
         s.setAsteroid(a);
         a.setLayer(0);
 

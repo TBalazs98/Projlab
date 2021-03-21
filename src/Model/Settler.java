@@ -137,4 +137,11 @@ public class Settler extends Worker {
         Logger.getInstance().printReturnCommand();
     }
 
+    public void setInventory(Inventory i ) {
+        inventory = i;
+    }
+
+    public void AddMaterial(Material m) {
+        m.Add(inventory);
+    }
 }
