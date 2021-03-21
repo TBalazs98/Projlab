@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.*;
-
 /**
  * Egy interfész, ami minden olyan dolgot reprezentál, amely körönként automatikusan csinál
  * valamit.

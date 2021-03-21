@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 public class SublimableMaterial extends Material {
     private SublimableMaterialName sname;
 
-
     /**
      *A szublimáló nyersanyagok konstruktora.
      */
@@ -21,7 +20,6 @@ public class SublimableMaterial extends Material {
 
         Logger.getInstance().printReturnCommand();
     }
-
 
     /**
      * Ha az aszteroidát külső behatás éri, ellenőrzi, hogy
@@ -54,7 +52,6 @@ public class SublimableMaterial extends Material {
 
         Logger.getInstance().printReturnCommand();
     }
-
 
     /**
      * Beállítja a nyersanyag nevét.

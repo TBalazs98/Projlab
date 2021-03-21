@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.*;
-
 /**
  * Magát a fúrást valósítja meg, csökkenti az aszteroida köpöcsnyegét.
  */
