@@ -220,12 +220,12 @@ public class Test {
         int layer = 0;
 
         Scanner in = new Scanner(System.in);
-        System.out.println("\nIs the asteroid empty (y/n)?");
-        String isEmpty = in.nextLine();
+        System.out.println("Is the asteroid empty? (Y/N)");
+        Boolean isEmpty;
 
         Scanner in2 = new Scanner(System.in);
-        System.out.println("\nIs the asteroid near Sun (y/n)?");
-        String isNear = in2.nextLine();
+        System.out.println("Is the asteroid near the sun? (Y/N)");
+        String isNear;
 
         s.PlaceMaterial(sm);
 
@@ -364,8 +364,7 @@ public class Test {
         //pair.setPair(tn);//27
         pair.Activate();
 
-        System.out.println("\nIs the asteroid near to the Sun?\n");
-        System.out.println(" (Y)es / (N)o");
+        System.out.print("Is the asteroid near to the Sun?\t(Y)es / (N)o\t");
         InputStreamReader br = new InputStreamReader(System.in);
         char ch = ' ';
         ch=(char)br.read();

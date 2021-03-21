@@ -30,12 +30,12 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printCommandCall(this, p);
 
         //függvény lefutása felhasználói beavatkozással
-            System.out.println("\nDo we have enough materials to build a pair of teleportgates?");
-            System.out.println(" (Y)es / (N)o");
+            System.out.print("Do we have enough materials to build a pair of teleportgates?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
                 ch=(char)br.read();
+                br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -94,6 +94,7 @@ public class TeleportGate implements DestinationObject {
             char ch = ' ';
             try {
                 ch=(char)br.read();
+                br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -124,12 +125,12 @@ public class TeleportGate implements DestinationObject {
 
         this.asteroid = asteroid;
         //függvény lefutása felhasználói beavatkozással
-            System.out.println("\nIs the pair of the teleportgate placed, and can we activate the gates?");
-            System.out.println(" (Y)es / (N)o");
+            System.out.print("Is the pair of the teleportgate placed, and can we activate the gates?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
                 ch=(char)br.read();
+                br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

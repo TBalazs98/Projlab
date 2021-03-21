@@ -24,12 +24,12 @@ public class Base {
         Logger.getInstance().printCommandCall(this, p);
 
         //függvény lefutása felhasználói beavatkozással
-            System.out.println("\nDo we have enough materials to build the base?");
-            System.out.println(" (Y)es / (N)o");
+            System.out.print("Do we have enough materials to build the base?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
                 ch=(char)br.read();
+                br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

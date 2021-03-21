@@ -45,28 +45,6 @@ public class Logger {
         intend++;
     }
 
-//    public void printCommandCall(String s1, String s2, Object[] params) {
-//        for(int i = 0; i < intend; i++) {
-//            System.out.print("\t");
-//        }
-//
-//        System.out.print(">>");
-//
-//        System.out.print("[:" + s1 + "]." + s2+ "(");
-//
-//
-//        for(int i = 0; i < params.length; i++) {
-//            String toPrint = params[i].toString();
-//            System.out.print(toPrint);
-//            if(i == params.length - 1)
-//                System.out.print(")");
-//        }
-//
-//        System.out.println();
-//
-//        intend++;
-//    }
-
     //függvényhívás kiírása, ha van paraméter
     public void printCommandCall(Object o, Object[] params) {
         for(int i = 0; i < intend; i++) {

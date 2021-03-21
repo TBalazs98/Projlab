@@ -31,17 +31,17 @@ public class SublimableMaterial extends Material {
         Logger.getInstance().printCommandCall(this, p);
 
         //függvény lefutása felhasználói beavatkozással
-            System.out.println("\nIs the asteroid near the sun?");
-            System.out.println(" (Y)es / (N)o");
+            System.out.print("Is the asteroid near the sun?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
                 ch=(char)br.read();
+                br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            if(ch=='y' || ch=='Y' ) {
+            if(ch =='y' || ch =='Y' ) {
                 a.RemoveMaterial(this);
             }
 
@@ -57,7 +57,7 @@ public class SublimableMaterial extends Material {
      * Beállítja a nyersanyag nevét.
      * @param name
      */
-    public void setName(SublimableMaterialName name){
+    public void setName(SublimableMaterialName name) {
         Logger.getInstance().printCommandCall(this);
 
         sname = name;
