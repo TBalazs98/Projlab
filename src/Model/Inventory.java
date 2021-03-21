@@ -8,11 +8,16 @@ public class Inventory {
 //asd
 
     public Inventory() {
+        Logger.getInstance().printCommandCall(this);
         inventory = new HashMap<MaterialName, Integer>();
+        Logger.getInstance().printReturnCommand();
     }
 
     //TODO NEW
     public Integer get_amount(MaterialName m) {
+        Object[] p = {m};
+        Logger.getInstance().printCommandCall(this, p);
+        Logger.getInstance().printReturnCommand(inventory.get(m));
         return inventory.get(m);
     }
 

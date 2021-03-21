@@ -95,12 +95,16 @@ public class Asteroid implements DestinationObject {
     public void Drilled() {
         Logger.getInstance().printCommandCall(this);
         this.layers--;
+        if(!isEmpty && layers == 0) {
+            material.Hit(this);
+        }
         Logger.getInstance().printReturnCommand();
     }
 
     public Material Mined() {
         Logger.getInstance().printCommandCall(this);
-        if(!isEmpty) {
+        if(!isEmpty && layers == 0) {
+            material.Hit(this);
             isEmpty = true;
             Logger.getInstance().printReturnCommand(material.name);
             return material;

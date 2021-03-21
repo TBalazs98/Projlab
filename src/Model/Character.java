@@ -10,27 +10,40 @@ public abstract class Character {
     protected Asteroid asteroid;
 
     public Character() {
+        Logger.getInstance().printCommandCall(this);
+        Logger.getInstance().printReturnCommand();
     }
 
     public void Die() {}
     public abstract void Explode();
 
     public void Move(int idx) {
+        Object[] p = {idx};
+        Logger.getInstance().printCommandCall(this, p);
         asteroid.Remove(this);
         DestinationObject goingTo = asteroid.GetNeighbour(idx);
         asteroid = (Asteroid) goingTo.Accept(this); //fixen asteroid lesz, mivel a DestinationObject minden implementálásánál Asteroiddal tér vissza
+        Logger.getInstance().printReturnCommand();
     }
 
-    public void addAsteroid(Asteroid a){
+    public void addAsteroid(Asteroid a) {
+        Object[] p = {a.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this, p);
         this.asteroid = a;
+        Logger.getInstance().printReturnCommand();
     }
 
-    public Asteroid getAsteroid(){
+    public Asteroid getAsteroid() {
+        Logger.getInstance().printCommandCall(this);
+        Logger.getInstance().printReturnCommand(asteroid.getClass().getSimpleName());
         return asteroid;
     }
 
-    public void setAsteroid(Asteroid a){
+    public void setAsteroid(Asteroid a) {
+        Object[] p = {a.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this, p);
         this.asteroid = a;
+        Logger.getInstance().printReturnCommand();
     }
 
 }
