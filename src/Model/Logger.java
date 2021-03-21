@@ -22,6 +22,9 @@ public class Logger {
     //source: https://stackoverflow.com/questions/442747/getting-the-name-of-the-currently-executing-method
     private static String getMethodName(final int depth) {
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
+//        for(int i = 0; i < ste.length; i++) {
+//            System.out.println(ste[i].getMethodName());
+//        }
         return ste[ste.length - 4 - depth].getMethodName(); //CSAK TESZTELÉSHEZ
         //return ste[ste.length - 2 - depth].getMethodName(); //ÉLESBEN EZ LESZ A JÓ
     }
@@ -40,6 +43,28 @@ public class Logger {
 
         intend++;
     }
+
+//    public void printCommandCall(String s1, String s2, Object[] params) {
+//        for(int i = 0; i < intend; i++) {
+//            System.out.print("\t");
+//        }
+//
+//        System.out.print(">>");
+//
+//        System.out.print("[:" + s1 + "]." + s2+ "(");
+//
+//
+//        for(int i = 0; i < params.length; i++) {
+//            String toPrint = params[i].toString();
+//            System.out.print(toPrint);
+//            if(i == params.length - 1)
+//                System.out.print(")");
+//        }
+//
+//        System.out.println();
+//
+//        intend++;
+//    }
 
     //függvényhívás kiírása, ha van paraméter
     public void printCommandCall(Object o, Object[] params) {
