@@ -30,6 +30,12 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * @param layer
+     * @param isempty
+     * @param isnearsun
+     * @param mat
+     */
     public Asteroid(int layer, boolean isempty,boolean isnearsun, Material mat){
         Object[] p = {layer, isempty, isnearsun, mat.name};
         Logger.getInstance().printCommandCall(this, p);
