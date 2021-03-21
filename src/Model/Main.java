@@ -14,7 +14,7 @@ public class Main {
         Material m = new Material();
         m.setName(NormalMaterialName.IRON);
         Asteroid a = new Asteroid();
-        System.out.println(a.AddMaterial(m));
+        a.AddMaterial(m);
         Settler s = new Settler();
         s.setAsteroid(a);
         s.Mine();
