@@ -140,7 +140,6 @@ public class Test {
         s.addAsteroid(asteroid);
 
         s.Drill();
-
     }
 
     /**

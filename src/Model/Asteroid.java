@@ -137,19 +137,21 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printCommandCall(this);
 
         //függvény lefutasa felhasznaloi beavatkozassal
-        System.out.print("How many layers does the asteroid have after drilling?\t(Y)es / (N)o \t");
+        System.out.print("How many layers does the asteroid have after drilling?\t");
         InputStreamReader br = new InputStreamReader(System.in);
         char ch = ' ';
         int layers = 0;
         try {
             layers = br.read();
             System.out.print("Is the asteroid empty?\t(Y)es / (N)o\t");
-            ch = (char)br.read();
+            InputStreamReader cr = new InputStreamReader(System.in);
+            ch = (char)cr.read();
             br.close();
+            cr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if((ch=='y' || ch=='Y' ) && layers == 0) {
+        if((ch=='n' || ch=='N' ) && layers == 0) {
             material.Hit(this);
         }
 
