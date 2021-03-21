@@ -128,6 +128,7 @@ public class Test {
         material.setName(subName.ICEWATER);
         Asteroid asteroid = new Asteroid(0,false,false,material);
         asteroid.setCharacter(s);
+        //asdkl
 
     }
 
