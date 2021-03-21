@@ -98,7 +98,7 @@ public class Asteroid implements DestinationObject {
      * @param c
      * @return
      */
-    public Asteroid Accept(Character c) {
+
     public DestinationObject Accept(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -158,6 +158,8 @@ public class Asteroid implements DestinationObject {
         if(!isEmpty && layers == 0) {
             material.Hit(this);
         }
+
+         */
         Logger.getInstance().printReturnCommand();
     }
 
@@ -262,7 +264,7 @@ public class Asteroid implements DestinationObject {
     /**
      *Napkozel/naptavol allitasa.
      */
-    public void SetSunProximity() {
+    public void SetSunProximity(){
         Logger.getInstance().printCommandCall(this);
         Random rand = new Random();
         int rand_int = rand.nextInt(2);
