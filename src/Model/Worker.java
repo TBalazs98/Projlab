@@ -1,19 +1,19 @@
 package Model;
 
 /**
- * Magát a fúrást valósítja meg, csökkenti az aszteroida köpöcsnyegét.
+ * Magat a furast valositja meg, csokkenti az aszteroida koponyeget.
  */
 public abstract class Worker extends Character implements drillable {
 
     /**
-     * Konstruktor, a szüőjátől (Character) örökli
+     * Konstruktor, a szulojetol (Character) orokli
      */
     public Worker() {
         super();
     }
 
     /**
-     * Fúrás az aszteroidán.
+     * Furas az aszteroidan.
      */
     public void Drill() {
         Logger.getInstance().printCommandCall(this);
@@ -24,9 +24,9 @@ public abstract class Worker extends Character implements drillable {
     }
 
     /**
-     * Mivel a worker osztály még absztrakt
-     * ezért itt nem fontos ezt implementálni,
-     * csak a Settlerben meg a robotban.
+     * Mivel a worker osztaly meg absztrakt
+     * ezert itt nem fontos ezt implementalni,
+     * csak a Settlerben meg a Robotban.
      */
     public abstract void Explode();
 

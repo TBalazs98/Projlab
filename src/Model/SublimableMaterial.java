@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * A szublimáló nyersanyagokat kezeli.
+ * A szublimalo nyersanyagokat kezeli.
  */
 public class SublimableMaterial extends Material {
     private SublimableMaterialName sname;
 
     /**
-     *A szublimáló nyersanyagok konstruktora.
+     *A szublimalo nyersanyagok konstruktora.
      */
     public SublimableMaterial() {
         super();
@@ -22,15 +22,15 @@ public class SublimableMaterial extends Material {
     }
 
     /**
-     * Ha az aszteroidát külső behatás éri, ellenőrzi, hogy
-     * napközelben van-e.
+     * Ha az aszteroidat kulso behatas eri, ellenorzi, hogy
+     * napkozelben van-e.
      * @param a
      */
     public void Hit(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        //függvény lefutása felhasználói beavatkozással
+        //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Is the asteroid near the sun?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
@@ -45,7 +45,7 @@ public class SublimableMaterial extends Material {
                 a.RemoveMaterial(this);
             }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*if(a.getLayers() == 0 && a.GetSunProximity() == true) //ide se kell a getlayers, lásd: radioactive
             a.RemoveMaterial(a.getMaterial());
         */
@@ -54,7 +54,7 @@ public class SublimableMaterial extends Material {
     }
 
     /**
-     * Beállítja a nyersanyag nevét.
+     * Beallitja a nyersanyag nevet.
      * @param name
      */
     public void setName(SublimableMaterialName name) {

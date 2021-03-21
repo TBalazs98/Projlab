@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 /**
-  * A teleportkapukat kezeli. Tárolja a párját, melyik aszteroidán van, illetve a jelenlegi állapotát.
+  * A teleportkapukat kezeli. Tarolja a parjat, melyik aszteroidan van, illetve a jelenlegi allapotat.
  */
 public class TeleportGate implements DestinationObject {
     public TeleportGate() {
@@ -22,14 +22,14 @@ public class TeleportGate implements DestinationObject {
     /**
      * A teleportkapu konstuktora.
      *
-     * @param i   A telepes inventorija, és összehasonlítja, a saját felépítéséhez szükséges inventoryval.
-     * @param s   Telepses, aki felépítené a teleportkaput.
+     * @param i   A telepes inventorija, és osszehasonlitja, a sajat felepitesehez szukseges inventoryval.
+     * @param s   Telepses, aki felepitene a teleportkaput.
      */
     public TeleportGate(Inventory i, Settler s) {
         Object[] p = {i.getClass().getSimpleName(), s.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        //függvény lefutása felhasználói beavatkozással
+        //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Do we have enough materials to build a pair of teleportgates?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
@@ -47,7 +47,7 @@ public class TeleportGate implements DestinationObject {
                 s.AddGate(this);
             }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*setInventory();
         if(inventory.ContainsAllElementsIn(i))
             {
@@ -62,7 +62,7 @@ public class TeleportGate implements DestinationObject {
 
 
     /**
-     * Inicializálja az inventorit, itt tárolja a felépítéséhez szükséges anyagokat.
+     * Inicializalja az inventorit, itt tarolja a felepiteshez szukseges anyagokat.
      */
     private void setInventory() {
         Logger.getInstance().printCommandCall(this);
@@ -78,7 +78,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Felveszi a ré lépő karaktert, majd visszatér az aszteroidával, ahol található.
+     * Felveszi a ra lepo karaktert, majd visszater az aszteroidaval, ahol talalhato.
      * @param c
      * @return
      */
@@ -88,7 +88,7 @@ public class TeleportGate implements DestinationObject {
 //        String name = new Object(){}.getClass().getEnclosingMethod().getName();
 //        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name ,p);
 
-        //függvény lefutása felhasználói beavatkozással
+        //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Is the teleportgate active?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
@@ -105,7 +105,7 @@ public class TeleportGate implements DestinationObject {
                 a.Accept(c);
             }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*if (isActive) {
             pair.GetAsteroid().Accept(c);
         }*/
@@ -115,16 +115,16 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Lehelyezzük a teleportkapunkat.
+     * Lehelyezzuk a teleportkapunkat.
      *
-     * @param asteroid  Az adott aszteroidára helyezzük le.
+     * @param asteroid  Az adott aszteroidara helyezzuk le.
      */
     public void Place(Asteroid asteroid) {
         Object[] p = {asteroid.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this,p);
 
         this.asteroid = asteroid;
-        //függvény lefutása felhasználói beavatkozással
+        //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Is the pair of the teleportgate placed, and can we activate the gates?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
@@ -140,7 +140,7 @@ public class TeleportGate implements DestinationObject {
                 Activate();
             }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*isPlaced = true;
         if (pair.GetPlaced()) {
             this.pair.Activate();
@@ -151,7 +151,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Visszatér egy logikai értékkel, hogy a kapunkat leraktuk-e.
+     * Visszater egy logikai ertekkel, hogy a kapunkat leraktuk-e.
      * @return
      */
     public boolean GetPlaced() {
@@ -162,7 +162,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Visszatér az aszteroidával, amin a telepes található.
+     * Visszater az aszteroidaval, amin a telepes talalhato.
      * @return
      */
     public Asteroid GetAsteroid() {
@@ -173,7 +173,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Beállítja az aszteroidát, ahol a kapu található.
+     * Beallitja az aszteroidat, ahol a kapu talalhato.
      * @param a
      */
     public void setAsteroid(Asteroid a) {
@@ -186,7 +186,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * A teleportkapu párját adja vissza.
+     * A teleportkapu parjat adja vissza.
      * @return
      */
     public TeleportGate GetPair() {
@@ -197,7 +197,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Beállítja a teleportkapu párját.
+     * Beallitja a teleportkapu parjat.
      * @param t
      */
     public void setPair(TeleportGate t) {
@@ -209,7 +209,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Aktiválja a kaput.
+     * Aktivalja a kaput.
      */
     public void Activate() {
         Logger.getInstance().printCommandCall(this);
@@ -220,7 +220,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Deaktiválja a kaput.
+     * Deaktivalja a kaput.
      */
     public void Deactivate() {
         Logger.getInstance().printCommandCall(this);
@@ -232,7 +232,7 @@ public class TeleportGate implements DestinationObject {
 
     /**
      * Ha az aszteroida felrobban, amin van, a kaput is
-     * eléri a robbanás és meghívja a destroy függvényt magára és a párjára is.
+     * eleri a robbanas es meghivja a destroy fuggvenyt magara es a parjara is.
      * @param a
      */
     public void HitByExplosion(Asteroid a) {
@@ -244,7 +244,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Megsemisűl a teleportkapu.
+     * Megsemisul a teleportkapu.
      */
     public void Destroy() {
         Logger.getInstance().printCommandCall(this);

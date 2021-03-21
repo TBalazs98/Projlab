@@ -3,8 +3,8 @@ package Model;
 import java.util.*;
 
 /**
- * Játékosok által irányított karakterek, akik az aszteroidaövön mozognak és nyersanyagot
- * gyűjtenek.
+ * Jatekosok altal iranyitott karakterek, akik az aszteroidaovon mozognak es nyersanyagot
+ * gyujtenek.
  */
 public class Settler extends Worker {
 
@@ -12,10 +12,10 @@ public class Settler extends Worker {
      * Publikus default konstrukor
      */
     public Settler() {
-        super();                        //Ős konstruktor
+        super();                        //Os konstruktor
         Logger.getInstance().printCommandCall(this);
 
-        inventory = new Inventory();    //Létrehozza az inventory-t
+        inventory = new Inventory();    //Letrehozza az inventory-t
 
         Logger.getInstance().printReturnCommand();
     }
@@ -25,70 +25,70 @@ public class Settler extends Worker {
     private Inventory inventory;
 
     /**
-     * Kibányássza az aszteroida magjában található nyersanyagot amin
-     * tartózkodik.
+     * Kibanyassza az aszteroida magjaban talalhato nyersanyagot amin
+     * tartozkodik.
      */
     public void Mine() {
         Logger.getInstance().printCommandCall(this);
 
         Material m = asteroid.Mined();
         if(m != null)
-            m.Add(inventory);           //Kibányászott nyesanyag eltárolása az inventory-ban
+            m.Add(inventory);           //Kibanyaszott nyesanyag eltarolasa az inventory-ban
 
         Logger.getInstance().printReturnCommand();
     }
 
     /**
-     * A Settler bázis építéséhez szükséges metódusa
+     * A Settler bazis epitesehez szukseges metodusa
      */
     public void BuildBase() {
         Logger.getInstance().printCommandCall(this);
 
-        Base base = new Base(inventory);        //Bázis építése, átadva a saját inventorynkat (ebben nézi meg a Base, hogy fel tud-e épülni)
+        Base base = new Base(inventory);        //bazis epitese, atadva a sajat inventorynkat (ebben nezi meg a Base, hogy fel tud-e epulni)
 
         Logger.getInstance().printReturnCommand();
     }
 
     /**
-     * A Settler bázis építéséhez szükséges metódusa
+     * A Settler bazis epitesehez szukseges metodusa
      */
     public void BuildGate() {
         Logger.getInstance().printCommandCall(this);
 
-        TeleportGate g1 = new TeleportGate(inventory, this);        //TG  építése, átadva a saját inventorynkat (ebben nézi meg a TG, hogy fel tud-e épülni)
+        TeleportGate g1 = new TeleportGate(inventory, this);        //TG  epitese, atadva a sajat inventorynkat (ebben nezi meg a TG, hogy fel tud-e epulni)
 
         Logger.getInstance().printReturnCommand();
     }
 
     /**
-     * A Settler bázis építéséhez szükséges metódusa
+     * A Settler bazis epitesehez szukseges metodusa
      */
     public void BuildRobot() {
         Logger.getInstance().printCommandCall(this);
 
-        Robot r = new Robot(inventory, asteroid);       //Robot építése, átadva a saját inventorynkat (ebben nézi meg a Robot, hogy fel tud-e épülni)
+        Robot r = new Robot(inventory, asteroid);       //Robot epitese, atadva a sajat inventorynkat (ebben nezi meg a Robot, hogy fel tud-e epulni)
 
         Logger.getInstance().printReturnCommand();
     }
 
     /**
-     * @param m A lehelyezendő material
-     * Visszahelyez egy egység nyersanyagot üreges
-     * aszteroida magjába.
+     * @param m A lehelyezendo material
+     * Visszahelyez egy egyseg nyersanyagot ureges
+     * aszteroida magjaba.
      */
     public void PlaceMaterial(Material m) {
         Object[] p = {m.name};
         Logger.getInstance().printCommandCall(this, p);
 
         if(asteroid.AddMaterial(m))
-            m.Remove(inventory);                        //Eltávolítjuk az inventorynkból
+            m.Remove(inventory);                        //Eltavolitjuk az inventorynkbol
 
         Logger.getInstance().printReturnCommand();
     }
 
     /**
-     * Metódus, amely kezeli azt az eseményt, amikor az az aszteroida felrobban,
-     * amin a Settler éppen tartózkodik.
+     * Metodus, amely kezeli azt az esemenyt, amikor az az aszteroida felrobban,
+     * amin a Settler eppen tartozkodik.
      */
     public void Explode() {
         Logger.getInstance().printCommandCall(this);
@@ -99,20 +99,20 @@ public class Settler extends Worker {
     }
 
     /**
-     * A Settler halálát levezénylő metódus
+     * A Settler halalat levezenylo metodus
      */
     public void Die() {
         Logger.getInstance().printCommandCall(this);
 
-        asteroid.Remove(this);                  //levesszük az adott Settlert az aszteroidáról (mert meghalt)
-        AsteroidBelt.getInstance().SetSettlersAlive();  //És átállítjuk a jelenleg életben lévő Settlereket
+        asteroid.Remove(this);                  //levesszuk az adott Settlert az aszteroidarol (mert meghalt)
+        AsteroidBelt.getInstance().SetSettlersAlive();  //Es atallitjuk a jelenleg eletben levo Settlereket
 
         Logger.getInstance().printReturnCommand();
     }
 
     /**
-     * @param t Eltárolandó Teleportkapu
-     * Hozzáad egy teleportkaput a Settlernél lévő teleportkapukhoz
+     * @param t Eltarolando Teleportkapu
+     * Hozzaad egy teleportkaput a Settlernel levo teleportkapukhoz
      */
     public void AddGate(TeleportGate t) {
         Object[] p = {t.getClass().getSimpleName()};
@@ -124,8 +124,8 @@ public class Settler extends Worker {
     }
 
     /**
-     * @param t Lehelyezendő teleportkapu
-     * Settler elhelyez egy teleportkaput az adott Aszteroidán, amin áll
+     * @param t Lehelyezendo teleportkapu
+     * Settler elhelyez egy teleportkaput az adott Aszteroidan, amin all
      */
     public void PlaceGate(TeleportGate t) {
         Object[] p = {t.getClass().getSimpleName()};

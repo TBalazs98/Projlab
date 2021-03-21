@@ -128,21 +128,23 @@ public class Test {
     }
 
     /**
-     * Az adott tesztesetben a Drill() függvény végrehajtását nézzük, abban az esetben,
-     * ha a szublimáló nyersanyagot adunk hozzá.
+     * Az adott tesztesetben a Drill() fuggveny vegrehajtasat nezzuk, abban az esetben,
+     * ha a szublimalo nyersanyagot adunk hozza.
      */
     void DrillLayerandReachSublimableMaterial() {                   //1.
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
+        SublimableMaterial m = new SublimableMaterial();
 
+        asteroid.setLayer(1);
         asteroid.setCharacter(s);
+        s.addAsteroid(asteroid);
 
         s.Drill();
-
     }
 
     /**
-     * A Mine() függvényt nézzük szublimáló nyersanyagra.
+     * A Mine() fuggvenyt nezzuk szublimalo nyersanyagra.
      */
     void MineSublimableMaterial() {                                 //2.
         Settler s = new Settler();
@@ -151,14 +153,14 @@ public class Test {
         SublimableMaterial material = new SublimableMaterial();
         material.setName(subName.ICEWATER);
         Asteroid asteroid = new Asteroid();
-        asteroid.setCharacter(s);
+        asteroid.Accept(s);
 
         s.Mine();
 
     }
 
     /**
-     * A telepesünket mozgatjuk egy szomszédos aszteroidára.
+     * A telepesunket mozgatjuk egy szomszsdos aszteroidara.
      */
     void MoveSettlertoAsteroid(){                                   //3.
         Settler s = new Settler();
@@ -174,7 +176,7 @@ public class Test {
     }
 
     /**
-     * A telepesünket mozgatjuk egy aszteroidára, teleportkapun keresztül.
+     * A telepesunket mozgatjuk egy aszteroidara, teleportkapun keresztul.
      */
     void MoveSettlertoTeleportGate(){                           //4.
         //Logger.getInstance().printCommandCall(this);
@@ -190,7 +192,7 @@ public class Test {
         s.setAsteroid(a);
         tg.setPair(pair);
         pair.setPair(tg);
-        a.setCharacter(s);
+        a.Accept(s);
         a.setNeighbour(tg);
         b.setNeighbour(pair);
 
@@ -199,17 +201,22 @@ public class Test {
     }
 
     /**
-     * A mozgatást hajtjuk végre, miközben napvihar van az aszteroidaövön.
+     * A mozgatast hajtjuk vegre, mikozben napvihar van az aszteroidaovon.
      */
     void MoveSettlerwhilebeinginSunStorm(){                      //5.
         Settler s = new Settler();
         AsteroidBelt ab = AsteroidBelt.getInstance();
         Game g = Game.getInstance();
         Asteroid onEmpty = new Asteroid();
+        Asteroid a = new Asteroid();
 
         ab.AddAsteroid(onEmpty);
         s.setAsteroid(onEmpty);
+        onEmpty.AddNeighbour(a);
+        a.AddNeighbour(onEmpty);
         onEmpty.Accept(s);
+
+
         ab.StartStorm();
 
         s.Move(0);
@@ -217,21 +224,23 @@ public class Test {
     }
 
     /**
-     * Lehelyeezünk egy szublimáló nyersanyagot.
+     * Lehelyezunk egy szublimalo nyersanyagot.
      */
     void PlaceSublimeMaterial(){                                //6.
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
         SublimableMaterial sm = new SublimableMaterial();
+
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
+        asteroid.setLayer(0);
 
         s.PlaceMaterial(sm);
 
     }
 
     /**
-     * A telepest lerakja a nála lévő teleprotkaput.
+     * A telepest lerakja a nala levo teleprotkaput.
      */
     void SettlerPlaceTeleportGate(){                            //7.
         Settler s = new Settler();
@@ -251,7 +260,7 @@ public class Test {
     }
 
     /**
-     * Megépítjük a bázist.
+     * Megepitjuk a bazist.
      */
     void BuildBase(){                                           //8.
         Settler s = new Settler();
@@ -269,11 +278,12 @@ public class Test {
     }
 
     /**
-     * Építünk egy robotot.
+     * Epitunk egy robotot.
      */
     void BuildRobot(){                                          //9.
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
+
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
 
@@ -281,11 +291,12 @@ public class Test {
     }
 
     /**
-     * A telepes létrehoz egy teleportkaput.
+     * A telepes letrehoz egy teleportkaput.
      */
     void BuildTeleportGate(){                                    //10.
         Settler s = new Settler();
         Asteroid a = new Asteroid();
+
         s.setAsteroid(a);
         a.Accept(s);
 
@@ -294,14 +305,15 @@ public class Test {
     }
 
     /**
-     * Fúrunk az aszteroidán egyet, amiben nyersanyag található.
+     * Furunk az aszteroidan egyet, amiben nyersanyag talalhato.
      */
     void DrillLayerandnotreachCore(){                           //11.
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
+        Material m=new Material();
+
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
-        Material m=new Material();
         asteroid.AddMaterial(m);
 
         s.Drill();
@@ -309,50 +321,56 @@ public class Test {
     }
 
     /**
-     * Fúrunk az üreges aszteroidán egyet.
+     * Furunk az ureges aszteroidan egyet.
      */
     void DrillLayerandreachemptyCore(){                         //12.
         Asteroid a=new Asteroid();
         Settler s = new Settler();
+
         s.setAsteroid(a);
         a.Accept(s);
+        a.AddMaterial(null);
 
         s.Drill();
 
     }
 
     /**
-     * Fúrás az aszteroidán.
+     * Furas az aszteroidan.
      */
     void DrillLayerandreachNormalMaterial() {               //13.
         Settler s = new Settler();
         Asteroid a = new Asteroid();
         Material m = new Material();
+
         s.setAsteroid(a);
         a.Accept(s);
         a.AddMaterial(m);
+        a.setLayer(1);
 
         s.Drill();  //-> a.Drilled() -> m.Hit()
 
     }
 
     /**
-     * Normál nyersanyag bányászása.
+     * Normal nyersanyag banyaszasa.
      */
     void MineNormalMaterial() {                             //14.
         Settler s = new Settler();
         Asteroid a = new Asteroid();
         Material m = new Material();
+
         s.setAsteroid(a);
         a.Accept(s);
         a.AddMaterial(m);
+        a.setLayer(0);
 
         s.Mine();
 
     }
 
     /**
-     *
+     * Furunk, ezzel elerjuk a radioaktiv magot.
      */
     void DrillLayerandreachRadioactiveMaterial() throws IOException {   //15.
         AsteroidBelt ab = AsteroidBelt.getInstance();
@@ -365,22 +383,23 @@ public class Test {
         TeleportGate pair = new TeleportGate();
         RadioactiveMaterial material = new RadioactiveMaterial();
 
-        ab.AddAsteroid(asteroid);
-        ab.AddAsteroid(an);
-        ab.AddAsteroid(a);
+        material.setName(RadioactiveMaterialName.URAN);
         asteroid.AddNeighbour(an);
-        an.AddNeighbour(asteroid);
-        tn.setAsteroid(asteroid);
-        pair.setAsteroid(a);
         asteroid.AddNeighbour(tn);
-        a.AddNeighbour(pair);
-        s.setAsteroid(asteroid);
         asteroid.Accept(s);
-        r.setAsteroid(asteroid);
-        asteroid.Accept(r);
-        tn.setPair(pair);
         asteroid.AddMaterial(material);
+        asteroid.Accept(r);
+        r.setAsteroid(asteroid);
+        s.setAsteroid(asteroid);
+        ab.AddAsteroid(asteroid);
+        ab.AddAsteroid(a);
+        ab.AddAsteroid(an);
+        tn.setAsteroid(asteroid);
+        tn.setPair(pair);
         tn.Activate();
+        an.AddNeighbour(asteroid);
+        pair.setAsteroid(a);
+        a.AddNeighbour(pair);
         pair.setPair(tn);
         pair.Activate();
 
@@ -389,7 +408,7 @@ public class Test {
     }
 
     /**
-     * Sima nyersanyag bányászása.
+     * Sima nyersanyag banyaszasa.
      */
     void PlaceMaterialbutAsteroidisnotemptyordrilledthrough(){      //16.
         Settler s = new Settler();
@@ -398,13 +417,14 @@ public class Test {
 
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
+        asteroid.setLayer(5);
 
         s.PlaceMaterial(m);
 
     }
 
     /**
-     * Radioaktiv nyersaynag bányászása.
+     * Radioaktiv nyersaynag banyaszasa.
      */
     void MineRadioactiveMaterial(){                         //17.
         Game g = Game.getInstance();
@@ -419,31 +439,33 @@ public class Test {
 
         asteroid.Accept(s);
         asteroid.AddNeighbour(an);
+        an.AddNeighbour(asteroid);
         asteroid.AddMaterial(material);
         s.setAsteroid(asteroid);
+        asteroid.setLayer(0);
 
         s.Mine();
 
     }
 
     /**
-     * Lehelyezünke egy sima nyersanyagot
+     * Lehelyezunke egy sima nyersanyagot.
      */
     void PlaceNormalMaterial(){                             //18.
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
         Material m = new Material();
-        NormalMaterialName rmn = NormalMaterialName.IRON;
 
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
+        asteroid.setLayer(0);
 
         s.PlaceMaterial(m);
 
     }
 
     /**
-     * Lehelyezünk egy radioaktav nyersanyagot.
+     * Lehelyezunk egy radioaktiv nyersanyagot.
      */
     void PlaceRadioactiveMaterial(){                        //19.
         Asteroid asteroid = new Asteroid();
@@ -451,37 +473,37 @@ public class Test {
         Asteroid an = new Asteroid();
         Settler s = new Settler();
         RadioactiveMaterial rm = new RadioactiveMaterial();
-        RadioactiveMaterialName rmn = RadioactiveMaterialName.URAN;
+        rm.setName(RadioactiveMaterialName.URAN);
         Robot r = new Robot();
         AsteroidBelt ab = AsteroidBelt.getInstance();
         TeleportGate tn = new TeleportGate();
         TeleportGate pair = new TeleportGate();
 
-        rm.setName(rmn);
         asteroid.AddNeighbour(an);
         asteroid.AddNeighbour(tn);
         asteroid.Accept(s);
-        asteroid.AddMaterial(rm);
         asteroid.Accept(r);
         r.setAsteroid(asteroid);
         s.setAsteroid(asteroid);
         ab.AddAsteroid(asteroid);
         ab.AddAsteroid(a);
         ab.AddAsteroid(an);
-        tn.Place(asteroid);
+        tn.setAsteroid(asteroid);
         tn.setPair(pair);
         tn.Activate();
         an.AddNeighbour(asteroid);
-        pair.Place(a);
-        tn.setPair(pair);
+        pair.setAsteroid(a);
+        a.AddNeighbour(pair);
+        pair.setPair(tn);
         pair.Activate();
+        a.setLayer(0);
 
         s.PlaceMaterial(rm);
 
     }
 
     /**
-     * Bányászás, de nincs benne nyersanyag.
+     * Banyaszas, de nincs benne nyersanyag.
      */
     void MinebutCoreisEmpty(){                          //20.
         Asteroid a = new Asteroid();
@@ -489,13 +511,14 @@ public class Test {
 
         a.Accept(s);
         s.setAsteroid(a);
+        a.setLayer(0);
 
         s.Mine();
 
     }
 
     /**
-     * Bányászás.
+     * Banyaszas.
      */
     void MinebutInventoryisFull(){                      //21.
         Settler s = new Settler();
@@ -506,6 +529,7 @@ public class Test {
         inventory.fill(material);
 
         s.setAsteroid(a);
+        a.setLayer(0);
 
         s.Mine();
     }

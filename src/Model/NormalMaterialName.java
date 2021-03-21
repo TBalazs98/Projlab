@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Az normális (különleges tulajdonsággal nem rendelkező) nyersanyagok neveit tároló szerkezet
+ * Az normalis (kulonleges tulajdonsággal nem rendelkezo) nyersanyagok neveit tarolo szerkezet
  */
 public enum NormalMaterialName implements MaterialName{
     IRON,
