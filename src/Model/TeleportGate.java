@@ -65,9 +65,9 @@ public class TeleportGate implements DestinationObject {
 
     public Asteroid Accept(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
-        //Logger.getInstance().printCommandCall(this,p);
-        String name = new Object(){}.getClass().getEnclosingMethod().getName();
-        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name ,p);
+        Logger.getInstance().printCommandCall(this,p);
+//        String name = new Object(){}.getClass().getEnclosingMethod().getName();
+//        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name ,p);
 
         //függvény lefutása felhasználói beavatkozással
             System.out.print("Is the teleportgate active?\t(Y)es / (N)o \t");
