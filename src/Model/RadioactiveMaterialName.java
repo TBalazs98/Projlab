@@ -2,7 +2,7 @@ package Model;
 
 
 /**
- * Az Radioaktív nyersanyagok neveit tároló szerkezet
+ * Az Radioaktiv nyersanyagok neveit tarolo szerkezet
  */
 public enum RadioactiveMaterialName implements MaterialName{
     URAN    //radioaktív nyesanyag

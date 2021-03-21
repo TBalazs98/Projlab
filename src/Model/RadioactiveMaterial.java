@@ -5,14 +5,14 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- *Radioaktív nyersanyagokat megtestesítő osztály.
+ *Radioaktiv nyersanyagokat megtestesito osztaly.
  */
 public class RadioactiveMaterial extends Material {
 
     private RadioactiveMaterialName name;
 
     /**
-     * Pubikus alapértelmezett konstruktor.
+     * Pubikus alapertelmezett konstruktor.
      */
     public RadioactiveMaterial() {
         Logger.getInstance().printCommandCall(this);
@@ -24,15 +24,15 @@ public class RadioactiveMaterial extends Material {
 
     /**
      * @param a - Asteroid
-     *  Ha az aszteroidát külső behatás éri, ellenőrzi, hogy az adott
-     * aszteroida napközelben van-e, illetve a sziklarétegen teljesen áthatoltak. Ha mindkét állítás
-     * igaz rá, robban.
+     *  Ha az aszteroidat kulso behatás eri, ellenorzi, hogy az adott
+     * aszteroida napkozelben van-e, illetve a sziklaretegen teljesen athatoltak. Ha mindket allitas
+     * igaz ra, robban.
      */
     public void Hit(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        //függvény lefutása felhasználói beavatkozással
+        //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Is the asteroid near the sun?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
@@ -47,7 +47,7 @@ public class RadioactiveMaterial extends Material {
                 a.Explode();
             }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //fuggvény lefutasa tagváltozó lekerdezesevel
         /*if(a.GetSunProximity() == true && a.getLayers() == 0) //amúgy ez a 0 ide nem is kell, mert csak akkor hívódik meg a hit, ha a layers 0
             a.Explode();
         */
@@ -57,7 +57,7 @@ public class RadioactiveMaterial extends Material {
 
     /**
      * @param rname
-     * A Radioaktív anyag nevének beállítása.
+     * A Radioaktiv anyag nevenek beallitasa.
      */
     public void setName(RadioactiveMaterialName rname){
         Logger.getInstance().printCommandCall(this);

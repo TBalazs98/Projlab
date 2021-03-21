@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- * Játékosok autonóm segítőit reprezentálja. Karakterek által építhetőek.
+ * Jatekosok autonom segitoit reprezentalja. Karakterek altal epithetoek.
  */
 public class Robot extends Worker {
     private static final Inventory inventory = new Inventory();
@@ -24,14 +24,14 @@ public class Robot extends Worker {
 
     /**
      * @param i - A settler inventory-ja
-     * @param a - Aszteroida, amin létre lesz hozva a robot
+     * @param a - Aszteroida, amin letre lesz hozva a robot
      * Publikus 2 paraméteres konstrukor
      */
     public Robot(Inventory i, Asteroid a) {
         super();            //Ős konstruktora
         Logger.getInstance().printCommandCall(this);
 
-        //függvény lefutása felhasználói beavatkozással
+        //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Do we have enough materials to build a robot?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
@@ -42,11 +42,11 @@ public class Robot extends Worker {
             }
 
             if(ch=='y' || ch=='Y' ) {
-                asteroid = a;           //A robot Aszteroidáját beállítjuk a paraméterként kapott Aszteroidára
-                a.Accept(this);      //És ezt a tényt közöljük az Aszteroidával is
+                asteroid = a;           //A robot Aszteroidajat beallitjuk a parameterkent kapott Aszteroidara
+                a.Accept(this);      //Es ezt a tenyt kozoljuk az Aszteroidaval is
             }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*  setInventory();
             if(inventory.ContainsAllElementsIn(i)) {
                 asteroid=a;
@@ -63,10 +63,10 @@ public class Robot extends Worker {
         Logger.getInstance().printCommandCall(this);
 
         HashMap<MaterialName, Integer> m = new HashMap<MaterialName, Integer>();
-        m.put(NormalMaterialName.IRON, 1);      //Létrehozzuk a szükséges anyagokat
+        m.put(NormalMaterialName.IRON, 1);      //Letrehozzuk a szukseges anyagokat
         m.put(NormalMaterialName.COAL, 1);
         m.put(RadioactiveMaterialName.URAN, 1);
-        inventory.fill(m);                      //Majd belepakoljuk a Robot Inventory-jába
+        inventory.fill(m);                      //Majd belepakoljuk a Robot Inventory-jaba
 
         Logger.getInstance().printReturnCommand();
     }
@@ -78,8 +78,8 @@ public class Robot extends Worker {
         Logger.getInstance().printCommandCall(this);
 
         Random rand = new Random();
-        if(rand.nextInt() % 2 == 0)         //Lépés eldöntéséhez szükséges belső logika
-            Drill();                        //Vagy fúr
+        if(rand.nextInt() % 2 == 0)         //Lepes eldontesehez szukseges belso logika
+            Drill();                        //Vagy fur
         else {
             int id = asteroid.GetRandNeighbour();
             Move(id);                       //Vagy mozog
@@ -95,7 +95,7 @@ public class Robot extends Worker {
     public void Explode() {
         Logger.getInstance().printCommandCall(this);
 
-        //függvény lefutása felhasználói beavatkozással
+        //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Does the robot get thrown to an asteroid or a teleportgate?\t(A)steroid / (T)eleportgate \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
@@ -113,7 +113,7 @@ public class Robot extends Worker {
                 id = 1;
             }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*int id = asteroid.GetRandNeighbour();
         * */
         Move(id);
