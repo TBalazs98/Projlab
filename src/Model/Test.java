@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -31,9 +30,10 @@ public class Test {
         System.out.println("21 - Mine but inventory full");
 
         Scanner in = new Scanner(System.in);
-        System.out.println("\nÍrja be a teszteset sorszámát!");
+        System.out.println("\nMelyik tesztesetet futtatná?");
 
         int testcase = in.nextInt();
+
 
         switch (testcase){
             case 1:
@@ -99,6 +99,10 @@ public class Test {
             case 21 :
                 MinebutInventoryisFull();
                 break;
+            case 0 :
+                System.out.println("Invalid number!");
+                menu();
+                break;
             default :
                 System.out.println("Invalid number!");
                 menu();
@@ -148,12 +152,6 @@ public class Test {
 
     void MinebutCoreisEmpty(){}
 
-    void MinebutInventoryisFull(){
-            Settler settler = new Settler();
-            Asteroid asteroid = new Asteroid();
-            Inventory iv = new Inventory();
-            HashMap<MaterialName, Integer> m = new HashMap<>();
-            m.put(NormalMaterialName.IRON, 10);
-            iv.init(m);
-    }
+    void MinebutInventoryisFull(){}
+
 }
