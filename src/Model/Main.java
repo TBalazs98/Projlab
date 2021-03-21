@@ -11,12 +11,20 @@ public class Main {
         //settler.Die();
 
         int input;
+
         Material m = new Material();
         m.setName(NormalMaterialName.IRON);
         Asteroid a = new Asteroid();
-        System.out.println(a.AddMaterial(m));
+        a.AddMaterial(m);
+
+        Robot r = new Robot();
+        r.setAsteroid(a);
+        a.Accept(r);
+
         Settler s = new Settler();
         s.setAsteroid(a);
+        a.Accept(s);
+
         s.Mine();
 
         s.PlaceMaterial(m);

@@ -43,14 +43,14 @@ public class Asteroid implements DestinationObject {
     }
 
     public void setCharacter(Character c){
-        Object[] p = {c.getClass().getName()};
+        Object[] p = {c.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         characters.add(c);
         Logger.getInstance().printReturnCommand();
     }
 
     public void setNeighbour(DestinationObject d){
-        Object[] p = {d.getClass().getName()};
+        Object[] p = {d.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         neighbours.add(d);
         Logger.getInstance().printReturnCommand();
@@ -69,15 +69,15 @@ public class Asteroid implements DestinationObject {
     }
 
     public Asteroid Accept(Character c) {
-        Object[] p = {c.getClass().getName()};
+        Object[] p = {c.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         characters.add(c);
-        Logger.getInstance().printReturnCommand(this.getClass().getName());
+        Logger.getInstance().printReturnCommand(this.getClass().getSimpleName());
         return this;
     }
 
     public void Remove(Character c) {
-        Object[] p = {c.getClass().getName()};
+        Object[] p = {c.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         characters.remove(c);
         Logger.getInstance().printReturnCommand();
@@ -95,12 +95,17 @@ public class Asteroid implements DestinationObject {
     public void Drilled() {
         Logger.getInstance().printCommandCall(this);
         this.layers--;
+        if(!isEmpty && layers == 0) {
+            material.Hit(this);
+        }
         Logger.getInstance().printReturnCommand();
     }
 
     public Material Mined() {
         Logger.getInstance().printCommandCall(this);
-        if(!isEmpty) {
+        if(!isEmpty && layers == 0) {
+            material.Hit(this);
+            isEmpty = true;
             Logger.getInstance().printReturnCommand(material.name);
             return material;
         }
@@ -109,7 +114,7 @@ public class Asteroid implements DestinationObject {
     }
 
     public void AddNeighbour(DestinationObject d) {
-        Object[] p = {d.getClass().getName()};
+        Object[] p = {d.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         if(!neighbours.contains(d))
             this.neighbours.add(d);
@@ -117,7 +122,7 @@ public class Asteroid implements DestinationObject {
     }
 
     public void RemoveNeighbour(DestinationObject d) {
-        Object[] p = {d.getClass().getName()};
+        Object[] p = {d.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         if(neighbours.contains(d))
             this.neighbours.remove(d);
@@ -127,7 +132,7 @@ public class Asteroid implements DestinationObject {
     public boolean AddMaterial(Material m) {
         Object[] p = {m.name};
         Logger.getInstance().printCommandCall(this, p);
-        if(isEmpty) {
+        if(isEmpty && layers == 0) {
             isEmpty = false;
             this.material = m;
             Logger.getInstance().printReturnCommand(true);
