@@ -77,15 +77,14 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
-
     /**
      * Felveszi a ré lépő karaktert, majd visszatér az aszteroidával, ahol található.
      * @param c
      * @return
      */
-    public Asteroid Accept(Character c) {
+    public DestinationObject Accept(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this,p);
+        Logger.getInstance().printCommandCall(this, p);
 //        String name = new Object(){}.getClass().getEnclosingMethod().getName();
 //        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name ,p);
 
@@ -101,7 +100,7 @@ public class TeleportGate implements DestinationObject {
 
             Asteroid a = null;
             if(ch=='y' || ch=='Y' ) {
-                a = this.GetPair().GetAsteroid();
+                a = pair.GetAsteroid();
                 a.Accept(c);
             }
 
@@ -113,7 +112,6 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand(a.getClass().getSimpleName());
         return a;
     }
-
 
     /**
      * Lehelyezzük a teleportkapunkat.
@@ -151,7 +149,6 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
-
     /**
      * Visszatér egy logikai értékkel, hogy a kapunkat leraktuk-e.
      * @return
@@ -163,7 +160,6 @@ public class TeleportGate implements DestinationObject {
         return pair.isPlaced;
     }
 
-
     /**
      * Visszatér az aszteroidával, amin a telepes található.
      * @return
@@ -174,7 +170,6 @@ public class TeleportGate implements DestinationObject {
 
         return this.asteroid;
     }
-
 
     /**
      * Beállítja az aszteroidát, ahol a kapu található.
@@ -189,7 +184,6 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
-
     /**
      * A teleportkapu párját adja vissza.
      * @return
@@ -200,7 +194,6 @@ public class TeleportGate implements DestinationObject {
 
         return pair;
     }
-
 
     /**
      * Beállítja a teleportkapu párját.
@@ -214,7 +207,6 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
-
     /**
      * Aktiválja a kaput.
      */
@@ -226,7 +218,6 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
-
     /**
      * Deaktiválja a kaput.
      */
@@ -237,7 +228,6 @@ public class TeleportGate implements DestinationObject {
 
         Logger.getInstance().printReturnCommand();
     }
-
 
     /**
      * Ha az aszteroida felrobban, amin van, a kaput is
@@ -251,7 +241,6 @@ public class TeleportGate implements DestinationObject {
 
         Logger.getInstance().printReturnCommand();
     }
-
 
     /**
      * Megsemisűl a teleportkapu.

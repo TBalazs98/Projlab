@@ -17,6 +17,9 @@ public class AsteroidBelt {
 
     private AsteroidBelt() {
         Logger.getInstance().printCommandCall(this);
+
+        asteroids = new ArrayList<Asteroid>();
+
         Logger.getInstance().printReturnCommand();
     }
 
