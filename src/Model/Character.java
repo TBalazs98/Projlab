@@ -10,11 +10,16 @@ public abstract class Character {
     protected Asteroid asteroid;
 
     public Character() {
+    }
+
+    public void Die() {
         Logger.getInstance().printCommandCall(this);
+
+        asteroid.Remove(this);
+
         Logger.getInstance().printReturnCommand();
     }
 
-    public void Die() {}
     public abstract void Explode();
 
     public void Move(int idx) {

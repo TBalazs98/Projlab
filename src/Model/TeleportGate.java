@@ -34,7 +34,7 @@ public class TeleportGate implements DestinationObject {
         m.put(SublimableMaterialName.ICEWATER, 1);
         m.put(RadioactiveMaterialName.URAN, 1);
 
-        inventory.init(m);
+        inventory.fill(m);
 
         Logger.getInstance().printReturnCommand();
     }
@@ -52,6 +52,7 @@ public class TeleportGate implements DestinationObject {
 
     public void Place(Asteroid asteroid) {
         Logger.getInstance().printCommandCall(this);
+
         this.asteroid = asteroid;
         isPlaced = true;
         if (pair.GetPlaced()) {

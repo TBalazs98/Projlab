@@ -36,7 +36,7 @@ public class Base {
         m.put(NormalMaterialName.COAL, 3);
         m.put(SublimableMaterialName.ICEWATER, 3);
         m.put(RadioactiveMaterialName.URAN, 3);
-        inventory.init(m);
+        inventory.fill(m);
 
         Logger.getInstance().printReturnCommand();
     }

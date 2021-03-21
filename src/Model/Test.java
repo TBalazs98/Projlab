@@ -175,7 +175,7 @@ public class Test {
         Inventory iv = new Inventory();
         HashMap<MaterialName, Integer> m = new HashMap<>();
         m.put(NormalMaterialName.IRON, 10);
-        iv.init(m);
+        iv.fill(m);
     }
 
 }

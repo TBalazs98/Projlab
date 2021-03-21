@@ -21,7 +21,7 @@ public class Inventory {
         return inventory.get(m);
     }
 
-    public void init(HashMap<MaterialName, Integer> m) {
+    public void fill(HashMap<MaterialName, Integer> m) {
         Object[] p = {m.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
         inventory.putAll(m);

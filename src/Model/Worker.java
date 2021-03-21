@@ -9,8 +9,6 @@ public abstract class Worker extends Character implements drillable {
 
     public Worker() {
         super();
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand();
     }
 
     public void Drill() {

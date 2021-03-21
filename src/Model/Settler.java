@@ -9,11 +9,14 @@ public class Settler extends Worker {
 
     public Settler() {
         super();
+        Logger.getInstance().printCommandCall(this);
+        inventory = new Inventory();
+        Logger.getInstance().printReturnCommand();
     }
 
     private ArrayList<TeleportGate> gates;
 
-    private Inventory inventory = new Inventory();
+    private Inventory inventory;
 
     public void Mine() {
         Logger.getInstance().printCommandCall(this);
