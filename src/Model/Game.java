@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.ArrayList;
 
 /**
- *A jaték példanyat testesiti meg, egyetlen peldany letezhet belőle egyszerre.
+ *A jatek peldanyat testesiti meg, egyetlen peldany letezhet belole egyszerre.
  */
 public class Game {
 
@@ -47,7 +47,7 @@ public class Game {
     }
 
     /**
-     *Minden karakter meghalt vagy nem talalható eleg nyersanyag az aszteroida ovben a bazis felepítesehez.
+     *Minden karakter meghalt vagy nem talalhato eleg nyersanyag az aszteroida ovben a bazis felepítesehez.
      */
     public void LoseGame() {
         Logger.getInstance().printCommandCall(this);
@@ -58,7 +58,7 @@ public class Game {
     }
 
     /**
-     *Kovetkező kor inditasa.
+     *Kovetkezo kor inditasa.
      */
     public void NextRound() {
         Logger.getInstance().printCommandCall(this);

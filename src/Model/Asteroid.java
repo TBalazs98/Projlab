@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- *Egy, az aszteroida ovben talalható aszteroidat reprezentalja.
+ *Egy, az aszteroida ovben talalhato aszteroidat reprezentalja.
  */
 public class Asteroid implements DestinationObject {
 
@@ -34,7 +34,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     *Konstruktor, amiben beallíthajuk az aszteroida tulajdonsagait.
+     *Konstruktor, amiben beallithajuk az aszteroida tulajdonsagait.
      * @param layer
      * @param isempty
      * @param isnearsun
@@ -64,7 +64,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * Paraméterben megadott objektum felvétele a szomszédok közé.
+     * Parameterben megadott objektum felvetele a szomszedok koze.
      * @param d
      */
     public void setNeighbour(DestinationObject d){
@@ -85,7 +85,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * Visszater a magban talalható szersanyaggal.
+     * Visszater a magban talalhato szersanyaggal.
      * @return
      */
     public Material getMaterial() {
@@ -132,7 +132,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     *A karakter furas metodusa után hivodik meg, és csokkenti a sziklareteget.
+     *A karakter furas metodusa utan hivodik meg, es csokkenti a sziklareteget.
      */
     public void Drilled() {
         Logger.getInstance().printCommandCall(this);
@@ -168,7 +168,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * A telepes banyaszas után kiveszi az aszteroidaból a nyersanyagot, visszater vele.
+     * A telepes banyaszas utan kiveszi az aszteroidabol a nyersanyagot, visszater vele.
      * @return
      */
     public Material Mined() {
@@ -188,7 +188,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * Parameter hozzaadása a szomszedokhoz.
+     * Parameter hozzaadasa a szomszedokhoz.
      * @param d
      */
     public void AddNeighbour(DestinationObject d) {
@@ -200,7 +200,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * Parameterul kapott objektum eltavolítasa a szomszedok kozul.
+     * Parameterul kapott objektum eltavolitasa a szomszedok kozul.
      * @param d
      */
     public void RemoveNeighbour(DestinationObject d) {
@@ -243,7 +243,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * Parameterul kapott id szerinti aszteroidat adja vissza.
+     * Parameterul kapott ID szerinti aszteroidat adja vissza.
      * @param id
      * @return
      */
