@@ -16,6 +16,7 @@ public class Settler extends Worker {
         Logger.getInstance().printCommandCall(this);
 
         inventory = new Inventory();    //Letrehozza az inventory-t
+        gates = new ArrayList<TeleportGate>();
 
         Logger.getInstance().printReturnCommand();
     }
@@ -30,6 +31,11 @@ public class Settler extends Worker {
      */
     public void Mine() {
         Logger.getInstance().printCommandCall(this);
+
+        if(inventory.Size() >= 10) {
+            Logger.getInstance().printReturnCommand();
+            return;
+        }
 
         Material m = asteroid.Mined();
         if(m != null)
@@ -77,7 +83,7 @@ public class Settler extends Worker {
      * aszteroida magjaba.
      */
     public void PlaceMaterial(Material m) {
-        Object[] p = {m.name};
+        Object[] p = {m.getName()};
         Logger.getInstance().printCommandCall(this, p);
 
         if(asteroid.AddMaterial(m))
@@ -138,10 +144,20 @@ public class Settler extends Worker {
     }
 
     public void setInventory(Inventory i ) {
+        Object[] p = {i.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this, p);
+
         inventory = i;
+
+        Logger.getInstance().printReturnCommand();
     }
 
     public void AddMaterial(Material m) {
+        Object[] p = {m.getName()};
+        Logger.getInstance().printCommandCall(this, p);
+
         m.Add(inventory);
+
+        Logger.getInstance().printReturnCommand();
     }
 }

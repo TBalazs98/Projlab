@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *Egy, az aszteroida ovben talalható aszteroidat reprezentalja.
@@ -138,20 +139,21 @@ public class Asteroid implements DestinationObject {
 
         //függvény lefutasa felhasznaloi beavatkozassal
         System.out.print("How many layers does the asteroid have after drilling?\t");
-        InputStreamReader br = new InputStreamReader(System.in);
+        Scanner sc = new Scanner(System.in);
+        //InputStreamReader br = new InputStreamReader(System.in);
         char ch = ' ';
-        int layers = 0;
+        int layer = 0;
         try {
-            layers = br.read();
+            layer = sc.nextInt();
             System.out.print("Is the asteroid empty?\t(Y)es / (N)o\t");
             InputStreamReader cr = new InputStreamReader(System.in);
             ch = (char)cr.read();
-            br.close();
-            cr.close();
+            //br.close();
+            //cr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if((ch=='n' || ch=='N' ) && layers == 0) {
+        if((ch=='n' || ch=='N' ) && layer == 0) {
             material.Hit(this);
         }
 
@@ -174,7 +176,11 @@ public class Asteroid implements DestinationObject {
         if(!isEmpty && layers == 0) {
             material.Hit(this);
             isEmpty = true;
-            Logger.getInstance().printReturnCommand(material.name);
+            if(material == null) {
+                Logger.getInstance().printReturnCommand();
+                return null;
+            }
+            Logger.getInstance().printReturnCommand(material.getName());
             return material;
         }
         Logger.getInstance().printReturnCommand();
@@ -211,11 +217,12 @@ public class Asteroid implements DestinationObject {
      * @return
      */
     public boolean AddMaterial(Material m) {
-        Object[] p = {m.name};
+        Object[] p = {m.getName()};
         Logger.getInstance().printCommandCall(this, p);
         if(isEmpty && layers == 0) {
             isEmpty = false;
             this.material = m;
+            //m.Hit(this);
             Logger.getInstance().printReturnCommand(true);
             return true;
         }
@@ -228,7 +235,7 @@ public class Asteroid implements DestinationObject {
      * @param m
      */
     public void RemoveMaterial(Material m) {
-        Object[] p = {m.name};
+        Object[] p = {m.getName()};
         Logger.getInstance().printCommandCall(this, p);
         if(!isEmpty)
             this.material = null;
@@ -247,8 +254,9 @@ public class Asteroid implements DestinationObject {
             Logger.getInstance().printReturnCommand();
             return null;
         }
-        Logger.getInstance().printReturnCommand(neighbours.get(id).getClass().getSimpleName());
-        return neighbours.get(id);
+        DestinationObject dob = neighbours.get(id);
+        Logger.getInstance().printReturnCommand(dob.getClass().getSimpleName());
+        return dob;
     }
 
     /**
@@ -292,18 +300,24 @@ public class Asteroid implements DestinationObject {
      */
     public void HitBySunstorm() {
         Logger.getInstance().printCommandCall(this);
-        if((layers!=0) && (!isEmpty))
-            this.characters.forEach(c -> c.Explode());
+        if((layers != 0) || (!isEmpty)) {
+            for(int i = 0; i < characters.size(); i++) {
+                this.characters.get(i).Die();
+            }
+        }
         Logger.getInstance().printReturnCommand();
     }
 
     /**
-     * Az aszteroida szomszedai kozul a parameterül kapott aszteroida felrobban.
+     * Az aszteroida szomszedai kozul a parameterul kapott aszteroida felrobban.
      * @param a
      */
     public void HitByExplosion(Asteroid a) {
-        Logger.getInstance().printCommandCall(this);
+        Object[] p = {a.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this, p);
+
         this.neighbours.remove(a);
+
         Logger.getInstance().printReturnCommand();
     }
 
@@ -312,13 +326,25 @@ public class Asteroid implements DestinationObject {
      */
     public void Explode() {
         Logger.getInstance().printCommandCall(this);
-        this.neighbours.forEach(n -> n.HitByExplosion(this));
-        this.characters.forEach(c -> c.Explode());
+        int n = characters.size();
+        for(int i = 0; i < n; i++) {
+            characters.get(0).Explode();
+        }
+        for(int i = 0; i < neighbours.size(); i++) {
+            neighbours.get(i).HitByExplosion(this);
+        }
+        //this.neighbours.forEach(n -> n.HitByExplosion(this));
+        //this.characters.forEach(c -> c.Explode());
         Logger.getInstance().printReturnCommand();
     }
 
     public void setLayer(int layer){
+        Object[] p = {layer};
+        Logger.getInstance().printCommandCall(this, p);
+
         this.layers = layer;
+
+        Logger.getInstance().printReturnCommand();
     }
 
 

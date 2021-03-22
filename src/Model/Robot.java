@@ -29,7 +29,8 @@ public class Robot extends Worker {
      */
     public Robot(Inventory i, Asteroid a) {
         super();            //Ős konstruktora
-        Logger.getInstance().printCommandCall(this);
+        Object[] p = {i.getClass().getSimpleName(), a.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Do we have enough materials to build a robot?\t(Y)es / (N)o \t");
@@ -37,6 +38,7 @@ public class Robot extends Worker {
             char ch = ' ';
             try {
                 ch=(char)br.read();
+                //br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -101,7 +103,7 @@ public class Robot extends Worker {
             char ch = ' ';
             try {
                 ch=(char)br.read();
-                br.close();
+                //br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

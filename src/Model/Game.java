@@ -27,6 +27,10 @@ public class Game {
         // TODO implement here
     }
 
+    /**
+     * lekeri az egyetlen letezo objektumot
+     * @return
+     */
     public static Game getInstance() {
         return game;
     }

@@ -37,7 +37,7 @@ public class Base {
             char ch = ' ';
             try {
                 ch=(char)br.read();
-                br.close();
+                //br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

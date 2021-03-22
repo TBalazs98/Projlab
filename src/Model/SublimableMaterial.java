@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
  * A szublimalo nyersanyagokat kezeli.
  */
 public class SublimableMaterial extends Material {
-    private SublimableMaterialName sname;
+    public SublimableMaterialName name;
 
     /**
      *A szublimalo nyersanyagok konstruktora.
@@ -15,8 +15,6 @@ public class SublimableMaterial extends Material {
     public SublimableMaterial() {
         super();
         Logger.getInstance().printCommandCall(this);
-
-        sname = SublimableMaterialName.ICEWATER;
 
         Logger.getInstance().printReturnCommand();
     }
@@ -36,7 +34,7 @@ public class SublimableMaterial extends Material {
             char ch = ' ';
             try {
                 ch=(char)br.read();
-                br.close();
+                //br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -55,14 +53,18 @@ public class SublimableMaterial extends Material {
 
     /**
      * Beallitja a nyersanyag nevet.
-     * @param name
+     * @param sname
      */
-    public void setName(SublimableMaterialName name) {
-        Logger.getInstance().printCommandCall(this);
+    public void setName(SublimableMaterialName sname) {
+        Object[] p = {sname};
+        Logger.getInstance().printCommandCall(this, p);
 
-        sname = name;
+        name = sname;
 
         Logger.getInstance().printReturnCommand();
     }
 
+    public MaterialName getName() {
+        return this.name;
+    }
 }

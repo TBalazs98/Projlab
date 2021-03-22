@@ -35,7 +35,7 @@ public class TeleportGate implements DestinationObject {
             char ch = ' ';
             try {
                 ch=(char)br.read();
-                br.close();
+                //br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -45,6 +45,7 @@ public class TeleportGate implements DestinationObject {
                 this.isPlaced = false;
                 this.isActive = false;
                 s.AddGate(this);
+                s.AddGate(pair);
             }
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
@@ -55,6 +56,7 @@ public class TeleportGate implements DestinationObject {
                 this.isPlaced = false;
                 this.isActive = false;
                 s.AddGate(this);
+                s.AddGate(pair);
             }*/
 
         Logger.getInstance().printReturnCommand();
@@ -94,7 +96,7 @@ public class TeleportGate implements DestinationObject {
             char ch = ' ';
             try {
                 ch=(char)br.read();
-                br.close();
+                //br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -103,6 +105,10 @@ public class TeleportGate implements DestinationObject {
             if(ch=='y' || ch=='Y' ) {
                 a = pair.GetAsteroid();
                 a.Accept(c);
+            }
+            else if(ch == 'n' || ch == 'N'){
+                Logger.getInstance().printReturnCommand();
+                return null;
             }
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
@@ -130,7 +136,7 @@ public class TeleportGate implements DestinationObject {
             char ch = ' ';
             try {
                 ch=(char)br.read();
-                br.close();
+                //br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -201,7 +207,8 @@ public class TeleportGate implements DestinationObject {
      * @param t
      */
     public void setPair(TeleportGate t) {
-        Logger.getInstance().printCommandCall(this);
+        Object[] p = {t.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this,p);
 
         this.pair = t;
 
@@ -236,7 +243,8 @@ public class TeleportGate implements DestinationObject {
      * @param a
      */
     public void HitByExplosion(Asteroid a) {
-        Logger.getInstance().printCommandCall(this);
+        Object[] p = {a.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this, p);
 
         this.Destroy();
 

@@ -9,15 +9,14 @@ import java.util.*;
  */
 public class RadioactiveMaterial extends Material {
 
-    private RadioactiveMaterialName name;
+    public RadioactiveMaterialName name;
 
     /**
      * Pubikus alapertelmezett konstruktor.
      */
     public RadioactiveMaterial() {
+        super();
         Logger.getInstance().printCommandCall(this);
-
-        name = RadioactiveMaterialName.URAN;
 
         Logger.getInstance().printReturnCommand();
     }
@@ -38,12 +37,13 @@ public class RadioactiveMaterial extends Material {
             char ch = ' ';
             try {
                 ch=(char)br.read();
-                br.close();
+                //br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             if(ch=='y' || ch=='Y' ) {
+                a.RemoveMaterial(this);
                 a.Explode();
             }
 
@@ -59,12 +59,16 @@ public class RadioactiveMaterial extends Material {
      * @param rname
      * A Radioaktiv anyag nevenek beallitasa.
      */
-    public void setName(RadioactiveMaterialName rname){
-        Logger.getInstance().printCommandCall(this);
+    public void setName(RadioactiveMaterialName rname) {
+        Object[] p = {rname};
+        Logger.getInstance().printCommandCall(this, p);
 
         name = rname;
-
+        super.name = null;
         Logger.getInstance().printReturnCommand();
     }
 
+    public MaterialName getName() {
+        return this.name;
+    }
 }

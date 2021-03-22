@@ -41,7 +41,13 @@ public abstract class Character {
 
         asteroid.Remove(this);
         DestinationObject goingTo = asteroid.GetNeighbour(idx);
-        asteroid = (Asteroid) goingTo.Accept(this); //fixen asteroid lesz, mivel a DestinationObject minden implementálásánál Asteroiddal tér vissza
+        Asteroid a = (Asteroid) goingTo.Accept(this);
+        if(a != null) {
+            asteroid = a; //fixen asteroid lesz, mivel a DestinationObject minden implementálásánál Asteroiddal tér vissza
+        }
+        else {
+            asteroid.Accept(this);
+        }
 
         Logger.getInstance().printReturnCommand();
     }

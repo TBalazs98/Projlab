@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Material  {
 
-    NormalMaterialName name;
+    public NormalMaterialName name;
 
     /**
      * A Material osztaly alapertelmezett konstruktora.
@@ -25,7 +25,7 @@ public class Material  {
         Object[] p = {inventory.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        inventory.Add(this.name);
+        inventory.Add(this.getName());
 
         Logger.getInstance().printReturnCommand();
     }
@@ -48,7 +48,7 @@ public class Material  {
         Object[] p = {inventory.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        inventory.Remove(this.name);
+        inventory.Remove(this.getName());
 
         Logger.getInstance().printReturnCommand();
     }
@@ -57,12 +57,16 @@ public class Material  {
      * @param n : a normal nyersanyag neve
      */
     public void setName(NormalMaterialName n) {
-        Object[] p = {n.name()};
+        Object[] p = {n};
         Logger.getInstance().printCommandCall(this, p);
 
         name = n;
 
         Logger.getInstance().printReturnCommand();
+    }
+
+    public MaterialName getName() {
+        return this.name;
     }
 
 }

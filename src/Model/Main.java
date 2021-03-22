@@ -8,7 +8,9 @@ public class Main {
 
 
 //        Material m = new Material();
-//        m.setName(NormalMaterialName.IRON);
+//        m.setName(NormalMaterialName.COAL);,
+//        RadioactiveMaterial m = new RadioactiveMaterial();
+//        m.setName(RadioactiveMaterialName.URAN);
 //        Asteroid a = new Asteroid();
 //        a.AddMaterial(m);
 //

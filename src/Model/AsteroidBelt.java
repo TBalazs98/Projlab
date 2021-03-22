@@ -26,6 +26,10 @@ public class AsteroidBelt {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * lekeri az egyetlen letezo objektumot
+     * @return
+     */
     public static AsteroidBelt getInstance() {
         return ab;
     }
@@ -46,8 +50,9 @@ public class AsteroidBelt {
      */
     public void StartStorm() {
         Logger.getInstance().printCommandCall(this);
-
-        asteroids.forEach(a -> a.HitBySunstorm());
+        for(int i = 0; i < asteroids.size(); i++) {
+            asteroids.get(i).HitBySunstorm();
+        }
 
         Logger.getInstance().printReturnCommand();
     }
@@ -90,7 +95,7 @@ public class AsteroidBelt {
             char ch = ' ';
             try {
                 ch=(char)br.read();
-                br.close();
+                //br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

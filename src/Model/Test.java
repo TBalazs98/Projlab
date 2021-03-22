@@ -131,9 +131,10 @@ public class Test {
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
         SublimableMaterial m = new SublimableMaterial();
+        m.setName(SublimableMaterialName.ICEWATER);
 
-        asteroid.setLayer(1);
         asteroid.setCharacter(s);
+        asteroid.AddMaterial(m);
         s.addAsteroid(asteroid);
 
         s.Drill();
@@ -145,13 +146,15 @@ public class Test {
     void MineSublimableMaterial() {                                 //2.
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
+
+        //SublimableMaterialName subName = SublimableMaterialName.ICEWATER;
+
         SublimableMaterial material = new SublimableMaterial();
         material.setName(SublimableMaterialName.ICEWATER);
 
         asteroid.Accept(s);
-        asteroid.AddMaterial(material);
         s.setAsteroid(asteroid);
-        asteroid.setLayer(0);
+        asteroid.AddMaterial(material);
 
         s.Mine();
 
@@ -177,7 +180,7 @@ public class Test {
      * A telepesunket mozgatjuk egy aszteroidara, teleportkapun keresztul.
      */
     void MoveSettlertoTeleportGate(){                           //4.
-        //Logger.getInstance().printCommandCall(this);
+
         Settler s = new Settler();
         Asteroid a = new Asteroid();
         Asteroid b = new Asteroid();
@@ -195,7 +198,7 @@ public class Test {
         b.setNeighbour(pair);
 
         s.Move(0);
-        //Logger.getInstance().printReturnCommand();
+
     }
 
     /**
@@ -213,7 +216,7 @@ public class Test {
         onEmpty.AddNeighbour(a);
         a.AddNeighbour(onEmpty);
         onEmpty.Accept(s);
-
+        onEmpty.setLayer(5);
 
         ab.StartStorm();
 
@@ -229,9 +232,9 @@ public class Test {
         Asteroid asteroid = new Asteroid();
         SublimableMaterial sm = new SublimableMaterial();
 
+        sm.setName(SublimableMaterialName.ICEWATER);
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
-        asteroid.setLayer(0);
         s.AddMaterial(sm);
 
         s.PlaceMaterial(sm);
@@ -250,10 +253,13 @@ public class Test {
 
         s.setAsteroid(a);
         a.Accept(s);
+
         pair.setPair(tg);
         tg.setPair(pair);
+
         pair.setAsteroid(b);
         b.AddNeighbour(pair);
+
         s.AddGate(tg);
 
         s.PlaceGate(tg);
@@ -312,7 +318,8 @@ public class Test {
         Settler s = new Settler();
         Asteroid asteroid = new Asteroid();
         Material m=new Material();
-
+        m.setName(NormalMaterialName.IRON);
+        asteroid.setLayer(5);
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
         asteroid.AddMaterial(m);
@@ -330,7 +337,7 @@ public class Test {
 
         s.setAsteroid(a);
         a.Accept(s);
-        a.AddMaterial(null);
+        //a.AddMaterial(null);
 
         s.Drill();
 
@@ -344,6 +351,7 @@ public class Test {
         Asteroid a = new Asteroid();
         Material m = new Material();
 
+        m.setName(NormalMaterialName.COAL);
         s.setAsteroid(a);
         a.Accept(s);
         a.AddMaterial(m);
@@ -361,10 +369,10 @@ public class Test {
         Asteroid a = new Asteroid();
         Material m = new Material();
 
+        m.setName(NormalMaterialName.IRON);
         s.setAsteroid(a);
         a.Accept(s);
         a.AddMaterial(m);
-        a.setLayer(0);
 
         s.Mine();
 
@@ -388,8 +396,8 @@ public class Test {
         asteroid.AddNeighbour(an);
         asteroid.AddNeighbour(tn);
         asteroid.Accept(s);
-        asteroid.AddMaterial(material);
         asteroid.Accept(r);
+        asteroid.AddMaterial(material);
         r.setAsteroid(asteroid);
         s.setAsteroid(asteroid);
         ab.AddAsteroid(asteroid);
@@ -416,10 +424,12 @@ public class Test {
         Asteroid asteroid = new Asteroid();
         Material m = new Material();
 
+        m.setName(NormalMaterialName.COAL);
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
         asteroid.setLayer(5);
 
+        s.AddMaterial(m);
         s.PlaceMaterial(m);
 
     }
@@ -434,10 +444,11 @@ public class Test {
         Asteroid an = new Asteroid();
         Settler s = new Settler();
         RadioactiveMaterial material = new RadioactiveMaterial();
-        RadioactiveMaterialName materialName = RadioactiveMaterialName.URAN;
+        //RadioactiveMaterialName materialName = RadioactiveMaterialName.URAN;
         TeleportGate tn = new TeleportGate();
         TeleportGate pair = new TeleportGate();
 
+        material.setName(RadioactiveMaterialName.URAN);
         asteroid.Accept(s);
         asteroid.AddNeighbour(an);
         an.AddNeighbour(asteroid);
@@ -457,9 +468,10 @@ public class Test {
         Asteroid asteroid = new Asteroid();
         Material m = new Material();
 
+        m.setName(NormalMaterialName.IRON);
         s.setAsteroid(asteroid);
         asteroid.Accept(s);
-        asteroid.setLayer(0);
+        s.AddMaterial(m);
 
         s.PlaceMaterial(m);
 
@@ -468,7 +480,7 @@ public class Test {
     /**
      * Lehelyezunk egy radioaktiv nyersanyagot.
      */
-    void PlaceRadioactiveMaterial(){                        //19.
+    void PlaceRadioactiveMaterial() {                        //19.
         Asteroid asteroid = new Asteroid();
         Asteroid a = new Asteroid();
         Asteroid an = new Asteroid();
@@ -497,8 +509,8 @@ public class Test {
         a.AddNeighbour(pair);
         pair.setPair(tn);
         pair.Activate();
-        a.setLayer(0);
 
+        s.AddMaterial(rm);
         s.PlaceMaterial(rm);
 
     }
@@ -512,7 +524,6 @@ public class Test {
 
         a.Accept(s);
         s.setAsteroid(a);
-        a.setLayer(0);
 
         s.Mine();
 
