@@ -22,7 +22,7 @@ public class SublimableMaterial extends Material {
     /**
      * Ha az aszteroidat kulso behatas eri, ellenorzi, hogy
      * napkozelben van-e.
-     * @param a
+     * @param a az aszteroida, ahonnan a kulso behatas erkezett
      */
     public void Hit(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
@@ -44,7 +44,7 @@ public class SublimableMaterial extends Material {
             }
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        /*if(a.getLayers() == 0 && a.GetSunProximity() == true) //ide se kell a getlayers, lásd: radioactive
+        /*if(a.getLayers() == 0 && a.GetSunProximity() == true) //ide se kell a getlayers, lasd: radioactive
             a.RemoveMaterial(a.getMaterial());
         */
 
@@ -53,7 +53,7 @@ public class SublimableMaterial extends Material {
 
     /**
      * Beallitja a nyersanyag nevet.
-     * @param sname
+     * @param sname a kapott nev, amit beallit maganak
      */
     public void setName(SublimableMaterialName sname) {
         Object[] p = {sname};

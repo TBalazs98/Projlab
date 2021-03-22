@@ -21,9 +21,8 @@ public class TeleportGate implements DestinationObject {
 
     /**
      * A teleportkapu konstuktora.
-     *
-     * @param i   A telepes inventorija, és osszehasonlitja, a sajat felepitesehez szukseges inventoryval.
-     * @param s   Telepses, aki felepitene a teleportkaput.
+     * @param i a telepes inventorija, és osszehasonlitja, a sajat felepitesehez szukseges inventoryval.
+     * @param s telepses, aki felepitene a teleportkaput.
      */
     public TeleportGate(Inventory i, Settler s) {
         Object[] p = {i.getClass().getSimpleName(), s.getClass().getSimpleName()};
@@ -80,9 +79,9 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Felveszi a ra lepo karaktert, majd visszater az aszteroidaval, ahol talalhato.
-     * @param c
-     * @return
+     * Felveszi a ralepo karaktert, majd visszater az aszteroidaval, ahol talalhato a parja.
+     * @param c a relepo karakter
+     * @return visszaadja azt az aszteroidato
      */
     public DestinationObject Accept(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
@@ -122,8 +121,7 @@ public class TeleportGate implements DestinationObject {
 
     /**
      * Lehelyezzuk a teleportkapunkat.
-     *
-     * @param asteroid  Az adott aszteroidara helyezzuk le.
+     * @param asteroid az adott aszteroidara helyezzuk le
      */
     public void Place(Asteroid asteroid) {
         Object[] p = {asteroid.getClass().getSimpleName()};
@@ -158,7 +156,7 @@ public class TeleportGate implements DestinationObject {
 
     /**
      * Visszater egy logikai ertekkel, hogy a kapunkat leraktuk-e.
-     * @return
+     * @return logikai ertek, leraktuk/nem raktuk le
      */
     public boolean GetPlaced() {
         Logger.getInstance().printCommandCall(this);
@@ -180,7 +178,7 @@ public class TeleportGate implements DestinationObject {
 
     /**
      * Beallitja az aszteroidat, ahol a kapu talalhato.
-     * @param a
+     * @param a az adott aszteroidat allitja be
      */
     public void setAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
@@ -193,7 +191,7 @@ public class TeleportGate implements DestinationObject {
 
     /**
      * A teleportkapu parjat adja vissza.
-     * @return
+     * @return a teleportkapu parja
      */
     public TeleportGate GetPair() {
         Logger.getInstance().printCommandCall(this);
@@ -204,7 +202,7 @@ public class TeleportGate implements DestinationObject {
 
     /**
      * Beallitja a teleportkapu parjat.
-     * @param t
+     * @param t egy teleportkapu
      */
     public void setPair(TeleportGate t) {
         Object[] p = {t.getClass().getSimpleName()};
@@ -240,7 +238,7 @@ public class TeleportGate implements DestinationObject {
     /**
      * Ha az aszteroida felrobban, amin van, a kaput is
      * eleri a robbanas es meghivja a destroy fuggvenyt magara es a parjara is.
-     * @param a
+     * @param a az aszteroida ahol talalhato, ahonnan erkezik a robbanas
      */
     public void HitByExplosion(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
