@@ -104,7 +104,7 @@ public class AsteroidBelt {
                 Game.getInstance().LoseGame();
             }
 
-        //fuggvény lefutasa tagvaltozo lekerdezesevel
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*this.settlersAlive--;
         if(settlersAlive == 0)
             Game.getInstance().LoseGame();
