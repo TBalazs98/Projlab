@@ -64,6 +64,10 @@ public class SublimableMaterial extends Material {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Visszater a nyersanyag nevele
+     * @return nyersanyag neve
+     */
     public MaterialName getName() {
         return this.name;
     }
