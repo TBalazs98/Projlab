@@ -231,7 +231,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * Nyersanyag eltavolítsa az aszteroida magjabol.
+     * Nyersanyag eltavolitsa az aszteroida magjabol.
      * @param m adott nyersanyagot tavolitja el
      */
     public void RemoveMaterial(Material m) {
