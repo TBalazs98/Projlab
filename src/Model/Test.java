@@ -8,13 +8,13 @@ import java.util.Scanner;
 
 
 /**
- * Tesztesetek osztálya
+ * Tesztesetek osztalya
  */
 public class Test {
 
     /**
-     * A tesztesetek megvalósításához létrehozott menüszerkezet.
-     * Itt választhatnak az egyes felhasználók mely teszteset hajtódjon végre.
+     * A tesztesetek megvalositasahoz letrehozott menuszerkezet.
+     * Itt valaszthatnak az egyes felhasznalok mely teszteset hajtodjon vegre.
      */
     void menu() {
         Scanner in = new Scanner(System.in);
