@@ -143,6 +143,10 @@ public class Settler extends Worker {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * A parameterul kapott inventoryt allitja be a telepes hatizsakjanak
+     * @param i inventory peldany, amire beallitodik a telepes hatizsakja
+     */
     public void setInventory(Inventory i ) {
         Object[] p = {i.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
@@ -152,6 +156,10 @@ public class Settler extends Worker {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Hozzaadja a parameterul kapott nyersanyagot a telepes hatizsakjahoz
+     * @param m A hatizsakhoz adando nyersanyag
+     */
     public void AddMaterial(Material m) {
         Object[] p = {m.getName()};
         Logger.getInstance().printCommandCall(this, p);

@@ -51,10 +51,10 @@ public class Logger {
     }
 
     /**
-     * Kiirja konzolra a legutolso relevans fuggvenyhivast [:osztalynev].fuggvenynev() formatumban, megfelelo intendalassal.
-     * @param o a metodus amit ki akarunk iratni a konzol kimenetere
+     * Kiirja konzolra a legutolso relevans fuggvenyhivast (osztalynev).fuggvenynev() formatumban, megfelelo intendalassal.
+     * @param o az osztaly, aminek nevet ki akarjuk iratni a konzol kimenetere
      */
-    //függvényhívás kiírása, ha nincs paraméter
+    //fuggvenyhivas kiirasa, ha nincs parameter
     public void printCommandCall(Object o) {
         for(int i = 0; i < intend; i++) {
             System.out.print("\t");
@@ -70,8 +70,8 @@ public class Logger {
     }
 
     /**
-     * Kiirja konzolra a legutolso relevans fuggvenyhivast [:osztalynev].fuggvenynev(parameterek) formatumban, megfelelo intendalassal.
-     * @param o a metodus, amit ki akarunk iratni
+     * Kiirja konzolra a legutolso relevans fuggvenyhivast (osztalynev).fuggvenynev(parameterek) formatumban, megfelelo intendalassal.
+     * @param o az osztaly, aminek nevet ki akarjuk iratni a konzol kimenetre
      * @param params a metodus parameterei, amit ki akarunk iratni
      */
     //fuggvenyhivas kiirasa, ha van parameter
@@ -116,7 +116,7 @@ public class Logger {
 
     /**
      * Kiirja a konzolra a legutobbi relevans fuggvenyhivas visszatereset visszateresi ertekkel, megfelelo intendalassal.
-     * @param value a metodus, aminek a visszatereset es visszaeresi erteket szeretnenk a konzol kimenetere irtani
+     * @param value a visszaeresi ertek, amit szeretnenk a konzol kimenetere irtani
      */
     //fuggveny visszateresenek kiirasa visszateresi ertekkel
     public void printReturnCommand(Object value) {
