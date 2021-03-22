@@ -57,9 +57,9 @@ public class Logger {
             System.out.print("\t");
         }
 
-        System.out.print(">>");
+        System.out.print("}");
 
-        System.out.print("[:" + getClassName(o) + "]." + getMethodName(intend) + "()");
+        System.out.print("(" + getClassName(o) + ")." + getMethodName(intend) + "()");
 
         System.out.println();
 
@@ -77,9 +77,9 @@ public class Logger {
             System.out.print("\t");
         }
 
-        System.out.print(">>");
+        System.out.print("}");
 
-        System.out.print("[:" + getClassName(o) + "]." + getMethodName(intend) + "(");
+        System.out.print("(" + getClassName(o) + ")." + getMethodName(intend) + "(");
 
         for(int i = 0; i < params.length; i++) {
             String toPrint = params[i].toString();
@@ -107,7 +107,7 @@ public class Logger {
         for(int i = 0; i < intend; i++) {
             System.out.print("\t");
         }
-        System.out.print("<<");
+        System.out.print("{");
         System.out.println();
     }
 
@@ -122,7 +122,7 @@ public class Logger {
             System.out.print("\t");
         }
         String toPrint = value.toString();
-        System.out.print("<< " + toPrint);
+        System.out.print("{ " + toPrint);
         System.out.println();
     }
 }

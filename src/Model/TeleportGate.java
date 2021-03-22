@@ -30,7 +30,7 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("Do we have enough materials to build a pair of teleportgates?\t(Y)es / (N)o \t");
+            System.out.print("? Do we have enough materials to build a pair of teleportgates?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -91,7 +91,7 @@ public class TeleportGate implements DestinationObject {
 //        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name ,p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("Is the teleportgate active?\t(Y)es / (N)o \t");
+            System.out.print("? Is the teleportgate active?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -131,7 +131,7 @@ public class TeleportGate implements DestinationObject {
 
         this.asteroid = asteroid;
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("Is the pair of the teleportgate placed, and can we activate the gates?\t(Y)es / (N)o \t");
+            System.out.print("? Is the pair of the teleportgate placed, and can we activate the gates?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {

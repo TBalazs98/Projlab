@@ -45,7 +45,7 @@ public class Test {
         System.out.println("22 - Exit!");
 
 
-        System.out.println("\nWhich test case would you like to run?");
+        System.out.println("\n? Which test case would you like to run?");
 
          testcase = in.nextInt();
 

@@ -29,7 +29,7 @@ public class SublimableMaterial extends Material {
         Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("Is the asteroid near the sun?\t(Y)es / (N)o \t");
+            System.out.print("? Is the asteroid near the sun?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {

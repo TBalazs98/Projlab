@@ -138,14 +138,14 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printCommandCall(this);
 
         //fuggvény lefutasa felhasznaloi beavatkozassal
-        System.out.print("How many layers does the asteroid have after drilling?\t");
+        System.out.print("? How many layers does the asteroid have after drilling?\t");
         Scanner sc = new Scanner(System.in);
         //InputStreamReader br = new InputStreamReader(System.in);
         char ch = ' ';
         int layer = 0;
         try {
             layer = sc.nextInt();
-            System.out.print("Is the asteroid empty?\t(Y)es / (N)o\t");
+            System.out.print("? Is the asteroid empty?\t(Y)es / (N)o\t");
             InputStreamReader cr = new InputStreamReader(System.in);
             ch = (char)cr.read();
             //br.close();
