@@ -31,7 +31,7 @@ public class Base {
         Object[] p = {i.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        //fuggvény lefutasa felhasznaloi beavatkozassal
+        //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Do we have enough materials to build the base?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';

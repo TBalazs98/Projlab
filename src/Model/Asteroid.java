@@ -137,7 +137,7 @@ public class Asteroid implements DestinationObject {
     public void Drilled() {
         Logger.getInstance().printCommandCall(this);
 
-        //fuggvény lefutasa felhasznaloi beavatkozassal
+        //fuggveny lefutasa felhasznaloi beavatkozassal
         System.out.print("? How many layers does the asteroid have after drilling?\t");
         Scanner sc = new Scanner(System.in);
         //InputStreamReader br = new InputStreamReader(System.in);
@@ -340,7 +340,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Beallitja a parameterul kapott erteket az aszterodia sziklaretegenek.
-     * @param layer parameterul akpott ertek
+     * @param layer parameterul kapott ertek
      */
     public void setLayer(int layer){
         Object[] p = {layer};

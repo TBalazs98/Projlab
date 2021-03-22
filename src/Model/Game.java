@@ -28,7 +28,7 @@ public class Game {
 
     /**
      * lekeri az egyetlen letezo objektumot
-     * @return
+     * @return visszater az objektum peldannyal
      */
     public static Game getInstance() {
         return game;
