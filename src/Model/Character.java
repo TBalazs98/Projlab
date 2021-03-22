@@ -27,12 +27,12 @@ public abstract class Character {
     }
 
     /**
-     * Karakter felrobbant egy aszteroidaval, a tipusanak megfelelő muveletsor tortenik vele.
+     * Karakter felrobbant egy aszteroidaval, a tipusanak megfelelo muveletsor tortenik vele.
      */
     public abstract void Explode();
 
     /**
-     * Karakter parameternek megfelelő helyre mozog.
+     * Karakter parameternek megfelelo helyre mozog.
      * @param idx
      */
     public void Move(int idx) {
@@ -53,7 +53,7 @@ public abstract class Character {
     }
 
     /**
-     * Karaker aszteroidajanak beallítasa.
+     * Karaker aszteroidajanak beallitasa.
      * @param a
      */
     public void addAsteroid(Asteroid a) {

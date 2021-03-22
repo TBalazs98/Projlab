@@ -8,7 +8,7 @@ import java.util.*;
 public interface drillable {
 
     /**
-     * Implementáló karakter fur az aszteroidan amin tartozkodik.
+     * Implementalo karakter fur az aszteroidan amin tartozkodik.
      */
     public void Drill();
 
