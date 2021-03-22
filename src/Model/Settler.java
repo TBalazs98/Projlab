@@ -117,8 +117,8 @@ public class Settler extends Worker {
     }
 
     /**
-     * @param t Eltarolando Teleportkapu
      * Hozzaad egy teleportkaput a Settlernel levo teleportkapukhoz
+     * @param t Eltarolando Teleportkapu
      */
     public void AddGate(TeleportGate t) {
         Object[] p = {t.getClass().getSimpleName()};
@@ -130,14 +130,14 @@ public class Settler extends Worker {
     }
 
     /**
-     * @param t Lehelyezendo teleportkapu
      * Settler elhelyez egy teleportkaput az adott Aszteroidan, amin all
+     * @param t Lehelyezendo teleportkapu
      */
     public void PlaceGate(TeleportGate t) {
         Object[] p = {t.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        t.Place(asteroid);          //Lerakjuk a TG-t arra az Aszteroidára, amin éppen állunk
+        t.Place(asteroid);          //Lerakjuk a TG-t arra az Aszteroidara, amin eppen allunk
         gates.remove(t);
 
         Logger.getInstance().printReturnCommand();

@@ -22,10 +22,10 @@ public class RadioactiveMaterial extends Material {
     }
 
     /**
-     * @param a - Asteroid
-     *  Ha az aszteroidat kulso behatás eri, ellenorzi, hogy az adott
+     * Ha az aszteroidat kulso behatas eri, ellenorzi, hogy az adott
      * aszteroida napkozelben van-e, illetve a sziklaretegen teljesen athatoltak. Ha mindket allitas
      * igaz ra, robban.
+     * @param a - Asteroid
      */
     public void Hit(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
@@ -47,8 +47,8 @@ public class RadioactiveMaterial extends Material {
                 a.Explode();
             }
 
-        //fuggvény lefutasa tagváltozó lekerdezesevel
-        /*if(a.GetSunProximity() == true && a.getLayers() == 0) //amúgy ez a 0 ide nem is kell, mert csak akkor hívódik meg a hit, ha a layers 0
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
+        /*if(a.GetSunProximity() == true && a.getLayers() == 0) //amugy ez a 0 ide nem is kell, mert csak akkor hívodik meg a hit, ha a layers 0
             a.Explode();
         */
 
@@ -56,8 +56,8 @@ public class RadioactiveMaterial extends Material {
     }
 
     /**
-     * @param rname
      * A Radioaktiv anyag nevenek beallitasa.
+     * @param rname Beallitando anyag neve
      */
     public void setName(RadioactiveMaterialName rname) {
         Object[] p = {rname};

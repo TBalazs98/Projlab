@@ -23,12 +23,12 @@ public class Robot extends Worker {
     }
 
     /**
+     * Publikus 2 parameteres konstrukor
      * @param i - A settler inventory-ja
      * @param a - Aszteroida, amin letre lesz hozva a robot
-     * Publikus 2 paraméteres konstrukor
      */
     public Robot(Inventory i, Asteroid a) {
-        super();            //Ős konstruktora
+        super();            //Os konstruktora
         Object[] p = {i.getClass().getSimpleName(), a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
@@ -59,7 +59,7 @@ public class Robot extends Worker {
     }
 
     /**
-     * Inicializálja az inventory-t. Itt tárolja az építéshez szükséges anyagokat.
+     * Inicializalja az inventory-t. Itt tarolja az epiteshez szukseges anyagokat.
      */
     private void setInventory() {
         Logger.getInstance().printCommandCall(this);
@@ -74,7 +74,7 @@ public class Robot extends Worker {
     }
 
     /**
-     * A controller itt dönteni el, hogy mi lesz a robot következő lépése
+     * A controller itt donteni el, hogy mi lesz a robot kovetkezo lepese
      */
     public void Step() {
         Logger.getInstance().printCommandCall(this);
@@ -91,8 +91,8 @@ public class Robot extends Worker {
     }
 
     /**
-     * Metódus, amely kezeli azt az eseményt, amikor az az aszteroida felrobban,
-     * amin a Robot éppen tartózkodik.
+     * Metodus, amely kezeli azt az esemenyt, amikor az az aszteroida felrobban,
+     * amin a Robot eppen tartozkodik.
      */
     public void Explode() {
         Logger.getInstance().printCommandCall(this);
