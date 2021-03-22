@@ -8,6 +8,10 @@ import java.util.HashMap;
   * A teleportkapukat kezeli. Tarolja a parjat, melyik aszteroidan van, illetve a jelenlegi allapotat.
  */
 public class TeleportGate implements DestinationObject {
+
+    /**
+     * Konstruktor
+     */
     public TeleportGate() {
         setInventory();
     }
@@ -250,7 +254,7 @@ public class TeleportGate implements DestinationObject {
     }
 
     /**
-     * Megsemisul a teleportkapu.
+     * Megsemmisul a teleportkapu.
      */
     public void Destroy() {
         Logger.getInstance().printCommandCall(this);
