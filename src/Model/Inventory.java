@@ -20,8 +20,8 @@ public class Inventory {
 
     /**
      * Egy nyersanyag nevet kap parameterkent es visszaadja a lekerdezni kivant nyersanyag mennyiseget az Inventory-ban.
-     * @param m : a lekerdezni kivant nyersanyag neve
-     * @return : a nyersanyag darabszama ami a jelenlegi Inventory-ban van
+     * @param m a lekerdezni kivant nyersanyag neve
+     * @return a nyersanyag darabszama ami a jelenlegi Inventory-ban van
      */
     public Integer get_amount(MaterialName m) {
         Object[] p = {m};
@@ -32,7 +32,7 @@ public class Inventory {
 
     /**
      * Parameterkent kap egy nyersanyag nevet es egy mennyiseget, amely egy objektum (Robot,Base,Teleport Gate) letrehozasahoz szukseges, es berakja a jelenlegi Inventory-ba.
-     * @param m : a nyersanyag nevek es azok mennyisege, amelyek egy objektum felepitesehez kellenek
+     * @param m a nyersanyag nevek es azok mennyisege, amelyek egy objektum felepitesehez kellenek
      */
     public void fill(HashMap<MaterialName, Integer> m) {
         Object[] p = {m.getClass().getSimpleName()};
@@ -43,7 +43,7 @@ public class Inventory {
 
     /**
      * Egy nyersanyag nevet ker parameterul, es a jelenlegi Inventory-ba belerakja.
-     * @param m : az Inventory-ba rakni kivant nyersanyag neve
+     * @param m az Inventory-ba rakni kivant nyersanyag neve
      */
     public void Add(MaterialName m) {
         Object[] p = {m};
@@ -60,7 +60,7 @@ public class Inventory {
 
     /**
      * Egy nyersanyag nevet ker parameterul, es azt a nyersanyagot kiveszi az Inventory-bol.
-     * @param m : a eltavolitani kivant nyersanyag neve
+     * @param m a eltavolitani kivant nyersanyag neve
      */
     public void Remove(MaterialName m) {
         Object[] p = {m};
@@ -77,8 +77,8 @@ public class Inventory {
 
     /**
      * Egy Inventory-t kap parameterul, es osszehasonlitja a jelenlegi Inventory-val, hogy tartalmazza-e azon nyersanyagokat, valamint azon mennyisegeket, amit parameterul adtunk.
-     * @param i : az osszehasonlitani kivant Inventory
-     * @return : ha tartalmazza a nyersanyagokat es azon mennyisegeket igaz ertekkel ter vissza a metodus, kulonben hamis ertekkel ter vissza
+     * @param i az osszehasonlitani kivant Inventory
+     * @return ha tartalmazza a nyersanyagokat es azon mennyisegeket igaz ertekkel ter vissza a metodus, kulonben hamis ertekkel ter vissza
      */
     public boolean ContainsAllElementsIn(Inventory i) {
         Object[] p = {i.getClass().getSimpleName()};
@@ -95,7 +95,7 @@ public class Inventory {
 
     /**
      * A jelenlegi Inventory-ban tarolt nyersanyagok mennyiseget vizsgalja.
-     * @return : visszaadja a jelenlegi Inventory-ban tarolt nyersanyagok mennyiseget
+     * @return visszaadja a jelenlegi Inventory-ban tarolt nyersanyagok mennyiseget
      */
     public int Size() {
         Logger.getInstance().printCommandCall(this);

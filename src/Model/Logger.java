@@ -2,19 +2,22 @@ package Model;
 
 import java.lang.reflect.Method;
 
-
-//PLS DONT TOUCH, ITS MAGIC
+/**
+ * A Logger asztaly segitsegevel iratjuk ki a fuggvenyhivasokat,
+ * az indentalasokat, es a szibolumokat
+ * a konzol kimenetere a megfelelo formatumban.
+ */
 public class Logger {
     /**
-     * Privat konstruktor
+     * A Logger osztaly privat konstruktora.
      */
     private Logger() {}
 
     private static final Logger l = new Logger();
 
     /**
-     * lekeri az egyetlen letezo objektumot
-     * @return
+     * Lekeri az egyetlen letezo peldanyt ami a teszteleshez szukseges.
+     * @return visszaadja az objektumot
      */
     public static Logger getInstance() {
         return l;
@@ -23,18 +26,18 @@ public class Logger {
     int intend = 0;
 
     /**
-     * visszater a parameterben kapott objektum nevevel
-     * @param o
-     * @return
+     * Visszater a parameterben kapott osztaly nevevel.
+     * @param o a bemeneti osztaly
+     * @return az osztaly neve
      */
     private String getClassName(Object o) {
         return o.getClass().getSimpleName();
     }
 
     /**
-     * visszater a legutobb hivott relevans metodus nevevel
-     * @param depth
-     * @return
+     * Visszater a legutobb hivott relevans metodus nevevel.
+     * @param depth a konzol kimeneten megjeleno intendalas melysege
+     * @return az osztaly nevenek szoveg formatumba alakitasa az intendalas figyelembevetelevel
      */
     //source: https://stackoverflow.com/questions/442747/getting-the-name-of-the-currently-executing-method
     private static String getMethodName(final int depth) {
@@ -48,8 +51,8 @@ public class Logger {
     }
 
     /**
-     * kiirja konzolra a legutolso relevans fuggvenyhivast [:osztalynev].fuggvenynev() formatumban, megfelelo intendalassal
-     * @param o
+     * Kiirja konzolra a legutolso relevans fuggvenyhivast [:osztalynev].fuggvenynev() formatumban, megfelelo intendalassal.
+     * @param o a metodus amit ki akarunk iratni a konzol kimenetere
      */
     //függvényhívás kiírása, ha nincs paraméter
     public void printCommandCall(Object o) {
@@ -67,11 +70,11 @@ public class Logger {
     }
 
     /**
-     * kiirja konzolra a legutolso relevans fuggvenyhivast [:osztalynev].fuggvenynev(parameterek) formatumban, megfelelo intendalassal
-     * @param o
-     * @param params
+     * Kiirja konzolra a legutolso relevans fuggvenyhivast [:osztalynev].fuggvenynev(parameterek) formatumban, megfelelo intendalassal.
+     * @param o a metodus, amit ki akarunk iratni
+     * @param params a metodus parameterei, amit ki akarunk iratni
      */
-    //függvényhívás kiírása, ha van paraméter
+    //fuggvenyhivas kiirasa, ha van parameter
     public void printCommandCall(Object o, Object[] params) {
         for(int i = 0; i < intend; i++) {
             System.out.print("\t");
@@ -99,9 +102,9 @@ public class Logger {
     }
 
     /**
-     * kiirja a konzolra a legutobbi relevans fuggvenyhivas visszatereset, megfelelo intendalassal
+     * Kiirja a konzolra a legutobbi relevans fuggvenyhivas visszatereset, megfelelo intendalassal.
      */
-    //függvény visszatérésének kiírása visszatérési érték nélkül
+    //fuggveny visszateresenek kiirasa visszateresi ertek nelkul
     public void printReturnCommand() {
         intend--;
         for(int i = 0; i < intend; i++) {
@@ -112,10 +115,10 @@ public class Logger {
     }
 
     /**
-     * kiirja a konzolra a legutobbi relevans fuggvenyhivas visszatereset visszateresi ertekkel, megfelelo intendalassal
-     * @param value
+     * Kiirja a konzolra a legutobbi relevans fuggvenyhivas visszatereset visszateresi ertekkel, megfelelo intendalassal.
+     * @param value a metodus, aminek a visszatereset es visszaeresi erteket szeretnenk a konzol kimenetere irtani
      */
-    //függvény visszatérésének kiírása visszatérési értékkel
+    //fuggveny visszateresenek kiirasa visszateresi ertekkel
     public void printReturnCommand(Object value) {
         intend--;
         for(int i = 0; i < intend; i++) {
