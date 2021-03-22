@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -16,6 +17,10 @@ public class Test {
      * Itt választhatnak az egyes felhasználók mely teszteset hajtódjon végre.
      */
     void menu() {
+        Scanner in = new Scanner(System.in);
+        int testcase ;
+        do {
+
         System.out.println("1 - Drill Layer and reach Sublime Material");
         System.out.println("2 - Mine Sublime Material");
         System.out.println("3 - Move Settler to Asteroid");
@@ -39,87 +44,83 @@ public class Test {
         System.out.println("21 - Mine but inventory full");
         System.out.println("22 - Exit!");
 
-        Scanner in = new Scanner(System.in);
+
         System.out.println("\nWhich test case would you like to run?");
 
-        int testcase = in.nextInt();
+         testcase = in.nextInt();
 
-        //Logger.getInstance().printCommandCall(this);
-        switch (testcase){
-            case 1:
-                DrillLayerandReachSublimableMaterial();
-                break;
-            case 2 :
-                MineSublimableMaterial();
-                break;
-            case 3 :
-                MoveSettlertoAsteroid();
-                break;
-            case 4 :
-                MoveSettlertoTeleportGate();
-                break;
-            case 5 :
-                MoveSettlerwhilebeinginSunStorm();
-                break;
-            case 6 :
-                PlaceSublimeMaterial();
-                break;
-            case 7 :
-                SettlerPlaceTeleportGate();
-                break;
-            case 8 :
-                BuildBase();
-                break;
-            case 9 :
-                BuildRobot();
-                break;
-            case 10 :
-                BuildTeleportGate();
-                break;
-            case 11 :
-                DrillLayerandnotreachCore();
-                break;
-            case 12 :
-                DrillLayerandreachemptyCore();
-                break;
-            case 13 :
-                DrillLayerandreachNormalMaterial();
-                break;
-            case 14 :
-                MineNormalMaterial();
-                break;
-            case 15 :
-                DrillLayerandreachRadioactiveMaterial();
-                break;
-            case 16 :
-                PlaceMaterialbutAsteroidisnotemptyordrilledthrough();
-                break;
-            case 17 :
-                MineRadioactiveMaterial();
-                break;
-            case 18 :
-                PlaceNormalMaterial();
-                break;
-            case 19 :
-                PlaceRadioactiveMaterial();
-                break;
-            case 20 :
-                MinebutCoreisEmpty();
-                break;
-            case 21 :
-                MinebutInventoryisFull();
-                break;
-            case 0 :
-                System.out.println("Invalid number!");
-                menu();
-                break;
-            case 22 : break;
-            default :
-                System.out.println("Invalid number!");
-                menu();
-                break;
-        }
-
+            switch (testcase) {
+                case 1:
+                    DrillLayerandReachSublimableMaterial();
+                    break;
+                case 2:
+                    MineSublimableMaterial();
+                    break;
+                case 3:
+                    MoveSettlertoAsteroid();
+                    break;
+                case 4:
+                    MoveSettlertoTeleportGate();
+                    break;
+                case 5:
+                    MoveSettlerwhilebeinginSunStorm();
+                    break;
+                case 6:
+                    PlaceSublimeMaterial();
+                    break;
+                case 7:
+                    SettlerPlaceTeleportGate();
+                    break;
+                case 8:
+                    BuildBase();
+                    break;
+                case 9:
+                    BuildRobot();
+                    break;
+                case 10:
+                    BuildTeleportGate();
+                    break;
+                case 11:
+                    DrillLayerandnotreachCore();
+                    break;
+                case 12:
+                    DrillLayerandreachemptyCore();
+                    break;
+                case 13:
+                    DrillLayerandreachNormalMaterial();
+                    break;
+                case 14:
+                    MineNormalMaterial();
+                    break;
+                case 15:
+                    DrillLayerandreachRadioactiveMaterial();
+                    break;
+                case 16:
+                    PlaceMaterialbutAsteroidisnotemptyordrilledthrough();
+                    break;
+                case 17:
+                    MineRadioactiveMaterial();
+                    break;
+                case 18:
+                    PlaceNormalMaterial();
+                    break;
+                case 19:
+                    PlaceRadioactiveMaterial();
+                    break;
+                case 20:
+                    MinebutCoreisEmpty();
+                    break;
+                case 21:
+                    MinebutInventoryisFull();
+                    break;
+                case 22:
+                    break;
+                default:
+                    System.out.println("Invalid number!");
+                    menu();
+                    break;
+            }
+        }while(testcase!=22);
         //Logger.getInstance().printReturnCommand();
     }
 
