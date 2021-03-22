@@ -10,5 +10,5 @@ public interface mine {
     /**
      * A banyaszas cselekmenyet megvalosito interfesz metodus.
      */
-    public void Mine()  ;
+    public void Mine();
 }

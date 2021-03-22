@@ -22,6 +22,9 @@ public class Asteroid implements DestinationObject {
 
     private ArrayList<DestinationObject> neighbours;
 
+    /**
+     * Az Asteroid osztaly publikus alapertelmezett konstruktora.
+     */
     public Asteroid(){
         Logger.getInstance().printCommandCall(this);
         this.layers = 0;
