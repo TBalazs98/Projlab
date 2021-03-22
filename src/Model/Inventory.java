@@ -49,9 +49,9 @@ public class Inventory {
         Object[] p = {m};
         Logger.getInstance().printCommandCall(this, p);
         if(this.inventory.size()<10) {
-            int n = 0;                          //segédváltozó ahhoz, hogy mennyi keyhez tartozó value van
-            if(inventory.containsKey(m))        //muszáj ellenőrizni, hogy létezik e már, mert ha nem akkor
-                n = inventory.get(m);           //nullexception hibát dob
+            int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
+            if(inventory.containsKey(m))        //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
+                n = inventory.get(m);           //nullexception hibat dob
             n++;
             this.inventory.put(m,n);
         }
@@ -66,9 +66,9 @@ public class Inventory {
         Object[] p = {m};
         Logger.getInstance().printCommandCall(this, p);
         if(this.inventory.size()<10) {
-            int n = 0;                          //segédváltozó ahhoz, hogy mennyi keyhez tartozó value van
-            if(inventory.containsKey(m)) {      //muszáj ellenőrizni, hogy létezik e már, mert ha nem akkor
-                n = inventory.get(m);           //nullexception hibát dob
+            int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
+            if(inventory.containsKey(m)) {      //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
+                n = inventory.get(m);           //nullexception hibat dob
                 this.inventory.put(m,n);
             }
         }
@@ -83,14 +83,14 @@ public class Inventory {
     public boolean ContainsAllElementsIn(Inventory i) {
         Object[] p = {i.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
-        for(MaterialName  m : this.inventory.keySet() ){    //végigmegyünk az összes materiálunkon
-            if(i.inventory.get(m) < this.inventory.get(m)){ //ha a paraméterként kapott inventoryban kevesebb van ( mint amennyire szükség lenne)
+        for(MaterialName  m : this.inventory.keySet() ){    //vegigmegyunk az osszes materialunkon
+            if(i.inventory.get(m) < this.inventory.get(m)){ //ha a parameterkent kapott inventoryban kevesebb van ( mint amennyire szukseg lenne)
                 Logger.getInstance().printReturnCommand(false);
-                return false;                               //akkor építkezés no-no
+                return false;                               //akkor epitkezes no-no
             }
         }
         Logger.getInstance().printReturnCommand(true);
-        return true;                                        //amúgy zsa
+        return true;                                        //amugy zsa
     }
 
     /**
@@ -100,8 +100,8 @@ public class Inventory {
     public int Size() {
         Logger.getInstance().printCommandCall(this);
         int size=0;
-        for(MaterialName m : this.inventory.keySet()){      //végigmegyünk az összes nálunk lévő materiálon
-            size+=this.inventory.get(m);                    //és az adott materiálhoz tartozó mennyiséget returnoljuk
+        for(MaterialName m : this.inventory.keySet()){      //vegigmegyunk az osszes nalunk levo materialon
+            size+=this.inventory.get(m);                    //es az adott materialhoz tartozo mennyiseget returnoljuk
         }
         Logger.getInstance().printReturnCommand(size);
         return size;
