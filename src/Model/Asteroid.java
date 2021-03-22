@@ -137,7 +137,7 @@ public class Asteroid implements DestinationObject {
     public void Drilled() {
         Logger.getInstance().printCommandCall(this);
 
-        //függvény lefutasa felhasznaloi beavatkozassal
+        //fuggvény lefutasa felhasznaloi beavatkozassal
         System.out.print("How many layers does the asteroid have after drilling?\t");
         Scanner sc = new Scanner(System.in);
         //InputStreamReader br = new InputStreamReader(System.in);
@@ -157,7 +157,7 @@ public class Asteroid implements DestinationObject {
             material.Hit(this);
         }
 
-        //függveny lefutasa tagvaltozo lekerdezesevel
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*this.layers--;
         if(!isEmpty && layers == 0) {
             material.Hit(this);
@@ -322,7 +322,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     *Az aszteroida felrobban, errol ertesiti a szomszedait, illetve a rajta levő karakterek ennek megfeleloen viselkednek.
+     *Az aszteroida felrobban, errol ertesiti a szomszedait, illetve a rajta levo karakterek ennek megfeleloen viselkednek.
      */
     public void Explode() {
         Logger.getInstance().printCommandCall(this);
