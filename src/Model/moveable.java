@@ -8,7 +8,8 @@ import java.util.*;
 public interface moveable {
 
     /**
-     * @param idx
+     *  A mozgatas cselekmenyet megtestesito interfesz metodus.
+     * @param idx a mozgatni kivant objektum ID azonositoja
      */
     public void Move(int idx) ;
 

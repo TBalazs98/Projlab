@@ -19,7 +19,7 @@ public class Material  {
 
     /**
      * A parameterul adott Inventory-ba belehelyezi a nyersanyagot.
-     * @param inventory : az Inventory amibe szeretnenk elhelyezni nyersanyagot
+     * @param inventory az Inventory amibe szeretnenk elhelyezni nyersanyagot
      */
     public void Add(Inventory inventory) {
         Object[] p = {inventory.getClass().getSimpleName()};
@@ -32,7 +32,7 @@ public class Material  {
 
     /**
      * Akkor hivodik meg a metodus, ha a nyersanyagot interakcio eri.
-     * @param a : az Aszteroida, amin a jenenlegi nyersanyag talalhato
+     * @param a az Aszteroida, amin a jenenlegi nyersanyag talalhato
      */
     public void Hit(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
@@ -42,7 +42,7 @@ public class Material  {
     }
 
     /** Az Inventory-bol kiveszi a nyersanyagot.
-     * @param inventory : az Inventory, melybol kivetelre kerul a nyersanyag
+     * @param inventory az Inventory, melybol kivetelre kerul a nyersanyag
      */
     public void Remove(Inventory inventory) {
         Object[] p = {inventory.getClass().getSimpleName()};
@@ -53,8 +53,8 @@ public class Material  {
         Logger.getInstance().printReturnCommand();
     }
 
-    /** Parameterul kap egy normal nyersanyag nevet es beallitja a jelenlegi nyersanyag neveve
-     * @param n : a normal nyersanyag neve
+    /** Parameterul kap egy normal nyersanyag nevet es beallitja a jelenlegi nyersanyag neveve.
+     * @param n a normal nyersanyag neve
      */
     public void setName(NormalMaterialName n) {
         Object[] p = {n};

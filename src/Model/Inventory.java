@@ -2,7 +2,6 @@ package Model;
 
 import java.util.*;
 
-
 /**
  * Az Inventory osztaly testesiti meg a Settler nyersanyag tarolojat.
  */
@@ -31,7 +30,8 @@ public class Inventory {
     }
 
     /**
-     * Parameterkent kap egy nyersanyag nevet es egy mennyiseget, amely egy objektum (Robot,Base,Teleport Gate) letrehozasahoz szukseges, es berakja a jelenlegi Inventory-ba.
+     * Parameterkent kap egy nyersanyag nevet es egy mennyiseget, amely egy objektum (Robot,Base,Teleport Gate) letrehozasahoz szukseges,
+     * es berakja a jelenlegi Inventory-ba.
      * @param m a nyersanyag nevek es azok mennyisege, amelyek egy objektum felepitesehez kellenek
      */
     public void fill(HashMap<MaterialName, Integer> m) {
@@ -76,7 +76,8 @@ public class Inventory {
     }
 
     /**
-     * Egy Inventory-t kap parameterul, es osszehasonlitja a jelenlegi Inventory-val, hogy tartalmazza-e azon nyersanyagokat, valamint azon mennyisegeket, amit parameterul adtunk.
+     * Egy Inventory-t kap parameterul, es osszehasonlitja a jelenlegi Inventory-val, hogy tartalmazza-e azon nyersanyagokat,
+     * valamint azon mennyisegeket, amit parameterul adtunk.
      * @param i az osszehasonlitani kivant Inventory
      * @return ha tartalmazza a nyersanyagokat es azon mennyisegeket igaz ertekkel ter vissza a metodus, kulonben hamis ertekkel ter vissza
      */
