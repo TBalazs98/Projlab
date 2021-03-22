@@ -35,10 +35,10 @@ public class Asteroid implements DestinationObject {
 
     /**
      *Konstruktor, amiben beallithajuk az aszteroida tulajdonsagait.
-     * @param layer
-     * @param isempty
-     * @param isnearsun
-     * @param mat
+     * @param layer az aszteroida felszinet borito szikla reteg mennyisege
+     * @param isempty megmondja ureges-e az aszteroida
+     * @param isnearsun megmondja napkozelben van-e az aszteroida
+     * @param mat az aszteroidaban talalhato nyersanyag
      */
     public Asteroid(int layer, boolean isempty,boolean isnearsun, Material mat){
         Object[] p = {layer, isempty, isnearsun, mat.name};
@@ -53,8 +53,8 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * Karakter felvetele az aszteroidara.
-     * @param c
+     * Karakter beallitasa
+     * @param c karakter, akit rateszunk az aszteroidara
      */
     public void setCharacter(Character c){
         Object[] p = {c.getClass().getSimpleName()};
@@ -65,7 +65,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Parameterben megadott objektum felvetele a szomszedok koze.
-     * @param d
+     * @param d objektum amit fel akarunk venni
      */
     public void setNeighbour(DestinationObject d){
         Object[] p = {d.getClass().getSimpleName()};
@@ -76,7 +76,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Visszater a sziklaretegek szamaval.
-     * @return
+     * @return sziklareteg vastagsaga
      */
     public int getLayers() {
         Logger.getInstance().printCommandCall(this);
@@ -85,8 +85,8 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * Visszater a magban talalhato szersanyaggal.
-     * @return
+     * Visszater a magban talalhato nyersanyaggal.
+     * @return nyersanyag, ha ures null-al ter vissza
      */
     public Material getMaterial() {
         Logger.getInstance().printCommandCall(this);
@@ -96,8 +96,8 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Karakter elfogadasa az aszteroidara lepeskor.
-     * @param c
-     * @return
+     * @param c karakter, aki ralep
+     * @return visszater sajat magaval, egy Destination Object-el
      */
 
     public DestinationObject Accept(Character c) {
@@ -110,7 +110,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Karakter eltavolitasa az aszteroidarol.
-     * @param c
+     * @param c karakter akit eltavolitunk
      */
     public void Remove(Character c) {
         Object[] p = {c.getClass().getSimpleName()};
@@ -132,7 +132,7 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     *A karakter furas metodusa utan hivodik meg, es csokkenti a sziklareteget.
+     * A karakter furas metodusa utan hivodik meg, es csokkenti a sziklareteget.
      */
     public void Drilled() {
         Logger.getInstance().printCommandCall(this);
@@ -169,7 +169,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * A telepes banyaszas utan kiveszi az aszteroidabol a nyersanyagot, visszater vele.
-     * @return
+     * @return a benne talalhato nyersanyag, ha nincs null
      */
     public Material Mined() {
         Logger.getInstance().printCommandCall(this);
@@ -188,8 +188,8 @@ public class Asteroid implements DestinationObject {
     }
 
     /**
-     * Parameter hozzaadasa a szomszedokhoz.
-     * @param d
+     * Destination Object hozzaadasa a szomszedokhoz.
+     * @param d a hozzaadott Destination Object
      */
     public void AddNeighbour(DestinationObject d) {
         Object[] p = {d.getClass().getSimpleName()};
@@ -201,7 +201,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Parameterul kapott objektum eltavolitasa a szomszedok kozul.
-     * @param d
+     * @param d a kapott szomszed eltavolitasa
      */
     public void RemoveNeighbour(DestinationObject d) {
         Object[] p = {d.getClass().getSimpleName()};
@@ -213,8 +213,8 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Nyersanyag visszahelyezese az aszteroida magjaba.
-     * @param m
-     * @return
+     * @param m nyersanyag
+     * @return visszater egy logikai ertekkel, hogy sikeres volt-e
      */
     public boolean AddMaterial(Material m) {
         Object[] p = {m.getName()};
@@ -232,7 +232,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Nyersanyag eltavolítsa az aszteroida magjabol.
-     * @param m
+     * @param m adott nyersanyagot tavolitja el
      */
     public void RemoveMaterial(Material m) {
         Object[] p = {m.getName()};
@@ -244,8 +244,8 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Parameterul kapott ID szerinti aszteroidat adja vissza.
-     * @param id
-     * @return
+     * @param id a kapott id
+     * @return visszater az objektummal
      */
     public DestinationObject GetNeighbour(int id) {
         Object[] p = {id};
@@ -261,7 +261,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Random szomszedot ad vissza.
-     * @return
+     * @return egy random szomszed
      */
     public int GetRandNeighbour() {
         Logger.getInstance().printCommandCall(this);
@@ -287,7 +287,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Visszaadja az aszteroida naphoz viszonyitott elhelyezkedeset.
-     * @return
+     * @return napkozelben/naptavolban
      */
     public boolean GetSunProximity() {
         Logger.getInstance().printCommandCall(this);
@@ -310,7 +310,7 @@ public class Asteroid implements DestinationObject {
 
     /**
      * Az aszteroida szomszedai kozul a parameterul kapott aszteroida felrobban.
-     * @param a
+     * @param a az egyik  szomszedja, akit el kell tavolitani a szomszedok listajabol
      */
     public void HitByExplosion(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
@@ -338,6 +338,10 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Beallitja a parameterul kapott erteket az aszterodia sziklaretegenek.
+     * @param layer parameterul akpott ertek
+     */
     public void setLayer(int layer){
         Object[] p = {layer};
         Logger.getInstance().printCommandCall(this, p);
