@@ -7,6 +7,8 @@ import java.util.*;
  */
 public interface mine {
 
-
+    /**
+     *
+     */
     public void Mine()  ;
 }
