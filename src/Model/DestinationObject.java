@@ -8,7 +8,7 @@ import java.util.*;
 public interface DestinationObject {
 
     /**
-     * Objektumra lépő karakter elfogadasa.
+     * Objektumra lepo karakter elfogadasa.
      * @param c karakter aki az objektumra lep
      * @return objektum amin a valtozas tortent
      */
