@@ -3,7 +3,7 @@ package Model;
 import java.util.*;
 
 /**
- * 
+ *Interfesz, melynek megvalositasaval kepes lesz a karakter furasra.
  */
 public interface drillable {
 

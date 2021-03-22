@@ -16,7 +16,7 @@ public class AsteroidBelt {
     private ArrayList<Asteroid> asteroids;
 
     /**
-     *Privát konstruktor az aszteroida ovhoz.
+     *Privat konstruktor az aszteroida ovhoz.
      */
     private AsteroidBelt() {
         Logger.getInstance().printCommandCall(this);
@@ -28,7 +28,7 @@ public class AsteroidBelt {
 
     /**
      * lekeri az egyetlen letezo objektumot
-     * @return
+     * @return visszaadja az egy letezo aszteroidamezo peldanyt
      */
     public static AsteroidBelt getInstance() {
         return ab;
@@ -46,7 +46,7 @@ public class AsteroidBelt {
     }
 
     /**
-     * A napvihar elinditása.
+     * A napvihar elinditasa.
      */
     public void StartStorm() {
         Logger.getInstance().printCommandCall(this);
@@ -59,7 +59,7 @@ public class AsteroidBelt {
 
     /**
      * Aszteroida eltavolitasa az aszteroida mezobol.
-     * @param a
+     * @param a Eltavolitando aszteroida
      */
     public void RemoveAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
@@ -72,7 +72,7 @@ public class AsteroidBelt {
 
     /**
      * Aszteroida felvetele az aszteroida mezobe.
-     * @param a
+     * @param a Felvevendo aszteroida
      */
     public void AddAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};

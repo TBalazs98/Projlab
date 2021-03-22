@@ -24,7 +24,6 @@ public class Game {
      *Jatek inditasa.
      */
     public void StartGame() {
-        // TODO implement here
     }
 
     /**
@@ -47,7 +46,7 @@ public class Game {
     }
 
     /**
-     *Minden karakter meghalt vagy nem talalhato eleg nyersanyag az aszteroida ovben a bazis felepítesehez.
+     *Minden karakter meghalt vagy nem talalhato eleg nyersanyag az aszteroida ovben a bazis felepitesehez.
      */
     public void LoseGame() {
         Logger.getInstance().printCommandCall(this);

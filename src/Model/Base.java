@@ -25,13 +25,13 @@ public class Base {
 
     /**
      * Konstruktor a bazis epitesehez.
-     * @param i
+     * @param i Settler inventoryja
      */
     public Base(Inventory i) {
         Object[] p = {i.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        //függvény lefutása felhasználói beavatkozással
+        //fuggvény lefutasa felhasznaloi beavatkozassal
             System.out.print("Do we have enough materials to build the base?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
@@ -46,7 +46,7 @@ public class Base {
                 Build();
             }
 
-        //függvény lefutása tagváltozó lekérdezésével
+        //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*setInventory();
         if(inventory.ContainsAllElementsIn(i))
             Build();
@@ -56,7 +56,7 @@ public class Base {
     }
 
     /**
-     *Beallitja a bazis inventory-jat, az alapjan, hogy mennyi nyersanyag kell az epiteshez.
+     *Beallitja a bazis inventory-jat, az alapjan, hogy mennyi es milyen nyersanyag kell az epiteshez.
      */
     private void setInventory() {
         Logger.getInstance().printCommandCall(this);

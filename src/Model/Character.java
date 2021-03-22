@@ -33,7 +33,7 @@ public abstract class Character {
 
     /**
      * Karakter parameternek megfelelo helyre mozog.
-     * @param idx
+     * @param idx parameter amely megadja az aszteroidat amelyre a mozgas tortenik
      */
     public void Move(int idx) {
         Object[] p = {idx};
@@ -54,7 +54,7 @@ public abstract class Character {
 
     /**
      * Karaker aszteroidajanak beallitasa.
-     * @param a
+     * @param a aszteroida amelyen a karakter tartozkodik
      */
     public void addAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
@@ -67,7 +67,7 @@ public abstract class Character {
 
     /**
      * Getter az aszteroidajahoz.
-     * @return
+     * @return visszaadja a karakter aszteroidajat
      */
     public Asteroid getAsteroid() {
         Logger.getInstance().printCommandCall(this);
@@ -78,7 +78,7 @@ public abstract class Character {
 
     /**
      * Setter az aszteroidahoz.
-     * @param a
+     * @param a karakter amelyen az aszteroida tartozodik
      */
     public void setAsteroid(Asteroid a) {
         Object[] p = {a.getClass().getSimpleName()};
