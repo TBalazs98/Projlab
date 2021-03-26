@@ -266,4 +266,8 @@ public class TeleportGate implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
+    public void HitBySunstorm(){        //TODO ezt nem tudtam megcsinálni a szeki miatt
+
+    }
+
 }

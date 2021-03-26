@@ -61,8 +61,9 @@ public class Settler extends Worker {
     public void BuildGate() {
         Logger.getInstance().printCommandCall(this);
 
-        TeleportGate g1 = new TeleportGate(inventory, this);        //TG  epitese, atadva a sajat inventorynkat (ebben nezi meg a TG, hogy fel tud-e epulni)
-
+        if(gates.size()<=1) {       //teleportGate konstruktorban 2 TG hozodik letre
+            TeleportGate g1 = new TeleportGate(inventory, this);        //TG  epitese, atadva a sajat inventorynkat (ebben nezi meg a TG, hogy fel tud-e epulni)
+        }
         Logger.getInstance().printReturnCommand();
     }
 
@@ -124,7 +125,8 @@ public class Settler extends Worker {
         Object[] p = {t.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this, p);
 
-        gates.add(t);
+        if(gates.size()<3)
+            gates.add(t);
 
         Logger.getInstance().printReturnCommand();
     }

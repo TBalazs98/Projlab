@@ -8,7 +8,7 @@ import java.util.*;
  *Radioaktiv nyersanyagokat megtestesito osztaly.
  */
 public class RadioactiveMaterial extends Material {
-
+    public int exposed;
     public RadioactiveMaterialName name;
 
     /**
@@ -16,6 +16,7 @@ public class RadioactiveMaterial extends Material {
      */
     public RadioactiveMaterial() {
         super();
+        exposed=3;
         Logger.getInstance().printCommandCall(this);
 
         Logger.getInstance().printReturnCommand();
@@ -43,8 +44,11 @@ public class RadioactiveMaterial extends Material {
             }
 
             if(ch=='y' || ch=='Y' ) {
-                a.RemoveMaterial(this);
-                a.Explode();
+                expose();
+                if(this.exposed==0) {
+                    a.RemoveMaterial(this);
+                    a.Explode();
+                }
             }
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
@@ -70,5 +74,8 @@ public class RadioactiveMaterial extends Material {
 
     public MaterialName getName() {
         return this.name;
+    }
+    public void expose(){
+        this.exposed--;
     }
 }

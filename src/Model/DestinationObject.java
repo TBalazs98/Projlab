@@ -19,4 +19,6 @@ public interface DestinationObject {
      * @param a eltavolitando aszteroida a szomszedok kozul
      */
     public void HitByExplosion(Asteroid a);
+    public void HitBySunstorm();
+
 }
