@@ -1,6 +1,12 @@
 package Model;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * @author Bakonyi Klaudia
@@ -14,14 +20,48 @@ public class Main {
     /**
      * Jelenleg a Test nevu tesztosztalyunk segitsegevel ellenorizzuk modellunk helyesseget.
      */
-    public static void main(String[] args) {
-/*
-        boolean isDeterministicRun = fajlbeolvasas; // "a veletlenszeruseg ki-bekapcsolhato legyen"
-        if (!isDeterministicRun){
-        Random rand = new Random(System.currentTimeMillis()); //random szam az ido fuggvenyeben, tehat a random szamok statikusak lesznek a lefutasok kozott
-    }*/
-        Test t = new Test();
-        t.menu();               //teszt menu meghivasa
+    public static void main(String[] args)  {
+
+
+        String regex = "\\W*((?i)createmap(?-i))\\W*\\s(\\d+\\s){5}\\d+";
+        Scanner in = new Scanner(System.in);
+
+        String input="";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+             input = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        int[] cuccosok = {0,0,0,0,0,0}; //Material, Asteroid, TG, Settler, Robot, Ufo
+
+        int sum =0;
+        //System.out.println(Pattern.matches("\\W*((?i)createmap(?-i))\\W*\\s(\\d+\\s){5}\\d+","createmap 1 2 32321 0 33123 5433"));
+        System.out.println(Pattern.matches(regex,input));
+        if(Pattern.matches(regex,input)){
+            String[] cmd=input.split(" ");
+            for(int i=1; i<cmd.length;i++){
+                System.out.println(cmd[i]);
+                cuccosok[i-1]=Integer.parseInt(cmd[i]);
+                sum+=cuccosok[i-1];
+            }
+        }
+        System.out.println(sum);
+        for(int i=0; i<cuccosok.length;i++){
+            System.out.println(cuccosok[i]);
+        }
+
+
+
+
+
+        //Test t = new Test();
+        //t.menu();               //teszt menu meghivasa
+
+
+
 
     }
 
