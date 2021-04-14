@@ -4,11 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import java.util.Arrays;
 
 /**
  * @author Bakonyi Klaudia
@@ -22,6 +19,15 @@ public class Main {
     /**
      * Jelenleg a Test nevu tesztosztalyunk segitsegevel ellenorizzuk modellunk helyesseget.
      */
+
+    ArrayList<Material> materials = new ArrayList<>();
+    ArrayList<Asteroid> asteroids=new ArrayList<>();
+    ArrayList<TeleportGate> teleportgates = new ArrayList<>();
+    ArrayList<Settler> settlers=new ArrayList<>();
+    ArrayList<Robot> robots=new ArrayList<>();
+    ArrayList<UFO> ufos= new ArrayList<>();
+
+
     public static void main(String[] args)  {
 
 
@@ -30,6 +36,7 @@ public class Main {
         String regex = "\\W*((?i)createmap(?-i))\\W*\\s(\\d+\\s){5}\\d+";
         String materialregex = "[013]|2\\s[012]";
         String asteroidregex ="0\\s\\d\\s\\d\\s0|\\d\\s(\\d,)*\\d\\s[01]\\s\\d{1,2}\\s1\\s\\d\n";
+        String asteroidregex2 ="0\\s\\d\\s\\d\\s0|\\d\\s(\\d,)*\\d\\s[01]\\s\\d{1,2}\\s1\\s\\d ||\\d\\s(\\d,)*\\d\\s[01]\\s\\d{1,2}";
         String tgregex ="\\d\\s[01]\\s\\d\\s[01]\\s[01]";
         String settlerregex ="\\d\\s\\d\\s(\\d,)*\\d\\s[0123]\\s\\d|\\d\\s0\\s0";
         String robotregex ="\\d";
@@ -43,33 +50,74 @@ public class Main {
 
 
         String[] cmd={};
-        int meddig=0;
         String line;
+        int[] ObjCounts = {0,0,0,0,0,0}; //Material, Asteroid, TG, Settler, Robot, Ufo
         try {
 
-            while ((line = reader.readLine()) != "")
-            {
-
-                input = line.split("\\n");
-                System.out.println(Arrays.toString(input));
+            line=reader.readLine();
+            cmd=line.split(" ");
+            for(int i=1; i<7;i++){
+                ObjCounts[i-1]=Integer.parseInt(cmd[i]);
             }
-            reader.close();
+            listaz(ObjCounts);
+            //System.out.println(reader.readLine());
+
+            for(int i=0;i<ObjCounts[0];i++){
+                System.out.println("helo material");
+                String temp=reader.readLine();
+                if(Pattern.matches(materialregex,temp)){
+                    System.out.println("material"+temp);
+                }
+            }
+            for(int i=0;i<ObjCounts[1];i++){
+                System.out.println("helo asteroid");
+                String temp=reader.readLine();
+                System.out.println(temp);
+                if(Pattern.matches(asteroidregex, temp)){
+                    System.out.println("asteroid"+temp);
+                }
+            }
+            for(int i=0;i<ObjCounts[2];i++){
+                System.out.println("helo tg");
+                String temp=reader.readLine();
+                if(Pattern.matches(tgregex,temp)){
+                    System.out.println("tg"+temp);
+                }
+            }
+            for(int i=0;i<ObjCounts[3];i++){
+                System.out.println("helo settler");
+                String temp=reader.readLine();
+                System.out.println(temp);
+                if(Pattern.matches(settlerregex,temp)){
+                    System.out.println("settkler"+temp);
+                }
+            }
+            for(int i=0;i<ObjCounts[4];i++){
+                System.out.println("helo robot");
+                String temp=reader.readLine();
+                if(Pattern.matches(robotregex,temp)){
+                    System.out.println("robot"+temp);
+                }
+            }
+            for(int i=0;i<ObjCounts[5];i++){
+                System.out.println("helo ufo");
+                String temp=reader.readLine();
+                if(Pattern.matches(uforegex,temp)){
+                    System.out.println("ufo"+temp);
+                }
+            }
+//            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-        System.out.println(input[0]);
-        System.out.println(input[1]);
-        System.out.println(input[2]);
+       // System.out.println(input[0]);
+       // System.out.println(input[1]);
+        //System.out.println(input[2]);
 
-        int[] ObjCounts = {0,0,0,0,0,0}; //Material, Asteroid, TG, Settler, Robot, Ufo
-        Material[] materials;
-        Asteroid[] asteroids;
-        TeleportGate[] teleportgates;
-        Settler[] settlers;
-        Robot[] robots;
-        UFO[] ufos;
+       // int[] ObjCounts = {0,0,0,0,0,0}; //Material, Asteroid, TG, Settler, Robot, Ufo
+
 
 
 
@@ -106,9 +154,29 @@ public class Main {
 
     }
 
-    public void beolvas(){
+    public static void listaz(int[]anyad){
+        for(int i=0; i<anyad.length;i++){
+            System.out.println( anyad[i]);
+        }
+
+    }
+    public static int osszead(int[]anyad){
+        int sum=0;
+        for(int i=0;i<anyad.length;i++){
+            sum+=anyad[i];
+        }
+        return sum;
+    }
+
+    public  void InitWhat(int what, String string){
+        switch (what){
+            case 1 : //material
+                break;
+            case 4:
+                settlers.add(new Settler());
 
 
+        }
     }
 
 
