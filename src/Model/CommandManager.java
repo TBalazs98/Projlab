@@ -220,13 +220,14 @@ public class CommandManager {
         if (Main.materials.size() == 0)
             System.out.println("No Material!");
         else {
-            for(Material m : Main.materials){
+            for(int index = 0; index< Main.materials.size();index++){
                 i++;
-                System.out.println("M" + i + " " + m.getName());
-                if(m.getName() == RadioactiveMaterialName.URAN) {
-                    RadioactiveMaterial r = (RadioactiveMaterial) Main.materials.get(i);
+                System.out.print("M" + i + " " + Main.materials.get(index).name);
+                if(Main.materials.get(index).name == RadioactiveMaterialName.URAN) {
+                    RadioactiveMaterial r = (RadioactiveMaterial) Main.materials.get(index);
                     System.out.print(" " + r.exposed);
                 }
+                System.out.println();
             }
         }
     }
