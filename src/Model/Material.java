@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Material  {
 
-    public NormalMaterialName name;
+    public MaterialName name;
 
     /**
      * A Material osztaly alapertelmezett konstruktora.
@@ -56,7 +56,7 @@ public class Material  {
     /** Parameterul kap egy normal nyersanyag nevet es beallitja a jelenlegi nyersanyag neveve.
      * @param n a normal nyersanyag neve
      */
-    public void setName(NormalMaterialName n) {
+    public void setName(MaterialName n) {
         Object[] p = {n};
         Logger.getInstance().printCommandCall(this, p);
 
