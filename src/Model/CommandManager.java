@@ -350,6 +350,8 @@ public class CommandManager {
             r.Step();
         for(UFO u : Main.ufos)
             u.Step();
+        for(TeleportGate tp : Main.teleportgates)
+            tp.Step();
     }
     void setRandomize(String cmd){
         //globális vált

@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
   * A teleportkapukat kezeli. Tarolja a parjat, melyik aszteroidan van, illetve a jelenlegi allapotat.
  */
-public class TeleportGate implements DestinationObject {
+public class TeleportGate implements DestinationObject, Steppable {
 
     /**
      * Konstruktor
@@ -21,6 +21,7 @@ public class TeleportGate implements DestinationObject {
     private TeleportGate pair;
     private Asteroid asteroid;
     private static final Inventory inventory = new Inventory();
+    private boolean isHit = false;
 
 
     /**
@@ -276,5 +277,16 @@ public class TeleportGate implements DestinationObject {
 
     public boolean GetisPlaced(){
         return isPlaced;
+    }
+    //STEP METODUST NE FELEJTSUK IMPLEMENTALNI
+
+
+    public void AddNeighbour(DestinationObject d)
+    {
+
+    }
+
+    public void Step(){
+
     }
 }
