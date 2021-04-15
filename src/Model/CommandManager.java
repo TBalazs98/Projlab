@@ -220,11 +220,11 @@ public class CommandManager {
         if (Main.materials.size() == 0)
             System.out.println("No Material!");
         else {
-            for(int index = 0; index< Main.materials.size();index++){
+            for(Material m : Main.materials){
                 i++;
-                System.out.print("M" + i + " " + Main.materials.get(index).name);
-                if(Main.materials.get(index).name == RadioactiveMaterialName.URAN) {
-                    RadioactiveMaterial r = (RadioactiveMaterial) Main.materials.get(index);
+                System.out.print("M" + i + " " + m.name);
+                if(m.name == RadioactiveMaterialName.URAN) {
+                    RadioactiveMaterial r = (RadioactiveMaterial) m;
                     System.out.print(" " + r.exposed);
                 }
                 System.out.println();
@@ -239,8 +239,9 @@ public class CommandManager {
         else{
             for (Asteroid a : Main.asteroids){
                 i++;
+                int mat = (Main.materials.indexOf(a.getMaterial()) + 1);
                 System.out.println("A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +
-                        (a.GetisEmpty()?a.getMaterial():"null"));
+                        (a.GetisEmpty()?("M" +mat):"null"));
             }
         }
 
@@ -253,10 +254,11 @@ public class CommandManager {
         else{
             for (TeleportGate g : Main.teleportgates){
                 i++;
+                int ast = (Main.asteroids.indexOf(g.GetAsteroid()) + 1);
                 if (g.GetPair() != null) {
                     pairid = Main.teleportgates.indexOf(g.GetPair()) + 1;
                 }
-                System.out.println("G" + i + " " + g.GetisActive() + " " + (pairid > 0?( "G" + pairid):"") + " " +  (g.GetisPlaced()? g.GetAsteroid():""));
+                System.out.println("G" + i + " " + g.GetisActive() + " " + (pairid > 0?( "G" + pairid):"") + " " +  (g.GetisPlaced()?("A" + ast):""));
             }
         }
 
