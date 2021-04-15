@@ -68,95 +68,23 @@ public class Main {
                 }
             }
 
-//            for(int i=0;i<ObjCounts[0];i++){
-//                System.out.println("helo material");
-//                String temp=reader.readLine();
-//                if(Pattern.matches(materialregex,temp)){
-//                    System.out.println("material"+temp);
-//                }
-//            }
-//            for(int i=0;i<ObjCounts[1];i++){
-//                System.out.println("helo asteroid");
-//                String temp=reader.readLine();
-//                System.out.println(temp);
-//                if(Pattern.matches(asteroidregex, temp)){
-//                    System.out.println("asteroid"+temp);
-//                }
-//            }
-//            for(int i=0;i<ObjCounts[2];i++){
-//                System.out.println("helo tg");
-//                String temp=reader.readLine();
-//                if(Pattern.matches(tgregex,temp)){
-//                    System.out.println("tg"+temp);
-//                }
-//            }
-//            for(int i=0;i<ObjCounts[3];i++){
-//                System.out.println("helo settler");
-//                String temp=reader.readLine();
-//                System.out.println(temp);
-//                if(Pattern.matches(settlerregex,temp)){
-//                    System.out.println("settkler"+temp);
-//                }
-//            }
-//            for(int i=0;i<ObjCounts[4];i++){
-//                System.out.println("helo robot");
-//                String temp=reader.readLine();
-//                if(Pattern.matches(robotregex,temp)){
-//                    System.out.println("robot"+temp);
-//                }
-//            }
-//            for(int i=0;i<ObjCounts[5];i++){
-//                System.out.println("helo ufo");
-//                String temp=reader.readLine();
-//                if(Pattern.matches(uforegex,temp)){
-//                    System.out.println("ufo"+temp);
-//                }
-//            }
+            CommandManager cm = new CommandManager();
+            cm.listMaterials();
+
+//
 //            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-       // System.out.println(input[0]);
-       // System.out.println(input[1]);
-        //System.out.println(input[2]);
-
-       // int[] ObjCounts = {0,0,0,0,0,0}; //Material, Asteroid, TG, Settler, Robot, Ufo
-
-
-
-
-
-
-//
-//        int sum =0;
-//        //System.out.println(Pattern.matches("\\W*((?i)createmap(?-i))\\W*\\s(\\d+\\s){5}\\d+","createmap 1 2 3 4 5 6"));
-//        System.out.println(Pattern.matches(regex,input));
-//        if(Pattern.matches(regex,input)){
-//            String[] cmd=input.split(" ");
-//            for(int i=1; i<cmd.length;i++){
-//                System.out.println(cmd[i]);
-//                ObjCounts[i-1]=Integer.parseInt(cmd[i]);
-//                sum+=ObjCounts[i-1];
-//            }
-//
-//            System.out.println(sum);
-//            for(int i=0; i<ObjCounts.length;i++){
-//                System.out.println(ObjCounts[i]);
-//            }
-//
-//        }
-//
-
-
-
-
         //Test t = new Test();
         //t.menu();               //teszt menu meghivasa
 
+
+
         for(int i=0; i<Main.materials.size();i++){
-            System.out.println(materials.get(i).name);
+            System.out.println(Main.materials.get(i).name);
         }
 
 
