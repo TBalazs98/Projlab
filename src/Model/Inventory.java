@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Inventory {
     public HashMap<MaterialName, Integer > inventory;
-
+    private Material[] materials;
     /**
      *  Publikus alapertelmezett konstruktor.
      */
@@ -108,4 +108,11 @@ public class Inventory {
         return size;
     }
 
+    void RemoveLot(Inventory i){
+
+    }
+
+    public Material[] GetMaterials(){
+        return  materials;
+    }
 }

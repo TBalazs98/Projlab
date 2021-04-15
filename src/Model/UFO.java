@@ -16,6 +16,9 @@ public class UFO extends Character implements Steppable, mine{
     }
     public void Mine(){}
 
+    public Inventory GetInventory(){
+        return inventory;
+    }
 
 
 }

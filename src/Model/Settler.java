@@ -170,4 +170,8 @@ public class Settler extends Worker {
 
         Logger.getInstance().printReturnCommand();
     }
+
+    public  Inventory GetInvenotry(){
+        return  this.inventory;
+    }
 }

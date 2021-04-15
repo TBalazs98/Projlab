@@ -294,6 +294,12 @@ public class Asteroid implements DestinationObject {
      */
     public boolean GetSunProximity() {
         Logger.getInstance().printCommandCall(this);
+        Logger.getInstance().printReturnCommand(isNearSun);
+        return isNearSun;
+    }
+
+    public boolean GetisEmpty() {
+        Logger.getInstance().printCommandCall(this);
         Logger.getInstance().printReturnCommand(isEmpty);
         return isEmpty;
     }

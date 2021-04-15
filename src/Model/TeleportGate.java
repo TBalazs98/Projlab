@@ -270,4 +270,11 @@ public class TeleportGate implements DestinationObject {
 
     }
 
+    public boolean GetisActive(){
+        return isActive;
+    }
+
+    public boolean GetisPlaced(){
+        return isPlaced;
+    }
 }
