@@ -20,12 +20,12 @@ public class Main {
      * Jelenleg a Test nevu tesztosztalyunk segitsegevel ellenorizzuk modellunk helyesseget.
      */
 
-    ArrayList<Material> materials = new ArrayList<>();
-    ArrayList<Asteroid> asteroids=new ArrayList<>();
-    ArrayList<TeleportGate> teleportgates = new ArrayList<>();
-    ArrayList<Settler> settlers=new ArrayList<>();
-    ArrayList<Robot> robots=new ArrayList<>();
-    ArrayList<UFO> ufos= new ArrayList<>();
+    public static ArrayList<Material> materials = new ArrayList<>();
+    public static ArrayList<Asteroid> asteroids=new ArrayList<>();
+    public static ArrayList<TeleportGate> teleportgates = new ArrayList<>();
+    public static ArrayList<Settler> settlers=new ArrayList<>();
+    public static ArrayList<Robot> robots=new ArrayList<>();
+    public static ArrayList<UFO> ufos= new ArrayList<>();
 
 
     public static void main(String[] args)  {
@@ -181,6 +181,7 @@ public class Main {
 
     //anyad
     //neked is
+
 
 
 
