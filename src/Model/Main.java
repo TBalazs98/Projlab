@@ -105,6 +105,7 @@ public class Main {
             CommandManager cm = new CommandManager();
             cm.listMaterials();
             cm.listAsteroids();
+            //cm.saveMap("savedmap");
 
 
 //

@@ -282,15 +282,18 @@ public class TeleportGate implements DestinationObject, Steppable {
     //STEP METODUST NE FELEJTSUK IMPLEMENTALNI
 
 
-    public void AddNeighbour(DestinationObject d)
-    {
+    public void AddNeighbour(DestinationObject d) {
 
+    }
+
+    public boolean GetIsHit(){
+        return  this.isHit;
     }
 
     public void Step(){
         if(this.isHit == true) {
             Random rand = new Random();
-            int i = rand.nextInt(this.asteroid.GetNeightboutCount());
+            int i = rand.nextInt(this.asteroid.GetNeighbourCount());
             this.setAsteroid((Asteroid) this.asteroid.GetNeighbour(i));
             }
     }

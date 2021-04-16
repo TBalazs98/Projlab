@@ -171,7 +171,10 @@ public class Settler extends Worker {
         Logger.getInstance().printReturnCommand();
     }
 
-    public  Inventory GetInvenotry(){
+    public  Inventory GetInventory(){
         return  this.inventory;
+    }
+    public  ArrayList<TeleportGate> GetGates(){
+        return this.gates;
     }
 }
