@@ -61,7 +61,7 @@ public class AsteroidBelt {
         Logger.getInstance().printCommandCall(this);
         ArrayList<DestinationObject> aneighb = a.GetNeighbours();
         a.HitBySunstorm();
-        for(int i = 0; i < a.GetNeightboutCount(); i++) {
+        for(int i = 0; i < a.GetNeighbourCount(); i++) {
             aneighb.get(i).HitBySunstorm();
         }
 

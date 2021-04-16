@@ -2,6 +2,9 @@ package Controller;
 
 import Model.*;
 
+import java.io.*;
+import java.util.ArrayList;
+
 public class CommandManager {
 
     public CommandManager(){}
@@ -273,7 +276,7 @@ public class CommandManager {
             i++;
             int aindex = Main.asteroids.indexOf((s.getAsteroid())) + 1 ;
             System.out.print("S" + i + " " + "A" + aindex);
-            Material[] mat =  s.GetInvenotry().GetMaterials();
+            Material[] mat =  s.GetInventory().GetMaterials();
             for(Material m : mat){
                 System.out.print(" M" + (Main.materials.indexOf(m) + 1));
             }
@@ -403,12 +406,115 @@ public class CommandManager {
     }
 
     public void saveMap (String filename){
-        int m = Main.materials.size();
-        int a = Main.asteroids.size();
-        int t = Main.teleportgates.size();
-        int s = Main.settlers.size();
-        int r = Main.robots.size();
-        int u = Main.ufos.size();
+        int M = Main.materials.size();
+        int A = Main.asteroids.size();
+        int T = Main.teleportgates.size();
+        int S = Main.settlers.size();
+        int R = Main.robots.size();
+        int U = Main.ufos.size();
+
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter("Files/Saved/" + filename + ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PrintWriter pw = new PrintWriter(fw);
+        pw.println("createmap " + M + " " + A + " " + T + " " + S + " " + R + " " + U);
+
+        for(Material m : Main.materials)
+            if (m.name.equals(NormalMaterialName.IRON)) {
+                pw.println("0");
+            } else if (m.name.equals(NormalMaterialName.COAL)) {
+                pw.println("1");
+            } else if (m.name.equals(RadioactiveMaterialName.URAN)) {
+                RadioactiveMaterial r = (RadioactiveMaterial) m;
+                pw.println("2   " + r.exposed);
+            } else if (m.name.equals(SublimableMaterialName.ICEWATER)) {
+                pw.println("3");
+            }
+
+        for(Asteroid a : Main.asteroids){
+            pw.print(a.GetNeighbourCount() + "  ");
+            if(a.GetNeighbourCount() != 0) {
+                ArrayList<String> neig = new ArrayList<>();
+                for (DestinationObject n : a.GetNeighbours())
+                    neig.add(Integer.toString((Main.asteroids.indexOf(n) + 1)));
+
+                pw.print(String.join(",",neig));
+            }
+            if(a.GetSunProximity())
+                pw.print("  " + 1);
+            else
+                pw.print("  "+ 0);
+            pw.print("  " + a.getLayers());
+            if(a.GetisEmpty())
+                pw.println("  " + 0);
+            else{
+                pw.print("  " + 1);
+                pw.println((Main.materials.indexOf(a.getMaterial()) + 1));
+            }
+
+        }
+
+        for(TeleportGate t : Main.teleportgates){
+            if(t.GetPair() != null)
+                pw.print((Main.teleportgates.indexOf(t.GetPair())+1) + "  ");
+            else
+                pw.print("null  ");
+
+            if(t.GetisPlaced())
+                pw.print(1 + "  " + (Main.asteroids.indexOf(t.GetAsteroid()) + 1) + "   ");
+            else
+                pw.print(0 + "  ");
+
+            if (t.GetisActive())
+                pw.print(1 + "  ");
+            else
+                pw.print(0 + "  ");
+
+            if(t.GetIsHit())
+                pw.println(1);
+            else
+                pw.println(0);
+        }
+
+        for(Settler s : Main.settlers){
+            pw.print((Main.asteroids.indexOf(s.getAsteroid()) + 1) + "  ");
+            pw.print(s.GetInventory().Size() + " ");
+            if(s.GetInventory().Size() != 0) {
+                ArrayList<String> mat = new ArrayList<>();
+                for (Material m : s.GetInventory().GetMaterials())
+                    mat.add(Integer.toString((Main.materials.indexOf(m) + 1)));
+
+                pw.print(String.join(",",mat));
+            }
+            pw.print(s.GetGates().size());
+            if(s.GetGates().size() != 0) {
+                ArrayList<String> gat = new ArrayList<>();
+                for (TeleportGate t : s.GetGates())
+                    gat.add(Integer.toString((Main.teleportgates.indexOf(t))+ 1));
+                pw.println(String.join(",",gat));
+
+            }
+        }
+
+        for(Robot r : Main.robots){
+            pw.println(Main.asteroids.indexOf(r.getAsteroid())+1);
+        }
+
+        for(UFO u : Main.ufos){
+            pw.print((Main.asteroids.indexOf(u.getAsteroid()) + 1) + "  ");
+            if(u.GetInventory().Size() != 0) {
+                ArrayList<String> mat = new ArrayList<>();
+                for (Material m : u.GetInventory().GetMaterials())
+                    mat.add(Integer.toString((Main.materials.indexOf(m) + 1)));
+
+                pw.print(String.join(",", mat));
+            }
+        }
+
+        pw.close();
 
 
     }

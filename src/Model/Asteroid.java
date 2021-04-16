@@ -374,7 +374,7 @@ public class Asteroid implements DestinationObject {
         Logger.getInstance().printReturnCommand();
     }
 
-    public int GetNeightboutCount(){
+    public int GetNeighbourCount(){
         return  neighbours.size();
     }
 
