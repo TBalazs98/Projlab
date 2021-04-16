@@ -409,6 +409,8 @@ public class CommandManager {
         int s = Main.settlers.size();
         int r = Main.robots.size();
         int u = Main.ufos.size();
+
+
     }
 
 
