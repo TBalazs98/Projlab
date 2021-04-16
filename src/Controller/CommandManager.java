@@ -257,7 +257,7 @@ public class CommandManager {
         int i = 0;
         int pairid = 0;
         if(Main.asteroids.size() == 0)
-            System.out.println("No Asteroids!");
+            System.out.println("No TeleportGates!");
         else{
             for (TeleportGate g : Main.teleportgates){
                 i++;
@@ -272,6 +272,9 @@ public class CommandManager {
     }
     public void listCharacters (){
         int i = 0;
+
+        if(Main.robots.size() == 0 && Main.settlers.size() == 0 && Main.ufos.size() == 0)
+            System.out.println("No Characters!");
         for(Settler s : Main.settlers){
             i++;
             int aindex = Main.asteroids.indexOf((s.getAsteroid())) + 1 ;
@@ -401,9 +404,7 @@ public class CommandManager {
         Main.game.LoseGame();
     }
 
-    public void loadmap(String filename){
-
-    }
+    public void loadmap(String filename){    }
 
     public void saveMap (String filename){
         int M = Main.materials.size();
@@ -515,7 +516,6 @@ public class CommandManager {
         }
 
         pw.close();
-
     }
 
 
