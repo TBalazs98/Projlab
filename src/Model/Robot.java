@@ -80,11 +80,17 @@ public class Robot extends Worker {
         Logger.getInstance().printCommandCall(this);
 
         Random rand = new Random();
-        if(rand.nextInt() % 2 == 0)         //Lepes eldontesehez szukseges belso logika
-            Drill();                        //Vagy fur
-        else {
-            int id = asteroid.GetRandNeighbour();
-            Move(id);                       //Vagy mozog
+        int rand_int = rand.nextInt(2);
+        switch(rand_int){
+            case 0 : {
+                Drill();
+                break;
+            }
+            case 1 : {
+                int id = asteroid.GetRandNeighbour();
+                Move(id);
+                break;
+            }
         }
 
         Logger.getInstance().printReturnCommand();

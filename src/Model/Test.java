@@ -213,7 +213,7 @@ public class Test {
         onEmpty.Accept(s);
         onEmpty.setLayer(5);
 
-        ab.StartStorm();
+       // ab.StartStorm();
 
         s.Move(0);
 

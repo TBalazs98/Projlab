@@ -127,7 +127,7 @@ public class Asteroid implements DestinationObject {
      */
     public void Step() {
         Logger.getInstance().printCommandCall(this);
-        this.SetSunProximity();
+        this.SetSunProximityAuto();
         if((layers == 0) && (!isEmpty))
             this.material.Hit(this);
 
@@ -274,18 +274,32 @@ public class Asteroid implements DestinationObject {
         return n;
     }
 
+    public ArrayList<DestinationObject> GetNeighbours(){
+        return neighbours;
+    }
+
     /**
      *Napkozel/naptavol allitasa.
      */
-    public void SetSunProximity(){
+    public void SetSunProximityAuto(){
         Logger.getInstance().printCommandCall(this);
         Random rand = new Random();
         int rand_int = rand.nextInt(2);
         switch(rand_int){
-            case 0 : isNearSun = false;
-            case 1 : isNearSun = true;
+            case 0 : {
+                isNearSun = false;
+                break;
+            }
+            case 1 : {
+                isNearSun = true;
+                break;
+            }
         }
         Logger.getInstance().printReturnCommand();
+    }
+
+    public void SetSunProximityManual(boolean proximity){
+        this.isNearSun = proximity;
     }
 
     /**
@@ -358,6 +372,10 @@ public class Asteroid implements DestinationObject {
         this.layers = layer;
 
         Logger.getInstance().printReturnCommand();
+    }
+
+    public int GetNeightboutCount(){
+        return  neighbours.size();
     }
 
 

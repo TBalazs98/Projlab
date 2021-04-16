@@ -3,6 +3,7 @@ package Model;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *A jatek palyajat reprezentalja, minden jatekhoz 1 darab tartozik.
@@ -40,7 +41,15 @@ public class AsteroidBelt {
     public void Step() {
         Logger.getInstance().printCommandCall(this);
 
-        this.StartStorm();
+        Random rand = new Random();
+        int rand_int = rand.nextInt(2);
+        switch(rand_int){
+            case 0 : {
+                this.StartStorm(this.asteroids.get(rand.nextInt(asteroids.size())));
+                break;
+            }
+        }
+
 
         Logger.getInstance().printReturnCommand();
     }
@@ -48,10 +57,12 @@ public class AsteroidBelt {
     /**
      * A napvihar elinditasa.
      */
-    public void StartStorm() {
+    public void StartStorm(Asteroid a) {
         Logger.getInstance().printCommandCall(this);
-        for(int i = 0; i < asteroids.size(); i++) {
-            asteroids.get(i).HitBySunstorm();
+        ArrayList<DestinationObject> aneighb = a.GetNeighbours();
+        a.HitBySunstorm();
+        for(int i = 0; i < a.GetNeightboutCount(); i++) {
+            aneighb.get(i).HitBySunstorm();
         }
 
         Logger.getInstance().printReturnCommand();

@@ -3,6 +3,7 @@ package Model;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
   * A teleportkapukat kezeli. Tarolja a parjat, melyik aszteroidan van, illetve a jelenlegi allapotat.
@@ -287,6 +288,10 @@ public class TeleportGate implements DestinationObject, Steppable {
     }
 
     public void Step(){
-
+        if(this.isHit == true) {
+            Random rand = new Random();
+            int i = rand.nextInt(this.asteroid.GetNeightboutCount());
+            this.setAsteroid((Asteroid) this.asteroid.GetNeighbour(i));
+            }
     }
 }

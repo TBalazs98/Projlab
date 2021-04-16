@@ -62,9 +62,18 @@ public class Game {
     public void NextRound() {
         Logger.getInstance().printCommandCall(this);
 
-        steppables.forEach(s -> s.Step());
+        if(Main.Randomize == true)
+            steppables.forEach(s -> s.Step());
 
         Logger.getInstance().printReturnCommand();
+    }
+
+    public void AddSteppable(Object s){
+        this.steppables.add((Steppable)s);
+    }
+
+    public void RemoveSteppabe(Object s){
+        this.steppables.remove((Steppable)s);
     }
 
 }

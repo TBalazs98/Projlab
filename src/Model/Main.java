@@ -1,4 +1,5 @@
 package Model;
+import Controller.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,12 +21,19 @@ public class Main {
      * Jelenleg a Test nevu tesztosztalyunk segitsegevel ellenorizzuk modellunk helyesseget.
      */
 
+    public static Game game = Game.getInstance();
+    public static AsteroidBelt ab = AsteroidBelt.getInstance();
+    public static boolean Randomize = false;
+
     public static ArrayList<Material> materials = new ArrayList<>();
     public static ArrayList<Asteroid> asteroids=new ArrayList<>();
     public static ArrayList<TeleportGate> teleportgates = new ArrayList<>();
     public static ArrayList<Settler> settlers=new ArrayList<>();
     public static ArrayList<Robot> robots=new ArrayList<>();
     public static ArrayList<UFO> ufos= new ArrayList<>();
+
+
+
 
     String regex = "\\W*((?i)createmap(?-i))\\W*\\s(\\d+\\s){5}\\d+";
     static String materialregex = "[013]|2\\s[012]";
@@ -89,8 +97,9 @@ public class Main {
             }
 
             CommandManager cm = new CommandManager();
-            //cm.listMaterials();
+            cm.listMaterials();
             cm.listAsteroids();
+
 
 //
 //            reader.close();

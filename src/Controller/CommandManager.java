@@ -1,10 +1,12 @@
-package Model;
+package Controller;
+
+import Model.*;
 
 public class CommandManager {
 
     public CommandManager(){}
 
-    void command(String command){
+    public void command(String command){
 
         String[] cmd = command.split(" ");
 
@@ -88,7 +90,7 @@ public class CommandManager {
 
     }
 
-    void drill(String character){
+    public void drill(String character){
 
         if(character.length() >= 2) {
             character = character.toUpperCase();
@@ -109,7 +111,7 @@ public class CommandManager {
             System.out.println("Invalid input!");
     }
 
-    void mine (String character){
+    public void mine (String character){
         if(character.length() >= 2) {
             character = character.toUpperCase();
             try{
@@ -128,7 +130,7 @@ public class CommandManager {
         } else
             System.out.println("Invalid input!");
     }
-    void build (String[] cmd){
+    public void build (String[] cmd){
         //ellenőrizni a tömb méretét
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
@@ -159,7 +161,7 @@ public class CommandManager {
             System.out.println("Invalid input!");
         }
     }
-    void put (String[] cmd){
+    public void put (String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
 
@@ -178,7 +180,7 @@ public class CommandManager {
         }
     }
 
-    void placegate (String[] cmd){
+    public void placegate (String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
 
@@ -197,7 +199,7 @@ public class CommandManager {
         }
     }
 
-    void move (String[] cmd){
+    public void move (String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
 
@@ -215,7 +217,7 @@ public class CommandManager {
             System.out.println("Invalid input!");
         }
     }
-    void listMaterials (){
+    public void listMaterials (){
         int i = 0;
         if (Main.materials.size() == 0)
             System.out.println("No Material!");
@@ -232,7 +234,7 @@ public class CommandManager {
         }
     }
 
-    void listAsteroids (){
+    public void listAsteroids (){
         int i = 0;
         int mat = 0;
         if(Main.asteroids.size() == 0)
@@ -248,7 +250,7 @@ public class CommandManager {
         }
 
     }
-    void listTeleportGates (){
+    public void listTeleportGates (){
         int i = 0;
         int pairid = 0;
         if(Main.asteroids.size() == 0)
@@ -265,7 +267,7 @@ public class CommandManager {
         }
 
     }
-    void listCharacters (){
+    public void listCharacters (){
         int i = 0;
         for(Settler s : Main.settlers){
             i++;
@@ -296,7 +298,7 @@ public class CommandManager {
         }
 
     }
-    void SunStorm (String[] cmd){
+    public void SunStorm (String[] cmd){
         //ellenőrizni a tömb méretét
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
@@ -307,8 +309,12 @@ public class CommandManager {
                 if ((index <= 0) && (index < Main.asteroids.size())) {
                     switch (cmd[2]){
                         case "ON" : {
+                            Main.ab.StartStorm(Main.asteroids.get(index));
+                            break;
                         }
                         case "OFF" : {
+
+                            break;
                         }
                         default:
                             System.out.println("Invalid command!");
@@ -323,7 +329,7 @@ public class CommandManager {
 
 
     }
-    void setProximity(String[] cmd){
+    public void setProximity(String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
 
@@ -333,8 +339,12 @@ public class CommandManager {
                 if ((index <= 0) && (index < Main.asteroids.size())) {
                     switch (cmd[2]) {
                         case "NEAR": {
+                            Main.asteroids.get(index).SetSunProximityManual(true);
+                            break;
                         }
                         case "FAR": {
+                            Main.asteroids.get(index).SetSunProximityManual(false);
+                            break;
                         }
                         default:
                             System.out.println("Invalid command!");
@@ -348,7 +358,8 @@ public class CommandManager {
         }
 
     }
-    void step (){
+    public void step (){
+      /*
         for(Asteroid a : Main.asteroids)
             a.Step();
         for(Robot r : Main.robots)
@@ -357,14 +368,21 @@ public class CommandManager {
             u.Step();
         for(TeleportGate tp : Main.teleportgates)
             tp.Step();
+        */
+        Main.game.NextRound();
+
     }
-    void setRandomize(String cmd){
+    public void setRandomize(String cmd){
         //globális vált
         cmd = cmd.toUpperCase();
         switch (cmd){
             case "ON":{
+                Main.Randomize = true;
+                break;
             }
-            case "OFF" :{
+            case "OFF" : {
+                Main.Randomize = false;
+                break;
             }
             default:
                 System.out.println("Invalid input");
@@ -372,20 +390,25 @@ public class CommandManager {
 
     }
 
-    void startGame(){
+    public void startGame(){
+        Main.game.StartGame();
+    }
+
+    public void endGame (){
+        Main.game.LoseGame();
+    }
+
+    public void loadmap(String filename){
 
     }
 
-    void endGame (){
-
-    }
-
-    void loadmap(String filename){
-
-    }
-
-    void saveMap (String filename){
-
+    public void saveMap (String filename){
+        int m = Main.materials.size();
+        int a = Main.asteroids.size();
+        int t = Main.teleportgates.size();
+        int s = Main.settlers.size();
+        int r = Main.robots.size();
+        int u = Main.ufos.size();
     }
 
 
