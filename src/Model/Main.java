@@ -200,9 +200,9 @@ public class Main {
     }
 
     public static void setCommonAsteroid(Asteroid a, int sunprox, int layer, int empty){
-        //a.setSunProximity
+        //a.SetSunProximity(sunprox);
         a.setLayer(layer);
-        //a.setEmpty
+        //a.SetEmpty
     }
 
 
