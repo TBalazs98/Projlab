@@ -294,4 +294,17 @@ public class TeleportGate implements DestinationObject, Steppable {
             this.setAsteroid((Asteroid) this.asteroid.GetNeighbour(i));
             }
     }
+
+    public void setActive(boolean state) {
+        isActive = state;
+    }
+
+    public void setPlaced(boolean state){
+        isPlaced = state;
+    }
+
+    public void setCrazy(boolean state){
+        isHit = state;
+    }
+
 }

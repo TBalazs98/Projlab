@@ -60,6 +60,12 @@ public class Main {
     //itt tudtok regexel baszkodni : https://regex101.com/
 
     String tgregex ="\\d\\s[01]\\s\\d\\s[01]\\s[01]";
+
+    String tp_placed_regex = "";
+
+    String tp_notplaced_regex = "";
+
+
     String settlerregex ="\\d\\s\\d\\s(\\d,)*\\d\\s[0123]\\s\\d|\\d\\s0\\s0";
     String robotregex ="\\d";
     String uforegex ="\\d\\s0|\\d\\s\\d\\s(\\d,)*\\d\n";
@@ -213,6 +219,35 @@ public class Main {
         a.setLayer(layer);
         //a.SetEmpty
     }
+
+    public static void createPortGate_placed(String params){
+
+        String[] cmd = params.split( " ");
+        Main.teleportgates.add(new TeleportGate());
+        TeleportGate tp = Main.teleportgates.get(Main.teleportgates.size()-1);
+        tp.setPair(Main.teleportgates.get(Integer.parseInt(cmd[0])-1));
+
+        /*if(Integer.parseInt(cmd[1]) == 0){
+            tp.setPlaced(false);
+        }else {
+            tp.setActive(true);
+        }
+
+        if(Integer.parseInt(cmd[2]) == 0){
+            tp.setPlaced(false);
+        }else {
+            tp.setActive(true);
+        }*/
+
+        tp.setPlaced(true);
+        tp.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[2])-1));
+
+        tp.setActive(Integer.parseInt(cmd[3]) != 0);
+
+        tp.setCrazy(Integer.parseInt(cmd[4]) != 0);
+
+    }
+
 
 
 
