@@ -234,12 +234,14 @@ public class CommandManager {
 
     void listAsteroids (){
         int i = 0;
+        int mat = 0;
         if(Main.asteroids.size() == 0)
             System.out.println("No Asteroids!");
         else{
             for (Asteroid a : Main.asteroids){
                 i++;
-                int mat = (Main.materials.indexOf(a.getMaterial()) + 1);
+                if(!a.GetisEmpty())
+                    mat = (Main.materials.indexOf(a.getMaterial()) + 1);
                 System.out.println("A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +
                         (a.GetisEmpty()?("M" +mat):"null"));
             }
