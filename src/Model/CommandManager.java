@@ -243,7 +243,7 @@ public class CommandManager {
                 if(!a.GetisEmpty())
                     mat = (Main.materials.indexOf(a.getMaterial()) + 1);
                 System.out.println("A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +
-                        (a.GetisEmpty()?("M" +mat):"null"));
+                        (a.GetisEmpty()?"null":("M" +mat)));
             }
         }
 
