@@ -247,8 +247,14 @@ public class CommandManager {
                 i++;
                 if(!a.GetisEmpty())
                     mat = (Main.materials.indexOf(a.getMaterial()) + 1);
-                System.out.println("A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +
+                System.out.print("A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +
                         (a.GetisEmpty()?"null":("M" +mat)));
+                ArrayList<String> neigh = new ArrayList<>();
+                for (DestinationObject o : a.GetNeighbours()) {
+                    neigh.add("M" + Integer.toString((Main.materials.indexOf(o) + 1)));
+                    neigh.add("G" + Integer.toString((Main.teleportgates.indexOf(o) + 1)));
+                }
+                System.out.println(String.join(",",neigh));
             }
         }
 
@@ -278,12 +284,14 @@ public class CommandManager {
         for(Settler s : Main.settlers){
             i++;
             int aindex = Main.asteroids.indexOf((s.getAsteroid())) + 1 ;
-            System.out.print("S" + i + " " + "A" + aindex);
+            System.out.print("S" + i + " " + "A" + aindex + " " + s.GetInventory().Size());
             Material[] mat =  s.GetInventory().GetMaterials();
-            for(Material m : mat){
-                System.out.print(" M" + (Main.materials.indexOf(m) + 1));
+            if(s.GetInventory().Size() != 0) {
+                ArrayList<String> smat = new ArrayList<>();
+                for (Material m : s.GetInventory().GetMaterials())
+                    smat.add(Integer.toString((Main.materials.indexOf(m) + 1)));
+                System.out.println((String.join(",", smat)));
             }
-            System.out.println();
         }
         i = 0;
         for(Robot r : Main.robots){
@@ -297,10 +305,12 @@ public class CommandManager {
             int aindex = Main.asteroids.indexOf((u.getAsteroid())) + 1 ;
             System.out.print("U" + i + " " + "A" + aindex);
             Material[] mat =  u.GetInventory().GetMaterials();
-            for(Material m : mat){
-                System.out.print(" M" + (Main.materials.indexOf(m) + 1));
+            if(u.GetInventory().Size() != 0) {
+                ArrayList<String> umat = new ArrayList<>();
+                for (Material m : u.GetInventory().GetMaterials())
+                    umat.add(Integer.toString((Main.materials.indexOf(m) + 1)));
+                System.out.println((String.join(",", umat)));
             }
-            System.out.println();
         }
 
     }
