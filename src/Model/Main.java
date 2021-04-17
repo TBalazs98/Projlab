@@ -249,16 +249,16 @@ public class Main {
                                                               //pl    : 0 0 25 0
         String[] cmd = params.split("\\t");
 
-        Asteroid a =Main.asteroids.get(actual);
-        Main.setCommonAsteroid(a,Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
+        //Asteroid a =Main.asteroids.get(actual);
+        Main.setCommonAsteroid(Main.asteroids.get(actual),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
 
     }
     public static void createAsteroid2(String params,int actual){         //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
                                                                 //pl    : 0 0 25 1 5
         String[] cmd = params.split("\\t");
-        Asteroid a =Main.asteroids.get(actual);
-        Main.setCommonAsteroid(a,Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
-        a.AddMaterial(Main.materials.get(Integer.parseInt(cmd[4])-1));
+        //Asteroid a =Main.asteroids.get(actual);
+        Main.setCommonAsteroid(Main.asteroids.get(actual),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
+        Main.asteroids.get(actual).AddMaterial(Main.materials.get(Integer.parseInt(cmd[4])-1));
 
     }
     public static void createAsteroid3(String params,int actual){         //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
@@ -274,11 +274,11 @@ public class Main {
            neighbors = cmd[1].split(",");
         }
 
-        Asteroid a = Main.asteroids.get(actual);
+       // Asteroid a = Main.asteroids.get(actual);
         for(int i=0; i<Integer.parseInt(cmd[0]);i++){
-            a.AddNeighbour(Main.asteroids.get(Integer.parseInt(neighbors[i])-1));
+            Main.asteroids.get(actual).AddNeighbour(Main.asteroids.get(Integer.parseInt(neighbors[i])-1));
         }
-        Main.setCommonAsteroid(a,Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]),Integer.parseInt(cmd[4]));
+        Main.setCommonAsteroid(Main.asteroids.get(actual),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]),Integer.parseInt(cmd[4]));
     }
     public static void createAsteroid4(String params,int actual){          //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
                                                                  //pl    : 5 5,2,3,4,5 1 5 0
