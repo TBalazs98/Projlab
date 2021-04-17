@@ -17,9 +17,9 @@ public class RadioactiveMaterial extends Material {
     public RadioactiveMaterial() {
         super();
         exposed=3;
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -29,8 +29,8 @@ public class RadioactiveMaterial extends Material {
      * @param a - Asteroid
      */
     public void Hit(Asteroid a) {
-        Object[] p = {a.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {a.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("? Is the asteroid near the sun?\t(Y)es / (N)o \t");
@@ -56,7 +56,7 @@ public class RadioactiveMaterial extends Material {
             a.Explode();
         */
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -64,12 +64,12 @@ public class RadioactiveMaterial extends Material {
      * @param rname Beallitando anyag neve
      */
     public void setName(RadioactiveMaterialName rname) {
-        Object[] p = {rname};
-        Logger.getInstance().printCommandCall(this, p);
+       // Object[] p = {rname};
+        //Logger.getInstance().printCommandCall(this, p);
 
         name = rname;
         super.name = null;
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     public MaterialName getName() {
