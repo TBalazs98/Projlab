@@ -12,9 +12,9 @@ public class Inventory {
      *  Publikus alapertelmezett konstruktor.
      */
     public Inventory() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         inventory = new HashMap<MaterialName, Integer>();
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -23,9 +23,9 @@ public class Inventory {
      * @return a nyersanyag darabszama ami a jelenlegi Inventory-ban van
      */
     public Integer get_amount(MaterialName m) {
-        Object[] p = {m};
-        Logger.getInstance().printCommandCall(this, p);
-        Logger.getInstance().printReturnCommand(inventory.get(m));
+        //Object[] p = {m};
+        //Logger.getInstance().printCommandCall(this, p);
+        //Logger.getInstance().printReturnCommand(inventory.get(m));
         return inventory.get(m);
     }
 
@@ -35,10 +35,10 @@ public class Inventory {
      * @param m a nyersanyag nevek es azok mennyisege, amelyek egy objektum felepitesehez kellenek
      */
     public void fill(HashMap<MaterialName, Integer> m) {
-        Object[] p = {m.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {m.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
         inventory.putAll(m);
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -46,8 +46,8 @@ public class Inventory {
      * @param m az Inventory-ba rakni kivant nyersanyag neve
      */
     public void Add(MaterialName m) {
-        Object[] p = {m};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {m};
+        //Logger.getInstance().printCommandCall(this, p);
         if(this.inventory.size()<10) {
             int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
             if(inventory.containsKey(m))        //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
@@ -55,7 +55,7 @@ public class Inventory {
             n++;
             this.inventory.put(m,n);
         }
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -63,8 +63,8 @@ public class Inventory {
      * @param m a eltavolitani kivant nyersanyag neve
      */
     public void Remove(MaterialName m) {
-        Object[] p = {m};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {m};
+        //Logger.getInstance().printCommandCall(this, p);
         if(this.inventory.size()<10) {
             int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
             if(inventory.containsKey(m)) {      //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
@@ -72,7 +72,7 @@ public class Inventory {
                 this.inventory.put(m,n);
             }
         }
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -82,15 +82,15 @@ public class Inventory {
      * @return ha tartalmazza a nyersanyagokat es azon mennyisegeket igaz ertekkel ter vissza a metodus, kulonben hamis ertekkel ter vissza
      */
     public boolean ContainsAllElementsIn(Inventory i) {
-        Object[] p = {i.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {i.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
         for(MaterialName  m : this.inventory.keySet() ){    //vegigmegyunk az osszes materialunkon
             if(i.inventory.get(m) < this.inventory.get(m)){ //ha a parameterkent kapott inventoryban kevesebb van ( mint amennyire szukseg lenne)
-                Logger.getInstance().printReturnCommand(false);
+                //Logger.getInstance().printReturnCommand(false);
                 return false;                               //akkor epitkezes no-no
             }
         }
-        Logger.getInstance().printReturnCommand(true);
+        //Logger.getInstance().printReturnCommand(true);
         return true;                                        //amugy zsa
     }
 
@@ -99,12 +99,12 @@ public class Inventory {
      * @return visszaadja a jelenlegi Inventory-ban tarolt nyersanyagok mennyiseget
      */
     public int Size() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         int size=0;
         for(MaterialName m : this.inventory.keySet()){      //vegigmegyunk az osszes nalunk levo materialon
             size+=this.inventory.get(m);                    //es az adott materialhoz tartozo mennyiseget returnoljuk
         }
-        Logger.getInstance().printReturnCommand(size);
+        //Logger.getInstance().printReturnCommand(size);
         return size;
     }
 

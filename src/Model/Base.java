@@ -16,11 +16,11 @@ public class Base {
      *Konstruktor a bazishoz.
      */
     public Base() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         setInventory();
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -28,8 +28,8 @@ public class Base {
      * @param i Settler inventoryja
      */
     public Base(Inventory i) {
-        Object[] p = {i.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {i.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("Do we have enough materials to build the base?\t(Y)es / (N)o \t");
@@ -52,14 +52,14 @@ public class Base {
             Build();
         */
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      *Beallitja a bazis inventory-jat, az alapjan, hogy mennyi es milyen nyersanyag kell az epiteshez.
      */
     private void setInventory() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         HashMap<MaterialName, Integer> m = new HashMap<MaterialName, Integer>();
         m.put(NormalMaterialName.IRON, 3);
@@ -68,18 +68,18 @@ public class Base {
         m.put(RadioactiveMaterialName.URAN, 3);
         inventory.fill(m);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      *Bazis felepitese.
      */
     public void Build() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         Game.getInstance().WinGame();
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
 }

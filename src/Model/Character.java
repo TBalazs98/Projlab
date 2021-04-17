@@ -19,11 +19,11 @@ public abstract class Character {
      *Karakter meghal, eltavolitasra kerul a jatekbol.
      */
     public void Die() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         asteroid.Remove(this);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -36,8 +36,8 @@ public abstract class Character {
      * @param idx parameter amely megadja az aszteroidat amelyre a mozgas tortenik
      */
     public void Move(int idx) {
-        Object[] p = {idx};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {idx};
+        //Logger.getInstance().printCommandCall(this, p);
 
         asteroid.Remove(this);
         DestinationObject goingTo = asteroid.GetNeighbour(idx);
@@ -49,7 +49,7 @@ public abstract class Character {
             asteroid.Accept(this);
         }
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -57,12 +57,12 @@ public abstract class Character {
      * @param a aszteroida amelyen a karakter tartozkodik
      */
     public void addAsteroid(Asteroid a) {
-        Object[] p = {a.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {a.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         this.asteroid = a;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -81,12 +81,12 @@ public abstract class Character {
      * @param a karakter amelyen az aszteroida tartozodik
      */
     public void setAsteroid(Asteroid a) {
-        Object[] p = {a.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {a.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         this.asteroid = a;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
 }
