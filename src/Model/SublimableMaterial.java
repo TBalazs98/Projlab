@@ -14,9 +14,9 @@ public class SublimableMaterial extends Material {
      */
     public SublimableMaterial() {
         super();
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -25,8 +25,8 @@ public class SublimableMaterial extends Material {
      * @param a az aszteroida, ahonnan a kulso behatas erkezett
      */
     public void Hit(Asteroid a) {
-        Object[] p = {a.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {a.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("? Is the asteroid near the sun?\t(Y)es / (N)o \t");
@@ -48,7 +48,7 @@ public class SublimableMaterial extends Material {
             a.RemoveMaterial(a.getMaterial());
         */
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -56,12 +56,12 @@ public class SublimableMaterial extends Material {
      * @param sname a kapott nev, amit beallit maganak
      */
     public void setName(SublimableMaterialName sname) {
-        Object[] p = {sname};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {sname};
+        //Logger.getInstance().printCommandCall(this, p);
 
         name = sname;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
