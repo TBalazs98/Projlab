@@ -70,8 +70,8 @@ public abstract class Character {
      * @return visszaadja a karakter aszteroidajat
      */
     public Asteroid getAsteroid() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand(asteroid.getClass().getSimpleName());
+//        Logger.getInstance().printCommandCall(this);
+//        Logger.getInstance().printReturnCommand(asteroid.getClass().getSimpleName());
 
         return asteroid;
     }

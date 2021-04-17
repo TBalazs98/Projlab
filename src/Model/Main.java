@@ -147,25 +147,28 @@ public class Main {
                 }
                 break;
             case 3:
-                if(Pattern.matches(settler_wm_and_wtg,params)){
+                if(Pattern.matches(settler_wom_and_wotg,params)){
                     createSettler1(params,actual);
                 }else if(Pattern.matches(settler_wm_and_wotg,params)){
                     createSettler2(params,actual);
                 }else if(Pattern.matches(settler_wom_and_wtg,params)){
                     createSettler3(params,actual);
-                }else if(Pattern.matches(settler_wom_and_wotg,params)){
+                }else if(Pattern.matches(settler_wm_and_wtg,params)){
                     createSettler4(params,actual);
                 }
+                break;
             case 4:
                 if(Pattern.matches(robotregex,params)){
                     createRobot(params,actual);
                 }
+                break;
             case 5:
                 if(Pattern.matches(ufo_wm,params)){
                     createUfo1(params,actual);
                 }else if(Pattern.matches(ufo_wom,params)){
                     createUfo2(params,actual);
                 }
+                break;
 
         }
 
@@ -244,7 +247,7 @@ public class Main {
 
     public static void createAsteroid1(String params,int actual){        //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
                                                               //pl    : 0 0 25 0
-        String[] cmd = params.split(" ");
+        String[] cmd = params.split("\\t");
 
         Asteroid a =Main.asteroids.get(actual);
         Main.setCommonAsteroid(a,Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
@@ -338,10 +341,10 @@ public class Main {
             s.AddGate(Main.teleportgates.get(Integer.parseInt(tgs[i])-1));
         }
     }
-    public static void createSettler4(String params, int actual){ //WithMaterial and WithTG
+    public static void createSettler4(String params, int actual){ //wm and wtg
         String[] cmd = params.split( "\\t");
         String[] materials=cmd[2].split(",");
-        String[] tgs=cmd[4].split(",");
+        String[] tgs=cmd[3].split(",");
         Settler s = Main.settlers.get(actual);
         s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         for(int i=0; i<materials.length;i++){
