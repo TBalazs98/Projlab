@@ -70,8 +70,9 @@ public class Main {
         static String settler_wm_and_wotg = "\\d{1,}\\s\\d{1,}\\s(\\d{1,},{0,1})*\\s0";    //WithMateruak and WithOutTG
         static String settler_wom_and_wtg = "\\d{1,}\\s0\\s[0123]\\s[1234]";    //WithOutMaterial and WithTG
         static String settler_wm_and_wtg = "\\d{1,}\\s\\d{1,}\\s(\\d{1,},{0,1})*\\s[0123]\\s[1234]";     //WithMaterial and WithTG
-        String robotregex = "\\d";
-        String uforegex = "\\d\\s0|\\d\\s\\d\\s(\\d,)*\\d\n";
+        static String robotregex = "\\d";
+        static String ufo_wm = "\\d\\s0|\\d\\s\\d\\s(\\d,)*\\d\n";
+        static String ufo_wom = "\\d{1,}\\s\\d{1,}\\s(\\d{1,},{0,1})*";
 
         //endregion regexek
 
@@ -109,6 +110,9 @@ public class Main {
         CommandManager cm = new CommandManager();
         cm.listMaterials();
         cm.listAsteroids();
+        cm.listTeleportGates();
+        cm.listCharacters();
+
         //cm.saveMap("savedmap");
 
 
@@ -153,7 +157,16 @@ public class Main {
                     createSettler4(params,actual);
                 }
             case 4:
+                if(Pattern.matches(robotregex,params)){
+                    createRobot(params,actual);
+                }
             case 5:
+                if(Pattern.matches(ufo_wm,params)){
+                    createUfo1(params,actual);
+                }else if(Pattern.matches(ufo_wom,params)){
+                    createUfo2(params,actual);
+                }
+
         }
 
     }
@@ -301,25 +314,62 @@ public class Main {
         return integer==1;
     }
 
-    public static void createSettler1(String params, int actual){   //with material and with tg
+    public static void createSettler1(String params, int actual){    //WithOutMaterial and WithOutTG
+        Settler s = Main.settlers.get(actual);
+        String[] cmd = params.split( "\\t");
+        s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+
+    }
+    public static void createSettler2(String params, int actual){   //With material and without tg
+        Settler s = Main.settlers.get(actual);
+        String[] cmd = params.split( "\\t");
+        String[] materials=cmd[2].split(",");
+        s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+        for(int i=0; i<materials.length;i++){
+            s.AddMaterial(Main.materials.get(Integer.parseInt(materials[i])-1));
+        }
+    }
+    public static void createSettler3(String params, int actual){   //WithOutMaterial and WithTG
+        Settler s = Main.settlers.get(actual);
+        String[] cmd = params.split( "\\t");
+        String[] tgs=cmd[3].split(",");
+        s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+        for(int i=0; i<tgs.length;i++){
+            s.AddGate(Main.teleportgates.get(Integer.parseInt(tgs[i])-1));
+        }
+    }
+    public static void createSettler4(String params, int actual){ //WithMaterial and WithTG
         String[] cmd = params.split( "\\t");
         String[] materials=cmd[2].split(",");
         String[] tgs=cmd[4].split(",");
         Settler s = Main.settlers.get(actual);
+        s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         for(int i=0; i<materials.length;i++){
             s.AddMaterial(Main.materials.get(Integer.parseInt(materials[i])-1));
         }
         for(int i=0; i<tgs.length;i++){
             s.AddGate(Main.teleportgates.get(Integer.parseInt(tgs[i])-1));
         }
+    }
+    public static void createRobot(String params, int actual){
+        String[] cmd=params.split("\\t");
+        Main.robots.get(actual).setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])));
+    }
+    public static void createUfo1(String params,int actual){
+        String[] cmd=params.split("\\t");
+        Main.ufos.get(actual).setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+    }
+    public static void createUfo2(String params, int actual){
+        String[] cmd=params.split("\\t");
+        UFO u =Main.ufos.get(actual);
+        u.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+        String[] materials=cmd[2].split(",");
+        u.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+        for(int i=0; i<materials.length;i++){
+            u.GetInventory().Add(Main.materials.get(Integer.parseInt(materials[i])-1).name);
+        }
 
     }
-    public static void createSettler2(String params, int actual){   //With material and without tg
-        Settler s = Main.settlers.get(actual);
-
-    }
-    public static void createSettler3(String params, int actual){}
-    public static void createSettler4(String params, int actual){}
 
 
 
