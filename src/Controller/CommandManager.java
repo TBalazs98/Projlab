@@ -219,9 +219,12 @@ public class CommandManager {
             int index = Integer.parseInt(cmd[1].substring(1));
             int indexDObject = Integer.parseInt(cmd[2].substring(1));
             if ((cmd[1].charAt(0) == 'S') && ((cmd[2].charAt(0) == 'A') || (cmd[2].charAt(0) == 'G')) ) {
-                if ((index <= 0) && (index < Main.settlers.size()))
+                if ((index <= 0) && (index < Main.settlers.size())) {
                     if ((indexDObject <= 0) && (indexDObject < Main.teleportgates.size()))
-                        Main.settlers.get(index).PlaceGate(Main.teleportgates.get(indexDObject));
+                        Main.settlers.get(index).Move(Main.teleportgates.indexOf(Main.teleportgates.get(indexDObject-1)));
+                    if ((indexDObject <= 0) && (indexDObject < Main.asteroids.size()))
+                        Main.settlers.get(index).Move(Main.asteroids.indexOf(Main.asteroids.get(indexDObject-1)));
+                }
             }
             else
                 System.out.println("Invalid input!");
