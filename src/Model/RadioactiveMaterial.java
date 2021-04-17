@@ -75,7 +75,16 @@ public class RadioactiveMaterial extends Material {
     public MaterialName getName() {
         return this.name;
     }
+
     public void expose(){
         this.exposed--;
+    }
+
+    public void  SetExposure(int i){
+        this.exposed = i;
+    }
+
+    public int GetExposure(){
+        return this.exposed;
     }
 }

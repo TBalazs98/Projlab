@@ -384,7 +384,7 @@ public class CommandManager {
         cmd[2] = cmd[2].toUpperCase();
 
         try {
-            int index = Integer.parseInt(cmd[1].substring(1));
+            int index = Integer.parseInt(cmd[2].substring(1)) -1;
             if( cmd[1].charAt(0) == 'A') {
                 if ((index >= 0) && (index < Main.asteroids.size())) {
                     switch (cmd[2]) {
