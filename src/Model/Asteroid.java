@@ -26,14 +26,14 @@ public class Asteroid implements DestinationObject {
      * Az Asteroid osztaly publikus alapertelmezett konstruktora.
      */
     public Asteroid(){
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         this.layers = 0;
         this.isEmpty = true;
         this.material = null;
         this.isNearSun = false;
         this.neighbours = new ArrayList<DestinationObject>();
         this.characters = new ArrayList<Character>();
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -180,7 +180,7 @@ public class Asteroid implements DestinationObject {
             material.Hit(this);
             isEmpty = true;
             if(material == null) {
-                Logger.getInstance().printReturnCommand();
+                //Logger.getInstance().printReturnCommand();
                 return null;
             }
             //Logger.getInstance().printReturnCommand(material.getName());
@@ -372,6 +372,10 @@ public class Asteroid implements DestinationObject {
         this.layers = layer;
 
         //Logger.getInstance().printReturnCommand();
+    }
+
+    public  void  SetEmpty(boolean emptyness){
+        this.isEmpty = emptyness;
     }
 
     public int GetNeighbourCount(){
