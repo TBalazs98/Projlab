@@ -283,7 +283,7 @@ public class Main {
     public static void createAsteroid4(String params,int actual){          //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
                                                                  //pl    : 5 5,2,3,4,5 1 5 0
         createAsteroid3(params,actual);
-        String[] cmd = params.split(" ");
+        String[] cmd = params.split("\\t");
         Main.asteroids.get(actual).AddMaterial(Main.materials.get(Integer.parseInt(cmd[5])-1));
 
     }
