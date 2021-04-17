@@ -44,15 +44,15 @@ public class Asteroid implements DestinationObject {
      * @param mat az aszteroidaban talalhato nyersanyag
      */
     public Asteroid(int layer, boolean isempty,boolean isnearsun, Material mat){
-        Object[] p = {layer, isempty, isnearsun, mat.name};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {layer, isempty, isnearsun, mat.name};
+        //Logger.getInstance().printCommandCall(this, p);
         this.layers = layer;
         this.isEmpty = isempty;
         this.isNearSun = isnearsun;
         this.material = mat;
         this.characters = new ArrayList<Character>();
         this.neighbours = new ArrayList<DestinationObject>();
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -60,10 +60,10 @@ public class Asteroid implements DestinationObject {
      * @param c karakter, akit rateszunk az aszteroidara
      */
     public void setCharacter(Character c){
-        Object[] p = {c.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {c.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
         characters.add(c);
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -71,10 +71,10 @@ public class Asteroid implements DestinationObject {
      * @param d objektum amit fel akarunk venni
      */
     public void setNeighbour(DestinationObject d){
-        Object[] p = {d.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {d.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
         neighbours.add(d);
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -82,8 +82,8 @@ public class Asteroid implements DestinationObject {
      * @return sziklareteg vastagsaga
      */
     public int getLayers() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand(this.layers);
+        //Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printReturnCommand(this.layers);
         return this.layers;
     }
 
@@ -92,8 +92,8 @@ public class Asteroid implements DestinationObject {
      * @return nyersanyag, ha ures null-al ter vissza
      */
     public Material getMaterial() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand(this.material.name);
+        //Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printReturnCommand(this.material.name);
         return this.material;
     }
 
@@ -104,10 +104,10 @@ public class Asteroid implements DestinationObject {
      */
 
     public DestinationObject Accept(Character c) {
-        Object[] p = {c.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {c.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
         characters.add(c);
-        Logger.getInstance().printReturnCommand(this.getClass().getSimpleName());
+        //Logger.getInstance().printReturnCommand(this.getClass().getSimpleName());
         return this;
     }
 
@@ -116,29 +116,29 @@ public class Asteroid implements DestinationObject {
      * @param c karakter akit eltavolitunk
      */
     public void Remove(Character c) {
-        Object[] p = {c.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {c.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
         characters.remove(c);
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * Az aszteroida egy kore, itt allitja be, hogy az egyes aszteroidak napkozelben, illetve naptavolban legyenek.
      */
     public void Step() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         this.SetSunProximityAuto();
         if((layers == 0) && (!isEmpty))
             this.material.Hit(this);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * A karakter furas metodusa utan hivodik meg, es csokkenti a sziklareteget.
      */
     public void Drilled() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
         System.out.print("? How many layers does the asteroid have after drilling?\t");
@@ -167,7 +167,7 @@ public class Asteroid implements DestinationObject {
         }
 
          */
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -175,7 +175,7 @@ public class Asteroid implements DestinationObject {
      * @return a benne talalhato nyersanyag, ha nincs null
      */
     public Material Mined() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         if(!isEmpty && layers == 0) {
             material.Hit(this);
             isEmpty = true;
@@ -183,10 +183,10 @@ public class Asteroid implements DestinationObject {
                 Logger.getInstance().printReturnCommand();
                 return null;
             }
-            Logger.getInstance().printReturnCommand(material.getName());
+            //Logger.getInstance().printReturnCommand(material.getName());
             return material;
         }
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
         return null;
     }
 
@@ -195,11 +195,11 @@ public class Asteroid implements DestinationObject {
      * @param d a hozzaadott Destination Object
      */
     public void AddNeighbour(DestinationObject d) {
-        Object[] p = {d.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {d.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
         if(!neighbours.contains(d))
             this.neighbours.add(d);
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -207,11 +207,11 @@ public class Asteroid implements DestinationObject {
      * @param d a kapott szomszed eltavolitasa
      */
     public void RemoveNeighbour(DestinationObject d) {
-        Object[] p = {d.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {d.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
         if(neighbours.contains(d))
             this.neighbours.remove(d);
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -220,16 +220,16 @@ public class Asteroid implements DestinationObject {
      * @return visszater egy logikai ertekkel, hogy sikeres volt-e
      */
     public boolean AddMaterial(Material m) {
-        Object[] p = {m.getName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {m.getName()};
+        //Logger.getInstance().printCommandCall(this, p);
         if(isEmpty && layers == 0) {
             isEmpty = false;
             this.material = m;
             //m.Hit(this);
-            Logger.getInstance().printReturnCommand(true);
+            //Logger.getInstance().printReturnCommand(true);
             return true;
         }
-        Logger.getInstance().printReturnCommand(false);
+        //Logger.getInstance().printReturnCommand(false);
         return false;
     }
 
@@ -238,11 +238,11 @@ public class Asteroid implements DestinationObject {
      * @param m adott nyersanyagot tavolitja el
      */
     public void RemoveMaterial(Material m) {
-        Object[] p = {m.getName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {m.getName()};
+        //Logger.getInstance().printCommandCall(this, p);
         if(!isEmpty)
             this.material = null;
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -251,14 +251,14 @@ public class Asteroid implements DestinationObject {
      * @return visszater az objektummal
      */
     public DestinationObject GetNeighbour(int id) {
-        Object[] p = {id};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {id};
+        //Logger.getInstance().printCommandCall(this, p);
         if((id > neighbours.size()) || (id < 0)) {
-            Logger.getInstance().printReturnCommand();
+            //Logger.getInstance().printReturnCommand();
             return null;
         }
         DestinationObject dob = neighbours.get(id);
-        Logger.getInstance().printReturnCommand(dob.getClass().getSimpleName());
+        //Logger.getInstance().printReturnCommand(dob.getClass().getSimpleName());
         return dob;
     }
 
@@ -267,10 +267,10 @@ public class Asteroid implements DestinationObject {
      * @return egy random szomszed
      */
     public int GetRandNeighbour() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         Random rand = new Random();
         int n = rand.nextInt(neighbours.size());
-        Logger.getInstance().printReturnCommand(n);
+        //Logger.getInstance().printReturnCommand(n);
         return n;
     }
 
@@ -282,7 +282,7 @@ public class Asteroid implements DestinationObject {
      *Napkozel/naptavol allitasa.
      */
     public void SetSunProximityAuto(){
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         Random rand = new Random();
         int rand_int = rand.nextInt(2);
         switch(rand_int){
@@ -295,7 +295,7 @@ public class Asteroid implements DestinationObject {
                 break;
             }
         }
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     public void SetSunProximityManual(boolean proximity){
@@ -307,14 +307,14 @@ public class Asteroid implements DestinationObject {
      * @return napkozelben/naptavolban
      */
     public boolean GetSunProximity() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand(isNearSun);
+        //Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printReturnCommand(isNearSun);
         return isNearSun;
     }
 
     public boolean GetisEmpty() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand(isEmpty);
+        //Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printReturnCommand(isEmpty);
         return isEmpty;
     }
 
@@ -322,13 +322,13 @@ public class Asteroid implements DestinationObject {
      *Az aszteroidat napvihar eri el.
      */
     public void HitBySunstorm() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         if((layers != 0) || (!isEmpty)) {
             for(int i = 0; i < characters.size(); i++) {
                 this.characters.get(i).Die();
             }
         }
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -336,19 +336,19 @@ public class Asteroid implements DestinationObject {
      * @param a az egyik  szomszedja, akit el kell tavolitani a szomszedok listajabol
      */
     public void HitByExplosion(Asteroid a) {
-        Object[] p = {a.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {a.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         this.neighbours.remove(a);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      *Az aszteroida felrobban, errol ertesiti a szomszedait, illetve a rajta levo karakterek ennek megfeleloen viselkednek.
      */
     public void Explode() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
         int n = characters.size();
         for(int i = 0; i < n; i++) {
             characters.get(0).Explode();
@@ -358,7 +358,7 @@ public class Asteroid implements DestinationObject {
         }
         //this.neighbours.forEach(n -> n.HitByExplosion(this));
         //this.characters.forEach(c -> c.Explode());
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -366,12 +366,12 @@ public class Asteroid implements DestinationObject {
      * @param layer parameterul kapott ertek
      */
     public void setLayer(int layer){
-        Object[] p = {layer};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {layer};
+        //Logger.getInstance().printCommandCall(this, p);
 
         this.layers = layer;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     public int GetNeighbourCount(){
