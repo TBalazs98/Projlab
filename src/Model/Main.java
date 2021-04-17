@@ -1,14 +1,5 @@
 package Model;
-import Controller.*;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.regex.Pattern;
 
 /**
  * @author Bakonyi Klaudia
@@ -77,68 +68,11 @@ public class Main {
         //endregion regexek
 
     public static void main(String[] args)  {
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        String[] cmd={};
-//        String line;
-//        int[] ObjCounts = {0,0,0,0,0,0}; //Material, Asteroid, TG, Settler, Robot, Ufo
-//        CommandManager cm = new CommandManager();
-//        try {
-//
-//            line=reader.readLine();
-//            cmd=line.split(" ");
-//            for(int i=1; i<7;i++){
-//                ObjCounts[i-1]=Integer.parseInt(cmd[i]);
-//            }
-//            listaz(ObjCounts);
-//
-//            for(int i=0; i<ObjCounts[0];i++){
-//                String params = reader.readLine();
-//                InputManager.createMaterial(params);
-//            }
-//
-//            for(int i=1; i<6;i++){
-//                InputManager.create(i,ObjCounts[i]);
-//                for(int j=0; j<ObjCounts[i];j++){
-//                    String params=reader.readLine();
-//                    InputManager.letrehoz(i,params,j);
-//                }
-//            }
-//
-//            reader.readLine();
-//
-//
-//            while(cm.IsRunning()){
-//                 line=reader.readLine();
-//                 System.out.println(line+" mine while ciklus");
-//                 cm.command(line);
-//            }
-//
-//
-////            reader.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        cm.listMaterials();
-//        cm.listAsteroids();
-//        cm.listTeleportGates();
-//        cm.listCharacters();
-        //InputManager.FromFileInput("asd");
+
         ProtoTest.menu();
 
         //cm.saveMap("savedmap");
-        //Test t = new Test();
-        //t.menu();               //teszt menu meghivasa
+
 
     }
-
-
-    public static void listaz(int[]anyad){
-        for(int i=0; i<anyad.length;i++){
-            System.out.println( anyad[i]);
-        }
-
-    }
-
 }

@@ -15,7 +15,6 @@ public class InputManager {
     public static void InputCore(){
         CommandManager cm = new CommandManager();
         try {
-
             line=reader.readLine();
             cmd=line.split(" ");
             for(int i=1; i<7;i++){
@@ -43,7 +42,7 @@ public class InputManager {
             while(cm.IsRunning()){
                 line=reader.readLine();
                 System.out.println(line+" mine while ciklus");
-                //cm.command(line);
+                cm.command(line);
             }
             cm.listMaterials();
             cm.listAsteroids();
@@ -335,7 +334,7 @@ public class InputManager {
         String[] materials=cmd[2].split(",");
         u.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         for(int i=0; i<materials.length;i++){
-            u.GetInventory().Add(Main.materials.get(Integer.parseInt(materials[i])-1).name);
+            u.GetInventory().Add(Main.materials.get(Integer.parseInt(materials[i])-1));
         }
 
     }
