@@ -348,7 +348,7 @@ public class Asteroid implements DestinationObject {
      *Az aszteroida felrobban, errol ertesiti a szomszedait, illetve a rajta levo karakterek ennek megfeleloen viselkednek.
      */
     public void Explode() {
-        //Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);;
         int n = characters.size();
         for(int i = 0; i < n; i++) {
             characters.get(0).Explode();
