@@ -109,10 +109,10 @@ public class CommandManager {
             try{
                 int index = Integer.parseInt(character.substring(1));
                 if (character.contains("S")) {
-                    if ((index <= 0) && (index < Main.settlers.size()))
+                    if ((index >= 0) && (index < Main.settlers.size()))
                         Main.settlers.get(index).Drill();
                 } else if (character.contains("R")) {
-                    if ((index <= 0) && (index < Main.robots.size()))
+                    if ((index >= 0) && (index < Main.robots.size()))
                         Main.robots.get(index).Drill();
                 } else
                     System.out.println("Invalid index number!");
@@ -129,10 +129,10 @@ public class CommandManager {
             try{
                 int index = Integer.parseInt(character.substring(1));
                 if (character.contains("S")) {
-                    if ((index <= 0) && (index < Main.settlers.size()))
+                    if ((index >= 0) && (index < Main.settlers.size()))
                         Main.settlers.get(index).Mine();
                 } else if (character.contains("U")) {
-                    if ((index <= 0) && (index < Main.ufos.size()))
+                    if ((index >= 0) && (index < Main.ufos.size()))
                         Main.ufos.get(index).Mine();
                 } else
                     System.out.println("Invalid index number!");
@@ -181,8 +181,8 @@ public class CommandManager {
             int index = Integer.parseInt(cmd[1].substring(1));
             int indexMaterial = Integer.parseInt(cmd[2].substring(1));
             if ((cmd[1].charAt(0) == 'S') && (cmd[2].charAt(0) == 'M')) {
-                if ((index <= 0) && (index < Main.settlers.size()))
-                    if ((indexMaterial <= 0) && (indexMaterial < Main.materials.size()))
+                if ((index >= 0) && (index < Main.settlers.size()))
+                    if ((indexMaterial >= 0) && (indexMaterial < Main.materials.size()))
                         Main.settlers.get(index).PlaceMaterial(Main.materials.get(indexMaterial));
             }
             else
@@ -200,8 +200,8 @@ public class CommandManager {
             int index = Integer.parseInt(cmd[1].substring(1));
             int indexGate = Integer.parseInt(cmd[2].substring(1));
             if ((cmd[1].charAt(0) == 'S') && (cmd[2].charAt(0) == 'G')) {
-                if ((index <= 0) && (index < Main.settlers.size()))
-                    if ((indexGate <= 0) && (indexGate < Main.teleportgates.size()))
+                if ((index >= 0) && (index < Main.settlers.size()))
+                    if ((indexGate >= 0) && (indexGate < Main.teleportgates.size()))
                         Main.settlers.get(index).PlaceGate(Main.teleportgates.get(indexGate));
             }
             else
@@ -220,9 +220,9 @@ public class CommandManager {
             int indexDObject = Integer.parseInt(cmd[2].substring(1)) -1;
             if ((cmd[1].charAt(0) == 'S') && ((cmd[2].charAt(0) == 'A') || (cmd[2].charAt(0) == 'G')) ) {
                 if ((index >= 0) && (index < Main.settlers.size())) {
-                    if ((indexDObject <= 0) && (indexDObject < Main.teleportgates.size()))
+                    if ((indexDObject >= 0) && (indexDObject < Main.teleportgates.size()))
                         Main.settlers.get(index).Move(Main.teleportgates.indexOf(Main.teleportgates.get(indexDObject)));
-                    if ((indexDObject <= 0) && (indexDObject < Main.asteroids.size()))
+                    if ((indexDObject >= 0) && (indexDObject < Main.asteroids.size()))
                         Main.settlers.get(index).Move(Main.asteroids.indexOf(Main.asteroids.get(indexDObject)));
                 }
             }
@@ -349,7 +349,7 @@ public class CommandManager {
         try {
             int index = Integer.parseInt(cmd[1].substring(1));
             if( cmd[1].charAt(0) == 'A') {
-                if ((index <= 0) && (index < Main.asteroids.size())) {
+                if ((index >= 0) && (index < Main.asteroids.size())) {
                     switch (cmd[2]){
                         case "ON" : {
                             Main.ab.StartStorm(Main.asteroids.get(index));
@@ -379,7 +379,7 @@ public class CommandManager {
         try {
             int index = Integer.parseInt(cmd[1].substring(1));
             if( cmd[1].charAt(0) == 'A') {
-                if ((index <= 0) && (index < Main.asteroids.size())) {
+                if ((index >= 0) && (index < Main.asteroids.size())) {
                     switch (cmd[2]) {
                         case "NEAR": {
                             Main.asteroids.get(index).SetSunProximityManual(true);
