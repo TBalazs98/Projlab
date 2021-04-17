@@ -252,9 +252,9 @@ public class CommandManager {
                 ArrayList<String> neigh = new ArrayList<>();
                 for (DestinationObject o : a.GetNeighbours()) {
                     if(Main.asteroids.indexOf(o) != -1)
-                    neigh.add("A" + Integer.toString((Main.asteroids.indexOf(o) + 1)));
+                    neigh.add("A" + (Main.asteroids.indexOf(o) + 1));
                     if(Main.teleportgates.indexOf(o) != -1)
-                    neigh.add("G" + Integer.toString((Main.teleportgates.indexOf(o) + 1)));
+                    neigh.add("G" + (Main.teleportgates.indexOf(o) + 1));
                 }
                 System.out.println(String.join(",",neigh));
             }
@@ -264,36 +264,46 @@ public class CommandManager {
     public void listTeleportGates (){
         int i = 0;
         int pairid = 0;
-        if(Main.asteroids.size() == 0)
-            System.out.println("No TeleportGates!");
-        else{
-            for (TeleportGate g : Main.teleportgates){
-                i++;
-                int ast = (Main.asteroids.indexOf(g.GetAsteroid()) + 1);
-                if (g.GetPair() != null) {
-                    pairid = Main.teleportgates.indexOf(g.GetPair()) + 1;
+        int ast = 0;
+            if (Main.teleportgates.size() == 0)
+                System.out.println("No TeleportGates!");
+            else {
+                for (TeleportGate g : Main.teleportgates) {
+                    i++;
+                    if (g.GetAsteroid() != null) {
+                        System.out.println("szar");
+                        ast = (Main.asteroids.indexOf(g.GetAsteroid()) + 1);
+                    }
+                    if (g.GetPair() != null) {
+                        pairid = Main.teleportgates.indexOf(g.GetPair()) + 1;
+                    }
+                    System.out.println("G" + i + " " + g.GetisActive() + " " + (pairid != 0 ? ("G" + pairid) : "") + " " + (ast != 0 ? ("A" + ast) : ""));
                 }
-                System.out.println("G" + i + " " + g.GetisActive() + " " + (pairid > 0?( "G" + pairid):"") + " " +  (g.GetisPlaced()?("A" + ast):""));
             }
-        }
 
     }
     public void listCharacters (){
-        int i = 0;
-
-        if(Main.robots.size() == 0 && Main.settlers.size() == 0 && Main.ufos.size() == 0)
+        if(Main.robots.size() == 0 && Main.settlers.size() == 0 && Main.ufos.size() == 0){
             System.out.println("No Characters!");
+        }
+        int i = 0;
         for(Settler s : Main.settlers){
             i++;
             int aindex = Main.asteroids.indexOf((s.getAsteroid())) + 1 ;
             System.out.print("S" + i + " " + "A" + aindex + " " + s.GetInventory().Size());
-            Material[] mat =  s.GetInventory().GetMaterials();
             if(s.GetInventory().Size() != 0) {
                 ArrayList<String> smat = new ArrayList<>();
                 for (Material m : s.GetInventory().GetMaterials())
-                    smat.add(Integer.toString((Main.materials.indexOf(m) + 1)));
-                System.out.println((String.join(",", smat)));
+                    smat.add("M" + (Main.materials.indexOf(m) + 1));
+                System.out.print((String.join(",", smat)));
             }
+            if(s.GetGates().size() != 0){
+                ArrayList<String> sgat = new ArrayList<>();
+                for (TeleportGate t : Main.teleportgates)
+                    sgat.add("G" + (Main.teleportgates.indexOf(t) + 1));
+                System.out.print((String.join(",", sgat)));
+            }
+            System.out.println("");
         }
         i = 0;
         for(Robot r : Main.robots){

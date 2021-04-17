@@ -19,7 +19,7 @@ public class TeleportGate implements DestinationObject, Steppable {
 
     private boolean isActive;
     private boolean isPlaced;
-    private TeleportGate pair;
+    private TeleportGate pair ;
     private Asteroid asteroid;
     private static final Inventory inventory = new Inventory();
     private boolean isHit = false;
@@ -176,10 +176,13 @@ public class TeleportGate implements DestinationObject, Steppable {
      * @return
      */
     public Asteroid GetAsteroid() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand(asteroid.getClass().getSimpleName());
+       // Logger.getInstance().printCommandCall(this);
+       // Logger.getInstance().printReturnCommand(asteroid.getClass().getSimpleName());
 
-        return this.asteroid;
+        if(this.asteroid == null)
+            return null;
+        else
+            return this.asteroid;
     }
 
     /**
@@ -190,7 +193,7 @@ public class TeleportGate implements DestinationObject, Steppable {
         Object[] p = {a.getClass().getSimpleName()};
         Logger.getInstance().printCommandCall(this,p);
 
-        asteroid = a;
+        this.asteroid = a;
 
         Logger.getInstance().printReturnCommand();
     }
@@ -200,10 +203,13 @@ public class TeleportGate implements DestinationObject, Steppable {
      * @return a teleportkapu parja
      */
     public TeleportGate GetPair() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand(pair.getClass().getSimpleName());
+        //Logger.getInstance().printCommandCall(this);
+       // Logger.getInstance().printReturnCommand(pair.getClass().getSimpleName());
 
-        return pair;
+        if(this.pair == null)
+            return  null;
+        else
+            return pair;
     }
 
     /**
