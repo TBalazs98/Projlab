@@ -248,10 +248,12 @@ public class CommandManager {
                 if(!a.GetisEmpty())
                     mat = (Main.materials.indexOf(a.getMaterial()) + 1);
                 System.out.print("A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +
-                        (a.GetisEmpty()?"null":("M" +mat)));
+                        (a.GetisEmpty()?"null ":("M" +mat + " ")));
                 ArrayList<String> neigh = new ArrayList<>();
                 for (DestinationObject o : a.GetNeighbours()) {
-                    neigh.add("M" + Integer.toString((Main.materials.indexOf(o) + 1)));
+                    if(Main.asteroids.indexOf(o) != -1)
+                    neigh.add("A" + Integer.toString((Main.asteroids.indexOf(o) + 1)));
+                    if(Main.teleportgates.indexOf(o) != -1)
                     neigh.add("G" + Integer.toString((Main.teleportgates.indexOf(o) + 1)));
                 }
                 System.out.println(String.join(",",neigh));
