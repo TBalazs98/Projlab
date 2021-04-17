@@ -20,11 +20,11 @@ public class AsteroidBelt {
      *Privat konstruktor az aszteroida ovhoz.
      */
     private AsteroidBelt() {
-        //Logger.getInstance().printCommandCall(this);
+        Logger.getInstance().printCommandCall(this);
 
         asteroids = new ArrayList<Asteroid>();
 
-        //Logger.getInstance().printReturnCommand();
+        Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -39,7 +39,7 @@ public class AsteroidBelt {
      *Az aszteroida ov egy kore, itt idokozonkent indit egy napvihart.
      */
     public void Step() {
-        //Logger.getInstance().printCommandCall(this);
+        Logger.getInstance().printCommandCall(this);
 
         Random rand = new Random();
         int rand_int = rand.nextInt(2);
@@ -51,21 +51,21 @@ public class AsteroidBelt {
         }
 
 
-        //Logger.getInstance().printReturnCommand();
+        Logger.getInstance().printReturnCommand();
     }
 
     /**
      * A napvihar elinditasa.
      */
     public void StartStorm(Asteroid a) {
-        //Logger.getInstance().printCommandCall(this);
+        Logger.getInstance().printCommandCall(this);
         ArrayList<DestinationObject> aneighb = a.GetNeighbours();
         a.HitBySunstorm();
         for(int i = 0; i < a.GetNeighbourCount(); i++) {
             aneighb.get(i).HitBySunstorm();
         }
 
-        //Logger.getInstance().printReturnCommand();
+        Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -73,12 +73,12 @@ public class AsteroidBelt {
      * @param a Eltavolitando aszteroida
      */
     public void RemoveAsteroid(Asteroid a) {
-        //Object[] p = {a.getClass().getSimpleName()};
-        //Logger.getInstance().printCommandCall(this, p);
+        Object[] p = {a.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this, p);
 
         this.asteroids.remove(a);
 
-        //Logger.getInstance().printReturnCommand();
+        Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -86,19 +86,19 @@ public class AsteroidBelt {
      * @param a Felvevendo aszteroida
      */
     public void AddAsteroid(Asteroid a) {
-        //Object[] p = {a.getClass().getSimpleName()};
-        //Logger.getInstance().printCommandCall(this, p);
+        Object[] p = {a.getClass().getSimpleName()};
+        Logger.getInstance().printCommandCall(this, p);
 
         this.asteroids.add(a);
 
-        //Logger.getInstance().printReturnCommand();
+        Logger.getInstance().printReturnCommand();
     }
 
     /**
      * eletben levo telepesek allitasa.
      */
     public void SetSettlersAlive() {
-        //Logger.getInstance().printCommandCall(this);
+        Logger.getInstance().printCommandCall(this);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("? Are there any settlers alive?\t(Y)es / (N)o \t");
@@ -121,7 +121,7 @@ public class AsteroidBelt {
             Game.getInstance().LoseGame();
         */
 
-        //Logger.getInstance().printReturnCommand();
+        Logger.getInstance().printReturnCommand();
     }
 
 }
