@@ -2,9 +2,89 @@ package Controller;
 
 import Model.*;
 
+import java.io.*;
 import java.util.regex.Pattern;
 
 public class InputManager {
+
+    private static int[] ObjCounts = {0,0,0,0,0,0}; //Material, Asteroid, TG, Settler, Robot, Ufo
+    private static String[] cmd={};
+    private static String line;
+    private static BufferedReader reader ;
+
+    public static void InputCore(){
+        CommandManager cm = new CommandManager();
+        try {
+
+            line=reader.readLine();
+            cmd=line.split(" ");
+            for(int i=1; i<7;i++){
+                ObjCounts[i-1]=Integer.parseInt(cmd[i]);
+            }
+            //listaz(ObjCounts);
+
+            for(int i=0; i<ObjCounts[0];i++){
+                String params = reader.readLine();
+                System.out.println(params);
+                InputManager.createMaterial(params);
+            }
+
+            for(int i=1; i<6;i++){
+                InputManager.create(i,ObjCounts[i]);
+                for(int j=0; j<ObjCounts[i];j++){
+                    String params=reader.readLine();
+                    System.out.println(params);
+                    InputManager.letrehoz(i,params,j);
+                }
+            }
+
+            reader.readLine();
+
+            while(cm.IsRunning()){
+                line=reader.readLine();
+                System.out.println(line+" mine while ciklus");
+                //cm.command(line);
+            }
+            cm.listMaterials();
+            cm.listAsteroids();
+            cm.listTeleportGates();
+            cm.listCharacters();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void FromFileInput(String filename){
+        try {
+            File currentfile = InputManager.getFile("Files","Input" ,filename);
+            reader = new BufferedReader(new FileReader(currentfile));
+            InputManager.InputCore();
+        }catch (IOException e){
+            System.out.println(":(");
+        }
+    }
+
+    public static void FromUserInput(){
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        InputManager.InputCore();
+    }
+    public static File getFile (String dir, String dir2, String filename)throws IOException {
+        File dir_File=new File (dir);
+
+        String caononical_path= dir_File.getCanonicalPath();
+
+        File dir_File_Input=new File(caononical_path,dir2);
+        String canonical_path_2=dir_File_Input.getCanonicalPath();
+        File one = new File(canonical_path_2,filename+".txt");
+
+
+        BufferedReader anyad = new BufferedReader(new FileReader(one));
+
+        System.out.println(anyad.readLine());
+
+        return one;
+    }
 
     public static void letrehoz(int what, String params,int actual ){
         switch (what){
@@ -175,7 +255,7 @@ public class InputManager {
     public static void setCommonAsteroid(Asteroid a, int sunprox, int layer, int empty){
         a.SetSunProximityManual(IntToBoolean(sunprox));
         a.setLayer(layer);
-        System.out.println(IntToBoolean(empty));
+        //System.out.println(IntToBoolean(empty));
         a.SetEmpty(!IntToBoolean(empty));
     }
 
