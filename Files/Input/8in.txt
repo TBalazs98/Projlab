@@ -6,3 +6,4 @@ createmap 0 2 0 1 0 0
 SunStorm on A2
 SetRandomize off
 Move S1 A2
+stop

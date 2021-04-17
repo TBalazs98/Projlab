@@ -4,3 +4,4 @@ createmap 0 1 0 1 0 0
 
 setRandomize off
 move S1 A2
+stop

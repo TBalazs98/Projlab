@@ -7,14 +7,15 @@ import java.util.ArrayList;
 
 public class CommandManager {
 
-    private boolean stop = false;
+    private static boolean stop = true;
     public CommandManager(){}
 
-    public void command(String command){
+    public static void command(String command){
 
         String[] cmd = command.split(" ");
 
         cmd[0] = cmd[0].toLowerCase();
+
         switch (cmd[0]){
             case "drill":{
                 drill(cmd[1]);
@@ -89,7 +90,7 @@ public class CommandManager {
                 break;
             }
             case "stop":{
-                this.stop = true;
+                stop = false;
                 break;
             }
             default:
@@ -98,11 +99,11 @@ public class CommandManager {
 
     }
 
-    public boolean IsRunning(){
-        return this.stop;
+    public static boolean IsRunning(){
+        return stop;
     }
 
-    public void drill(String character){
+    public static void drill(String character){
 
         if(character.length() >= 2) {
             character = character.toUpperCase();
@@ -123,7 +124,7 @@ public class CommandManager {
             System.out.println("Invalid input!");
     }
 
-    public void mine (String character){
+    public static  void mine (String character){
         if(character.length() >= 2) {
             character = character.toUpperCase();
             try{
@@ -142,7 +143,7 @@ public class CommandManager {
         } else
             System.out.println("Invalid input!");
     }
-    public void build (String[] cmd){
+    public static void build (String[] cmd){
         //ellenőrizni a tömb méretét
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
@@ -173,7 +174,7 @@ public class CommandManager {
             System.out.println("Invalid input!");
         }
     }
-    public void put (String[] cmd){
+    public static void put (String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
 
@@ -192,7 +193,7 @@ public class CommandManager {
         }
     }
 
-    public void placegate (String[] cmd){
+    public static void placegate (String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
 
@@ -211,19 +212,25 @@ public class CommandManager {
         }
     }
 
-    public void move (String[] cmd){
+    public static void move (String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
+        char towhere = cmd[2].charAt(0);
 
         try {
             int index = Integer.parseInt(cmd[1].substring(1)) -1;
             int indexDObject = Integer.parseInt(cmd[2].substring(1)) -1;
             if ((cmd[1].charAt(0) == 'S') && ((cmd[2].charAt(0) == 'A') || (cmd[2].charAt(0) == 'G')) ) {
-                if ((index >= 0) && (index < Main.settlers.size())) {
-                    if ((indexDObject >= 0) && (indexDObject < Main.teleportgates.size()))
-                        Main.settlers.get(index).Move(Main.teleportgates.indexOf(Main.teleportgates.get(indexDObject)));
-                    if ((indexDObject >= 0) && (indexDObject < Main.asteroids.size()))
-                        Main.settlers.get(index).Move(Main.asteroids.indexOf(Main.asteroids.get(indexDObject)));
+                if(((towhere == 'G') && (indexDObject > Main.teleportgates.size())) || ((towhere == 'A') && (indexDObject > Main.asteroids.size())))
+                    System.out.println("Invalid index number!");
+                else {
+                    if ((index >= 0) && (index < Main.settlers.size()))
+                        if (Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)) != -1) {
+                            if ((indexDObject >= 0) && (indexDObject < Main.teleportgates.size()) && (towhere=='G'))
+                                Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)));
+                            if ((indexDObject >= 0) && (indexDObject < Main.asteroids.size()) && (towhere == 'A'))
+                                Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)));
+                        }
                 }
             }
             else
@@ -232,7 +239,7 @@ public class CommandManager {
             System.out.println("Invalid input!");
         }
     }
-    public void listMaterials (){
+    public static void listMaterials (){
         int i = 0;
         if (Main.materials.size() == 0)
             System.out.println("No Material!");
@@ -249,7 +256,7 @@ public class CommandManager {
         }
     }
 
-    public void listAsteroids (){
+    public static void listAsteroids (){
         int i = 0;
         int mat = 0;
         if(Main.asteroids.size() == 0)
@@ -273,7 +280,7 @@ public class CommandManager {
         }
 
     }
-    public void listTeleportGates (){
+    public static void listTeleportGates (){
         int i = 0;
         int pairid = 0;
         int ast = 0;
@@ -293,7 +300,7 @@ public class CommandManager {
             }
 
     }
-    public void listCharacters (){
+    public static void listCharacters (){
         if(Main.robots.size() == 0 && Main.settlers.size() == 0 && Main.ufos.size() == 0){
             System.out.println("No Characters!");
         }
@@ -341,7 +348,7 @@ public class CommandManager {
         }
 
     }
-    public void SunStorm (String[] cmd){
+    public static void SunStorm (String[] cmd){
         //ellenőrizni a tömb méretét
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
@@ -372,7 +379,7 @@ public class CommandManager {
 
 
     }
-    public void setProximity(String[] cmd){
+    public static void setProximity(String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
 
@@ -401,7 +408,7 @@ public class CommandManager {
         }
 
     }
-    public void step (){
+    public static void step (){
       /*
         for(Asteroid a : Main.asteroids)
             a.Step();
@@ -415,7 +422,7 @@ public class CommandManager {
         Main.game.NextRound();
 
     }
-    public void setRandomize(String cmd){
+    public static void setRandomize(String cmd){
         //globális vált
         cmd = cmd.toUpperCase();
         switch (cmd){
@@ -433,17 +440,17 @@ public class CommandManager {
 
     }
 
-    public void startGame(){
+    public static void startGame(){
         Main.game.StartGame();
     }
 
-    public void endGame (){
+    public static void endGame (){
         Main.game.LoseGame();
     }
 
-    public void loadmap(String filename){    }
+    public static void loadmap(String filename){    }
 
-    public void saveMap (String filename){
+    public static void saveMap (String filename){
         int M = Main.materials.size();
         int A = Main.asteroids.size();
         int T = Main.teleportgates.size();

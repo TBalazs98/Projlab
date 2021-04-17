@@ -7,3 +7,4 @@ createmap 0 2 2 1 0 0
 
 SetRandomize off
 Move S1 G1
+stop

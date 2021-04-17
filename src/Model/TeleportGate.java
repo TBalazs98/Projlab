@@ -96,9 +96,9 @@ public class TeleportGate implements DestinationObject, Steppable {
 //        //Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name ,p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("? Is the teleportgate active?\t(Y)es / (N)o \t");
-            InputStreamReader br = new InputStreamReader(System.in);
-            char ch = ' ';
+           // System.out.print("? Is the teleportgate active?\t(Y)es / (N)o \t");
+            //InputStreamReader br = new InputStreamReader(System.in);
+            /*char ch = ' ';
             try {
                 ch=(char)br.read();
                 //br.close();
@@ -106,15 +106,19 @@ public class TeleportGate implements DestinationObject, Steppable {
                 e.printStackTrace();
             }
 
+
+            //if(ch=='y' || ch=='Y' ) {
+              */
             Asteroid a = null;
-            if(ch=='y' || ch=='Y' ) {
+            if(this.pair!= null && this.pair.isActive && this.pair.GetPlaced()){
                 a = pair.GetAsteroid();
+                this.asteroid.Remove(c);
                 a.Accept(c);
             }
-            else if(ch == 'n' || ch == 'N'){
+            else //if(ch == 'n' || ch == 'N'){
                 //Logger.getInstance().printReturnCommand();
                 return null;
-            }
+            //}
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
         /*if (isActive) {

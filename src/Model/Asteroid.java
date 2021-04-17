@@ -222,10 +222,10 @@ public class Asteroid implements DestinationObject {
     public boolean AddMaterial(Material m) {
         //Object[] p = {m.getName()};
         //Logger.getInstance().printCommandCall(this, p);
-        if(isEmpty && layers == 0) {
+        if((this.isEmpty) && (this.layers == 0)) {
             isEmpty = false;
             this.material = m;
-            //m.Hit(this);
+            m.Hit(this);
             //Logger.getInstance().printReturnCommand(true);
             return true;
         }
@@ -260,6 +260,10 @@ public class Asteroid implements DestinationObject {
         DestinationObject dob = neighbours.get(id);
         //Logger.getInstance().printReturnCommand(dob.getClass().getSimpleName());
         return dob;
+    }
+
+    public int GetNeighbourIndex(DestinationObject obj){
+        return  neighbours.indexOf(obj);
     }
 
     /**
