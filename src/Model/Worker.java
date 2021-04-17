@@ -16,11 +16,11 @@ public abstract class Worker extends Character implements drillable {
      * Furas az aszteroidan.
      */
     public void Drill() {
-        Logger.getInstance().printCommandCall(this);
+        //.getInstance().printCommandCall(this);
 
         asteroid.Drilled();
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**

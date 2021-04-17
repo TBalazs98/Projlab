@@ -15,11 +15,11 @@ public class Robot extends Worker {
      */
     public Robot() {
         super();
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         setInventory();
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -29,8 +29,8 @@ public class Robot extends Worker {
      */
     public Robot(Inventory i, Asteroid a) {
         super();            //Os konstruktora
-        Object[] p = {i.getClass().getSimpleName(), a.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {i.getClass().getSimpleName(), a.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("? Do we have enough materials to build a robot?\t(Y)es / (N)o \t");
@@ -55,14 +55,14 @@ public class Robot extends Worker {
                 a.Accept(this);
             }*/
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * Inicializalja az inventory-t. Itt tarolja az epiteshez szukseges anyagokat.
      */
     private void setInventory() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         HashMap<MaterialName, Integer> m = new HashMap<MaterialName, Integer>();
         m.put(NormalMaterialName.IRON, 1);      //Letrehozzuk a szukseges anyagokat
@@ -70,14 +70,14 @@ public class Robot extends Worker {
         m.put(RadioactiveMaterialName.URAN, 1);
         inventory.fill(m);                      //Majd belepakoljuk a Robot Inventory-jaba
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * A controller itt donteni el, hogy mi lesz a robot kovetkezo lepese
      */
     public void Step() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         Random rand = new Random();
         int rand_int = rand.nextInt(2);
@@ -93,7 +93,7 @@ public class Robot extends Worker {
             }
         }
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -101,7 +101,7 @@ public class Robot extends Worker {
      * amin a Robot eppen tartozkodik.
      */
     public void Explode() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("? Does the robot get thrown to an asteroid or a teleportgate?\t(A)steroid / (T)eleportgate \t");
@@ -126,7 +126,7 @@ public class Robot extends Worker {
         * */
         Move(id);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
 }

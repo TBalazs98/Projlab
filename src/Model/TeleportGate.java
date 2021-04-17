@@ -31,8 +31,8 @@ public class TeleportGate implements DestinationObject, Steppable {
      * @param s telepses, aki felepitene a teleportkaput.
      */
     public TeleportGate(Inventory i, Settler s) {
-        Object[] p = {i.getClass().getSimpleName(), s.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {i.getClass().getSimpleName(), s.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("? Do we have enough materials to build a pair of teleportgates?\t(Y)es / (N)o \t");
@@ -64,7 +64,7 @@ public class TeleportGate implements DestinationObject, Steppable {
                 s.AddGate(pair);
             }*/
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
 
@@ -72,7 +72,7 @@ public class TeleportGate implements DestinationObject, Steppable {
      * Inicializalja az inventorit, itt tarolja a felepiteshez szukseges anyagokat.
      */
     private void setInventory() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         HashMap<MaterialName, Integer> m = new HashMap<MaterialName, Integer>();
         m.put(NormalMaterialName.IRON, 2);
@@ -81,7 +81,7 @@ public class TeleportGate implements DestinationObject, Steppable {
 
         inventory.fill(m);
 
-        Logger.getInstance().printReturnCommand();
+       //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -90,10 +90,10 @@ public class TeleportGate implements DestinationObject, Steppable {
      * @return visszaadja azt az aszteroidato
      */
     public DestinationObject Accept(Character c) {
-        Object[] p = {c.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {c.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 //        String name = new Object(){}.getClass().getEnclosingMethod().getName();
-//        Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name ,p);
+//        //Logger.getInstance().printCommandCall(this.getClass().getSimpleName(), name ,p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
             System.out.print("? Is the teleportgate active?\t(Y)es / (N)o \t");
@@ -112,7 +112,7 @@ public class TeleportGate implements DestinationObject, Steppable {
                 a.Accept(c);
             }
             else if(ch == 'n' || ch == 'N'){
-                Logger.getInstance().printReturnCommand();
+                //Logger.getInstance().printReturnCommand();
                 return null;
             }
 
@@ -121,7 +121,7 @@ public class TeleportGate implements DestinationObject, Steppable {
             pair.GetAsteroid().Accept(c);
         }*/
 
-        Logger.getInstance().printReturnCommand(a.getClass().getSimpleName());
+        //Logger.getInstance().printReturnCommand(a.getClass().getSimpleName());
         return a;
     }
 
@@ -130,8 +130,8 @@ public class TeleportGate implements DestinationObject, Steppable {
      * @param asteroid az adott aszteroidara helyezzuk le
      */
     public void Place(Asteroid asteroid) {
-        Object[] p = {asteroid.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this,p);
+        //Object[] p = {asteroid.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this,p);
 
         this.asteroid = asteroid;
         //fuggveny lefutasa felhasznaloi beavatkozassal
@@ -157,7 +157,7 @@ public class TeleportGate implements DestinationObject, Steppable {
             this.Activate();
         }*/
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -165,8 +165,8 @@ public class TeleportGate implements DestinationObject, Steppable {
      * @return logikai ertek, leraktuk/nem raktuk le
      */
     public boolean GetPlaced() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand(pair.isPlaced);
+        //Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printReturnCommand(pair.isPlaced);
 
         return pair.isPlaced;
     }
@@ -190,12 +190,12 @@ public class TeleportGate implements DestinationObject, Steppable {
      * @param a az adott aszteroidat allitja be
      */
     public void setAsteroid(Asteroid a) {
-        Object[] p = {a.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this,p);
+        //Object[] p = {a.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this,p);
 
         this.asteroid = a;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -217,34 +217,34 @@ public class TeleportGate implements DestinationObject, Steppable {
      * @param t egy teleportkapu
      */
     public void setPair(TeleportGate t) {
-        Object[] p = {t.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this,p);
+        //Object[] p = {t.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this,p);
 
         this.pair = t;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * Aktivalja a kaput.
      */
     public void Activate() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         this.isActive = true;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * Deaktivalja a kaput.
      */
     public void Deactivate() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         this.isActive = false;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -253,25 +253,25 @@ public class TeleportGate implements DestinationObject, Steppable {
      * @param a az aszteroida ahol talalhato, ahonnan erkezik a robbanas
      */
     public void HitByExplosion(Asteroid a) {
-        Object[] p = {a.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {a.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         this.Destroy();
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * Megsemmisul a teleportkapu.
      */
     public void Destroy() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         this.Deactivate();
         pair.Deactivate();
         this.isPlaced = false;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     public void HitBySunstorm(){        //TODO ezt nem tudtam megcsinálni a szeki miatt
