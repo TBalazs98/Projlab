@@ -69,7 +69,9 @@ public class Main {
 
     public static void main(String[] args)  {
 
-        ProtoTest.menu();
+        ProtoTest pt = new ProtoTest();
+        pt.menu();
+        //ProtoTest.menu();
 
         //cm.saveMap("savedmap");
 
