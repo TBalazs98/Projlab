@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class CommandManager {
 
+    private boolean stop = false;
     public CommandManager(){}
 
     public void command(String command){
@@ -87,10 +88,18 @@ public class CommandManager {
                 saveMap(cmd[1]);
                 break;
             }
+            case "stop":{
+                this.stop = true;
+                break;
+            }
             default:
                 System.out.println("Invalid command!");
         }
 
+    }
+
+    public boolean IsRunning(){
+        return this.stop;
     }
 
     public void drill(String character){
@@ -271,7 +280,6 @@ public class CommandManager {
                 for (TeleportGate g : Main.teleportgates) {
                     i++;
                     if (g.GetAsteroid() != null) {
-                        System.out.println("szar");
                         ast = (Main.asteroids.indexOf(g.GetAsteroid()) + 1);
                     }
                     if (g.GetPair() != null) {
