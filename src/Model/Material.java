@@ -13,8 +13,8 @@ public class Material  {
      * A Material osztaly alapertelmezett konstruktora.
      */
     public Material() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printCommandCall(this);
+       // Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -22,12 +22,12 @@ public class Material  {
      * @param inventory az Inventory amibe szeretnenk elhelyezni nyersanyagot
      */
     public void Add(Inventory inventory) {
-        Object[] p = {inventory.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+       // Object[] p = {inventory.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         inventory.Add(this.getName());
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -35,34 +35,34 @@ public class Material  {
      * @param a az Aszteroida, amin a jenenlegi nyersanyag talalhato
      */
     public void Hit(Asteroid a) {
-        Object[] p = {a.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {a.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /** Az Inventory-bol kiveszi a nyersanyagot.
      * @param inventory az Inventory, melybol kivetelre kerul a nyersanyag
      */
     public void Remove(Inventory inventory) {
-        Object[] p = {inventory.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+       // Object[] p = {inventory.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         inventory.Remove(this.getName());
 
-        Logger.getInstance().printReturnCommand();
+       // Logger.getInstance().printReturnCommand();
     }
 
     /** Parameterul kap egy normal nyersanyag nevet es beallitja a jelenlegi nyersanyag neveve.
      * @param n a normal nyersanyag neve
      */
     public void setName(MaterialName n) {
-        Object[] p = {n};
-        Logger.getInstance().printCommandCall(this, p);
+       // Object[] p = {n};
+       // Logger.getInstance().printCommandCall(this, p);
 
         name = n;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     public MaterialName getName() {
