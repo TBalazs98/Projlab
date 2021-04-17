@@ -13,12 +13,12 @@ public class Settler extends Worker {
      */
     public Settler() {
         super();                        //Os konstruktor
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         inventory = new Inventory();    //Letrehozza az inventory-t
         gates = new ArrayList<TeleportGate>();
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     private ArrayList<TeleportGate> gates;
@@ -30,10 +30,10 @@ public class Settler extends Worker {
      * tartozkodik.
      */
     public void Mine() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         if(inventory.Size() >= 10) {
-            Logger.getInstance().printReturnCommand();
+            //Logger.getInstance().printReturnCommand();
             return;
         }
 
@@ -41,41 +41,41 @@ public class Settler extends Worker {
         if(m != null)
             m.Add(inventory);           //Kibanyaszott nyesanyag eltarolasa az inventory-ban
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * A Settler bazis epitesehez szukseges metodusa
      */
     public void BuildBase() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         Base base = new Base(inventory);        //bazis epitese, atadva a sajat inventorynkat (ebben nezi meg a Base, hogy fel tud-e epulni)
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * A Settler bazis epitesehez szukseges metodusa
      */
     public void BuildGate() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         if(gates.size()<=1) {       //teleportGate konstruktorban 2 TG hozodik letre
             TeleportGate g1 = new TeleportGate(inventory, this);        //TG  epitese, atadva a sajat inventorynkat (ebben nezi meg a TG, hogy fel tud-e epulni)
         }
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * A Settler bazis epitesehez szukseges metodusa
      */
     public void BuildRobot() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         Robot r = new Robot(inventory, asteroid);       //Robot epitese, atadva a sajat inventorynkat (ebben nezi meg a Robot, hogy fel tud-e epulni)
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -84,13 +84,13 @@ public class Settler extends Worker {
      * aszteroida magjaba.
      */
     public void PlaceMaterial(Material m) {
-        Object[] p = {m.getName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {m.getName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         if(asteroid.AddMaterial(m))
             m.Remove(inventory);                        //Eltavolitjuk az inventorynkbol
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -98,23 +98,23 @@ public class Settler extends Worker {
      * amin a Settler eppen tartozkodik.
      */
     public void Explode() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         Die();
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      * A Settler halalat levezenylo metodus
      */
     public void Die() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         asteroid.Remove(this);                  //levesszuk az adott Settlert az aszteroidarol (mert meghalt)
         AsteroidBelt.getInstance().SetSettlersAlive();  //Es atallitjuk a jelenleg eletben levo Settlereket
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -122,13 +122,13 @@ public class Settler extends Worker {
      * @param t Eltarolando Teleportkapu
      */
     public void AddGate(TeleportGate t) {
-        Object[] p = {t.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {t.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         if(gates.size()<3)
             gates.add(t);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -136,13 +136,13 @@ public class Settler extends Worker {
      * @param t Lehelyezendo teleportkapu
      */
     public void PlaceGate(TeleportGate t) {
-        Object[] p = {t.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {t.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         t.Place(asteroid);          //Lerakjuk a TG-t arra az Aszteroidara, amin eppen allunk
         gates.remove(t);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -150,12 +150,12 @@ public class Settler extends Worker {
      * @param i inventory peldany, amire beallitodik a telepes hatizsakja
      */
     public void setInventory(Inventory i ) {
-        Object[] p = {i.getClass().getSimpleName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {i.getClass().getSimpleName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         inventory = i;
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
@@ -163,12 +163,12 @@ public class Settler extends Worker {
      * @param m A hatizsakhoz adando nyersanyag
      */
     public void AddMaterial(Material m) {
-        Object[] p = {m.getName()};
-        Logger.getInstance().printCommandCall(this, p);
+        //Object[] p = {m.getName()};
+        //Logger.getInstance().printCommandCall(this, p);
 
         m.Add(inventory);
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     public  Inventory GetInventory(){
