@@ -290,12 +290,16 @@ public class CommandManager {
         for(Settler s : Main.settlers){
             i++;
             int aindex = Main.asteroids.indexOf((s.getAsteroid())) + 1 ;
-            System.out.print("S" + i + " " + "A" + aindex + " " + s.GetInventory().Size());
+            System.out.print("S" + i + " " + "A" + aindex);
             if(s.GetInventory().Size() != 0) {
+                System.out.println(s.GetInventory().Size() + " ");
                 ArrayList<String> smat = new ArrayList<>();
                 for (Material m : s.GetInventory().GetMaterials())
                     smat.add("M" + (Main.materials.indexOf(m) + 1));
                 System.out.print((String.join(",", smat)));
+            }
+            else {
+                System.out.print(" null ");
             }
             if(s.GetGates().size() != 0){
                 ArrayList<String> sgat = new ArrayList<>();

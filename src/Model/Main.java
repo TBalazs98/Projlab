@@ -255,7 +255,7 @@ public class Main {
     }
     public static void createAsteroid2(String params,int actual){         //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
                                                                 //pl    : 0 0 25 1 5
-        String[] cmd = params.split(" ");
+        String[] cmd = params.split("\\t");
         Asteroid a =Main.asteroids.get(actual);
         Main.setCommonAsteroid(a,Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
         a.AddMaterial(Main.materials.get(Integer.parseInt(cmd[4])-1));
