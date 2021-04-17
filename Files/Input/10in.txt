@@ -1,0 +1,7 @@
+createmap 1 1 0 1 0 0
+3
+0	1	0	0
+1	1	1	0
+
+SetRandomize off
+put S1 M1

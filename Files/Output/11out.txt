@@ -1,0 +1,6 @@
+A1	2	false	true	null
+A2	2	false	true	null
+A3	2	false	true	null
+G1	true	G2	A1
+G2	true	G1	A3
+S1	A3	null
