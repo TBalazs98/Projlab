@@ -175,7 +175,8 @@ public class InputManager {
     public static void setCommonAsteroid(Asteroid a, int sunprox, int layer, int empty){
         a.SetSunProximityManual(IntToBoolean(sunprox));
         a.setLayer(layer);
-        a.SetEmpty(IntToBoolean(empty));
+        System.out.println(IntToBoolean(empty));
+        a.SetEmpty(!IntToBoolean(empty));
     }
 
     public static void createTeleportGate1(String params, int actual){
