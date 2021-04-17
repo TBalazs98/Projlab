@@ -81,6 +81,7 @@ public class Main {
         String[] cmd={};
         String line;
         int[] ObjCounts = {0,0,0,0,0,0}; //Material, Asteroid, TG, Settler, Robot, Ufo
+        CommandManager cm = new CommandManager();
         try {
 
             line=reader.readLine();
@@ -102,12 +103,23 @@ public class Main {
                     InputManager.letrehoz(i,params,j);
                 }
             }
+
+            reader.readLine();
+
+
+            while(cm.IsRunning()){
+                 line=reader.readLine();
+                 System.out.println( line);
+                 cm.command(line);
+            }
+
+
 //            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        CommandManager cm = new CommandManager();
+
         cm.listMaterials();
         cm.listAsteroids();
         cm.listTeleportGates();
