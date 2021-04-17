@@ -1,0 +1,13 @@
+M1 	Iron
+M2 	Uran
+M3 	Coal
+M4 	IceWater
+M5 	Coal
+M6 	Coal
+M7 	Iron
+M8  Coal
+M9  Uran
+M10 Coal
+M1  IceWater
+A1  0   false   false   M3
+S1	A1	M1,M2,M4,M5,M6,M7,M8,M9,M10,M11

@@ -1,0 +1,3 @@
+M1	Uran
+A1	 0	false	true	null
+S1 	A1	M1

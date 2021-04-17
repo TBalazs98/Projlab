@@ -1,0 +1,7 @@
+M1	Iron
+A1	0	false	false	M1
+A2	3	false	true
+A3	4	true	true
+G1	true	G2	A1
+G2	true	G1	A3
+S1	A2
