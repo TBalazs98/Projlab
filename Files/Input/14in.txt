@@ -8,3 +8,4 @@ createmap 4 1 0 1 0 0
 
 SetRandomize off
 build S1 teleportgate
+stop

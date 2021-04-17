@@ -35,7 +35,7 @@ public class TeleportGate implements DestinationObject, Steppable {
         //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("? Do we have enough materials to build a pair of teleportgates?\t(Y)es / (N)o \t");
+           /* System.out.print("? Do we have enough materials to build a pair of teleportgates?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -51,10 +51,10 @@ public class TeleportGate implements DestinationObject, Steppable {
                 this.isActive = false;
                 s.AddGate(this);
                 s.AddGate(pair);
-            }
+            }*/
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        /*setInventory();
+        setInventory();
         if(inventory.ContainsAllElementsIn(i))
             {
                 this.pair = new TeleportGate();
@@ -62,7 +62,7 @@ public class TeleportGate implements DestinationObject, Steppable {
                 this.isActive = false;
                 s.AddGate(this);
                 s.AddGate(pair);
-            }*/
+            }
 
         //Logger.getInstance().printReturnCommand();
     }

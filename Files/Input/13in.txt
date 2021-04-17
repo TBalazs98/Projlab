@@ -7,3 +7,4 @@ createmap 3 1 0 1 0 0
 
 SetRandomize off
 build S1 robot
+stop

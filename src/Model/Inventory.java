@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Inventory {
     public HashMap<MaterialName, Integer > inventory;
-    private Material[] materials;
+    private ArrayList<Material> materials = new ArrayList<>();
     /**
      *  Publikus alapertelmezett konstruktor.
      */
@@ -45,15 +45,19 @@ public class Inventory {
      * Egy nyersanyag nevet ker parameterul, es a jelenlegi Inventory-ba belerakja.
      * @param m az Inventory-ba rakni kivant nyersanyag neve
      */
-    public void Add(MaterialName m) {
+    public void Add(Material m) {
         //Object[] p = {m};
         //Logger.getInstance().printCommandCall(this, p);
         if(this.inventory.size()<10) {
             int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
-            if(inventory.containsKey(m))        //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
-                n = inventory.get(m);           //nullexception hibat dob
+            if(inventory.containsKey(m.name))        //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
+                n = inventory.get(m.name);           //nullexception hibat dob
             n++;
-            this.inventory.put(m,n);
+            this.inventory.put(m.name,n);
+            try {
+                this.materials.add(m);
+            }catch (NullPointerException e){
+            }
         }
         //Logger.getInstance().printReturnCommand();
     }
@@ -62,14 +66,15 @@ public class Inventory {
      * Egy nyersanyag nevet ker parameterul, es azt a nyersanyagot kiveszi az Inventory-bol.
      * @param m a eltavolitani kivant nyersanyag neve
      */
-    public void Remove(MaterialName m) {
+    public void Remove(Material m) {
         //Object[] p = {m};
         //Logger.getInstance().printCommandCall(this, p);
         if(this.inventory.size()<10) {
             int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
-            if(inventory.containsKey(m)) {      //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
-                n = inventory.get(m);           //nullexception hibat dob
-                this.inventory.put(m,n);
+            if(inventory.containsKey(m.name)) {      //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
+                n = inventory.get(m.name);           //nullexception hibat dob
+                this.inventory.put(m.name,n);
+                this.materials.remove(m);
             }
         }
         //Logger.getInstance().printReturnCommand();
@@ -112,7 +117,18 @@ public class Inventory {
 
     }
 
-    public Material[] GetMaterials(){
-        return  materials;
+    public ArrayList<Material> GetMaterials(){
+        return  this.materials;
+    }
+
+    public Material GetMaterialByName(MaterialName m){
+        for(Material mat : this.materials) {
+            if (mat.name.equals(m)) {
+                Main.materials.remove(mat);
+                this.inventory.replace(m,inventory.get(m)-1);
+                return mat;
+            }
+        }
+        return  null;
     }
 }

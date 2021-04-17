@@ -149,9 +149,9 @@ public class CommandManager {
         cmd[2] = cmd[2].toUpperCase();
 
         try {
-            int index = Integer.parseInt(cmd[1].substring(1));
+            int index = Integer.parseInt(cmd[1].substring(1))-1;
             if( cmd[1].charAt(0) == 'S') {
-                if ((index <= 0) && (index < Main.settlers.size())) {
+                if ((index >= 0) && (index < Main.settlers.size())) {
                     switch (cmd[2]) {
                         case "ROBOT": {
                             Main.settlers.get(index).BuildRobot();
@@ -295,7 +295,7 @@ public class CommandManager {
                     if (g.GetPair() != null) {
                         pairid = Main.teleportgates.indexOf(g.GetPair()) + 1;
                     }
-                    System.out.println("G" + i + " " + g.GetisActive() + " " + (pairid != 0 ? ("G" + pairid) : "") + " " + (ast != 0 ? ("A" + ast) : ""));
+                    System.out.println("G" + i + " " + g.GetisActive() + " " + (pairid != 0 ? ("G" + pairid) : "") + " " + (ast != 0 ? ("A" + ast) : "null"));
                 }
             }
 
@@ -308,13 +308,13 @@ public class CommandManager {
         for(Settler s : Main.settlers){
             i++;
             int aindex = Main.asteroids.indexOf((s.getAsteroid())) + 1 ;
-            System.out.print("S" + i + " " + "A" + aindex);
+            System.out.print("S" + i + " " + "A" + aindex + " ");
             if(s.GetInventory().Size() != 0) {
-                System.out.println(s.GetInventory().Size() + " ");
+                System.out.print(s.GetInventory().Size() + " ");
                 ArrayList<String> smat = new ArrayList<>();
                 for (Material m : s.GetInventory().GetMaterials())
                     smat.add("M" + (Main.materials.indexOf(m) + 1));
-                System.out.print((String.join(",", smat)));
+                System.out.print((String.join(",", smat)) + " ");
             }
             else {
                 System.out.print(" null ");
@@ -338,7 +338,7 @@ public class CommandManager {
             i++;
             int aindex = Main.asteroids.indexOf((u.getAsteroid())) + 1 ;
             System.out.print("U" + i + " " + "A" + aindex);
-            Material[] mat =  u.GetInventory().GetMaterials();
+            ArrayList<Material> mat =  u.GetInventory().GetMaterials();
             if(u.GetInventory().Size() != 0) {
                 ArrayList<String> umat = new ArrayList<>();
                 for (Material m : u.GetInventory().GetMaterials())

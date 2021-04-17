@@ -25,7 +25,7 @@ public class Material  {
        // Object[] p = {inventory.getClass().getSimpleName()};
         //Logger.getInstance().printCommandCall(this, p);
 
-        inventory.Add(this.getName());
+        inventory.Add(this);
 
         //Logger.getInstance().printReturnCommand();
     }
@@ -48,7 +48,7 @@ public class Material  {
        // Object[] p = {inventory.getClass().getSimpleName()};
         //Logger.getInstance().printCommandCall(this, p);
 
-        inventory.Remove(this.getName());
+        inventory.Remove(this);
 
        // Logger.getInstance().printReturnCommand();
     }

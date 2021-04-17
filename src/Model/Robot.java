@@ -33,7 +33,7 @@ public class Robot extends Worker {
         //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("? Do we have enough materials to build a robot?\t(Y)es / (N)o \t");
+            /*System.out.print("? Do we have enough materials to build a robot?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -47,13 +47,13 @@ public class Robot extends Worker {
                 asteroid = a;           //A robot Aszteroidajat beallitjuk a parameterkent kapott Aszteroidara
                 a.Accept(this);      //Es ezt a tenyt kozoljuk az Aszteroidaval is
             }
-
+*/
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        /*  setInventory();
+         setInventory();
             if(inventory.ContainsAllElementsIn(i)) {
-                asteroid=a;
+                this.asteroid=a;
                 a.Accept(this);
-            }*/
+            }
 
         //Logger.getInstance().printReturnCommand();
     }
