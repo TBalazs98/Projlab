@@ -12,8 +12,8 @@ public class Game {
      *Privat konstruktor.
      */
     private Game() {
-        Logger.getInstance().printCommandCall(this);
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printReturnCommand();
     }
 
     private static final Game game = new Game();
@@ -38,34 +38,34 @@ public class Game {
      *Jatekosok osszegyujtottek eleg nyersanyagot, felepitik a bazist ezzel nyernek.
      */
     public void WinGame() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         System.out.println("Settlers have won the game");
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      *Minden karakter meghalt vagy nem talalhato eleg nyersanyag az aszteroida ovben a bazis felepitesehez.
      */
     public void LoseGame() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         System.out.println("Settlers have lost the game");
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     /**
      *Kovetkezo kor inditasa.
      */
     public void NextRound() {
-        Logger.getInstance().printCommandCall(this);
+        //Logger.getInstance().printCommandCall(this);
 
         if(Main.Randomize == true)
             steppables.forEach(s -> s.Step());
 
-        Logger.getInstance().printReturnCommand();
+        //Logger.getInstance().printReturnCommand();
     }
 
     public void AddSteppable(Object s){
