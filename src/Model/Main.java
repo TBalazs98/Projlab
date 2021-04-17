@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -33,51 +34,49 @@ public class Main {
     public static ArrayList<UFO> ufos= new ArrayList<>();
 
 
+        //region regexek
+        String regex = "\\W*((?i)createmap(?-i))\\W*\\s(\\d+\\s){5}\\d+";
+        static String materialregex = "[013]|2\\s[012]";
+
+        static String lonely_empty_asteroid = "0\\s[01]\\s\\d{1,}\\s0";
+        //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
+        //pl    : 0 0 25 0
+
+        static String lonely_not_empty_asteroid = "0\\s[01]\\s\\d{1,}\\s1\\s\\d{1,}";
+        //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
+        //pl    : 0 0 25 1 5
+
+        static String not_lonely_not_empty_asteroid = "\\d\\s(\\d{1,},{0,1})*\\s[01]\\s\\d{1,}\\s1\\s\\d{1,}";
+        //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
+        //pl    : 2 5,2 1 5 1 1
+        //hint  : egyelőre nem nézi a vesszőket a szomszédok között
+        //        egyelőre nem nézi hogy annyi szomszéd index legyen beolvasva, mint amennyit megadtunk az első inputban
+        static String not_lonely_empty = "\\d\\s(\\d{1,},{0,1})*\\s[01]\\s\\d{1,}\\s0";
+        //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
+        //pl    : 5 5,2,3,4,5 1 5 0
+        //hint  : egyelőre nem nézi a vesszőket a szomszédok között
+        //        egyelőre nem nézi hogy annyi szomszéd index legyen beolvasva, mint amennyit megadtunk az első inputban
+
+        //itt tudtok regexel baszkodni : https://regex101.com/
 
 
-    String regex = "\\W*((?i)createmap(?-i))\\W*\\s(\\d+\\s){5}\\d+";
-    static String materialregex = "[013]|2\\s[012]";
+        static String tg_placed_regex = "\\d{1,}\\s1\\s\\d{1,}\\s[01]\\s[01]";
 
-    static String lonely_empty_asteroid ="0\\s[01]\\s\\d{1,}\\s0";
-    //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
-    //pl    : 0 0 25 0
-
-    static String lonely_not_empty_asteroid ="0\\s[01]\\s\\d{1,}\\s1\\s\\d{1,}";
-    //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
-    //pl    : 0 0 25 1 5
-
-    static String not_lonely_not_empty_asteroid ="\\d\\s(\\d{1,},{0,1})*\\s[01]\\s\\d{1,}\\s1\\s\\d{1,}";
-    //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
-    //pl    : 2 5,2 1 5 1 1
-    //hint  : egyelőre nem nézi a vesszőket a szomszédok között
-    //        egyelőre nem nézi hogy annyi szomszéd index legyen beolvasva, mint amennyit megadtunk az első inputban
-    static String not_lonely_empty="\\d\\s(\\d{1,},{0,1})*\\s[01]\\s\\d{1,}\\s0";
-    //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
-    //pl    : 5 5,2,3,4,5 1 5 0
-    //hint  : egyelőre nem nézi a vesszőket a szomszédok között
-    //        egyelőre nem nézi hogy annyi szomszéd index legyen beolvasva, mint amennyit megadtunk az első inputban
-
-    //itt tudtok regexel baszkodni : https://regex101.com/
-
-    String tgregex ="\\d\\s[01]\\s\\d\\s[01]\\s[01]";
-
-    String tp_placed_regex = "";
-
-    String tp_notplaced_regex = "";
+        static String tg_notplaced_regex = "\\d{1,}\\s0\\s[01]\\s[01]";
 
 
-    String settlerregex ="\\d\\s\\d\\s(\\d,)*\\d\\s[0123]\\s\\d|\\d\\s0\\s0";
-    String robotregex ="\\d";
-    String uforegex ="\\d\\s0|\\d\\s\\d\\s(\\d,)*\\d\n";
+        static String settlerregex = "\\d\\s\\d\\s(\\d,)*\\d\\s[0123]\\s\\d|\\d\\s0\\s0";
+        static String settler_wom_and_wotg = "\\d{1,}\\s0\\s0";   //WithOutMaterial and WithOutTG
+        static String settler_wm_and_wotg = "\\d{1,}\\s\\d{1,}\\s(\\d{1,},{0,1})*\\s0";    //WithMateruak and WithOutTG
+        static String settler_wom_and_wtg = "\\d{1,}\\s0\\s[0123]\\s[1234]";    //WithOutMaterial and WithTG
+        static String settler_wm_and_wtg = "\\d{1,}\\s\\d{1,}\\s(\\d{1,},{0,1})*\\s[0123]\\s[1234]";     //WithMaterial and WithTG
+        String robotregex = "\\d";
+        String uforegex = "\\d\\s0|\\d\\s\\d\\s(\\d,)*\\d\n";
 
+        //endregion regexek
 
     public static void main(String[] args)  {
-
-        Scanner in = new Scanner(System.in);
-        String[] input={};
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-
         String[] cmd={};
         String line;
         int[] ObjCounts = {0,0,0,0,0,0}; //Material, Asteroid, TG, Settler, Robot, Ufo
@@ -89,69 +88,110 @@ public class Main {
                 ObjCounts[i-1]=Integer.parseInt(cmd[i]);
             }
             listaz(ObjCounts);
-            //System.out.println(reader.readLine());
 
-
-            for(int i=0; i<6;i++){
-                for(int j=0; j<ObjCounts[i];j++){
-                    String temp=reader.readLine();
-
-                    System.out.println("apad"+temp);
-                    letrehoz(i,temp);
-
-                }
+            for(int i=0; i<ObjCounts[0];i++){
+                String params = reader.readLine();
+                Main.createMaterial(params);
             }
 
-            CommandManager cm = new CommandManager();
-            cm.listMaterials();
-            cm.listAsteroids();
-            //cm.saveMap("savedmap");
-
-
-//
+            for(int i=1; i<6;i++){
+                create(i,ObjCounts[i]);
+                for(int j=0; j<ObjCounts[i];j++){
+                    String params=reader.readLine();
+                    letrehoz(i,params,j);
+                }
+            }
 //            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        CommandManager cm = new CommandManager();
+        cm.listMaterials();
+        cm.listAsteroids();
+        //cm.saveMap("savedmap");
+
 
         //Test t = new Test();
         //t.menu();               //teszt menu meghivasa
 
-
-
-//        for(int i=0; i<Main.materials.size();i++){
-//            System.out.println(Main.materials.get(i).name);
-//        }
-
-
-
     }
 
-    public static void letrehoz(int what, String params ){
+    public static void letrehoz(int what, String params,int actual ){
         switch (what){
             case 0:
                 if(Pattern.matches(materialregex,params)){
                     createMaterial(params);
-                    System.out.println(Main.materials.get(0).name);
-                    break;
                     }
+                break;
             case 1:
                 if(Pattern.matches(lonely_empty_asteroid,params)){
-                    createAsteroid1(params);
+                    createAsteroid1(params,actual);
                 }else if(Pattern.matches(lonely_not_empty_asteroid,params)) {
-                    createAsteroid2(params);
+                    createAsteroid2(params,actual);
                 }else if(Pattern.matches(not_lonely_empty,params)){
-                    createAsteroid3(params);
+                    createAsteroid3(params,actual);
                 }else if(Pattern.matches(not_lonely_not_empty_asteroid,params)){
-                    createAsteroid4(params);
+                    createAsteroid4(params,actual);
                 }
+                break;
             case 2:
+                if(Pattern.matches(tg_placed_regex,params)){
+                    createTeleportGate1(params,actual);
+                }else if(Pattern.matches(tg_notplaced_regex,params)){
+                    createTeleportGate2(params,actual);
+                }
+                break;
             case 3:
+                if(Pattern.matches(settler_wm_and_wtg,params)){
+                    createSettler1(params,actual);
+                }else if(Pattern.matches(settler_wm_and_wotg,params)){
+                    createSettler2(params,actual);
+                }else if(Pattern.matches(settler_wom_and_wtg,params)){
+                    createSettler3(params,actual);
+                }else if(Pattern.matches(settler_wom_and_wotg,params)){
+                    createSettler4(params,actual);
+                }
             case 4:
             case 5:
         }
 
+    }
+
+    public static void create(int what, int how_man){
+        switch (what){
+            case 0:
+                for(int i=0; i<how_man;i++){
+                    Main.materials.add(new Material());
+                }
+                break;
+            case 1:
+                for(int i=0; i<how_man;i++){
+                    Main.asteroids.add(new Asteroid());
+                }
+                break;
+            case 2:
+                for(int i=0; i<how_man;i++){
+                    Main.teleportgates.add(new TeleportGate());
+                }
+                break;
+            case 3:
+                for(int i=0; i<how_man;i++){
+                    Main.settlers.add(new Settler());
+                }
+                break;
+            case 4:
+                for(int i=0; i<how_man;i++){
+                    Main.robots.add(new Robot());
+                }
+                break;
+            case 5:
+                for(int i=0; i<how_man;i++){
+                    Main.ufos.add(new UFO());
+                }
+                break;
+
+        }
     }
 
     public static void createMaterial(String params){
@@ -189,65 +229,97 @@ public class Main {
         }
     }
 
-    public static void createAsteroid1(String params){        //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
+    public static void createAsteroid1(String params,int actual){        //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
                                                               //pl    : 0 0 25 0
         String[] cmd = params.split(" ");
-        Main.asteroids.add(new Asteroid());
-        Asteroid a =Main.asteroids.get(Main.asteroids.size()-1);
+
+        Asteroid a =Main.asteroids.get(actual);
         Main.setCommonAsteroid(a,Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
 
     }
-    public static void createAsteroid2(String params){         //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
+    public static void createAsteroid2(String params,int actual){         //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
                                                                 //pl    : 0 0 25 1 5
         String[] cmd = params.split(" ");
-        Main.asteroids.add(new Asteroid());
-        Asteroid a =Main.asteroids.get(Main.asteroids.size()-1);
+        Asteroid a =Main.asteroids.get(actual);
         Main.setCommonAsteroid(a,Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
         a.AddMaterial(Main.materials.get(Integer.parseInt(cmd[4])-1));
 
     }
-    public static void createAsteroid3(String params){         //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
-                                                               //pl    : 2 5,2 1 5 1 1
+    public static void createAsteroid3(String params,int actual){         //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
+                                                               //pl    : 2 1,2 1 5 0
+        String[] cmd = params.split("\\t");
+        String[] neighbors={""};
+        int ize = Integer.parseInt(cmd[0]);
+        if(ize==1) {
+            System.out.println( "itt vagyok");
+            String asd = cmd[1];
+            neighbors[0] = asd;
+        }else{
+           neighbors = cmd[1].split(",");
+        }
 
+        Asteroid a = Main.asteroids.get(actual);
+        for(int i=0; i<Integer.parseInt(cmd[0]);i++){
+            a.AddNeighbour(Main.asteroids.get(Integer.parseInt(neighbors[i])-1));
+        }
+        Main.setCommonAsteroid(a,Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]),Integer.parseInt(cmd[4]));
     }
-    public static void createAsteroid4(String params){          //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
+    public static void createAsteroid4(String params,int actual){          //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
                                                                  //pl    : 5 5,2,3,4,5 1 5 0
+        createAsteroid3(params,actual);
+        String[] cmd = params.split(" ");
+        Main.asteroids.get(actual).AddMaterial(Main.materials.get(Integer.parseInt(cmd[5])-1));
 
     }
-
     public static void setCommonAsteroid(Asteroid a, int sunprox, int layer, int empty){
         //a.SetSunProximity(sunprox);
         a.setLayer(layer);
         //a.SetEmpty
     }
 
-    public static void createPortGate_placed(String params){
-
-        String[] cmd = params.split( " ");
-        Main.teleportgates.add(new TeleportGate());
-        TeleportGate tp = Main.teleportgates.get(Main.teleportgates.size()-1);
-        tp.setPair(Main.teleportgates.get(Integer.parseInt(cmd[0])-1));
-
-        /*if(Integer.parseInt(cmd[1]) == 0){
-            tp.setPlaced(false);
-        }else {
-            tp.setActive(true);
-        }
-
-        if(Integer.parseInt(cmd[2]) == 0){
-            tp.setPlaced(false);
-        }else {
-            tp.setActive(true);
-        }*/
-
-        tp.setPlaced(true);
-        tp.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[2])-1));
-
-        tp.setActive(Integer.parseInt(cmd[3]) != 0);
-
-        tp.setCrazy(Integer.parseInt(cmd[4]) != 0);
+    public static void createTeleportGate1(String params, int actual){
+        String[] cmd = params.split( "\\t");
+        TeleportGate tg = Main.teleportgates.get(actual);
+        Main.setCommonTG(tg,Integer.parseInt(cmd[0]),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[3]),Integer.parseInt(cmd[4]));
+        tg.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[2])-1));
 
     }
+    public static void createTeleportGate2(String params,int actual){
+        String[] cmd = params.split( "\\t");
+        TeleportGate tg = Main.teleportgates.get(actual);
+        Main.setCommonTG(tg,Integer.parseInt(cmd[0]),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
+    }
+    public static void setCommonTG(TeleportGate tg,int pair,int placed,int active, int crazy){
+        if(pair!=0){
+            tg.setPair(Main.teleportgates.get(pair-1));
+        }
+        tg.setPlaced(IntToBoolean(placed));
+        tg.setActive(IntToBoolean(active));
+        tg.setCrazy(IntToBoolean(crazy));
+    }
+    public static boolean IntToBoolean(int integer){
+        return integer==1;
+    }
+
+    public static void createSettler1(String params, int actual){   //with material and with tg
+        String[] cmd = params.split( "\\t");
+        String[] materials=cmd[2].split(",");
+        String[] tgs=cmd[4].split(",");
+        Settler s = Main.settlers.get(actual);
+        for(int i=0; i<materials.length;i++){
+            s.AddMaterial(Main.materials.get(Integer.parseInt(materials[i])-1));
+        }
+        for(int i=0; i<tgs.length;i++){
+            s.AddGate(Main.teleportgates.get(Integer.parseInt(tgs[i])-1));
+        }
+
+    }
+    public static void createSettler2(String params, int actual){   //With material and without tg
+        Settler s = Main.settlers.get(actual);
+
+    }
+    public static void createSettler3(String params, int actual){}
+    public static void createSettler4(String params, int actual){}
 
 
 
