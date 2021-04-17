@@ -288,9 +288,9 @@ public class Main {
 
     }
     public static void setCommonAsteroid(Asteroid a, int sunprox, int layer, int empty){
-        //a.SetSunProximity(sunprox);
+        a.SetSunProximityManual(IntToBoolean(sunprox));
         a.setLayer(layer);
-        //a.SetEmpty
+        a.SetEmpty(IntToBoolean(empty));
     }
 
     public static void createTeleportGate1(String params, int actual){
