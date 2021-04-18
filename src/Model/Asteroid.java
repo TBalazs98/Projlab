@@ -161,10 +161,10 @@ public class Asteroid implements DestinationObject {
         }*/
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        if (layers > 0)
+        if (this.layers > 0)
             this.layers--;
-        if(!isEmpty && layers == 0) {
-            this.material.Hit(this);
+        if(!(this.isEmpty) && (this.layers == 0)) {
+            this.material.Hit(Main.asteroids.get(Main.asteroids.indexOf(this)));
         }
 
 
