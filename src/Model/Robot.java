@@ -129,4 +129,9 @@ public class Robot extends Worker {
         //Logger.getInstance().printReturnCommand();
     }
 
+    public void Die(){
+        Main.robots.remove(this);
+        this.asteroid.Remove(this);
+    }
+
 }

@@ -38,5 +38,11 @@ public class UFO extends Character implements Steppable, mine{
         return this.inventory;
     }
 
+    public void Die(){
+        Main.ufos.remove(this);
+        this.inventory.CharacterDied();
+        this.asteroid.Remove(this);
+    }
+
 
 }

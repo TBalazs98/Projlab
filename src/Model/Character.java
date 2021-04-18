@@ -21,6 +21,7 @@ public abstract class Character {
     public void Die() {
         //Logger.getInstance().printCommandCall(this);
 
+
         asteroid.Remove(this);
 
         //Logger.getInstance().printReturnCommand();

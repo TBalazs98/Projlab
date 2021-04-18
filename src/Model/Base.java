@@ -32,7 +32,7 @@ public class Base {
         //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("Do we have enough materials to build the base?\t(Y)es / (N)o \t");
+           /* System.out.print("Do we have enough materials to build the base?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -46,11 +46,11 @@ public class Base {
                 Build();
             }
 
-        //fuggveny lefutasa tagvaltozo lekerdezesevel
-        /*setInventory();
+        //fuggveny lefutasa tagvaltozo lekerdezesevel*/
+        setInventory();
         if(inventory.ContainsAllElementsIn(i))
             Build();
-        */
+
 
         //Logger.getInstance().printReturnCommand();
     }
@@ -82,4 +82,7 @@ public class Base {
         //Logger.getInstance().printReturnCommand();
     }
 
+    public Inventory GetInventory(){
+        return inventory;
+    }
 }

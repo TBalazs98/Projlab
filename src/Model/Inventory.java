@@ -48,7 +48,7 @@ public class Inventory {
     public void Add(Material m) {
         //Object[] p = {m};
         //Logger.getInstance().printCommandCall(this, p);
-        if(this.inventory.size()<10) {
+
             int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
             if(inventory.containsKey(m.name))        //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
                 n = inventory.get(m.name);           //nullexception hibat dob
@@ -58,7 +58,7 @@ public class Inventory {
                 this.materials.add(m);
             }catch (NullPointerException e){
             }
-        }
+
         //Logger.getInstance().printReturnCommand();
     }
 
@@ -69,14 +69,16 @@ public class Inventory {
     public void Remove(Material m) {
         //Object[] p = {m};
         //Logger.getInstance().printCommandCall(this, p);
-        if(this.inventory.size()<10) {
+
+        if(inventory.size() > 0) {
             int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
-            if(inventory.containsKey(m.name)) {      //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
+            if (inventory.containsKey(m.name)) {      //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
                 n = inventory.get(m.name);           //nullexception hibat dob
-                this.inventory.put(m.name,n);
+                this.inventory.put(m.name, n);
                 this.materials.remove(m);
             }
         }
+
         //Logger.getInstance().printReturnCommand();
     }
 
@@ -125,10 +127,18 @@ public class Inventory {
         for(Material mat : this.materials) {
             if (mat.name.equals(m)) {
                 Main.materials.remove(mat);
-                this.inventory.replace(m,inventory.get(m)-1);
+                this.inventory.replace(m,m.hashCode()-1);
                 return mat;
             }
         }
         return  null;
+    }
+
+    public void CharacterDied(){
+        for(Material m : Main.materials)
+            Main.materials.remove(m);
+        for(Material m : materials)
+            materials.remove(m);
+        this.inventory.clear();
     }
 }

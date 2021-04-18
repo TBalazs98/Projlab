@@ -377,24 +377,11 @@ public class CommandManager {
     public static void SunStorm (String[] cmd){
         //ellenőrizni a tömb méretét
         cmd[1] = cmd[1].toUpperCase();
-        cmd[2] = cmd[2].toUpperCase();
-
         try {
-            int index = Integer.parseInt(cmd[1].substring(1));
+            int index = Integer.parseInt(cmd[1].substring(1)) - 1;
             if( cmd[1].charAt(0) == 'A') {
                 if ((index >= 0) && (index < Main.asteroids.size())) {
-                    switch (cmd[2]){
-                        case "ON" : {
-                            Main.ab.StartStorm(Main.asteroids.get(index));
-                            break;
-                        }
-                        case "OFF" : {
-
-                            break;
-                        }
-                        default:
-                            System.out.println("Invalid command!");
-                    }
+                    Main.ab.StartStorm(Main.asteroids.get(index));
                 }
             }
             else
@@ -568,9 +555,10 @@ public class CommandManager {
                 ArrayList<String> gat = new ArrayList<>();
                 for (TeleportGate t : s.GetGates())
                     gat.add(Integer.toString((Main.teleportgates.indexOf(t))+ 1));
-                pw.println(String.join(",",gat));
+                pw.print(String.join(",",gat));
 
             }
+            System.out.println("");
         }
 
         for(Robot r : Main.robots){

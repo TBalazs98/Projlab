@@ -50,10 +50,47 @@ public class Settler extends Worker {
     public void BuildBase() {
         //Logger.getInstance().printCommandCall(this);
 
-        Base base = new Base(inventory);        //bazis epitese, atadva a sajat inventorynkat (ebben nezi meg a Base, hogy fel tud-e epulni)
+        Inventory setlersOnsameAsteroid = new Inventory();
+        ArrayList<Settler> BaseBuilders = new ArrayList<>();
+        for(Settler s : Main.settlers){
+            if (s.getAsteroid() == this.asteroid){
+                if(s.inventory.GetMaterials() != null)
+                    BaseBuilders.add(s);
+                for(Material m : s.inventory.GetMaterials())
+                    setlersOnsameAsteroid.Add(m);
+            }
 
-        //Logger.getInstance().printReturnCommand();
+        }
+        Base base = new Base(setlersOnsameAsteroid);        //bazis epitese, atadva a sajat inventorynkat (ebben nezi meg a Base, hogy fel tud-e epulni)
+        /*if(base !=null){
+           ArrayList<Integer> basecount = new ArrayList<>();
+           basecount.add(3); basecount.add(3); basecount.add(3); basecount.add(3);
+                for(Settler s : BaseBuilders){
+                    for(Material m: s.GetInventory().GetMaterials()) {
+                        System.out.println("count: " + s.GetInventory().Size());
+                        if (basecount.get(0) > 0 && m.name == NormalMaterialName.IRON && s.GetInventory().Size() != 0) {
+                            s.inventory.Remove(s.inventory.GetMaterialByName(NormalMaterialName.IRON));
+                            basecount.set(0,basecount.get(0)-1);
+                        }
+                        if (basecount.get(1) > 0 && m.name == NormalMaterialName.COAL && s.GetInventory().Size() != 0) {
+                            s.inventory.Remove(s.inventory.GetMaterialByName(NormalMaterialName.COAL));
+                            basecount.set(1,basecount.get(1)-1);
+                        }
+                        if (basecount.get(2) > 00 && m.name == RadioactiveMaterialName.URAN && s.GetInventory().Size() != 0) {
+                            s.inventory.Remove(s.inventory.GetMaterialByName(RadioactiveMaterialName.URAN));
+                            basecount.set(2,basecount.get(2)-1);
+                        }
+                        if (basecount.get(3) > 0 && m.name == SublimableMaterialName.ICEWATER && s.GetInventory().Size() != 0) {
+                            s.inventory.Remove(s.inventory.GetMaterialByName(SublimableMaterialName.ICEWATER));
+                            basecount.set(3,basecount.get(3)-1);
+                        }
+                    }
+                //}
+            }
+        }*/
+
     }
+        //Logger.getInstance().printReturnCommand();
 
     /**
      * A Settler bazis epitesehez szukseges metodusa
@@ -128,6 +165,9 @@ public class Settler extends Worker {
 
         asteroid.Remove(this);                  //levesszuk az adott Settlert az aszteroidarol (mert meghalt)
         AsteroidBelt.getInstance().SetSettlersAlive();  //Es atallitjuk a jelenleg eletben levo Settlereket
+        this.inventory.CharacterDied();
+        Main.settlers.remove(this);
+
 
         //Logger.getInstance().printReturnCommand();
     }
@@ -181,7 +221,8 @@ public class Settler extends Worker {
         //Object[] p = {m.getName()};
         //Logger.getInstance().printCommandCall(this, p);
 
-        m.Add(inventory);
+        if(this.inventory.GetMaterials().size() < 10)
+            m.Add(inventory);
 
         //Logger.getInstance().printReturnCommand();
     }

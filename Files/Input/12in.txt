@@ -17,3 +17,4 @@ createmap 12 1 0 2 0 0
 
 SetRandomize off
 build S1 base
+stop
