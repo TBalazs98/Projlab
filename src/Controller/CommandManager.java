@@ -246,12 +246,12 @@ public class CommandManager {
         else {
             for(Material m : Main.materials){
                 i++;
-                System.out.print("M" + i + " " + m.name);
-                InputManager.write_to_output(generateoutput,"M" + i + " " + m.name);
+                System.out.print("M" + i + "\t" + m.name);
+                InputManager.write_to_output(generateoutput,"M" + i + "\t" + m.name);
                 if(m.name == RadioactiveMaterialName.URAN) {
                     RadioactiveMaterial r = (RadioactiveMaterial) m;
-                    System.out.print(" " + r.exposed);
-                    InputManager.write_to_output(generateoutput," " + r.exposed);
+                    System.out.print("\t" + r.exposed);
+                    InputManager.write_to_output(generateoutput,"\t" + r.exposed);
                 }
                 System.out.println();
             }
@@ -270,7 +270,7 @@ public class CommandManager {
                 i++;
                 if(!a.GetisEmpty())
                     mat = (Main.materials.indexOf(a.getMaterial()) + 1);
-                System.out.print("A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " + (a.GetisEmpty()?"null ":("M" +mat + " ")));
+                System.out.print("A" + i + "\t" + a.getLayers() + "\t" + a.GetSunProximity() + "\t" + a.GetisEmpty() + "\t" + (a.GetisEmpty()?"null\t":("M" +mat + "\t")));
 
 
                 ArrayList<String> neigh = new ArrayList<>();
@@ -282,7 +282,7 @@ public class CommandManager {
                 }
                 System.out.println(String.join(",",neigh));
                 String asdasd = String.join(",",neigh);
-                InputManager.write_to_output(generateoutput,"A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " + (a.GetisEmpty()?"null ":("M" +mat + " "))+(a.GetisEmpty()?"":asdasd));
+                InputManager.write_to_output(generateoutput,"A" + i + "\t" + a.getLayers() + "\t" + a.GetSunProximity() + "\t" + a.GetisEmpty() + (a.GetisEmpty()?"\tnull":("\tM" +mat + ""))+(a.GetisEmpty()?"":("\t" + asdasd)));
                 //TODO EZ MIEZ Bakonyi
             }
         }
@@ -305,8 +305,8 @@ public class CommandManager {
                     if (g.GetPair() != null) {
                         pairid = Main.teleportgates.indexOf(g.GetPair()) + 1;
                     }
-                    System.out.println("G" + i + " " + g.GetisActive() + " " + (pairid != 0 ? ("G" + pairid) : "") + " " + (ast != 0 ? ("A" + ast) : "null"));
-                    InputManager.write_to_output(generateoutput,"G" + i + " " + g.GetisActive() + " " + (pairid != 0 ? ("G" + pairid) : "") + " " + (ast != 0 ? ("A" + ast) : "null"));
+                    System.out.println("G" + i + "\t" + g.GetisActive() + "\t" + (pairid != 0 ? ("G" + pairid) : "") + (ast != 0 ? ("\tA" + ast) : "\tnull"));
+                    InputManager.write_to_output(generateoutput,"G" + i + "\t" + g.GetisActive() + (pairid != 0 ? ("\tG" + pairid) : "") + (ast != 0 ? ("\tA" + ast) : "\tnull"));
                 }
             }
 
@@ -321,8 +321,8 @@ public class CommandManager {
             String setler = "";
             i++;
             int aindex = Main.asteroids.indexOf((s.getAsteroid())) + 1 ;
-            System.out.print("S" + i + " " + "A" + aindex + " ");
-            setler += ("S" + i + " " + "A" + aindex + " ");
+            System.out.print("S" + i + "\t" + "A" + aindex + "\t");
+            setler += ("S" + i + "\t" + "A" + aindex + "\t");
             if(s.GetInventory().Size() != 0) {
                 System.out.print(s.GetInventory().Size() + " ");
                 ArrayList<String> smat = new ArrayList<>();
@@ -332,8 +332,8 @@ public class CommandManager {
                 setler += ((String.join(",", smat)) + " ");
             }
             else {
-                System.out.print(" null ");
-                setler += " null ";
+                System.out.print("\tnull ");
+                setler += "\tnull ";
             }
             if(s.GetGates().size() != 0){
                 ArrayList<String> sgat = new ArrayList<>();
@@ -350,16 +350,16 @@ public class CommandManager {
             i++;
             String robot = "";
             int aindex = Main.asteroids.indexOf((r.getAsteroid())) + 1 ;
-            System.out.println("R" + i + " " + "A" + aindex);
-            InputManager.write_to_output(generateoutput,("R" + i + " " + "A" + aindex));
+            System.out.println("R" + i + "\t" + "A" + aindex);
+            InputManager.write_to_output(generateoutput,("R" + i + "\t" + "A" + aindex));
         }
         i = 0;
         for(UFO u : Main.ufos){
             i++;
             String ufo = "";
             int aindex = Main.asteroids.indexOf((u.getAsteroid())) + 1 ;
-            System.out.print("U" + i + " " + "A" + aindex + " ");
-            ufo+=("U" + i + " " + "A" + aindex + " ");
+            System.out.print("U" + i + "\t" + "A" + aindex + "\t");
+            ufo+=("U" + i + "\t" + "A" + aindex + " ");
             ArrayList<Material> mat =  u.GetInventory().GetMaterials();
             if(u.GetInventory().Size() != 0) {
                 ArrayList<String> umat = new ArrayList<>();
