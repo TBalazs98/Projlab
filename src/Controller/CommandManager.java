@@ -42,19 +42,19 @@ public class CommandManager {
                 break;
             }
             case "listmaterials":{
-                listMaterials(true);
+                listMaterials(generateoutput);
                 break;
             }
             case "listteleportgates":{
-                listTeleportGates();
+                listTeleportGates(generateoutput);
                 break;
             }
             case "listcharacters":{
-                listCharacters();
+                listCharacters(generateoutput);
                 break;
             }
             case "listasteroids":{
-                listAsteroids();
+                listAsteroids(generateoutput);
                 break;
             }
             case "sunstorm":{
@@ -283,7 +283,7 @@ public class CommandManager {
                     neigh.add("G" + (Main.teleportgates.indexOf(o) + 1));
                 }
                 System.out.println(String.join(",",neigh));
-                String asdasd = String.join(",",neigh)
+                String asdasd = String.join(",",neigh);
                 InputManager.write_to_output(generateoutput,"A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +(a.GetisEmpty()?"null ":("M" +mat + " "))+asdasd);
                 //TODO EZ MIEZ Bakonyi
             }
@@ -320,45 +320,57 @@ public class CommandManager {
         }
         int i = 0;
         for(Settler s : Main.settlers){
+            String setler = "";
             i++;
             int aindex = Main.asteroids.indexOf((s.getAsteroid())) + 1 ;
             System.out.print("S" + i + " " + "A" + aindex + " ");
+            setler += ("S" + i + " " + "A" + aindex + " ");
             if(s.GetInventory().Size() != 0) {
                 System.out.print(s.GetInventory().Size() + " ");
                 ArrayList<String> smat = new ArrayList<>();
                 for (Material m : s.GetInventory().GetMaterials())
                     smat.add("M" + (Main.materials.indexOf(m) + 1));
                 System.out.print((String.join(",", smat)) + " ");
+                setler += ((String.join(",", smat)) + " ");
             }
             else {
                 System.out.print(" null ");
+                setler += " null ";
             }
             if(s.GetGates().size() != 0){
                 ArrayList<String> sgat = new ArrayList<>();
                 for (TeleportGate t : Main.teleportgates)
                     sgat.add("G" + (Main.teleportgates.indexOf(t) + 1));
                 System.out.print((String.join(",", sgat)));
+                setler+=((String.join(",", sgat)));
             }
             System.out.println("");
+            InputManager.write_to_output(generateoutput,setler);
         }
         i = 0;
         for(Robot r : Main.robots){
             i++;
+            String robot = "";
             int aindex = Main.asteroids.indexOf((r.getAsteroid())) + 1 ;
             System.out.println("R" + i + " " + "A" + aindex);
+            InputManager.write_to_output(generateoutput,("R" + i + " " + "A" + aindex));
         }
         i = 0;
         for(UFO u : Main.ufos){
             i++;
+            String ufo = "";
             int aindex = Main.asteroids.indexOf((u.getAsteroid())) + 1 ;
-            System.out.print("U" + i + " " + "A" + aindex);
+            System.out.print("U" + i + " " + "A" + aindex + " ");
+            ufo+=("U" + i + " " + "A" + aindex + " ");
             ArrayList<Material> mat =  u.GetInventory().GetMaterials();
             if(u.GetInventory().Size() != 0) {
                 ArrayList<String> umat = new ArrayList<>();
                 for (Material m : u.GetInventory().GetMaterials())
                     umat.add(Integer.toString((Main.materials.indexOf(m) + 1)));
                 System.out.println((String.join(",", umat)));
+                ufo+=(String.join(",", umat));
             }
+            InputManager.write_to_output(generateoutput,ufo);
         }
 
     }
