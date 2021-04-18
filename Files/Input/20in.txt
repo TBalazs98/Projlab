@@ -8,3 +8,4 @@ createmap 2 2 0 1 0 0
 
 SetRandomize off
 drill S1
+stop
