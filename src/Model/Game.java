@@ -63,7 +63,8 @@ public class Game {
         //Logger.getInstance().printCommandCall(this);
 
         if(Main.Randomize == true)
-            steppables.forEach(s -> s.Step());
+            for(Steppable s: steppables)
+                s.Step();
 
         //Logger.getInstance().printReturnCommand();
     }
