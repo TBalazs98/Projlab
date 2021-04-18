@@ -63,6 +63,7 @@ public class InputManager {
             cm.listAsteroids(generateoutput);
             cm.listTeleportGates(generateoutput);
             cm.listCharacters(generateoutput);
+            cm.saveMap("savedmap");
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();

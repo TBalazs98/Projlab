@@ -17,7 +17,7 @@ public class Test {
         Scanner in = new Scanner(System.in);
         int testcase ;
         do {
-
+        //region printek
         System.out.println("1 - Drill Layer and reach Sublime Material");
         System.out.println("2 - Mine Sublime Material");
         System.out.println("3 - Move Settler to Asteroid");
@@ -40,7 +40,7 @@ public class Test {
         System.out.println("20 - Mine but Core is empty");
         System.out.println("21 - Mine but inventory full");
         System.out.println("22 - Exit!");
-
+        //endregion printek
 
         System.out.println("\n? Which test case would you like to run?");
 
