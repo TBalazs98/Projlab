@@ -506,18 +506,21 @@ public class CommandManager {
             }
 
         for(Asteroid a : Main.asteroids){
-            pw.print(a.GetNeighbourCount());
+            pw.print(a.GetNeighbourCount() + "\t");
             if(a.GetNeighbourCount() != 0) {
-                ArrayList<String> neig = new ArrayList<>();
-                for (DestinationObject n : a.GetNeighbours())
-                    neig.add(Integer.toString((Main.asteroids.indexOf(n) + 1)));
-
-                pw.print("\t" + String.join(",",neig));
+                ArrayList<String> neigh = new ArrayList<>();
+                for (DestinationObject o : a.GetNeighbours()) {
+                    if (Main.asteroids.indexOf(o) != -1)
+                        neigh.add(""+(Main.asteroids.indexOf(o) + 1));
+                    if (Main.teleportgates.indexOf(o) != -1)
+                        neigh.add(""+(Main.teleportgates.indexOf(o) + 1));
+                }
+                pw.print(String.join(",",neigh));
             }
             if(a.GetSunProximity())
-                pw.print("\t" + 1);
+                pw.print(1);
             else
-                pw.print("\t" + 0);
+                pw.print(0);
             pw.print("\t" + a.getLayers());
             if(a.GetisEmpty())
                 pw.println("\t" + 0);
