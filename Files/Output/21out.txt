@@ -1,5 +1,5 @@
-M1	Iron
-M2	Iron
+M1	IRON
+M2	IRON
 A1	4	true	false	M1
 A2	2	false	true
 S1	A1	M2

@@ -1,4 +1,4 @@
-M1	Coal
+M1	COAL
 A1	1	false	ture
 A2	2	false	true
 A3	3	false	false	M1
