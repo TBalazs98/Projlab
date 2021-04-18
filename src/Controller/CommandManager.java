@@ -500,13 +500,13 @@ public class CommandManager {
                 pw.println("1");
             } else if (m.name.equals(RadioactiveMaterialName.URAN)) {
                 RadioactiveMaterial r = (RadioactiveMaterial) m;
-                pw.println("2   " + r.exposed);
+                pw.println("2\t" + r.exposed);
             } else if (m.name.equals(SublimableMaterialName.ICEWATER)) {
                 pw.println("3");
             }
 
         for(Asteroid a : Main.asteroids){
-            pw.print(a.GetNeighbourCount() + "  ");
+            pw.print(a.GetNeighbourCount() + "\t");
             if(a.GetNeighbourCount() != 0) {
                 ArrayList<String> neig = new ArrayList<>();
                 for (DestinationObject n : a.GetNeighbours())
@@ -515,14 +515,14 @@ public class CommandManager {
                 pw.print(String.join(",",neig));
             }
             if(a.GetSunProximity())
-                pw.print("  " + 1);
+                pw.print("\t" + 1);
             else
-                pw.print("  "+ 0);
-            pw.print("  " + a.getLayers());
+                pw.print("\t"+ 0);
+            pw.print("\t" + a.getLayers());
             if(a.GetisEmpty())
-                pw.println("  " + 0);
+                pw.println("\t" + 0);
             else{
-                pw.print("  " + 1);
+                pw.print("\t" + 1);
                 pw.println((Main.materials.indexOf(a.getMaterial()) + 1));
             }
 
@@ -532,17 +532,17 @@ public class CommandManager {
             if(t.GetPair() != null)
                 pw.print((Main.teleportgates.indexOf(t.GetPair())+1) + "  ");
             else
-                pw.print("null  ");
+                pw.print("null\t");
 
             if(t.GetisPlaced())
-                pw.print(1 + "  " + (Main.asteroids.indexOf(t.GetAsteroid()) + 1) + "   ");
+                pw.print(1 + "\t" + (Main.asteroids.indexOf(t.GetAsteroid()) + 1) + "\t");
             else
-                pw.print(0 + "  ");
+                pw.print(0 + "\t");
 
             if (t.GetisActive())
-                pw.print(1 + "  ");
+                pw.print(1 + "\t");
             else
-                pw.print(0 + "  ");
+                pw.print(0 + "\t");
 
             if(t.GetIsHit())
                 pw.println(1);
@@ -551,8 +551,8 @@ public class CommandManager {
         }
 
         for(Settler s : Main.settlers){
-            pw.print((Main.asteroids.indexOf(s.getAsteroid()) + 1) + "  ");
-            pw.print(s.GetInventory().Size() + " ");
+            pw.print((Main.asteroids.indexOf(s.getAsteroid()) + 1) + "\t");
+            pw.print(s.GetInventory().Size() + "\t");
             if(s.GetInventory().Size() != 0) {
                 ArrayList<String> mat = new ArrayList<>();
                 for (Material m : s.GetInventory().GetMaterials())
@@ -575,7 +575,7 @@ public class CommandManager {
         }
 
         for(UFO u : Main.ufos){
-            pw.print((Main.asteroids.indexOf(u.getAsteroid()) + 1) + "  ");
+            pw.print((Main.asteroids.indexOf(u.getAsteroid()) + 1) + "\t");
             if(u.GetInventory().Size() != 0) {
                 ArrayList<String> mat = new ArrayList<>();
                 for (Material m : u.GetInventory().GetMaterials())
