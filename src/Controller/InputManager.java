@@ -14,6 +14,12 @@ public class InputManager {
     private static BufferedReader reader ;
     private static ArrayList<String> output = new ArrayList<>();
 
+    public static void removeObjects (ArrayList<?> array ){
+        for(int i=0; i<array.size();i++){
+            array.remove(array.get(i));
+        }
+    }
+
     public static void write_to_output(boolean generateoutput,String what){
         if(generateoutput)
             InputManager.GetOutput().add(what);
@@ -56,7 +62,7 @@ public class InputManager {
 
             while(cm.IsRunning()){
                 line=reader.readLine();
-                System.out.println(line+" mine while ciklus");
+                //System.out.println(line+" mine while ciklus");
                 cm.command(line,generateoutput);
             }
             cm.listMaterials(generateoutput);
@@ -64,7 +70,16 @@ public class InputManager {
             cm.listTeleportGates(generateoutput);
             cm.listCharacters(generateoutput);
             cm.saveMap("savedmap");
-            reader.close();
+
+            removeObjects(Main.materials);
+            removeObjects(Main.asteroids);
+            removeObjects(Main.teleportgates);
+            removeObjects(Main.settlers);
+            removeObjects(Main.robots);
+            removeObjects(Main.ufos);
+
+
+           // reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,14 +90,18 @@ public class InputManager {
             File currentfile = InputManager.getFile("Files","Input" ,filename);
             reader = new BufferedReader(new FileReader(currentfile));
             InputManager.InputCore(generateoutput);   //TODO ezt kell átváltoztatni bool generateoutput-ra, meg paraméterben felvenni
-        }catch (IOException e){                         //TODO és a ParamTest-ben átváltoztatni minden hívást, kiegészíteni false-ra
+        }catch (IOException e){                       //TODO és a ParamTest-ben átváltoztatni minden hívást, kiegészíteni false-ra
             System.out.println("I am sorry, but I dont find the file :(");
         }
     }
 
     public static void FromUserInput(){
-        reader = new BufferedReader(new InputStreamReader(System.in));
-        InputManager.InputCore(false);
+        try {
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            InputManager.InputCore(false);
+        }catch (Exception e){
+            System.out.println("From UserInput :)");
+        }
     }
     public static File getFile (String dir, String dir2, String filename)throws IOException {
         File dir_File=new File (dir);
@@ -244,7 +263,7 @@ public class InputManager {
         String[] neighbors={""};
         int ize = Integer.parseInt(cmd[0]);
         if(ize==1) {
-            System.out.println( "itt vagyok");
+            //System.out.println( "itt vagyok");
             String asd = cmd[1];
             neighbors[0] = asd;
         }else{
