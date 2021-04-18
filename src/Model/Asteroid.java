@@ -235,6 +235,11 @@ public class Asteroid implements DestinationObject {
         return false;
     }
 
+    public void SetMaterial(Material m) {
+        isEmpty = false;
+        this.material = m;
+    }
+
     /**
      * Nyersanyag eltavolitsa az aszteroida magjabol.
      * @param m adott nyersanyagot tavolitja el
@@ -242,8 +247,10 @@ public class Asteroid implements DestinationObject {
     public void RemoveMaterial(Material m) {
         //Object[] p = {m.getName()};
         //Logger.getInstance().printCommandCall(this, p);
-        if(!isEmpty)
+        if(!isEmpty) {
             this.material = null;
+            isEmpty = true;
+        }
         //Logger.getInstance().printReturnCommand();
     }
 
