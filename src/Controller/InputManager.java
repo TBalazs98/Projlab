@@ -24,7 +24,6 @@ public class InputManager {
     }
 
     public static ArrayList<String> GenerateOutput(String filename){
-
         InputManager.FromFileInput(filename);
         return output;
     }
@@ -34,10 +33,9 @@ public class InputManager {
         try {
             line=reader.readLine();
             cmd=line.split(" ");
-            for(int i=1; i<7;i++){
-                ObjCounts[i-1]=Integer.parseInt(cmd[i]);
+            for(int i=1; i<7;i++) {
+                ObjCounts[i - 1] = Integer.parseInt(cmd[i]);
             }
-            //listaz(ObjCounts);
 
             for(int i=0; i<ObjCounts[0];i++){
                 String params = reader.readLine();
@@ -75,9 +73,9 @@ public class InputManager {
         try {
             File currentfile = InputManager.getFile("Files","Input" ,filename);
             reader = new BufferedReader(new FileReader(currentfile));
-            InputManager.InputCore(true);
-        }catch (IOException e){
-            System.out.println(":(");
+            InputManager.InputCore(true);   //TODO ezt kell átváltoztatni bool generateoutput-ra, meg paraméterben felvenni
+        }catch (IOException e){                         //TODO és a ParamTest-ben átváltoztatni minden hívást, kiegészíteni false-ra
+            System.out.println("I am sorry, but I dont find the file :(");
         }
     }
 
@@ -87,19 +85,16 @@ public class InputManager {
     }
     public static File getFile (String dir, String dir2, String filename)throws IOException {
         File dir_File=new File (dir);
-
         String caononical_path= dir_File.getCanonicalPath();
-
         File dir_File_Input=new File(caononical_path,dir2);
         String canonical_path_2=dir_File_Input.getCanonicalPath();
-        File one = new File(canonical_path_2,filename+".txt");
+        File wanted = new File(canonical_path_2,filename+".txt");
 
+        BufferedReader read = new BufferedReader(new FileReader(one));
 
-        BufferedReader anyad = new BufferedReader(new FileReader(one));
+        System.out.println(read.readLine());
 
-        System.out.println(anyad.readLine());
-
-        return one;
+        return wanted;
     }
 
     public static void letrehoz(int what, String params,int actual ){
