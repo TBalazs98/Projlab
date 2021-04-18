@@ -172,7 +172,7 @@ public class TeleportGate implements DestinationObject, Steppable {
         //Logger.getInstance().printCommandCall(this);
         //Logger.getInstance().printReturnCommand(pair.isPlaced);
 
-        return pair.isPlaced;
+        return isPlaced;
     }
 
     /**

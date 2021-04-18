@@ -126,11 +126,11 @@ public class CommandManager {
         if(character.length() >= 2) {
             character = character.toUpperCase();
             try{
-                int index = Integer.parseInt(character.substring(1));
-                if (character.contains("S")) {
+                int index = Integer.parseInt(character.substring(1)) - 1;
+                if (character.charAt(0) == 'S') {
                     if ((index >= 0) && (index < Main.settlers.size()))
                         Main.settlers.get(index).Mine();
-                } else if (character.contains("U")) {
+                } else if (character.charAt(0) == 'U') {
                     if ((index >= 0) && (index < Main.ufos.size()))
                         Main.ufos.get(index).Mine();
                 } else
@@ -222,13 +222,19 @@ public class CommandManager {
                 if(((towhere == 'G') && (indexDObject > Main.teleportgates.size())) || ((towhere == 'A') && (indexDObject > Main.asteroids.size())))
                     System.out.println("Invalid index number!");
                 else {
-                    if ((index >= 0) && (index < Main.settlers.size()))
-                        if (Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)) != -1) {
-                            if ((indexDObject >= 0) && (indexDObject < Main.teleportgates.size()) && (towhere=='G'))
-                                Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)));
-                            if ((indexDObject >= 0) && (indexDObject < Main.asteroids.size()) && (towhere == 'A'))
-                                Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)));
-                        }
+                    try {
+                        if ((index >= 0) && (index < Main.settlers.size()))
+                            if (Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)) != -1) {
+                                if ((indexDObject >= 0) && (indexDObject < Main.asteroids.size()) && (towhere == 'A'))
+                                    Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)));
+                            }
+                            if(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)) != -1) {
+
+                                if ((indexDObject >= 0) && (indexDObject < Main.teleportgates.size()) && (towhere=='G'))
+                                    Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)));
+
+                            }
+                    } catch (IndexOutOfBoundsException e) {}
                 }
             }
             else
@@ -240,8 +246,8 @@ public class CommandManager {
     public static void listMaterials (boolean generateoutput){
         int i = 0;
         if (Main.materials.size() == 0) {
-            System.out.println("No Material!");
-            InputManager.write_to_output(generateoutput,"No Material!");
+//            System.out.println("No Material!");
+//            InputManager.write_to_output(generateoutput,"No Material!");
         }
         else {
             for(Material m : Main.materials){
@@ -282,7 +288,7 @@ public class CommandManager {
                 }
                 System.out.println(String.join(",",neigh));
                 String asdasd = String.join(",",neigh);
-                InputManager.write_to_output(generateoutput,"A" + i + "\t" + a.getLayers() + "\t" + a.GetSunProximity() + "\t" + a.GetisEmpty() + (a.GetisEmpty()?"\tnull":("\tM" +mat))+(a.GetisEmpty()?"":("\t" + asdasd)));
+                InputManager.write_to_output(generateoutput,"A" + i + "\t" + a.getLayers() + "\t" + a.GetSunProximity() + "\t" + a.GetisEmpty() + (a.GetisEmpty()?"\tnull":("\tM" +mat))/*+(a.GetisEmpty()?"":("\t" + asdasd))*/);
                 //TODO EZ MIEZ Bakonyi
             }
         }
@@ -293,8 +299,8 @@ public class CommandManager {
         int pairid = 0;
         int ast = 0;
             if (Main.teleportgates.size() == 0) {
-                System.out.println("No TeleportGates!");
-                InputManager.write_to_output(generateoutput,"No Teleportgates!");
+//                System.out.println("No TeleportGates!");
+//                InputManager.write_to_output(generateoutput,"No Teleportgates!");
             }
             else {
                 for (TeleportGate g : Main.teleportgates) {
@@ -313,8 +319,8 @@ public class CommandManager {
     }
     public static void listCharacters (boolean generateoutput){
         if(Main.robots.size() == 0 && Main.settlers.size() == 0 && Main.ufos.size() == 0){
-            System.out.println("No Characters!");
-            InputManager.write_to_output(generateoutput,"No Characters!");
+//            System.out.println("No Characters!");
+//            InputManager.write_to_output(generateoutput,"No Characters!");
         }
         int i = 0;
         for(Settler s : Main.settlers){
@@ -328,8 +334,8 @@ public class CommandManager {
                 ArrayList<String> smat = new ArrayList<>();
                 for (Material m : s.GetInventory().GetMaterials())
                     smat.add("M" + (Main.materials.indexOf(m) + 1));
-                System.out.print((String.join(",", smat)) + " ");
-                setler += ((String.join(",", smat)) + " ");
+                System.out.print((String.join(",", smat)));
+                setler += ((String.join(",", smat)));
             }
             else {
                 System.out.print("null");

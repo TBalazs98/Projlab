@@ -178,6 +178,8 @@ public class Asteroid implements DestinationObject {
      */
     public Material Mined() {
         //Logger.getInstance().printCommandCall(this);
+        if(material != null)
+            material.Hit(this);
         if(!isEmpty && layers == 0) {
             material.Hit(this);
             isEmpty = true;
@@ -186,7 +188,9 @@ public class Asteroid implements DestinationObject {
                 return null;
             }
             //Logger.getInstance().printReturnCommand(material.getName());
-            return material;
+            Material m = material;
+            material = null;
+            return m;
         }
         //Logger.getInstance().printReturnCommand();
         return null;
@@ -339,6 +343,11 @@ public class Asteroid implements DestinationObject {
         if((layers != 0) || (!isEmpty)) {
             for(int i = 0; i < characters.size(); i++) {
                 this.characters.get(i).Die();
+            }
+            for(TeleportGate t: Main.teleportgates) {
+                if(t.GetAsteroid() == this) {
+                    t.HitBySunstorm();
+                }
             }
         }
         //Logger.getInstance().printReturnCommand();

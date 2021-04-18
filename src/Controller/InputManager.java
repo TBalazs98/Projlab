@@ -296,12 +296,14 @@ public class InputManager {
         TeleportGate tg = Main.teleportgates.get(actual);
         setCommonTG(tg,Integer.parseInt(cmd[0]),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[3]),Integer.parseInt(cmd[4]));
         tg.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[2])-1));
+        Main.asteroids.get(Integer.parseInt(cmd[2])-1).AddNeighbour(tg);
 
     }
     public static void createTeleportGate2(String params,int actual){
         String[] cmd = params.split( "\\t");
         TeleportGate tg = Main.teleportgates.get(actual);
         setCommonTG(tg,Integer.parseInt(cmd[0]),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
+        Main.asteroids.get(Integer.parseInt(cmd[2])-1).AddNeighbour(tg);
     }
     public static void setCommonTG(TeleportGate tg,int pair,int placed,int active, int crazy){
         if(pair!=0){

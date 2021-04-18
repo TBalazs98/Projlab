@@ -95,6 +95,8 @@ public class TestcaseTester {
         Testing("16in","16out");
     }
     @Test
+    public void Test17() { Testing("17in", "17out"); }
+    @Test
     public void Test18()   {
         Testing("18in","18out");
     }
