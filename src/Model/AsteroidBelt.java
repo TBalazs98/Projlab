@@ -101,7 +101,7 @@ public class AsteroidBelt {
         //Logger.getInstance().printCommandCall(this);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("? Are there any settlers alive?\t(Y)es / (N)o \t");
+           /* System.out.print("? Are there any settlers alive?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -116,10 +116,10 @@ public class AsteroidBelt {
             }
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        /*this.settlersAlive--;
-        if(settlersAlive == 0)
-            Game.getInstance().LoseGame();
         */
+        this.settlersAlive--;
+        if(settlersAlive == 0)
+            Main.game.getInstance().LoseGame();
 
         //Logger.getInstance().printReturnCommand();
     }

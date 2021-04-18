@@ -105,23 +105,21 @@ public class CommandManager {
 
     public static void drill(String character){
 
-        if(character.length() >= 2) {
-            character = character.toUpperCase();
-            try{
-                int index = Integer.parseInt(character.substring(1));
-                if (character.contains("S")) {
-                    if ((index >= 0) && (index < Main.settlers.size()))
-                        Main.settlers.get(index).Drill();
-                } else if (character.contains("R")) {
-                    if ((index >= 0) && (index < Main.robots.size()))
-                        Main.robots.get(index).Drill();
-                } else
-                    System.out.println("Invalid index number!");
-            } catch (NumberFormatException e){
-                System.out.println("Invalid input!");
+        character = character.toUpperCase();
+        try{
+            int index = Integer.parseInt(character.substring(1)) - 1;
+            if (character.charAt(0) == 'S') {
+                if ((index >= 0) && (index < Main.settlers.size())) {
+                    Main.settlers.get(index).Drill();
+                }
             }
-        } else
+            if (character.charAt(0) == 'R') {
+                if ((index >= 0) && (index < Main.robots.size()))
+                    Main.robots.get(index).Drill();
+            }
+        } catch (NumberFormatException e){
             System.out.println("Invalid input!");
+        }
     }
 
     public static  void mine (String character){
@@ -284,7 +282,7 @@ public class CommandManager {
                 }
                 System.out.println(String.join(",",neigh));
                 String asdasd = String.join(",",neigh);
-                InputManager.write_to_output(generateoutput,"A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +(a.GetisEmpty()?"null ":("M" +mat + " "))+asdasd);
+                InputManager.write_to_output(generateoutput,"A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " + (a.GetisEmpty()?"null ":("M" +mat + " "))+(a.GetisEmpty()?"":asdasd));
                 //TODO EZ MIEZ Bakonyi
             }
         }
@@ -397,10 +395,10 @@ public class CommandManager {
         cmd[2] = cmd[2].toUpperCase();
 
         try {
-            int index = Integer.parseInt(cmd[2].substring(1)) -1;
-            if( cmd[1].charAt(0) == 'A') {
+            int index = Integer.parseInt(cmd[2].substring(1)) - 1;
+            if( cmd[2].charAt(0) == 'A') {
                 if ((index >= 0) && (index < Main.asteroids.size())) {
-                    switch (cmd[2]) {
+                    switch (cmd[1]) {
                         case "NEAR": {
                             Main.asteroids.get(index).SetSunProximityManual(true);
                             break;

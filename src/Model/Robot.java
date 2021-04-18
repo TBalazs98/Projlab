@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Jatekosok autonom segitoit reprezentalja. Karakterek altal epithetoek.
  */
-public class Robot extends Worker {
+public class Robot extends Worker implements drillable{
     private static final Inventory inventory = new Inventory();
 
     /**
@@ -20,6 +20,10 @@ public class Robot extends Worker {
         setInventory();
 
         //Logger.getInstance().printReturnCommand();
+    }
+
+    public void Drill(){
+        this.asteroid.Drilled();
     }
 
     /**
@@ -104,7 +108,7 @@ public class Robot extends Worker {
         //Logger.getInstance().printCommandCall(this);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("? Does the robot get thrown to an asteroid or a teleportgate?\t(A)steroid / (T)eleportgate \t");
+          /*  System.out.print("? Does the robot get thrown to an asteroid or a teleportgate?\t(A)steroid / (T)eleportgate \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -120,10 +124,10 @@ public class Robot extends Worker {
             } else if(ch == 't' || ch == 'T') {
                 id = 1;
             }
-
+*/
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        /*int id = asteroid.GetRandNeighbour();
-        * */
+
+        int id = this.asteroid.GetRandNeighbour();
         Move(id);
 
         //Logger.getInstance().printReturnCommand();

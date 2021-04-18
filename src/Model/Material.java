@@ -37,7 +37,6 @@ public class Material  {
     public void Hit(Asteroid a) {
         //Object[] p = {a.getClass().getSimpleName()};
         //Logger.getInstance().printCommandCall(this, p);
-
         //Logger.getInstance().printReturnCommand();
     }
 

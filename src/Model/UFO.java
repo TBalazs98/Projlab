@@ -11,8 +11,10 @@ public class UFO extends Character implements Steppable, mine{
     }
 
     public void Explode() {
-
+        int id = this.asteroid.GetRandNeighbour();
+        Move(id);
     }
+
     public void Step(){
         Random rand = new Random();
         int rand_int = rand.nextInt(2);

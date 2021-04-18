@@ -6,7 +6,7 @@ import java.util.*;
  * Jatekosok altal iranyitott karakterek, akik az aszteroidaovon mozognak es nyersanyagot
  * gyujtenek.
  */
-public class Settler extends Worker {
+public class Settler extends Worker implements drillable, moveable {
 
     /**
      * Publikus default konstrukor
@@ -42,6 +42,10 @@ public class Settler extends Worker {
             m.Add(inventory);           //Kibanyaszott nyesanyag eltarolasa az inventory-ban
 
         //Logger.getInstance().printReturnCommand();
+    }
+
+    public void Drill(){
+        this.asteroid.Drilled();
     }
 
     /**
@@ -152,7 +156,7 @@ public class Settler extends Worker {
     public void Explode() {
         //Logger.getInstance().printCommandCall(this);
 
-        Die();
+        this.Die();
 
         //Logger.getInstance().printReturnCommand();
     }

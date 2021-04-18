@@ -13,7 +13,7 @@ public class SublimableMaterial extends Material {
      *A szublimalo nyersanyagok konstruktora.
      */
     public SublimableMaterial() {
-        super();
+        //super();
         //Logger.getInstance().printCommandCall(this);
 
         //Logger.getInstance().printReturnCommand();
@@ -29,7 +29,7 @@ public class SublimableMaterial extends Material {
         //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("? Is the asteroid near the sun?\t(Y)es / (N)o \t");
+          /*  System.out.print("? Is the asteroid near the sun?\t(Y)es / (N)o \t");
             InputStreamReader br = new InputStreamReader(System.in);
             char ch = ' ';
             try {
@@ -41,12 +41,14 @@ public class SublimableMaterial extends Material {
 
             if(ch =='y' || ch =='Y' ) {
                 a.RemoveMaterial(this);
-            }
-
+            }*/
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        /*if(a.getLayers() == 0 && a.GetSunProximity() == true) //ide se kell a getlayers, lasd: radioactive
+        if(a.getLayers() == 0 && a.GetSunProximity() == true) { //ide se kell a getlayers, lasd: radioactive
             a.RemoveMaterial(a.getMaterial());
-        */
+
+            Main.materials.remove(this);
+        }
+
 
         //Logger.getInstance().printReturnCommand();
     }

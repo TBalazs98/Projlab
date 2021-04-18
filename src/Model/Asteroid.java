@@ -141,7 +141,7 @@ public class Asteroid implements DestinationObject {
         //Logger.getInstance().printCommandCall(this);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-        System.out.print("? How many layers does the asteroid have after drilling?\t");
+       /* System.out.print("? How many layers does the asteroid have after drilling?\t");
         Scanner sc = new Scanner(System.in);
         //InputStreamReader br = new InputStreamReader(System.in);
         char ch = ' ';
@@ -158,15 +158,16 @@ public class Asteroid implements DestinationObject {
         }
         if((ch=='n' || ch=='N' ) && layer == 0) {
             material.Hit(this);
-        }
+        }*/
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        /*this.layers--;
+        if (layers > 0)
+            this.layers--;
         if(!isEmpty && layers == 0) {
-            material.Hit(this);
+            this.material.Hit(this);
         }
 
-         */
+
         //Logger.getInstance().printReturnCommand();
     }
 
@@ -354,14 +355,17 @@ public class Asteroid implements DestinationObject {
     public void Explode() {
         //Logger.getInstance().printCommandCall(this);;
         int n = characters.size();
-        for(int i = 0; i < n; i++) {
-            characters.get(0).Explode();
+        for(Character c : this.characters) {
+            c.Explode();
         }
-        for(int i = 0; i < neighbours.size(); i++) {
-            neighbours.get(i).HitByExplosion(this);
+        for(DestinationObject o : this.neighbours) {
+            o.HitByExplosion(this);
         }
         //this.neighbours.forEach(n -> n.HitByExplosion(this));
         //this.characters.forEach(c -> c.Explode());
+
+        Main.materials.remove(this.material);
+        Main.asteroids.remove(this);
         //Logger.getInstance().printReturnCommand();
     }
 
