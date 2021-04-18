@@ -10,7 +10,7 @@ public class CommandManager {
     private static boolean stop = true;
     public CommandManager(){}
 
-    public static void command(String command){
+    public static void command(String command, boolean generateoutput){
 
         String[] cmd = command.split(" ");
 
@@ -42,7 +42,7 @@ public class CommandManager {
                 break;
             }
             case "listmaterials":{
-                listMaterials();
+                listMaterials(true);
                 break;
             }
             case "listteleportgates":{
@@ -239,35 +239,42 @@ public class CommandManager {
             System.out.println("Invalid input!");
         }
     }
-    public static void listMaterials (){
+    public static void listMaterials (boolean generateoutput){
         int i = 0;
-        if (Main.materials.size() == 0)
+        if (Main.materials.size() == 0) {
             System.out.println("No Material!");
+            InputManager.write_to_output(generateoutput,"No Material!");
+        }
         else {
             for(Material m : Main.materials){
                 i++;
                 System.out.print("M" + i + " " + m.name);
+                InputManager.write_to_output(generateoutput,"M" + i + " " + m.name);
                 if(m.name == RadioactiveMaterialName.URAN) {
                     RadioactiveMaterial r = (RadioactiveMaterial) m;
                     System.out.print(" " + r.exposed);
+                    InputManager.write_to_output(generateoutput," " + r.exposed);
                 }
                 System.out.println();
             }
         }
     }
 
-    public static void listAsteroids (){
+    public static void listAsteroids (boolean generateoutput){
         int i = 0;
         int mat = 0;
-        if(Main.asteroids.size() == 0)
+        if(Main.asteroids.size() == 0) {
             System.out.println("No Asteroids!");
+            InputManager.write_to_output(generateoutput,"No Asteroids!");
+        }
         else{
             for (Asteroid a : Main.asteroids){
                 i++;
                 if(!a.GetisEmpty())
                     mat = (Main.materials.indexOf(a.getMaterial()) + 1);
-                System.out.print("A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +
-                        (a.GetisEmpty()?"null ":("M" +mat + " ")));
+                System.out.print("A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " + (a.GetisEmpty()?"null ":("M" +mat + " ")));
+
+
                 ArrayList<String> neigh = new ArrayList<>();
                 for (DestinationObject o : a.GetNeighbours()) {
                     if(Main.asteroids.indexOf(o) != -1)
@@ -276,16 +283,21 @@ public class CommandManager {
                     neigh.add("G" + (Main.teleportgates.indexOf(o) + 1));
                 }
                 System.out.println(String.join(",",neigh));
+                String asdasd = String.join(",",neigh)
+                InputManager.write_to_output(generateoutput,"A" + i + " " + a.getLayers() + " " + a.GetSunProximity() + " " + a.GetisEmpty() + " " +(a.GetisEmpty()?"null ":("M" +mat + " "))+asdasd);
+                //TODO EZ MIEZ Bakonyi
             }
         }
 
     }
-    public static void listTeleportGates (){
+    public static void listTeleportGates (boolean generateoutput){
         int i = 0;
         int pairid = 0;
         int ast = 0;
-            if (Main.teleportgates.size() == 0)
+            if (Main.teleportgates.size() == 0) {
                 System.out.println("No TeleportGates!");
+                InputManager.write_to_output(generateoutput,"No Teleportgates!");
+            }
             else {
                 for (TeleportGate g : Main.teleportgates) {
                     i++;
@@ -296,13 +308,15 @@ public class CommandManager {
                         pairid = Main.teleportgates.indexOf(g.GetPair()) + 1;
                     }
                     System.out.println("G" + i + " " + g.GetisActive() + " " + (pairid != 0 ? ("G" + pairid) : "") + " " + (ast != 0 ? ("A" + ast) : "null"));
+                    InputManager.write_to_output(generateoutput,"G" + i + " " + g.GetisActive() + " " + (pairid != 0 ? ("G" + pairid) : "") + " " + (ast != 0 ? ("A" + ast) : "null"));
                 }
             }
 
     }
-    public static void listCharacters (){
+    public static void listCharacters (boolean generateoutput){
         if(Main.robots.size() == 0 && Main.settlers.size() == 0 && Main.ufos.size() == 0){
             System.out.println("No Characters!");
+            InputManager.write_to_output(generateoutput,"No Characters!");
         }
         int i = 0;
         for(Settler s : Main.settlers){

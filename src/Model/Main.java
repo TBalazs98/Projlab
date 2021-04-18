@@ -1,4 +1,6 @@
 package Model;
+import Controller.InputManager;
+
 import java.util.ArrayList;
 
 /**
@@ -69,8 +71,18 @@ public class Main {
 
     public static void main(String[] args)  {
 
-        ProtoTest pt = new ProtoTest();
-        pt.menu();
+        //ProtoTest pt = new ProtoTest();
+       // pt.menu();
+        ArrayList<String> asd = new ArrayList<>();
+        asd = InputManager.GenerateOutput("1in");
+        for (int i=0;i<5;i++){
+            System.out.println("\n");
+        }
+        for(int i=0; i< asd.size();i++){
+            System.out.println(asd.get(i));
+        }
+
+
         //ProtoTest.menu();
 
         //cm.saveMap("savedmap");

@@ -3,6 +3,7 @@ package Controller;
 import Model.*;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class InputManager {
@@ -11,8 +12,24 @@ public class InputManager {
     private static String[] cmd={};
     private static String line;
     private static BufferedReader reader ;
+    private static ArrayList<String> output = new ArrayList<>();
 
-    public static void InputCore(){
+    public static void write_to_output(boolean generateoutput,String what){
+        if(generateoutput)
+            InputManager.GetOutput().add(what);
+    }
+
+    public static ArrayList<String> GetOutput(){
+        return output;
+    }
+
+    public static ArrayList<String> GenerateOutput(String filename){
+
+        InputManager.FromFileInput(filename);
+        return output;
+    }
+
+    public static void InputCore(Boolean generateoutput){
         CommandManager cm = new CommandManager();
         try {
             line=reader.readLine();
@@ -42,12 +59,12 @@ public class InputManager {
             while(cm.IsRunning()){
                 line=reader.readLine();
                 System.out.println(line+" mine while ciklus");
-                cm.command(line);
+                cm.command(line,generateoutput);
             }
-            cm.listMaterials();
-            cm.listAsteroids();
-            cm.listTeleportGates();
-            cm.listCharacters();
+            cm.listMaterials(generateoutput);
+            cm.listAsteroids(generateoutput);
+            cm.listTeleportGates(generateoutput);
+            cm.listCharacters(generateoutput);
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +75,7 @@ public class InputManager {
         try {
             File currentfile = InputManager.getFile("Files","Input" ,filename);
             reader = new BufferedReader(new FileReader(currentfile));
-            InputManager.InputCore();
+            InputManager.InputCore(true);
         }catch (IOException e){
             System.out.println(":(");
         }
@@ -66,7 +83,7 @@ public class InputManager {
 
     public static void FromUserInput(){
         reader = new BufferedReader(new InputStreamReader(System.in));
-        InputManager.InputCore();
+        InputManager.InputCore(false);
     }
     public static File getFile (String dir, String dir2, String filename)throws IOException {
         File dir_File=new File (dir);
