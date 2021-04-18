@@ -7,3 +7,4 @@ createmap 1 2 0 2 0 0
 
 setRandomize off
 SunStorm A1
+stop

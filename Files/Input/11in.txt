@@ -8,3 +8,4 @@ createmap 0 3 2 1 0 0
 
 SetRandomize off
 placegate S1 G2
+stop
