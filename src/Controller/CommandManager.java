@@ -517,7 +517,7 @@ public class CommandManager {
             if(a.GetSunProximity())
                 pw.print("\t" + 1);
             else
-                pw.print("\t"+ 0);
+                pw.print("\t" + 0);
             pw.print("\t" + a.getLayers());
             if(a.GetisEmpty())
                 pw.println("\t" + 0);
@@ -530,7 +530,7 @@ public class CommandManager {
 
         for(TeleportGate t : Main.teleportgates){
             if(t.GetPair() != null)
-                pw.print((Main.teleportgates.indexOf(t.GetPair())+1) + "  ");
+                pw.print((Main.teleportgates.indexOf(t.GetPair())+1) + "\t");
             else
                 pw.print("null\t");
 
