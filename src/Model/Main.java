@@ -21,7 +21,7 @@ public class Main {
     public static boolean Randomize = false;
 
     public static ArrayList<Material> materials = new ArrayList<>();
-    public static ArrayList<Asteroid> asteroids=new ArrayList<>();
+    public static ArrayList<Asteroid> asteroids = new ArrayList<>();
     public static ArrayList<TeleportGate> teleportgates = new ArrayList<>();
     public static ArrayList<Settler> settlers=new ArrayList<>();
     public static ArrayList<Robot> robots=new ArrayList<>();

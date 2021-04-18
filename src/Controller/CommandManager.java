@@ -282,7 +282,7 @@ public class CommandManager {
                 }
                 System.out.println(String.join(",",neigh));
                 String asdasd = String.join(",",neigh);
-                InputManager.write_to_output(generateoutput,"A" + i + "\t" + a.getLayers() + "\t" + a.GetSunProximity() + "\t" + a.GetisEmpty() + (a.GetisEmpty()?"\tnull":("\tM" +mat + ""))+(a.GetisEmpty()?"":("\t" + asdasd)));
+                InputManager.write_to_output(generateoutput,"A" + i + "\t" + a.getLayers() + "\t" + a.GetSunProximity() + "\t" + a.GetisEmpty() + (a.GetisEmpty()?"\tnull":("\tM" +mat))+(a.GetisEmpty()?"":("\t" + asdasd)));
                 //TODO EZ MIEZ Bakonyi
             }
         }
@@ -332,15 +332,15 @@ public class CommandManager {
                 setler += ((String.join(",", smat)) + " ");
             }
             else {
-                System.out.print("\tnull ");
-                setler += "\tnull ";
+                System.out.print("null");
+                setler += "null";
             }
             if(s.GetGates().size() != 0){
                 ArrayList<String> sgat = new ArrayList<>();
                 for (TeleportGate t : Main.teleportgates)
                     sgat.add("G" + (Main.teleportgates.indexOf(t) + 1));
                 System.out.print((String.join(",", sgat)));
-                setler+=((String.join(",", sgat)));
+                setler+=("\t" + (String.join(",", sgat)));
             }
             System.out.println("");
             InputManager.write_to_output(generateoutput,setler);

@@ -254,7 +254,8 @@ public class InputManager {
         String[] cmd = params.split("\\t");
         //Asteroid a =Main.asteroids.get(actual);
         setCommonAsteroid(Main.asteroids.get(actual),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
-        Main.asteroids.get(actual).AddMaterial(Main.materials.get(Integer.parseInt(cmd[4])-1));
+        int idx = Integer.parseInt(cmd[4])-1;
+        Main.asteroids.get(actual).SetMaterial(Main.materials.get(idx));
 
     }
     public static void createAsteroid3(String params,int actual){         //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]

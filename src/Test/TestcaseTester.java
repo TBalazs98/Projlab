@@ -13,10 +13,16 @@ public class TestcaseTester {
          ArrayList<String> actual_output = InputManager.GenerateOutput(input);
          File currentfile = InputManager.getFile("Files", "Output", output);
          BufferedReader reader = new BufferedReader(new FileReader(currentfile));
-         String expected_line = reader.readLine();
-         for (String actual_line : actual_output)
-             Assert.assertEquals(expected_line, actual_line);
-
+         String expected_line = "";
+         int counter = 0;
+         while(true) {
+            expected_line = reader.readLine();
+            if(expected_line == null) {
+                break;
+            }
+            Assert.assertEquals(expected_line, actual_output.get(counter));
+            counter++;
+         }
      }
      catch (IOException IOE){
      System.out.print("File not exist!");
