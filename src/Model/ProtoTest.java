@@ -46,112 +46,112 @@ public class ProtoTest {
                     InputManager.FromUserInput();
                     break;
                 case 1:
-                    InputManager.FromFileInput("1in");
+                    InputManager.FromFileInput("1in",false);
                     break;
                 case 2:
-                    InputManager.FromFileInput("2in");
+                    InputManager.FromFileInput("2in",false);
                     break;
                 case 3:
-                    InputManager.FromFileInput("3in");
+                    InputManager.FromFileInput("3in",false);
                     break;
                 case 4:
-                    InputManager.FromFileInput("4in");
+                    InputManager.FromFileInput("4in",false);
                     break;
                 case 5:
-                    InputManager.FromFileInput("5in");
+                    InputManager.FromFileInput("5in",false);
                     break;
                 case 6:
-                    InputManager.FromFileInput("6in");
+                    InputManager.FromFileInput("6in",false);
                     break;
                 case 7:
-                    InputManager.FromFileInput("7in");
+                    InputManager.FromFileInput("7in",false);
                     break;
                 case 8:
-                    InputManager.FromFileInput("8in");
+                    InputManager.FromFileInput("8in",false);
                     break;
                 case 9:
-                    InputManager.FromFileInput("9in");
+                    InputManager.FromFileInput("9in",false);
                     break;
                 case 10:
-                    InputManager.FromFileInput("10in");
+                    InputManager.FromFileInput("10in",false);
                     break;
                 case 11:
-                    InputManager.FromFileInput("11in");
+                    InputManager.FromFileInput("11in",false);
                     break;
                 case 12:
-                    InputManager.FromFileInput("12in");
+                    InputManager.FromFileInput("12in",false);
                     break;
                 case 13:
-                    InputManager.FromFileInput("13in");
+                    InputManager.FromFileInput("13in",false);
                     break;
                 case 14:
-                    InputManager.FromFileInput("14in");
+                    InputManager.FromFileInput("14in",false);
                     break;
                 case 15:
-                    InputManager.FromFileInput("15in");
+                    InputManager.FromFileInput("15in",false);
                     break;
                 case 16:
-                    InputManager.FromFileInput("16in");
+                    InputManager.FromFileInput("16in",false);
                     break;
                 case 17:
-                    InputManager.FromFileInput("17in");
+                    InputManager.FromFileInput("17in",false);
                     break;
                 case 18:
-                    InputManager.FromFileInput("18in");
+                    InputManager.FromFileInput("18in",false);
                     break;
                 case 19:
-                    InputManager.FromFileInput("19in");
+                    InputManager.FromFileInput("19in",false);
                     break;
                 case 20:
-                    InputManager.FromFileInput("20in");
+                    InputManager.FromFileInput("20in",false);
                     break;
                 case 21:
-                    InputManager.FromFileInput("21in");
+                    InputManager.FromFileInput("21in",false);
                     break;
                 case 22:
-                    InputManager.FromFileInput("22in");
+                    InputManager.FromFileInput("22in",false);
                     break;
                 case 23:
-                    InputManager.FromFileInput("23in");
+                    InputManager.FromFileInput("23in",false);
                     break;
                 case 24:
-                    InputManager.FromFileInput("24in");
+                    InputManager.FromFileInput("24in",false);
                     break;
                 case 25:
-                    InputManager.FromFileInput("25in");
+                    InputManager.FromFileInput("25in",false);
                     break;
                 case 26:
-                    InputManager.FromFileInput("26in");
+                    InputManager.FromFileInput("26in",false);
                     break;
                 case 27:
-                    InputManager.FromFileInput("27in");
+                    InputManager.FromFileInput("27in",false);
                     break;
                 case 28:
-                    InputManager.FromFileInput("28in");
+                    InputManager.FromFileInput("28in",false);
                     break;
                 case 29:
-                    InputManager.FromFileInput("29in");
+                    InputManager.FromFileInput("29in",false);
                     break;
                 case 30:
-                    InputManager.FromFileInput("30in");
+                    InputManager.FromFileInput("30in",false);
                     break;
                 case 31:
-                    InputManager.FromFileInput("31in");
+                    InputManager.FromFileInput("31in",false);
                     break;
                 case 32:
-                    InputManager.FromFileInput("32in");
+                    InputManager.FromFileInput("32in",false);
                     break;
                 case 33:
-                    InputManager.FromFileInput("33in");
+                    InputManager.FromFileInput("33in",false);
                     break;
                 case 34:
-                    InputManager.FromFileInput("34in");
+                    InputManager.FromFileInput("34in",false);
                     break;
                 case 35:
-                    InputManager.FromFileInput("35in");
+                    InputManager.FromFileInput("35in",false);
                     break;
                 case 36:
-                    InputManager.FromFileInput("36in");
+                    InputManager.FromFileInput("36in",false);
                     break;
                 case 37:
                     break;

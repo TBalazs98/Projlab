@@ -24,7 +24,7 @@ public class InputManager {
     }
 
     public static ArrayList<String> GenerateOutput(String filename){
-        InputManager.FromFileInput(filename);
+        InputManager.FromFileInput(filename,true);
         return output;
     }
 
@@ -69,11 +69,11 @@ public class InputManager {
         }
     }
 
-    public static void FromFileInput(String filename){
+    public static void FromFileInput(String filename,boolean generateoutput){
         try {
             File currentfile = InputManager.getFile("Files","Input" ,filename);
             reader = new BufferedReader(new FileReader(currentfile));
-            InputManager.InputCore(true);   //TODO ezt kell átváltoztatni bool generateoutput-ra, meg paraméterben felvenni
+            InputManager.InputCore(generateoutput);   //TODO ezt kell átváltoztatni bool generateoutput-ra, meg paraméterben felvenni
         }catch (IOException e){                         //TODO és a ParamTest-ben átváltoztatni minden hívást, kiegészíteni false-ra
             System.out.println("I am sorry, but I dont find the file :(");
         }
@@ -90,7 +90,7 @@ public class InputManager {
         String canonical_path_2=dir_File_Input.getCanonicalPath();
         File wanted = new File(canonical_path_2,filename+".txt");
 
-        BufferedReader read = new BufferedReader(new FileReader(one));
+        BufferedReader read = new BufferedReader(new FileReader(wanted));
 
         System.out.println(read.readLine());
 
