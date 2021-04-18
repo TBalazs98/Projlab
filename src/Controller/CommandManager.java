@@ -506,13 +506,13 @@ public class CommandManager {
             }
 
         for(Asteroid a : Main.asteroids){
-            pw.print(a.GetNeighbourCount() + "\t");
+            pw.print(a.GetNeighbourCount());
             if(a.GetNeighbourCount() != 0) {
                 ArrayList<String> neig = new ArrayList<>();
                 for (DestinationObject n : a.GetNeighbours())
                     neig.add(Integer.toString((Main.asteroids.indexOf(n) + 1)));
 
-                pw.print(String.join(",",neig));
+                pw.print("\t" + String.join(",",neig));
             }
             if(a.GetSunProximity())
                 pw.print("\t" + 1);
@@ -522,7 +522,7 @@ public class CommandManager {
             if(a.GetisEmpty())
                 pw.println("\t" + 0);
             else{
-                pw.print("\t" + 1);
+                pw.print("\t" + 1 + "\t");
                 pw.println((Main.materials.indexOf(a.getMaterial()) + 1));
             }
 
