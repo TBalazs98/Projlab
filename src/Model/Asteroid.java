@@ -157,7 +157,7 @@ public class Asteroid implements DestinationObject {
             e.printStackTrace();
         }
         if((ch=='n' || ch=='N' ) && layer == 0) {
-            material.Hit(this);
+            material.Hit(this);d
         }*/
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
