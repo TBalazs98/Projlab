@@ -1,5 +1,5 @@
-M1	Iron
-M2	Uran
+M1	IRON
+M2	URAN
 A1	4	true	false	M1
 A2	0	false	true	null
 S1	A2	M2
