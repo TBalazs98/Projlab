@@ -128,7 +128,7 @@ public class Asteroid implements DestinationObject {
     public void Step() {
         //Logger.getInstance().printCommandCall(this);
         this.SetSunProximityAuto();
-        if((layers == 0) && (!isEmpty))
+        if((layers == 0) && (!isEmpty) && (material !=null))
             this.material.Hit(this);
 
         //Logger.getInstance().printReturnCommand();
@@ -161,10 +161,11 @@ public class Asteroid implements DestinationObject {
         }*/
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        if (this.layers > 0)
+        if (this.layers > 0){
             this.layers--;
-        if(!(this.isEmpty) && (this.layers == 0)) {
-            this.material.Hit(Main.asteroids.get(Main.asteroids.indexOf(this)));
+            if(!(this.isEmpty) && (this.layers == 0) && (material != null)) {
+                this.material.Hit(this);
+            }
         }
 
 
