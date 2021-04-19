@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.InputManager;
+
 import java.util.*;
 import java.util.ArrayList;
 
@@ -41,6 +43,7 @@ public class Game {
         //Logger.getInstance().printCommandCall(this);
 
         System.out.println("Settlers have won the game");
+        InputManager.write_to_output(true,"Settlers have won the game");
 
         //Logger.getInstance().printReturnCommand();
     }

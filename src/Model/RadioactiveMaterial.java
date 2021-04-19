@@ -16,7 +16,7 @@ public class RadioactiveMaterial extends Material {
      */
     public RadioactiveMaterial() {
         super();
-        exposed=3;
+        exposed=0;
         //Logger.getInstance().printCommandCall(this);
 
         //Logger.getInstance().printReturnCommand();
@@ -33,26 +33,28 @@ public class RadioactiveMaterial extends Material {
         //Logger.getInstance().printCommandCall(this, p);
 
         //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("? Is the asteroid near the sun?\t(Y)es / (N)o \t");
-            InputStreamReader br = new InputStreamReader(System.in);
-            char ch = ' ';
-            try {
-                ch=(char)br.read();
-                //br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            if(ch=='y' || ch=='Y' ) {
-                expose();
-                if(this.exposed==0) {
-                    a.RemoveMaterial(this);
-                    a.Explode();
-                }
-            }
+//            System.out.print("? Is the asteroid near the sun?\t(Y)es / (N)o \t");
+//            InputStreamReader br = new InputStreamReader(System.in);
+//            char ch = ' ';
+//            try {
+//                ch=(char)br.read();
+//                //br.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            if(ch=='y' || ch=='Y' ) {
+//                expose();
+//                if(this.exposed==0) {
+//                    a.RemoveMaterial(this);
+//                    a.Explode();
+//                }
+//            }
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
         if(a.GetSunProximity() == true && a.getLayers() == 0) //amugy ez a 0 ide nem is kell, mert csak akkor hívodik meg a hit, ha a layers 0
+            expose();
+        if(exposed == 3)
             a.Explode();
 
 
@@ -77,10 +79,10 @@ public class RadioactiveMaterial extends Material {
     }
 
     public void expose(){
-        this.exposed--;
+        this.exposed++;
     }
 
-    public void  SetExposure(int i){
+    public void SetExposure(int i){
         this.exposed = i;
     }
 

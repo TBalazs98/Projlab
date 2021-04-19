@@ -62,6 +62,8 @@ public class TeleportGate implements DestinationObject, Steppable {
                 this.isActive = false;
                 s.AddGate(this);
                 s.AddGate(pair);
+                Main.teleportgates.add(this);
+                Main.teleportgates.add(pair);
             }
 
         //Logger.getInstance().printReturnCommand();
@@ -138,28 +140,28 @@ public class TeleportGate implements DestinationObject, Steppable {
         //Logger.getInstance().printCommandCall(this,p);
 
         this.asteroid = asteroid;
-        //fuggveny lefutasa felhasznaloi beavatkozassal
-            System.out.print("? Is the pair of the teleportgate placed, and can we activate the gates?\t(Y)es / (N)o \t");
-            InputStreamReader br = new InputStreamReader(System.in);
-            char ch = ' ';
-            try {
-                ch=(char)br.read();
-                //br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            if(ch=='y' || ch=='Y' ) {
-                pair.Activate();
-                Activate();
-            }
+//        //fuggveny lefutasa felhasznaloi beavatkozassal
+//            System.out.print("? Is the pair of the teleportgate placed, and can we activate the gates?\t(Y)es / (N)o \t");
+//            InputStreamReader br = new InputStreamReader(System.in);
+//            char ch = ' ';
+//            try {
+//                ch=(char)br.read();
+//                //br.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            if(ch=='y' || ch=='Y' ) {
+//                pair.Activate();
+//                Activate();
+//            }
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        /*isPlaced = true;
+        isPlaced = true;
         if (pair.GetPlaced()) {
             this.pair.Activate();
             this.Activate();
-        }*/
+        }
 
         //Logger.getInstance().printReturnCommand();
     }
@@ -172,7 +174,7 @@ public class TeleportGate implements DestinationObject, Steppable {
         //Logger.getInstance().printCommandCall(this);
         //Logger.getInstance().printReturnCommand(pair.isPlaced);
 
-        return pair.isPlaced;
+        return isPlaced;
     }
 
     /**

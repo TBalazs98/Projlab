@@ -1,3 +1,1 @@
-A1	2	false	true	null
-S1	A1	null
-S2	A1	null
+Settlers have won the game

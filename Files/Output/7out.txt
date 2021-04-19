@@ -1,5 +1,5 @@
 A1	2	false	true	null
 A2	2	false	true	null
-G1	true    G2	A1
-G2	true	G2	A2
+G1	true	G2	A1
+G2	true	G1	A2
 S1	A2	null

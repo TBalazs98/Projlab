@@ -43,9 +43,8 @@ public class SublimableMaterial extends Material {
                 a.RemoveMaterial(this);
             }*/
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        if(a.getLayers() == 0 && a.GetSunProximity() == true) { //ide se kell a getlayers, lasd: radioactive
+        if(a.GetSunProximity() == true) {
             a.RemoveMaterial(this);
-            System.out.println( "helloka");
             Main.materials.remove(this);
         }
 

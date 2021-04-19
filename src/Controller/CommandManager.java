@@ -126,11 +126,11 @@ public class CommandManager {
         if(character.length() >= 2) {
             character = character.toUpperCase();
             try{
-                int index = Integer.parseInt(character.substring(1));
-                if (character.contains("S")) {
+                int index = Integer.parseInt(character.substring(1)) - 1;
+                if (character.charAt(0) == 'S') {
                     if ((index >= 0) && (index < Main.settlers.size()))
                         Main.settlers.get(index).Mine();
-                } else if (character.contains("U")) {
+                } else if (character.charAt(0) == 'U') {
                     if ((index >= 0) && (index < Main.ufos.size()))
                         Main.ufos.get(index).Mine();
                 } else
@@ -177,8 +177,8 @@ public class CommandManager {
         cmd[2] = cmd[2].toUpperCase();
 
         try {
-            int index = Integer.parseInt(cmd[1].substring(1));
-            int indexMaterial = Integer.parseInt(cmd[2].substring(1));
+            int index = Integer.parseInt(cmd[1].substring(1))-1;
+            int indexMaterial = Integer.parseInt(cmd[2].substring(1))-1;
             if ((cmd[1].charAt(0) == 'S') && (cmd[2].charAt(0) == 'M')) {
                 if ((index >= 0) && (index < Main.settlers.size()))
                     if ((indexMaterial >= 0) && (indexMaterial < Main.materials.size()))
@@ -196,8 +196,8 @@ public class CommandManager {
         cmd[2] = cmd[2].toUpperCase();
 
         try {
-            int index = Integer.parseInt(cmd[1].substring(1));
-            int indexGate = Integer.parseInt(cmd[2].substring(1));
+            int index = Integer.parseInt(cmd[1].substring(1))-1;
+            int indexGate = Integer.parseInt(cmd[2].substring(1))-1;
             if ((cmd[1].charAt(0) == 'S') && (cmd[2].charAt(0) == 'G')) {
                 if ((index >= 0) && (index < Main.settlers.size()))
                     if ((indexGate >= 0) && (indexGate < Main.teleportgates.size()))
@@ -222,13 +222,20 @@ public class CommandManager {
                 if(((towhere == 'G') && (indexDObject > Main.teleportgates.size())) || ((towhere == 'A') && (indexDObject > Main.asteroids.size())))
                     System.out.println("Invalid index number!");
                 else {
-                    if ((index >= 0) && (index < Main.settlers.size()))
-                        if (Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)) != -1) {
-                            if ((indexDObject >= 0) && (indexDObject < Main.teleportgates.size()) && (towhere=='G'))
-                                Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)));
-                            if ((indexDObject >= 0) && (indexDObject < Main.asteroids.size()) && (towhere == 'A'))
-                                Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)));
+                    try {
+                        if ((index >= 0) && (index < Main.settlers.size())) {
+                            if (Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)) != -1) {
+                                if ((indexDObject >= 0) && (indexDObject < Main.asteroids.size()) && (towhere == 'A'))
+                                    Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)));
+                            }
+                            if (Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)) != -1) {
+
+                                if ((indexDObject >= 0) && (indexDObject < Main.teleportgates.size()) && (towhere == 'G'))
+                                    Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)));
+
+                            }
                         }
+                    } catch (IndexOutOfBoundsException e) {}
                 }
             }
             else
@@ -240,19 +247,21 @@ public class CommandManager {
     public static void listMaterials (boolean generateoutput){
         int i = 0;
         if (Main.materials.size() == 0) {
-            System.out.println("No Material!");
-            InputManager.write_to_output(generateoutput,"No Material!");
+//            System.out.println("No Material!");
+//            InputManager.write_to_output(generateoutput,"No Material!");
         }
         else {
             for(Material m : Main.materials){
                 i++;
                 System.out.print("M" + i + "\t" + m.name);
-                InputManager.write_to_output(generateoutput,"M" + i + "\t" + m.name);
                 if(m.name == RadioactiveMaterialName.URAN) {
                     RadioactiveMaterial r = (RadioactiveMaterial) m;
                     System.out.print("\t" + r.exposed);
-                    InputManager.write_to_output(generateoutput,"\t" + r.exposed);
+                    InputManager.write_to_output(generateoutput,"M" + i + "\t" + m.name + "\t" + r.exposed);
+                } else {
+                    InputManager.write_to_output(generateoutput,"M" + i + "\t" + m.name);
                 }
+
                 System.out.println();
             }
         }
@@ -262,8 +271,8 @@ public class CommandManager {
         int i = 0;
         int mat = 0;
         if(Main.asteroids.size() == 0) {
-            System.out.println("No Asteroids!");
-            InputManager.write_to_output(generateoutput,"No Asteroids!");
+//            System.out.println("No Asteroids!");
+//            InputManager.write_to_output(generateoutput,"No Asteroids!");
         }
         else{
             for (Asteroid a : Main.asteroids){
@@ -282,7 +291,7 @@ public class CommandManager {
                 }
                 System.out.println(String.join(",",neigh));
                 String asdasd = String.join(",",neigh);
-                InputManager.write_to_output(generateoutput,"A" + i + "\t" + a.getLayers() + "\t" + a.GetSunProximity() + "\t" + a.GetisEmpty() + (a.GetisEmpty()?"\tnull":("\tM" +mat))+(a.GetisEmpty()?"":("\t" + asdasd)));
+                InputManager.write_to_output(generateoutput,"A" + i + "\t" + a.getLayers() + "\t" + a.GetSunProximity() + "\t" + a.GetisEmpty() + (a.GetisEmpty()?"\tnull":("\tM" +mat))/*+(a.GetisEmpty()?"":("\t" + asdasd))*/);
                 //TODO EZ MIEZ Bakonyi
             }
         }
@@ -293,8 +302,8 @@ public class CommandManager {
         int pairid = 0;
         int ast = 0;
             if (Main.teleportgates.size() == 0) {
-                System.out.println("No TeleportGates!");
-                InputManager.write_to_output(generateoutput,"No Teleportgates!");
+//                System.out.println("No TeleportGates!");
+//                InputManager.write_to_output(generateoutput,"No Teleportgates!");
             }
             else {
                 for (TeleportGate g : Main.teleportgates) {
@@ -313,8 +322,8 @@ public class CommandManager {
     }
     public static void listCharacters (boolean generateoutput){
         if(Main.robots.size() == 0 && Main.settlers.size() == 0 && Main.ufos.size() == 0){
-            System.out.println("No Characters!");
-            InputManager.write_to_output(generateoutput,"No Characters!");
+//            System.out.println("No Characters!");
+//            InputManager.write_to_output(generateoutput,"No Characters!");
         }
         int i = 0;
         for(Settler s : Main.settlers){
@@ -328,8 +337,8 @@ public class CommandManager {
                 ArrayList<String> smat = new ArrayList<>();
                 for (Material m : s.GetInventory().GetMaterials())
                     smat.add("M" + (Main.materials.indexOf(m) + 1));
-                System.out.print((String.join(",", smat)) + " ");
-                setler += ((String.join(",", smat)) + " ");
+                System.out.print((String.join(",", smat)));
+                setler += ((String.join(",", smat)));
             }
             else {
                 System.out.print("null");
