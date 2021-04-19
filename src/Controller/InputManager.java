@@ -207,7 +207,7 @@ public class InputManager {
     }
 
     public static void createMaterial(String params){
-        String[] input = params.split("\t");
+        String[] input = params.split("\\t");
         Material normal = new Material();
         RadioactiveMaterial radmat = new RadioactiveMaterial();
         SublimableMaterial submat= new SublimableMaterial();
@@ -227,11 +227,14 @@ public class InputManager {
                 Main.materials.get(Main.materials.size()-1).setName(normalMaterialName);
                 break;
             case 2:
-                Main.materials.add(radmat);
+                int c = Integer.parseInt(input[1]);
                 radioactiveMaterialName = RadioactiveMaterialName.URAN;
+                radmat.setName(radioactiveMaterialName);
+                radmat.SetExposure(Integer.parseInt(input[1]));
+                Main.materials.add(radmat);
+                //radioactiveMaterialName = RadioactiveMaterialName.URAN;
                 Main.materials.get(Main.materials.size()-1).setName(RadioactiveMaterialName.URAN);
-                //Main.materials.get(Main.materials.size()-1).setExposure(input[1]);
-                //TODO itt kell még a params paraméterből kiolvasni az exposure értéket
+//                (RadioactiveMaterial)(Main.materials.get(Main.materials.size()-1))
                 break;
             case 3:
                 Main.materials.add(submat);
@@ -281,7 +284,7 @@ public class InputManager {
         //pl    : 5 5,2,3,4,5 1 5 0
         createAsteroid3(params,actual);
         String[] cmd = params.split("\\t");
-        Main.asteroids.get(actual).AddMaterial(Main.materials.get(Integer.parseInt(cmd[5])-1));
+        Main.asteroids.get(actual).SetMaterial(Main.materials.get(Integer.parseInt(cmd[5])-1));
 
     }
     public static void setCommonAsteroid(Asteroid a, int sunprox, int layer, int empty){
@@ -303,7 +306,7 @@ public class InputManager {
         String[] cmd = params.split( "\\t");
         TeleportGate tg = Main.teleportgates.get(actual);
         setCommonTG(tg,Integer.parseInt(cmd[0]),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
-        Main.asteroids.get(Integer.parseInt(cmd[2])-1).AddNeighbour(tg);
+        //Main.asteroids.get(Integer.parseInt(cmd[2])-1).AddNeighbour(tg);
     }
     public static void setCommonTG(TeleportGate tg,int pair,int placed,int active, int crazy){
         if(pair!=0){
@@ -321,13 +324,14 @@ public class InputManager {
         Settler s = Main.settlers.get(actual);
         String[] cmd = params.split( "\\t");
         s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
-
+        Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(s);
     }
     public static void createSettler2(String params, int actual){   //With material and without tg
         Settler s = Main.settlers.get(actual);
         String[] cmd = params.split( "\\t");
         String[] materials=cmd[2].split(",");
         s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+        Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(s);
         for(int i=0; i<materials.length;i++){
             s.AddMaterial(Main.materials.get(Integer.parseInt(materials[i])-1));
         }
@@ -337,6 +341,7 @@ public class InputManager {
         String[] cmd = params.split( "\\t");
         String[] tgs=cmd[3].split(",");
         s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+        Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(s);
         for(int i=0; i<tgs.length;i++){
             s.AddGate(Main.teleportgates.get(Integer.parseInt(tgs[i])-1));
         }
@@ -347,6 +352,7 @@ public class InputManager {
         String[] tgs=cmd[3].split(",");
         Settler s = Main.settlers.get(actual);
         s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+        Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(s);
         for(int i=0; i<materials.length;i++){
             s.AddMaterial(Main.materials.get(Integer.parseInt(materials[i])-1));
         }
@@ -355,8 +361,11 @@ public class InputManager {
         }
     }
     public static void createRobot(String params, int actual){
+        Robot r = Main.robots.get(actual);
         String[] cmd=params.split("\\t");
-        Main.robots.get(actual).setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])));
+        Main.robots.get(actual).setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+        Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(r);
+
     }
     public static void createUfo1(String params,int actual){
         String[] cmd=params.split("\\t");

@@ -177,8 +177,8 @@ public class CommandManager {
         cmd[2] = cmd[2].toUpperCase();
 
         try {
-            int index = Integer.parseInt(cmd[1].substring(1));
-            int indexMaterial = Integer.parseInt(cmd[2].substring(1));
+            int index = Integer.parseInt(cmd[1].substring(1))-1;
+            int indexMaterial = Integer.parseInt(cmd[2].substring(1))-1;
             if ((cmd[1].charAt(0) == 'S') && (cmd[2].charAt(0) == 'M')) {
                 if ((index >= 0) && (index < Main.settlers.size()))
                     if ((indexMaterial >= 0) && (indexMaterial < Main.materials.size()))
@@ -196,8 +196,8 @@ public class CommandManager {
         cmd[2] = cmd[2].toUpperCase();
 
         try {
-            int index = Integer.parseInt(cmd[1].substring(1));
-            int indexGate = Integer.parseInt(cmd[2].substring(1));
+            int index = Integer.parseInt(cmd[1].substring(1))-1;
+            int indexGate = Integer.parseInt(cmd[2].substring(1))-1;
             if ((cmd[1].charAt(0) == 'S') && (cmd[2].charAt(0) == 'G')) {
                 if ((index >= 0) && (index < Main.settlers.size()))
                     if ((indexGate >= 0) && (indexGate < Main.teleportgates.size()))
@@ -223,17 +223,18 @@ public class CommandManager {
                     System.out.println("Invalid index number!");
                 else {
                     try {
-                        if ((index >= 0) && (index < Main.settlers.size()))
+                        if ((index >= 0) && (index < Main.settlers.size())) {
                             if (Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)) != -1) {
                                 if ((indexDObject >= 0) && (indexDObject < Main.asteroids.size()) && (towhere == 'A'))
                                     Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.asteroids.get(indexDObject)));
                             }
-                            if(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)) != -1) {
+                            if (Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)) != -1) {
 
-                                if ((indexDObject >= 0) && (indexDObject < Main.teleportgates.size()) && (towhere=='G'))
+                                if ((indexDObject >= 0) && (indexDObject < Main.teleportgates.size()) && (towhere == 'G'))
                                     Main.settlers.get(index).Move(Main.settlers.get(index).getAsteroid().GetNeighbourIndex(Main.teleportgates.get(indexDObject)));
 
                             }
+                        }
                     } catch (IndexOutOfBoundsException e) {}
                 }
             }
@@ -253,12 +254,14 @@ public class CommandManager {
             for(Material m : Main.materials){
                 i++;
                 System.out.print("M" + i + "\t" + m.name);
-                InputManager.write_to_output(generateoutput,"M" + i + "\t" + m.name);
                 if(m.name == RadioactiveMaterialName.URAN) {
                     RadioactiveMaterial r = (RadioactiveMaterial) m;
                     System.out.print("\t" + r.exposed);
-                    InputManager.write_to_output(generateoutput,"\t" + r.exposed);
+                    InputManager.write_to_output(generateoutput,"M" + i + "\t" + m.name + "\t" + r.exposed);
+                } else {
+                    InputManager.write_to_output(generateoutput,"M" + i + "\t" + m.name);
                 }
+
                 System.out.println();
             }
         }
@@ -268,8 +271,8 @@ public class CommandManager {
         int i = 0;
         int mat = 0;
         if(Main.asteroids.size() == 0) {
-            System.out.println("No Asteroids!");
-            InputManager.write_to_output(generateoutput,"No Asteroids!");
+//            System.out.println("No Asteroids!");
+//            InputManager.write_to_output(generateoutput,"No Asteroids!");
         }
         else{
             for (Asteroid a : Main.asteroids){

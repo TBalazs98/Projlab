@@ -103,16 +103,17 @@ public class Settler extends Worker implements drillable, moveable {
         //Logger.getInstance().printCommandCall(this);
 
         if(gates.size()<=1) {       //teleportGate konstruktorban 2 TG hozodik letre
-            TeleportGate g1 = new TeleportGate(inventory, this); //TG  epitese, atadva a sajat inventorynkat (ebben nezi meg a TG, hogy fel tud-e epulni)
-            if (g1 !=null){
-                Main.teleportgates.add(g1);
-                Main.teleportgates.add(g1.GetPair());
+            TeleportGate gate = new TeleportGate(inventory, this);
+//            TeleportGate g1 = new TeleportGate(inventory, this); //TG  epitese, atadva a sajat inventorynkat (ebben nezi meg a TG, hogy fel tud-e epulni)
+//            if (g1 != null){
+//                Main.teleportgates.add(g1);
+//                Main.teleportgates.add(g1.GetPair());
 
                 this.inventory.Remove(this.inventory.GetMaterialByName(NormalMaterialName.IRON));
                 this.inventory.Remove(this.inventory.GetMaterialByName(RadioactiveMaterialName.URAN));
                 this.inventory.Remove(this.inventory.GetMaterialByName(SublimableMaterialName.ICEWATER));
                 this.inventory.Remove(this.inventory.GetMaterialByName(NormalMaterialName.IRON));
-            }
+            //}
         }
         //Logger.getInstance().printReturnCommand();
     }

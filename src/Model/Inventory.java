@@ -73,7 +73,8 @@ public class Inventory {
         if(inventory.size() > 0) {
             int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
             if (inventory.containsKey(m.name)) {      //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
-                n = inventory.get(m.name);           //nullexception hibat dob
+                n = inventory.get(m.name) -1;           //nullexception hibat dob
+                //this.inventory.put(m.name, n);
                 this.inventory.put(m.name, n);
                 this.materials.remove(m);
             }
@@ -127,8 +128,11 @@ public class Inventory {
         for(Material mat : this.materials) {
             if (mat.name.equals(m)) {
                 Main.materials.remove(mat);
-                this.inventory.replace(m,m.hashCode()-1);
-                return mat;
+                int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
+                if (inventory.containsKey(m)) {      //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
+                    n = inventory.get(m) - 1;
+                    return mat;
+                }
             }
         }
         return  null;
