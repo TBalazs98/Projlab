@@ -1,4 +1,4 @@
 A1	2	false	true	null
-G1	false	G2
-G2	false	G1
-S1	A1	null
+G1	false	G2	null
+G2	false	G1	null
+S1	A1	null	G1,G2

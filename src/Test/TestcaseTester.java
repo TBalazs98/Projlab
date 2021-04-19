@@ -110,7 +110,7 @@ public class TestcaseTester {
     }
     @Test
     public void Test21()   {
-        Testing("21in","21out");
+        Testing("21in","21out"); //INPUTNÁL A 6. TULAJDONSÁG MIATT VAN HIBA
     }
     @Test
     public void Test22()   {
@@ -118,19 +118,19 @@ public class TestcaseTester {
     }
     @Test
     public void Test23()   {
-        Testing("23in","23out");
+        Testing("23in","23out"); //settler mine kivétel
     }
     @Test
     public void Test24()   {
-        Testing("24in","24out");
+        Testing("24in","24out"); //settler placematerial kivétel
     }
     @Test
     public void Test25()   {
-        Testing("25in","25out");
+        Testing("25in","25out"); //settler placematerial kivétel
     }
     @Test
     public void Test26()   {
-        Testing("26in","26out");
+        Testing("26in","26out"); //settler placematerial kivétel
     }
     @Test
     public void Test27()   {
@@ -138,11 +138,11 @@ public class TestcaseTester {
     }
     @Test
     public void Test28()   {
-        Testing("28in","28out");
+        Testing("28in","28out"); //settler mine kivétel
     }
     @Test
     public void Test29()   {
-        Testing("29in","29out");
+        Testing("29in","29out"); //settler placematerial kivétel
     }
     @Test
     public void Test30()   {
@@ -150,15 +150,15 @@ public class TestcaseTester {
     }
     @Test
     public void Test31()   {
-        Testing("31in","31out");
+        Testing("31in","31out"); //containsallelementsin kivétel
     }
     @Test
     public void Test32()   {
-        Testing("32in","32out");
+        Testing("32in","32out"); //index out of bound
     }
     @Test
     public void Test33()   {
-        Testing("33in","33out");
+        Testing("33in","33out"); //
     }
     @Test
     public void Test34()   {
