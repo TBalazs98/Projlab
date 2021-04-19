@@ -1,6 +1,6 @@
 createmap 0 1 0 1 0 0
-0	0	0	0	0	0
-1	0	0	0	0
+0	0	0	0
+1	0	0
 
 setRandomize off
 mine S1
