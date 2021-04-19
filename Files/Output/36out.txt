@@ -1,4 +1,4 @@
-M1  IRON
+M1	IRON
 A1	0	false	false	M1
 A2	3	false	true
 A3	4	true	true
