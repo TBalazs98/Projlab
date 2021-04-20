@@ -143,9 +143,11 @@ public class Settler extends Worker implements drillable, moveable {
     public void PlaceMaterial(Material m) {
         //Object[] p = {m.getName()};
         //Logger.getInstance().printCommandCall(this, p);
-
-        if(asteroid.AddMaterial(m))
-            m.Remove(inventory);                        //Eltavolitjuk az inventorynkbol
+        Material drop = m;
+        m.Remove(inventory);
+        boolean success = asteroid.AddMaterial(drop);
+        if(!success)
+            drop.Add(inventory);                        //Eltavolitjuk az inventorynkbol
 
         //Logger.getInstance().printReturnCommand();
     }
@@ -171,7 +173,7 @@ public class Settler extends Worker implements drillable, moveable {
         asteroid.Remove(this);                  //levesszuk az adott Settlert az aszteroidarol (mert meghalt)
         AsteroidBelt.getInstance().SetSettlersAlive();  //Es atallitjuk a jelenleg eletben levo Settlereket
         this.inventory.CharacterDied();
-        Main.settlers.remove(this);
+        Main.settlers.set(Main.settlers.indexOf(this), null);
 
 
         //Logger.getInstance().printReturnCommand();

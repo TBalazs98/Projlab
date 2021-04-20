@@ -1,2 +1,2 @@
-A2	2	false	true
+A2	2	false	true	null
 U1	A2

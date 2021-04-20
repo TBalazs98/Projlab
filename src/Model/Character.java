@@ -45,7 +45,7 @@ public abstract class Character {
         Asteroid a = (Asteroid) (goingTo.Accept(this));
         if(a != null) {
             asteroid = a; //fixen asteroid lesz, mivel a DestinationObject minden implementalasanal Asteroiddal ter vissza
-            a.Accept(this);
+            //a.Accept(this);
         }
         else {
             asteroid.Accept(this);

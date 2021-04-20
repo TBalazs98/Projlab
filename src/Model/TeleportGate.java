@@ -20,7 +20,7 @@ public class TeleportGate implements DestinationObject, Steppable {
     private boolean isActive;
     private boolean isPlaced;
     private TeleportGate pair ;
-    private Asteroid asteroid;
+    private Asteroid asteroid = null;
     private static final Inventory inventory = new Inventory();
     private boolean isHit = false;
 
@@ -162,6 +162,7 @@ public class TeleportGate implements DestinationObject, Steppable {
             this.pair.Activate();
             this.Activate();
         }
+        asteroid.AddNeighbour(this);
 
         //Logger.getInstance().printReturnCommand();
     }
@@ -281,7 +282,8 @@ public class TeleportGate implements DestinationObject, Steppable {
     }
 
     public void HitBySunstorm(){        //TODO ezt nem tudtam megcsinálni a szeki miatt
-
+        isHit = true;
+        Step();
     }
 
     public boolean GetisActive(){
@@ -305,8 +307,13 @@ public class TeleportGate implements DestinationObject, Steppable {
     public void Step(){
         if(this.isHit == true) {
             Random rand = new Random();
-            int i = rand.nextInt(this.asteroid.GetNeighbourCount());
+            int i = 0;
+            while(Main.asteroids.indexOf(asteroid.GetNeighbour(i)) <= -1) {
+                i++;
+            }
+            asteroid.RemoveNeighbour(this);
             this.setAsteroid((Asteroid) this.asteroid.GetNeighbour(i));
+            asteroid.AddNeighbour(this);
             }
     }
 

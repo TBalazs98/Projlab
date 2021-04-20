@@ -178,9 +178,7 @@ public class Asteroid implements DestinationObject {
      */
     public Material Mined() {
         //Logger.getInstance().printCommandCall(this);
-        if(material != null)
-            material.Hit(this);
-        if(!isEmpty && layers == 0) {
+        if(!isEmpty && layers == 0 && material != null) {
             material.Hit(this);
             isEmpty = true;
             if(material == null) {
@@ -317,6 +315,9 @@ public class Asteroid implements DestinationObject {
 
     public void SetSunProximityManual(boolean proximity){
         this.isNearSun = proximity;
+        //élesben törlendő
+        if((layers == 0) && (!isEmpty) && (material !=null))
+            this.material.Hit(this);
     }
 
     /**
@@ -341,9 +342,13 @@ public class Asteroid implements DestinationObject {
     public void HitBySunstorm() {
         //Logger.getInstance().printCommandCall(this);
         if((layers != 0) || (!isEmpty)) {
-            for(int i = 0; i < characters.size(); i++) {
-                this.characters.get(i).Die();
+            int n = characters.size();
+            for(int i = n - 1; i >= 0; i--) {
+                characters.get(i).Die();
             }
+//            for(int i = 0; i < characters.size(); i++) {
+//                this.characters.get(i).Die();
+//            }
             for(TeleportGate t: Main.teleportgates) {
                 if(t.GetAsteroid() == this) {
                     t.HitBySunstorm();
@@ -372,8 +377,8 @@ public class Asteroid implements DestinationObject {
     public void Explode() {
         //Logger.getInstance().printCommandCall(this);;
         int n = characters.size();
-        for(Character c : this.characters) {
-            c.Explode();
+        for(int i = n - 1; i >= 0; i--) {
+            characters.get(i).Explode();
         }
         for(DestinationObject o : this.neighbours) {
             o.HitByExplosion(this);
@@ -382,7 +387,8 @@ public class Asteroid implements DestinationObject {
         //this.characters.forEach(c -> c.Explode());
 
         Main.materials.remove(this.material);
-        Main.asteroids.remove(this);
+        //Main.asteroids.remove(this);
+        Main.asteroids.set(Main.asteroids.indexOf(this), null);
         //Logger.getInstance().printReturnCommand();
     }
 

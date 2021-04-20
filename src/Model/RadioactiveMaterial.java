@@ -54,8 +54,9 @@ public class RadioactiveMaterial extends Material {
         //fuggveny lefutasa tagvaltozo lekerdezesevel
         if(a.GetSunProximity() == true && a.getLayers() == 0) //amugy ez a 0 ide nem is kell, mert csak akkor hívodik meg a hit, ha a layers 0
             expose();
-        if(exposed == 3)
+        if(exposed >= 3) {
             a.Explode();
+        }
 
 
         //Logger.getInstance().printReturnCommand();

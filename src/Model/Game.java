@@ -55,6 +55,7 @@ public class Game {
         //Logger.getInstance().printCommandCall(this);
 
         System.out.println("Settlers have lost the game");
+        InputManager.write_to_output(true,"Settlers have lost the game");
 
         //Logger.getInstance().printReturnCommand();
     }

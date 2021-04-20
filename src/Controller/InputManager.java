@@ -69,7 +69,7 @@ public class InputManager {
             cm.listAsteroids(generateoutput);
             cm.listTeleportGates(generateoutput);
             cm.listCharacters(generateoutput);
-            cm.saveMap("savedmap");
+            //cm.saveMap("savedmap");
 
             removeObjects(Main.materials);
             removeObjects(Main.asteroids);
@@ -285,7 +285,6 @@ public class InputManager {
         createAsteroid3(params,actual);
         String[] cmd = params.split("\\t");
         Main.asteroids.get(actual).SetMaterial(Main.materials.get(Integer.parseInt(cmd[5])-1));
-
     }
     public static void setCommonAsteroid(Asteroid a, int sunprox, int layer, int empty){
         a.SetSunProximityManual(IntToBoolean(sunprox));
@@ -325,6 +324,7 @@ public class InputManager {
         String[] cmd = params.split( "\\t");
         s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(s);
+        Main.ab.settlersAlive += 1; //kiszedve, a teszteléshez szükséges settlerek minimalizálásához
     }
     public static void createSettler2(String params, int actual){   //With material and without tg
         Settler s = Main.settlers.get(actual);
@@ -335,6 +335,7 @@ public class InputManager {
         for(int i=0; i<materials.length;i++){
             s.AddMaterial(Main.materials.get(Integer.parseInt(materials[i])-1));
         }
+        Main.ab.settlersAlive += 1; //kiszedve, a teszteléshez szükséges settlerek minimalizálásához
     }
     public static void createSettler3(String params, int actual){   //WithOutMaterial and WithTG
         Settler s = Main.settlers.get(actual);
@@ -345,6 +346,7 @@ public class InputManager {
         for(int i=0; i<tgs.length;i++){
             s.AddGate(Main.teleportgates.get(Integer.parseInt(tgs[i])-1));
         }
+        Main.ab.settlersAlive += 1; //kiszedve, a teszteléshez szükséges settlerek minimalizálásához
     }
     public static void createSettler4(String params, int actual){ //wm and wtg
         String[] cmd = params.split( "\\t");
@@ -359,6 +361,7 @@ public class InputManager {
         for(int i=0; i<tgs.length;i++){
             s.AddGate(Main.teleportgates.get(Integer.parseInt(tgs[i])-1));
         }
+        Main.ab.settlersAlive += 1; //kiszedve, a teszteléshez szükséges settlerek minimalizálásához
     }
     public static void createRobot(String params, int actual){
         Robot r = Main.robots.get(actual);
@@ -368,8 +371,10 @@ public class InputManager {
 
     }
     public static void createUfo1(String params,int actual){
+        UFO u = Main.ufos.get(actual);
         String[] cmd=params.split("\\t");
         Main.ufos.get(actual).setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
+        Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(u);
     }
     public static void createUfo2(String params, int actual){
         String[] cmd=params.split("\\t");

@@ -1,4 +1,4 @@
-createmap 1 1	0 1 1 0
+createmap 1 1 0 1 0 1
 2	0
 0	0	1	1	1
 1	0	0
@@ -7,4 +7,5 @@ createmap 1 1	0 1 1 0
 setRandomize off
 drill S1
 mine U1
+mine S1
 stop

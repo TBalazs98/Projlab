@@ -1,13 +1,13 @@
 M1	COAL
-A1	1	false	ture
-A2	2	false	true
+A1	1	false	true	null
+A2	2	false	true	null
 A3	3	false	false	M1
-A4	4	false	true
-A5	5	false	true
+A4	4	false	true	null
+A5	5	false	true	null
 G1	true	G4	A4
 G2	true	G3	A4
 G3	true	G2	A1
 G4	true	G1	A3
 G5	false	G6	null
 G6	false	G5	null
-S1	A4	G5,G6
+S1	A4	null	G5,G6

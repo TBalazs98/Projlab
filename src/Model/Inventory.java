@@ -92,10 +92,14 @@ public class Inventory {
     public boolean ContainsAllElementsIn(Inventory i) {
         //Object[] p = {i.getClass().getSimpleName()};
         //Logger.getInstance().printCommandCall(this, p);
-        for(MaterialName  m : this.inventory.keySet() ){    //vegigmegyunk az osszes materialunkon
-            if(i.inventory.get(m) < this.inventory.get(m)){ //ha a parameterkent kapott inventoryban kevesebb van ( mint amennyire szukseg lenne)
-                //Logger.getInstance().printReturnCommand(false);
-                return false;                               //akkor epitkezes no-no
+        if(i.Size() < this.Size()) {
+            return false;
+        } else {
+            for(MaterialName  m : this.inventory.keySet() ){    //vegigmegyunk az osszes materialunkon
+                if(i.inventory.get(m) < this.inventory.get(m)){ //ha a parameterkent kapott inventoryban kevesebb van ( mint amennyire szukseg lenne)
+                    //Logger.getInstance().printReturnCommand(false);
+                    return false;                               //akkor epitkezes no-no
+                }
             }
         }
         //Logger.getInstance().printReturnCommand(true);
@@ -139,10 +143,12 @@ public class Inventory {
     }
 
     public void CharacterDied(){
-        for(Material m : Main.materials)
-            Main.materials.remove(m);
-        for(Material m : materials)
+//        for(Material m : Main.materials)
+//            Main.materials.remove(m);
+        for(Material m : materials) {
             materials.remove(m);
+            Main.materials.remove(m);
+        }
         this.inventory.clear();
     }
 }

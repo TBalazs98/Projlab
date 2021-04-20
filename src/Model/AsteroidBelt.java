@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class AsteroidBelt {
 
-    public int settlersAlive;
+    public int settlersAlive = 0;
 
     private static final AsteroidBelt ab = new AsteroidBelt();
 

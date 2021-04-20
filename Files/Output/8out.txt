@@ -1,2 +1,3 @@
-A1	2	false	true	null
+A1	0	false	true	null
 A2	2	true	true	null
+S2	A1	null

@@ -61,7 +61,7 @@ public class Main {
     public static String settlerregex = "\\d\\s\\d\\s(\\d,)*\\d\\s[0123]\\s\\d|\\d\\s0\\s0";
     public static String settler_wom_and_wotg = "\\d{1,}\\s0\\s0";   //WithOutMaterial and WithOutTG
     public static String settler_wm_and_wotg = "\\d{1,}\\s\\d{1,}\\s(\\d{1,},{0,1})*\\s0";    //WithMateruak and WithOutTG
-    public static String settler_wom_and_wtg = "\\d{1,}\\s0\\s[0123]\\s[1234]";    //WithOutMaterial and WithTG
+    public static String settler_wom_and_wtg = "\\d{1,}\\s0\\s[0123]\\s(\\d{1,},{0,1})*";    //WithOutMaterial and WithTG
     public static String settler_wm_and_wtg = "\\d{1,}\\s\\d{1,}\\s(\\d{1,},{0,1})*\\s[0123]\\s[1234]";     //WithMaterial and WithTG
     public static String robotregex = "\\d";
     public static String ufo_wm = "\\d\\s0|\\d\\s\\d\\s(\\d,)*\\d\n";

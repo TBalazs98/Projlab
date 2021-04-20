@@ -1,4 +1,4 @@
 M1	IRON
-A1	0	true	true
+A1	0	true	true	null
 A2	0	true	false	M1
-S1	A1
+S1	A1	null
