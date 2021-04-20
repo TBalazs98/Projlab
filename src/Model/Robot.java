@@ -134,7 +134,7 @@ public class Robot extends Worker implements drillable{
     }
 
     /**
-     * A Robot halalat levezenylo metodus
+     * A robot halalanak bekovetkezeset lekezelo metodus
      */
     public void Die(){
         Main.robots.remove(this);

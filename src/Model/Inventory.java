@@ -124,6 +124,11 @@ public class Inventory {
 
     }
 
+
+    /**
+     * Inventory nyersanyagainak listzasa
+     * @return visszaadja az Invertory nyersanyagainak listqajat
+     */
     public ArrayList<Material> GetMaterials(){
         return  this.materials;
     }
@@ -142,6 +147,9 @@ public class Inventory {
         return  null;
     }
 
+    /**
+     * Az Inventory-gazda halalanak bekovetkezeset lekezelo metodus
+     */
     public void CharacterDied(){
 //        for(Material m : Main.materials)
 //            Main.materials.remove(m);

@@ -237,6 +237,10 @@ public class Asteroid implements DestinationObject {
         return false;
     }
 
+    /**
+     * Beallitjuk az aszteroia nyersanyagat
+     * @param m a nyersanyag, melyet az aszteroida nyersanyagava allitunk
+     */
     public void SetMaterial(Material m) {
         isEmpty = false;
         this.material = m;
@@ -273,6 +277,11 @@ public class Asteroid implements DestinationObject {
         return dob;
     }
 
+    /**
+     * Visszaadjuk hanyadik indexen talalthato a jelenlegi aszteroida szomszedsagi tombjeben a parameterul adott szomszedos objektum
+     * @param obj a szomszedos objektum
+     * @return a szomszedok tombben a parameterul adott objektum indexe
+     */
     public int GetNeighbourIndex(DestinationObject obj){
         return  neighbours.indexOf(obj);
     }
@@ -289,12 +298,16 @@ public class Asteroid implements DestinationObject {
         return n;
     }
 
+    /**
+     * Lekerjuk az adott aszteroida szomszed-listajat
+     * @return visszaadjuk az aszteroida szomszedjainak listajat
+     */
     public ArrayList<DestinationObject> GetNeighbours(){
         return neighbours;
     }
 
     /**
-     *Napkozel/naptavol allitasa.
+     * Aszteroida napkozel/naptavol automatikus/rendszeren beluli allitasa.
      */
     public void SetSunProximityAuto(){
         //Logger.getInstance().printCommandCall(this);
@@ -313,8 +326,12 @@ public class Asteroid implements DestinationObject {
         //Logger.getInstance().printReturnCommand();
     }
 
-    public void SetSunProximityManual(boolean proximity){
-        this.isNearSun = proximity;
+    /**
+     * Beallitjuk manualisan az aszteroida naptol valo tavolsagat (kozeli/tavoli)
+     * @param isnear igaz ha kozel van az aszteroida a naphoz
+     */
+    public void SetSunProximityManual(boolean isnear){
+        this.isNearSun = isnear;
         //élesben törlendő
         if((layers == 0) && (!isEmpty) && (material !=null))
             this.material.Hit(this);
@@ -405,10 +422,18 @@ public class Asteroid implements DestinationObject {
         //Logger.getInstance().printReturnCommand();
     }
 
-    public  void  SetEmpty(boolean emptyness){
-        this.isEmpty = emptyness;
+    /**
+     * Az aszteroida uressegenek beallitasa
+     * @param emptiness igaz erteku, ha uresre allitjuk az aszteroidat
+     */
+    public void SetEmpty(boolean emptiness){
+        this.isEmpty = emptiness;
     }
 
+    /**
+     * Az aszteroida szomszedjainak szamanak lekerdezese
+     * @return aszteroida szomszedjainak szama
+     */
     public int GetNeighbourCount(){
         return  neighbours.size();
     }
