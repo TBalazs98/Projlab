@@ -593,7 +593,12 @@ public class CommandManager {
      * Terke betoltese fajbol
      * @param filename fajlnev
      */
-    public static void loadmap(String filename){    }
+    public static void loadmap(String filename){
+        try {
+            File currentfile = InputManager.getFile("Files", "Saved", filename);
+
+        }catch (IOException e){}
+    }
 
     /**
      * Elmenti a jatekallast a megadott fajlba
@@ -609,7 +614,8 @@ public class CommandManager {
 
         FileWriter fw = null;
         try {
-            fw = new FileWriter("Files/Saved/" + filename + ".txt");
+            File currentfile = InputManager.getFile("Files","Saved",filename);
+            fw = new FileWriter(currentfile);
         } catch (IOException e) {
             e.printStackTrace();
         }
