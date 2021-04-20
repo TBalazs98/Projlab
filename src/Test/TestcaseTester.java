@@ -1,4 +1,5 @@
 import Controller.InputManager;
+import Model.Main;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,10 +8,11 @@ import java.util.ArrayList;
 
 public class TestcaseTester {
 
+    private ArrayList<String> actual_output;
+
  public void Testing(String input, String output) {
      try {
-
-         ArrayList<String> actual_output = InputManager.GenerateOutput(input);
+         actual_output = InputManager.GenerateOutput(input);
          File currentfile = InputManager.getFile("Files", "Output", output);
          BufferedReader reader = new BufferedReader(new FileReader(currentfile));
          String expected_line = "";
@@ -21,13 +23,16 @@ public class TestcaseTester {
                 break;
             }
             Assert.assertEquals(expected_line, actual_output.get(counter));
+
             counter++;
          }
      }
      catch (IOException IOE){
      System.out.print("File not exist!");
-    }
-
+    }finally {
+         actual_output.clear();
+         InputManager.zero();
+     }
  }
 
     @Test
@@ -110,7 +115,7 @@ public class TestcaseTester {
     }
     @Test
     public void Test21()   {
-        Testing("21in","21out"); //INPUTNÁL A 6. TULAJDONSÁG MIATT VAN HIBA
+        Testing("21in","21out");
     }
     @Test
     public void Test22()   {

@@ -103,6 +103,11 @@ public class CommandManager {
         return stop;
     }
 
+    public static void Reset(){
+        stop = true;
+        Main.ab.settlersAlive = 0;
+    }
+
     public static void drill(String character){
 
         character = character.toUpperCase();

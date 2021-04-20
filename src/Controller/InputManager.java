@@ -15,9 +15,10 @@ public class InputManager {
     private static ArrayList<String> output = new ArrayList<>();
 
     public static void removeObjects (ArrayList<?> array ){
-        for(int i=0; i<array.size();i++){
+        /*for(int i=0; i<array.size();i++){
             array.remove(array.get(i));
-        }
+        }*/
+        array.clear();
     }
 
     public static void write_to_output(boolean generateoutput,String what){
@@ -29,9 +30,17 @@ public class InputManager {
         return output;
     }
 
+    public static void zero(){
+        InputManager.output.clear();
+    }
+
     public static ArrayList<String> GenerateOutput(String filename){
         InputManager.FromFileInput(filename,true);
-        return output;
+        ArrayList<String> vissza = new ArrayList<String>();
+        for(int i=0; i<InputManager.output.size(); i++){
+            vissza.add(InputManager.output.get(i));
+        }
+        return vissza;
     }
 
     public static void InputCore(Boolean generateoutput){
@@ -78,6 +87,7 @@ public class InputManager {
             removeObjects(Main.robots);
             removeObjects(Main.ufos);
 
+            cm.Reset();
 
            // reader.close();
         } catch (IOException e) {
@@ -110,9 +120,9 @@ public class InputManager {
         String canonical_path_2=dir_File_Input.getCanonicalPath();
         File wanted = new File(canonical_path_2,filename+".txt");
 
-        BufferedReader read = new BufferedReader(new FileReader(wanted));
+        /*BufferedReader read = new BufferedReader(new FileReader(wanted));
 
-        System.out.println(read.readLine());
+        System.out.println(read.readLine());*/
 
         return wanted;
     }
