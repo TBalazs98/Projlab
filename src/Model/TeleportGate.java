@@ -58,6 +58,7 @@ public class TeleportGate implements DestinationObject, Steppable {
         if(inventory.ContainsAllElementsIn(i))
             {
                 this.pair = new TeleportGate();
+                pair.setPair(this);
                 this.isPlaced = false;
                 this.isActive = false;
                 s.AddGate(this);
