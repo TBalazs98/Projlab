@@ -5,11 +5,26 @@ import Model.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ *A bemeneti nyelv parancsait kezeli amit a felhasznalo begepelhet
+ */
 public class CommandManager {
 
+    /**
+     *Kilepesi feltelet kezeljuk vele
+     */
     private static boolean stop = true;
+
+    /**
+    *Konstruktor
+     */
     public CommandManager(){}
 
+    /**
+     * A parancsokat kezeljuk vele, a megadott bemenet alapjan meghivaj a megfelelo fuggvenyt
+     * @param command   bemeneti parancs
+     * @param generateoutput    ha iagaz az erteke, elemnti a kimenetet egy Stringbe
+     */
     public static void command(String command, boolean generateoutput){
 
         String[] cmd = command.split(" ");
@@ -99,15 +114,26 @@ public class CommandManager {
 
     }
 
+    /**
+     * Visszaadja hogy fut-e meg a beolvasas vagy sem, stop parancsig olvas
+     * @return visszaadja a stop erteket
+     */
     public static boolean IsRunning(){
         return stop;
     }
 
+    /**
+     * Beallitja nullara az eletben levo settlerek szamat
+     */
     public static void Reset(){
         stop = true;
         Main.ab.settlersAlive = 0;
     }
 
+    /**
+     * A Drill parancsot hajtja vegre, ha a bemeneti nyelvben megirt azonosito ervenyes
+     * @param character bemeneti nyelvrol olvasott karakter azonositoja
+     */
     public static void drill(String character){
 
         character = character.toUpperCase();
@@ -127,6 +153,10 @@ public class CommandManager {
         }
     }
 
+    /**
+     * A Mine parancsot hajtja vegre, ha a bemeneti nyelvben megirt azonosito ervenyes
+     * @param character bemeneti nyelvrol olvasott karakter azonositoja
+     */
     public static  void mine (String character){
         if(character.length() >= 2) {
             character = character.toUpperCase();
@@ -146,6 +176,11 @@ public class CommandManager {
         } else
             System.out.println("Invalid input!");
     }
+
+    /**
+     * A Build parancsot hajtja vegre, ha a bemeneti nyelvben megirt azonositok ervenyesek
+     * @param cmd bemeneti nyelvrol olvasott karakter azonositoja illetve az epiteni kivant dolog
+     */
     public static void build (String[] cmd){
         //ellenőrizni a tömb méretét
         cmd[1] = cmd[1].toUpperCase();
@@ -177,6 +212,11 @@ public class CommandManager {
             System.out.println("Invalid input!");
         }
     }
+
+    /**
+     * A PlaceMaterial parancsot hajtja vegre, ha a bemeneti nyelvben megirt azonositok ervenyesek
+     * @param cmd bemeneti nyelvrol olvasott karakter azonositoja illetve a visszahelyezni kivant nyersanyag azonositoja
+     */
     public static void put (String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
@@ -196,6 +236,10 @@ public class CommandManager {
         }
     }
 
+    /**
+     * A PlaceGate parancsot hajtja vegre, ha a bemeneti nyelvben megirt azonositok ervenyesek
+     * @param cmd bemeneti nyelvrol olvasott karakter azonositoja illetve a lehelyezni kivant teleportkapu azonositoja
+     */
     public static void placegate (String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
@@ -215,6 +259,10 @@ public class CommandManager {
         }
     }
 
+    /**
+     * A Move parancsot hajtja vegre, ha a bemeneti nyelvben megirt azonositok ervenyesek
+     * @param cmd bemeneti nyelvrol olvasott karakter azonositoja illetve annak a DestinationObjectnek az azonositoja ahova utaznank
+     */
     public static void move (String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
@@ -249,6 +297,11 @@ public class CommandManager {
             System.out.println("Invalid input!");
         }
     }
+
+    /**
+     * Kilistazza a nyersanyagokat
+     * @param generateoutput ha iagaz az erteke, elemnti a kimenetet egy Stringbe
+     */
     public static void listMaterials (boolean generateoutput){
         int i = 0;
         if (Main.materials.size() == 0) {
@@ -272,6 +325,10 @@ public class CommandManager {
         }
     }
 
+    /**
+     * Kilistazza az aszteroidakat
+     * @param generateoutput ha iagaz az erteke, elemnti a kimenetet egy Stringbe
+     */
     public static void listAsteroids (boolean generateoutput){
         int i = 0;
         int mat = 0;
@@ -307,6 +364,11 @@ public class CommandManager {
         }
 
     }
+
+    /**
+     * Kilistazza a teleportkapukat
+     * @param generateoutput ha iagaz az erteke, elemnti a kimenetet egy Stringbe
+     */
     public static void listTeleportGates (boolean generateoutput){
         int i = 0;
         int pairid = 0;
@@ -332,11 +394,20 @@ public class CommandManager {
             }
 
     }
+
+    /**
+     * Kilistazza a karakterket
+     * @param generateoutput ha iagaz az erteke, elemnti a kimenetet egy Stringbe
+     */
     public static void listCharacters (boolean generateoutput){
         if(Main.robots.size() == 0 && Main.settlers.size() == 0 && Main.ufos.size() == 0){
 //            System.out.println("No Characters!");
 //            InputManager.write_to_output(generateoutput,"No Characters!");
         }
+
+        /**
+         * Telepesek kilistazasa
+         */
         int i = 0;
         for(Settler s : Main.settlers){
             if(s == null) {
@@ -370,6 +441,10 @@ public class CommandManager {
                 InputManager.write_to_output(generateoutput, setler);
             }
         }
+
+        /**
+         * Robotok kilistazasa
+         */
         i = 0;
         for(Robot r : Main.robots){
             i++;
@@ -378,6 +453,10 @@ public class CommandManager {
             System.out.println("R" + i + "\t" + "A" + aindex);
             InputManager.write_to_output(generateoutput,("R" + i + "\t" + "A" + aindex));
         }
+
+        /**
+         * Ufok kilistazasa
+         */
         i = 0;
         for(UFO u : Main.ufos){
             i++;
@@ -398,6 +477,11 @@ public class CommandManager {
         }
 
     }
+
+    /**
+     * A SunStorm parancsot hajtja vegre, ha a bemeneti nyelvben megirt azonosito ervenyes
+     * @param cmd aszteroida azonositoja amin elinditjuk a napvihart
+     */
     public static void SunStorm (String[] cmd){
         //ellenőrizni a tömb méretét
         cmd[1] = cmd[1].toUpperCase();
@@ -416,6 +500,11 @@ public class CommandManager {
 
 
     }
+
+    /**
+     * A SetSunProximityManul parancsot hajtja vegre, ha a bemeneti nyelvben megirt azonosito ervenyes
+     * @param cmd a beallitani kivant ertek és az aszteroida azonositoja
+     */
     public static void setProximity(String[] cmd){
         cmd[1] = cmd[1].toUpperCase();
         cmd[2] = cmd[2].toUpperCase();
@@ -445,6 +534,10 @@ public class CommandManager {
         }
 
     }
+
+    /**
+     * A Step parancsot hajtja vegre, ami lepteti a leptetheto dolgokat
+     */
     public static void step (){
       /*
         for(Asteroid a : Main.asteroids)
@@ -459,6 +552,11 @@ public class CommandManager {
         Main.game.NextRound();
 
     }
+
+    /**
+     * A determinisztikussagot kezeli
+     * @param cmd a bemenetrol beolvasott ertek
+     */
     public static void setRandomize(String cmd){
         //globális vált
         cmd = cmd.toUpperCase();
@@ -477,16 +575,30 @@ public class CommandManager {
 
     }
 
+    /**
+     * A jatekot inditja el
+     */
     public static void startGame(){
         Main.game.StartGame();
     }
 
+    /**
+     * Befejezi a jatekot mentes nelkul
+     */
     public static void endGame (){
         Main.game.LoseGame();
     }
 
+    /**
+     * Terke betoltese fajbol
+     * @param filename fajlnev
+     */
     public static void loadmap(String filename){    }
 
+    /**
+     * Elmenti a jatekallast a megadott fajlba
+     * @param filename a bemenetrol beolvasott fajlnev
+     */
     public static void saveMap (String filename){
         int M = Main.materials.size();
         int A = Main.asteroids.size();
@@ -599,9 +711,7 @@ public class CommandManager {
                 pw.print(String.join(",", mat));
             }
         }
-
         pw.close();
     }
-
 
 }

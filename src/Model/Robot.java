@@ -133,6 +133,9 @@ public class Robot extends Worker implements drillable{
         //Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * A Robot halalat levezenylo metodus
+     */
     public void Die(){
         Main.robots.remove(this);
         this.asteroid.Remove(this);

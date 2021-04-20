@@ -282,15 +282,26 @@ public class TeleportGate implements DestinationObject, Steppable {
         //Logger.getInstance().printReturnCommand();
     }
 
-    public void HitBySunstorm(){        //TODO ezt nem tudtam megcsinálni a szeki miatt
+    /**
+     * Napvihar hatasara a teleportkapu megkergul.
+     */
+    public void HitBySunstorm(){
         isHit = true;
         Step();
     }
 
+    /**
+     * Vissaadja, hogy aktivalva van-e a kapunk.
+     * @return  aktivalast jelzi
+     */
     public boolean GetisActive(){
         return isActive;
     }
 
+    /**
+     * A lehelyezest jelzo logikai ertekkel ter vissza.
+     * @return helzi, hogy le van e helyezve a kapu
+     */
     public boolean GetisPlaced(){
         return isPlaced;
     }
@@ -301,10 +312,17 @@ public class TeleportGate implements DestinationObject, Steppable {
 
     }
 
+    /**
+     * Visszaadja, hogy megkergult-e az aszteroidank.
+     * @return a megkergulest jeloli
+     */
     public boolean GetIsHit(){
         return  this.isHit;
     }
 
+    /**
+     * Ha a teleportkapu megkergult, akkor egy szomszedos aszteroidara ugrik at.
+     */
     public void Step(){
         if(this.isHit == true) {
             Random rand = new Random();
@@ -318,14 +336,26 @@ public class TeleportGate implements DestinationObject, Steppable {
             }
     }
 
+    /**
+     * A megadott erteknek megfeleloan atallitja az isActive erteket.
+     * @param state beallitani kivant logikai ertek
+     */
     public void setActive(boolean state) {
         isActive = state;
     }
 
+    /**
+     * A megadott erteknek megfeleloan atallitja az isPlaced erteket.
+     * @param state beallitani kivant logikai ertek
+     */
     public void setPlaced(boolean state){
         isPlaced = state;
     }
 
+    /**
+     * A megadott erteknek megfeleloan atallitja az isHit erteket.
+     * @param state beallitani kivant logikai ertek
+     */
     public void setCrazy(boolean state){
         isHit = state;
     }
