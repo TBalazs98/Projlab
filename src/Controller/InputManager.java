@@ -18,10 +18,7 @@ public class InputManager {
      * A metodus kiuriti a parameterkent kaott ArrayListet
      * @param array tetszoleges ArrayList<>
      */
-    public static void removeObjects (ArrayList<?> array ){
-        /*for(int i=0; i<array.size();i++){
-            array.remove(array.get(i));
-        }*/
+    public static void removeObjects(ArrayList<?> array ){
         array.clear();
     }
 
@@ -36,7 +33,7 @@ public class InputManager {
     }
 
     /**
-     * gettter az output tagvaltozora
+     * Gettter az output tagvaltozora
      * @return private output struktura
      */
     public static ArrayList<String> GetOutput(){
@@ -44,7 +41,7 @@ public class InputManager {
     }
 
     /**
-     * kiuriti az ouput tartalmat
+     * Kiuriti az output tartalmat
      */
     public static void zero(){
         InputManager.output.clear();
@@ -53,11 +50,11 @@ public class InputManager {
 
     public static ArrayList<String> GenerateOutput(String filename){
         InputManager.FromFileInput(filename,true);
-        ArrayList<String> vissza = new ArrayList<String>();
+        ArrayList<String> output_list = new ArrayList<String>();
         for(int i=0; i<InputManager.output.size(); i++){
-            vissza.add(InputManager.output.get(i));
+            output_list.add(InputManager.output.get(i));
         }
-        return vissza;
+        return output_list;
     }
 
     /**
@@ -80,11 +77,11 @@ public class InputManager {
             }
 
             for(int i=1; i<6;i++){                      //itt pedig minden mast, vegigmegyunk az ObjCounts tombon, hogy mibol mennyi kell
-                InputManager.create(i,ObjCounts[i]);    //eloszor csak letrehozzuk
+                InputManager.createObject(i,ObjCounts[i]);    //eloszor csak letrehozzuk
                 for(int j=0; j<ObjCounts[i];j++){
                     String params=reader.readLine();
                     System.out.println(params);
-                    InputManager.letrehoz(i,params,j);  //majd inicializaljuk is
+                    InputManager.initObjects(i,params,j);  //majd inicializaljuk is
                 }
             }
 
@@ -126,7 +123,7 @@ public class InputManager {
             reader = new BufferedReader(new FileReader(currentfile));
             InputManager.InputCore(generateoutput);   //TODO ezt kell átváltoztatni bool generateoutput-ra, meg paraméterben felvenni
         }catch (IOException e){                       //TODO és a ParamTest-ben átváltoztatni minden hívást, kiegészíteni false-ra
-            System.out.println("I am sorry, but I dont find the file :(");
+            System.out.println("Input file not found!");
         }
     }
 
@@ -138,7 +135,7 @@ public class InputManager {
             reader = new BufferedReader(new InputStreamReader(System.in));
             InputManager.InputCore(false);
         }catch (Exception e){
-            System.out.println("From UserInput :)");
+            System.out.println("User input: Input file not found!");
         }
     }
 
@@ -146,7 +143,7 @@ public class InputManager {
      * OPrendszer fuggetlen filebeolvasast valositja meg
      * @param dir gyokermappa elso szintjen levo konyvtar
      * @param dir2 gyokermappa masodik szintjen levo konyvtar
-     * @param filename cel filename
+     * @param filename cel file neve
      * @return wanted, a kulonbozo parameterkent kapott directorykban talalhato file
      * @throws IOException ha a file nem talalhato
      */
@@ -166,56 +163,56 @@ public class InputManager {
 
     /**
      *
-     * @param what Milyen tipusu objektumrol van szo (Material, Asteroid, Settler....)
-     * @param params Az inicializalashoz szukseges szamfolyam
-     * @param actual Hanyadik objektumrol van szo (Az ArrayList-ekben valo eleresekhez)
+     * @param type_of_object Milyen tipusu objektumrol van szo (Material, Asteroid, Settler....)
+     * @param init_settings Az inicializalashoz szukseges szamfolyam
+     * @param type Hanyadik objektumrol van szo (Az ArrayList-ekben valo eleresekhez)
      */
-    public static void letrehoz(int what, String params,int actual ){
-        switch (what){
+    public static void initObjects(int type_of_object, String init_settings, int type ){
+        switch (type_of_object){
             case 0:
-                if(Pattern.matches(Main.materialregex,params)){
-                    createMaterial(params);
+                if(Pattern.matches(Main.materialregex,init_settings)){
+                    createMaterial(init_settings);
                 }
                 break;
             case 1:
-                if(Pattern.matches(Main.lonely_empty_asteroid,params)){
-                    createAsteroid1(params,actual);
-                }else if(Pattern.matches(Main.lonely_not_empty_asteroid,params)) {
-                    createAsteroid2(params,actual);
-                }else if(Pattern.matches(Main.not_lonely_empty,params)){
-                    createAsteroid3(params,actual);
-                }else if(Pattern.matches(Main.not_lonely_not_empty_asteroid,params)){
-                    createAsteroid4(params,actual);
+                if(Pattern.matches(Main.lonely_empty_asteroid,init_settings)){
+                    createAsteroid1(init_settings,type);
+                }else if(Pattern.matches(Main.lonely_not_empty_asteroid,init_settings)) {
+                    createAsteroid2(init_settings,type);
+                }else if(Pattern.matches(Main.not_lonely_empty,init_settings)){
+                    createAsteroid3(init_settings,type);
+                }else if(Pattern.matches(Main.not_lonely_not_empty_asteroid,init_settings)){
+                    createAsteroid4(init_settings,type);
                 }
                 break;
             case 2:
-                if(Pattern.matches(Main.tg_placed_regex,params)){
-                    createTeleportGate1(params,actual);
-                }else if(Pattern.matches(Main.tg_notplaced_regex,params)){
-                    createTeleportGate2(params,actual);
+                if(Pattern.matches(Main.tg_placed_regex,init_settings)){
+                    createTeleportGate1(init_settings,type);
+                }else if(Pattern.matches(Main.tg_notplaced_regex,init_settings)){
+                    createTeleportGate2(init_settings,type);
                 }
                 break;
             case 3:
-                if(Pattern.matches(Main.settler_wom_and_wotg,params)){
-                    createSettler1(params,actual);
-                }else if(Pattern.matches(Main.settler_wm_and_wotg,params)){
-                    createSettler2(params,actual);
-                }else if(Pattern.matches(Main.settler_wom_and_wtg,params)){
-                    createSettler3(params,actual);
-                }else if(Pattern.matches(Main.settler_wm_and_wtg,params)){
-                    createSettler4(params,actual);
+                if(Pattern.matches(Main.settler_wom_and_wotg,init_settings)){
+                    createSettler1(init_settings,type);
+                }else if(Pattern.matches(Main.settler_wm_and_wotg,init_settings)){
+                    createSettler2(init_settings,type);
+                }else if(Pattern.matches(Main.settler_wom_and_wtg,init_settings)){
+                    createSettler3(init_settings,type);
+                }else if(Pattern.matches(Main.settler_wm_and_wtg,init_settings)){
+                    createSettler4(init_settings,type);
                 }
                 break;
             case 4:
-                if(Pattern.matches(Main.robotregex,params)){
-                    createRobot(params,actual);
+                if(Pattern.matches(Main.robotregex,init_settings)){
+                    createRobot(init_settings,type);
                 }
                 break;
             case 5:
-                if(Pattern.matches(Main.ufo_wm,params)){
-                    createUfo1(params,actual);
-                }else if(Pattern.matches(Main.ufo_wom,params)){
-                    createUfo2(params,actual);
+                if(Pattern.matches(Main.ufo_wm,init_settings)){
+                    createUfo1(init_settings,type);
+                }else if(Pattern.matches(Main.ufo_wom,init_settings)){
+                    createUfo2(init_settings,type);
                 }
                 break;
 
@@ -224,39 +221,39 @@ public class InputManager {
     }
 
     /**
-     * Letrehozza elore az objektumokat, es eltarolja az objektumnak megfelelo ArrayListban
-     * @param what milyen tipusu objektum (Material, Asteroid, Settler...)
-     * @param how_man Mennyit kell letrehozni
+     * Letrehozza elore az objektumokat, es eltarolja az objektumnak megfelelo ArrayList-ben
+     * @param type_of_object milyen tipusu objektum (Material, Asteroid, Settler...)
+     * @param size_of_objects Mennyit kell letrehozni
      */
-    public static void create(int what, int how_man){
-        switch (what){
+    public static void createObject(int type_of_object, int size_of_objects){
+        switch (type_of_object){
             case 0:
-                for(int i=0; i<how_man;i++){
+                for(int i=0; i<size_of_objects;i++){
                     Main.materials.add(new Material());
                 }
                 break;
             case 1:
-                for(int i=0; i<how_man;i++){
+                for(int i=0; i<size_of_objects;i++){
                     Main.asteroids.add(new Asteroid());
                 }
                 break;
             case 2:
-                for(int i=0; i<how_man;i++){
+                for(int i=0; i<size_of_objects;i++){
                     Main.teleportgates.add(new TeleportGate());
                 }
                 break;
             case 3:
-                for(int i=0; i<how_man;i++){
+                for(int i=0; i<size_of_objects;i++){
                     Main.settlers.add(new Settler());
                 }
                 break;
             case 4:
-                for(int i=0; i<how_man;i++){
+                for(int i=0; i<size_of_objects;i++){
                     Main.robots.add(new Robot());
                 }
                 break;
             case 5:
-                for(int i=0; i<how_man;i++){
+                for(int i=0; i<size_of_objects;i++){
                     Main.ufos.add(new UFO());
                 }
                 break;
@@ -266,10 +263,10 @@ public class InputManager {
 
     /**
      * Letrehozza a bemeneti params alapján a Materialt, a szukseges fuggosegekkel
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param material_settings Az inicializalashoz szukseges ertekhalmaz
      */
-    public static void createMaterial(String params){
-        String[] input = params.split("\\t");
+    public static void createMaterial(String material_settings){
+        String[] input = material_settings.split("\\t");
         Material normal = new Material();
         RadioactiveMaterial radmat = new RadioactiveMaterial();
         SublimableMaterial submat= new SublimableMaterial();
@@ -307,41 +304,41 @@ public class InputManager {
 
     /**
      * Letrehozza a bemeneti params alapján az Asteroidot, a szukseges fuggosegekkel, ami illeszkedik a lonely_empty_asteroid regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
-     * @param actual hanyad objektumrol van szo
+     * @param asteroid_settings_type1 Az inicializalashoz szukseges ertekhalmaz
+     * @param type hanyad objektumrol van szo
      */
-    public static void createAsteroid1(String params,int actual){        //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
+    public static void createAsteroid1(String asteroid_settings_type1,int type){        //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
         //pl    : 0 0 25 0
-        String[] cmd = params.split("\\t");
+        String[] cmd = asteroid_settings_type1.split("\\t");
 
-        //Asteroid a =Main.asteroids.get(actual);
-        setCommonAsteroid(Main.asteroids.get(actual),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
+        //Asteroid a =Main.asteroids.get(type);
+        setCommonAsteroid(Main.asteroids.get(type),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
 
     }
 
     /**
      * Letrehozza a bemeneti params alapján a Asteroidot, a szukseges fuggosegekkel, ami illeszkedik a lonely_not_empty_asteroid regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
-     * @param actual hanyad objektumrol van szo
+     * @param asteroid_settings_type2 Az inicializalashoz szukseges ertekhalmaz
+     * @param type hanyad objektumrol van szo
      */
-    public static void createAsteroid2(String params,int actual){         //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
+    public static void createAsteroid2(String asteroid_settings_type2,int type){         //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
         //pl    : 0 0 25 1 5
-        String[] cmd = params.split("\\t");
-        //Asteroid a =Main.asteroids.get(actual);
-        setCommonAsteroid(Main.asteroids.get(actual),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
+        String[] cmd = asteroid_settings_type2.split("\\t");
+        //Asteroid a =Main.asteroids.get(type);
+        setCommonAsteroid(Main.asteroids.get(type),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
         int idx = Integer.parseInt(cmd[4])-1;
-        Main.asteroids.get(actual).SetMaterial(Main.materials.get(idx));
+        Main.asteroids.get(type).SetMaterial(Main.materials.get(idx));
 
     }
 
     /**
      * Letrehozza a bemeneti params alapján a Asteroidot, a szukseges fuggosegekkel, ami illeszkedik a not_lonely_empty regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
-     * @param actual hanyad objektumrol van szo
+     * @param asteroid_settings_type3 Az inicializalashoz szukseges ertekhalmaz
+     * @param type hanyad objektumrol van szo
      */
-    public static void createAsteroid3(String params,int actual){         //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
+    public static void createAsteroid3(String asteroid_settings_type3,int type){         //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
         //pl    : 2 1,2 1 5 0
-        String[] cmd = params.split("\\t");
+        String[] cmd = asteroid_settings_type3.split("\\t");
         String[] neighbors={""};
         int ize = Integer.parseInt(cmd[0]);
         if(ize==1) {
@@ -354,21 +351,21 @@ public class InputManager {
 
         // Asteroid a = Main.asteroids.get(actual);
         for(int i=0; i<Integer.parseInt(cmd[0]);i++){
-            Main.asteroids.get(actual).AddNeighbour(Main.asteroids.get(Integer.parseInt(neighbors[i])-1));
+            Main.asteroids.get(type).AddNeighbour(Main.asteroids.get(Integer.parseInt(neighbors[i])-1));
         }
-        setCommonAsteroid(Main.asteroids.get(actual),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]),Integer.parseInt(cmd[4]));
+        setCommonAsteroid(Main.asteroids.get(type),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]),Integer.parseInt(cmd[4]));
     }
 
     /**
      * Letrehozza a bemeneti params alapján a Asteroidot, a szukseges fuggosegekkel, ami illeszkedik a not_lonely_not_empty_asteroid regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
-     * @param actual hanyad objektumrol van szo
+     * @param asteroid_settings_type4 Az inicializalashoz szukseges ertekhalmaz
+     * @param type hanyad objektumrol van szo
      */
-    public static void createAsteroid4(String params,int actual){          //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
+    public static void createAsteroid4(String asteroid_settings_type4,int type){          //input : szomszédszám = [bármi int], szomszéd index[bármi int, (utolsó után nem kell)],  napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 0]
         //pl    : 5 5,2,3,4,5 1 5 0
-        createAsteroid3(params,actual);
-        String[] cmd = params.split("\\t");
-        Main.asteroids.get(actual).SetMaterial(Main.materials.get(Integer.parseInt(cmd[5])-1));
+        createAsteroid3(asteroid_settings_type4,type);
+        String[] cmd = asteroid_settings_type4.split("\\t");
+        Main.asteroids.get(type).SetMaterial(Main.materials.get(Integer.parseInt(cmd[5])-1));
     }
 
     /**
@@ -381,19 +378,18 @@ public class InputManager {
     public static void setCommonAsteroid(Asteroid a, int sunprox, int layer, int empty){
         a.SetSunProximityManual(IntToBoolean(sunprox));
         a.setLayer(layer);
-        //System.out.println(IntToBoolean(empty));
         a.SetEmpty(!IntToBoolean(empty));
     }
 
     /**
      * Letrehozza a bemeneti params alapján a Teleportkaput, a szukseges fuggosegekkel, ami illeszkedik a tg_placed_regex regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param tpg_setting_type1 Az inicializalashoz szukseges ertekhalmaz
      * @param actual hanyad objektumrol van szo
      */
-    public static void createTeleportGate1(String params, int actual){
-        String[] cmd = params.split( "\\t");
+    public static void createTeleportGate1(String tpg_setting_type1, int actual){
+        String[] cmd = tpg_setting_type1.split( "\\t");
         TeleportGate tg = Main.teleportgates.get(actual);
-        setCommonTG(tg,Integer.parseInt(cmd[0]),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[3]),Integer.parseInt(cmd[4]));
+        setCommonTeleportGate(tg,Integer.parseInt(cmd[0]),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[3]),Integer.parseInt(cmd[4]));
         tg.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[2])-1));
         Main.asteroids.get(Integer.parseInt(cmd[2])-1).AddNeighbour(tg);
 
@@ -401,13 +397,13 @@ public class InputManager {
 
     /**
      * Letrehozza a bemeneti params alapján a Asteroidot, a szukseges fuggosegekkel, ami illeszkedik a tg_notplaced_regex regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param tpg_settings_type2 Az inicializalashoz szukseges ertekhalmaz
      * @param actual hanyad objektumrol van szo
      */
-    public static void createTeleportGate2(String params,int actual){
-        String[] cmd = params.split( "\\t");
+    public static void createTeleportGate2(String tpg_settings_type2,int actual){
+        String[] cmd = tpg_settings_type2.split( "\\t");
         TeleportGate tg = Main.teleportgates.get(actual);
-        setCommonTG(tg,Integer.parseInt(cmd[0]),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
+        setCommonTeleportGate(tg,Integer.parseInt(cmd[0]),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
         //Main.asteroids.get(Integer.parseInt(cmd[2])-1).AddNeighbour(tg);
     }
 
@@ -417,15 +413,15 @@ public class InputManager {
      * @param pair, parja ertek (index)
      * @param placed, lehelyezett-e ertek
      * @param active, aktiv-e ertek
-     * @param crazy, orult-e ertek
+     * @param craziness_factor, orult-e ertek
      */
-    public static void setCommonTG(TeleportGate tg,int pair,int placed,int active, int crazy){
+    public static void setCommonTeleportGate(TeleportGate tg, int pair, int placed, int active, int craziness_factor){
         if(pair!=0){
             tg.setPair(Main.teleportgates.get(pair-1));
         }
         tg.setPlaced(IntToBoolean(placed));
         tg.setActive(IntToBoolean(active));
-        tg.setCrazy(IntToBoolean(crazy));
+        tg.setCrazy(IntToBoolean(craziness_factor));
     }
 
     /**
@@ -439,12 +435,12 @@ public class InputManager {
 
     /**
      * Letrehozza a bemeneti params alapján a Settlert, a szukseges fuggosegekkel, ami illeszkedik a settler_wim_and_wotg regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param settler_settings_type1 Az inicializalashoz szukseges ertekhalmaz
      * @param actual hanyad objektumrol van szo
      */
-    public static void createSettler1(String params, int actual){    //WithOutMaterial and WithOutTG
+    public static void createSettler1(String settler_settings_type1, int actual){    //WithOutMaterial and WithOutTG
         Settler s = Main.settlers.get(actual);
-        String[] cmd = params.split( "\\t");
+        String[] cmd = settler_settings_type1.split( "\\t");
         s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(s);
         Main.ab.settlersAlive += 1; //kiszedve, a teszteléshez szükséges settlerek minimalizálásához
@@ -452,12 +448,12 @@ public class InputManager {
 
     /**
      * Letrehozza a bemeneti params alapján a Settlert, a szukseges fuggosegekkel, ami illeszkedik a settler_wm_and_wotg regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param settler_settings_type2 Az inicializalashoz szukseges ertekhalmaz
      * @param actual hanyad objektumrol van szo
      */
-    public static void createSettler2(String params, int actual){   //With material and without tg
+    public static void createSettler2(String settler_settings_type2, int actual){   //With material and without tg
         Settler s = Main.settlers.get(actual);
-        String[] cmd = params.split( "\\t");
+        String[] cmd = settler_settings_type2.split( "\\t");
         String[] materials=cmd[2].split(",");
         s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(s);
@@ -469,12 +465,12 @@ public class InputManager {
 
     /**
      * Letrehozza a bemeneti params alapján a Settlert, a szukseges fuggosegekkel, ami illeszkedik a settler_wom_and_wtg regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param settler_settings_type3 Az inicializalashoz szukseges ertekhalmaz
      * @param actual hanyad objektumrol van szo
      */
-    public static void createSettler3(String params, int actual){   //WithOutMaterial and WithTG
+    public static void createSettler3(String settler_settings_type3, int actual){   //WithOutMaterial and WithTG
         Settler s = Main.settlers.get(actual);
-        String[] cmd = params.split( "\\t");
+        String[] cmd = settler_settings_type3.split( "\\t");
         String[] tgs=cmd[3].split(",");
         s.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(s);
@@ -486,11 +482,11 @@ public class InputManager {
 
     /**
      * Letrehozza a bemeneti params alapján a Settlert, a szukseges fuggosegekkel, ami illeszkedik a settler_wm_and_wtg regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param settler_settings_type4 Az inicializalashoz szukseges ertekhalmaz
      * @param actual hanyad objektumrol van szo
      */
-    public static void createSettler4(String params, int actual){ //wm and wtg
-        String[] cmd = params.split( "\\t");
+    public static void createSettler4(String settler_settings_type4, int actual){ //wm and wtg
+        String[] cmd = settler_settings_type4.split( "\\t");
         String[] materials=cmd[2].split(",");
         String[] tgs=cmd[3].split(",");
         Settler s = Main.settlers.get(actual);
@@ -507,12 +503,12 @@ public class InputManager {
 
     /**
      * Letrehozza a bemeneti params alapjan a Robotot, a szukseges fuggosegekkel, ami illeszkedik a robotregex regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param robot_settings Az inicializalashoz szukseges ertekhalmaz
      * @param actual hanyad objektumrol van szo
      */
-    public static void createRobot(String params, int actual){
+    public static void createRobot(String robot_settings, int actual){
         Robot r = Main.robots.get(actual);
-        String[] cmd=params.split("\\t");
+        String[] cmd=robot_settings.split("\\t");
         Main.robots.get(actual).setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(r);
 
@@ -520,23 +516,23 @@ public class InputManager {
 
     /**
      * Letrehozza a bemeneti params alapjan a Ufot, a szukseges fuggosegekkel, ami illeszkedik a ufo_wm regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param ufo_settings_type1 Az inicializalashoz szukseges ertekhalmaz
      * @param actual hanyad objektumrol van szo
      */
-    public static void createUfo1(String params,int actual){
+    public static void createUfo1(String ufo_settings_type1,int actual){
         UFO u = Main.ufos.get(actual);
-        String[] cmd=params.split("\\t");
+        String[] cmd=ufo_settings_type1.split("\\t");
         Main.ufos.get(actual).setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(u);
     }
 
     /**
      * Letrehozza a bemeneti params alapján a Settlert, a szukseges fuggosegekkel, ami illeszkedik a ufo_wom regexre
-     * @param params Az inicializalashoz szukseges ertekhalmaz
+     * @param ufo_settings_type2 Az inicializalashoz szukseges ertekhalmaz
      * @param actual hanyad objektumrol van szo
      */
-    public static void createUfo2(String params, int actual){
-        String[] cmd=params.split("\\t");
+    public static void createUfo2(String ufo_settings_type2, int actual){
+        String[] cmd=ufo_settings_type2.split("\\t");
         UFO u =Main.ufos.get(actual);
         u.setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         String[] materials=cmd[2].split(",");
