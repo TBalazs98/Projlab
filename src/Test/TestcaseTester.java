@@ -11,19 +11,21 @@ public class TestcaseTester {
     private ArrayList<String> actual_output;
 
  public void Testing(String input, String output) {
+
      try {
          actual_output = InputManager.GenerateOutput(input);
          File currentfile = InputManager.getFile("Files", "Output", output);
          BufferedReader reader = new BufferedReader(new FileReader(currentfile));
          String expected_line = "";
          int counter = 0;
+         System.out.println("[Expected output]");
          while(true) {
             expected_line = reader.readLine();
             if(expected_line == null) {
                 break;
             }
             Assert.assertEquals(expected_line, actual_output.get(counter));
-
+             System.out.println(expected_line);
             counter++;
          }
      }

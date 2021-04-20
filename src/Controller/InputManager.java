@@ -91,6 +91,7 @@ public class InputManager {
                 line=reader.readLine();
                 cm.command(line,generateoutput);
             }
+            System.out.println("[Actual output]");
             cm.listMaterials(generateoutput);   //
             cm.listAsteroids(generateoutput);
             cm.listTeleportGates(generateoutput);
