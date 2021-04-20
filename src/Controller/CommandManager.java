@@ -592,12 +592,14 @@ public class CommandManager {
     /**
      * Terke betoltese fajbol
      * @param filename fajlnev
+     *
+     * **** DO NOT USE IT PLEASE :c ****
      */
     public static void loadmap(String filename){
-        try {
-            File currentfile = InputManager.getFile("Files", "Saved", filename);
-
-        }catch (IOException e){}
+//        try {
+//           // File currentfile = InputManager.getFile("Files", "Saved", filename);
+//
+//        }catch (IOException e){}
     }
 
     /**
