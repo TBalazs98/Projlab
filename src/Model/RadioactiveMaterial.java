@@ -75,16 +75,27 @@ public class RadioactiveMaterial extends Material {
         //Logger.getInstance().printReturnCommand();
     }
 
+    /**
+     * Radioaktiv nyersanyag fajtajanak lekerdezese
+     * @return a radioaktiav nyersanyag fajtaja
+     */
     public MaterialName getName() {
         return this.name;
     }
 
+    /**
+     * Jelenlegi nyersanyag napsugarzasnak kitettseget lekezelo metodus
+     */
     public void expose(){
         this.exposed++;
     }
 
-    public void SetExposure(int i){
-        this.exposed = i;
+    /**
+     * A nyersanyag elozetes napsugarzas-kitettsegeinek beallitasa
+     * @param exp a nyersanyag elozetes napsugarzasnak kitettseget beallito ertek
+     * */
+    public void SetExposure(int exp){
+        this.exposed = exp;
     }
 
     public int GetExposure(){

@@ -19,6 +19,10 @@ public interface DestinationObject {
      * @param a eltavolitando aszteroida a szomszedok kozul
      */
     public void HitByExplosion(Asteroid a);
+
+    /**
+     * Napvihar altal sulytott jelenlegi objektum esemyenek kezelese
+     */
     public void HitBySunstorm();
 
 }

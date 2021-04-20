@@ -123,19 +123,19 @@ public class TestcaseTester {
     }
     @Test
     public void Test23()   {
-        Testing("23in","23out"); //settler mine kivétel
+        Testing("23in","23out");
     }
     @Test
     public void Test24()   {
-        Testing("24in","24out"); //settler placematerial kivétel
+        Testing("24in","24out");
     }
     @Test
     public void Test25()   {
-        Testing("25in","25out"); //settler placematerial kivétel
+        Testing("25in","25out");
     }
     @Test
     public void Test26()   {
-        Testing("26in","26out"); //settler placematerial kivétel
+        Testing("26in","26out");
     }
     @Test
     public void Test27()   {
@@ -143,11 +143,11 @@ public class TestcaseTester {
     }
     @Test
     public void Test28()   {
-        Testing("28in","28out"); //settler mine kivétel
+        Testing("28in","28out");
     }
     @Test
     public void Test29()   {
-        Testing("29in","29out"); //settler placematerial kivétel
+        Testing("29in","29out");
     }
     @Test
     public void Test30()   {
@@ -155,15 +155,15 @@ public class TestcaseTester {
     }
     @Test
     public void Test31()   {
-        Testing("31in","31out"); //containsallelementsin kivétel
+        Testing("31in","31out");
     }
     @Test
     public void Test32()   {
-        Testing("32in","32out"); //index out of bound
+        Testing("32in","32out");
     }
     @Test
     public void Test33()   {
-        Testing("33in","33out"); //
+        Testing("33in","33out");
     }
     @Test
     public void Test34()   {
