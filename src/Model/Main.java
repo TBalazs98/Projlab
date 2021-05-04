@@ -1,5 +1,6 @@
 package Model;
 import Controller.InputManager;
+import View.GUI;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class Main {
     public static ArrayList<Settler> settlers=new ArrayList<>();
     public static ArrayList<Robot> robots=new ArrayList<>();
     public static ArrayList<UFO> ufos= new ArrayList<>();
-
+/*
     //region regexek
     String regex = "\\W*((?i)createmap(?-i))\\W*\\s(\\d+\\s){5}\\d+";
     public static String materialregex = "[013]|2\\s[012]";
@@ -68,11 +69,11 @@ public class Main {
     public static String ufo_wom = "\\d{1,}\\s\\d{1,}\\s(\\d{1,},{0,1})*";
 
         //endregion regexek
-
+*/
     public static void main(String[] args)  {
 
-        ProtoTest pt = new ProtoTest();
-        pt.menu();
+        //ProtoTest pt = new ProtoTest();
+       // pt.menu();
 //        ArrayList<String> asd = new ArrayList<>();
 //        asd = InputManager.GenerateOutput("1in");
 //        for (int i=0;i<5;i++){
@@ -85,6 +86,9 @@ public class Main {
 
         //ProtoTest.menu();
 
+
+        GUI g = new GUI();
+        g.DrawAll();
 
 
 
