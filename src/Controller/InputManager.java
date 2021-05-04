@@ -25,11 +25,11 @@ public class InputManager {
     /**
      * Sajat valtozoba menti a parameterkent kapott Stringet
      * @param generateoutput boolean, ami megmondja, hogy az stdout-ot elmentsuk-e egy sajat valtozoba, amit majd kesobb (tesztelesnel) fel tudunk hasznalni
-     * @param what String, amit kiirt az stdout
+     * @param output String, amit kiirt az stdout
      */
-    public static void write_to_output(boolean generateoutput,String what){
+    public static void write_to_output(boolean generateoutput,String output){
         if(generateoutput)
-            InputManager.GetOutput().add(what);
+            InputManager.GetOutput().add(output);
     }
 
     /**
@@ -325,7 +325,6 @@ public class InputManager {
     public static void createAsteroid2(String asteroid_settings_type2,int type){         //input : szomszédszám = [kötelezően 0], napközel = [0,1], rétegszám = [bármi int], üresség = [kötelezően 1], nyersi index = [bármi int]
         //pl    : 0 0 25 1 5
         String[] cmd = asteroid_settings_type2.split("\\t");
-        //Asteroid a =Main.asteroids.get(type);
         setCommonAsteroid(Main.asteroids.get(type),Integer.parseInt(cmd[1]),Integer.parseInt(cmd[2]),Integer.parseInt(cmd[3]));
         int idx = Integer.parseInt(cmd[4])-1;
         Main.asteroids.get(type).SetMaterial(Main.materials.get(idx));
@@ -343,14 +342,11 @@ public class InputManager {
         String[] neighbors={""};
         int ize = Integer.parseInt(cmd[0]);
         if(ize==1) {
-            //System.out.println( "itt vagyok");
             String asd = cmd[1];
             neighbors[0] = asd;
         }else{
             neighbors = cmd[1].split(",");
         }
-
-        // Asteroid a = Main.asteroids.get(actual);
         for(int i=0; i<Integer.parseInt(cmd[0]);i++){
             Main.asteroids.get(type).AddNeighbour(Main.asteroids.get(Integer.parseInt(neighbors[i])-1));
         }
