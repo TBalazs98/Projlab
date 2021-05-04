@@ -21,10 +21,18 @@ public class GUI extends JFrame {
         JPanel dp = new DetailsPanel();
         JPanel cp = new CommandPanel();
 
+        JPanel controls = new JPanel();
+        controls.setLayout(new FlowLayout());
 
         this.add(gamespace, BorderLayout.CENTER);
+
+
         this.add(dp, BorderLayout.PAGE_END);
-        this.add(cp, BorderLayout.PAGE_END);
+        controls.add(cp);
+        controls.add(dp);
+        this.add(controls, BorderLayout.PAGE_END);
+
+        this.setResizable(false);
         this.pack();
         this.setVisible(true);
     }
