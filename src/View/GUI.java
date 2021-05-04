@@ -36,6 +36,7 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public void DrawAll(){
+        this.setLayout(new FlowLayout());
         JPanel gamespace = new JPanel();
 
         gamespace.setPreferredSize(new Dimension(width,height-200));
@@ -45,8 +46,11 @@ public class GUI extends JFrame implements ActionListener {
 
         JPanel controls = new JPanel();
         controls.setLayout(new FlowLayout());
-
         this.add(gamespace, BorderLayout.CENTER);
+
+        /**
+         * RAJZOLASOK IDE gamespacebe
+         */
 
 
         this.add(dp, BorderLayout.PAGE_END);
@@ -56,7 +60,7 @@ public class GUI extends JFrame implements ActionListener {
 
 
 
-        this.pack();
+        //this.pack();
         this.setVisible(true);
     }
 
@@ -75,7 +79,9 @@ public class GUI extends JFrame implements ActionListener {
         SetPanel(title);
         this.add(title);
 
-        //SZAR AZ ELÉRÉSI ÚT:3
+        /**TODO
+         * SZAR AZ ELÉRÉSI ÚT:3
+         */
         sg = new JPanel();
         startgame = new JButton( new ImageIcon("Files/Pictures/startbtn.png"));
         startgame.setRolloverIcon(new ImageIcon("Files/Pictures/startdarkbtn.png"));
@@ -111,9 +117,7 @@ public class GUI extends JFrame implements ActionListener {
         ex.setOpaque(false);
         this.add(ex);
 
-        this.pack();
         this.setVisible(true);
-
     }
 
     public void SetButton(JButton button) {
@@ -132,7 +136,9 @@ public class GUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == startgame){
-
+            this.getContentPane().removeAll();
+            this.repaint();
+            DrawAll();
         } else if (e.getSource() == loadgame){
 
         } else if (e.getSource() == settings) {
