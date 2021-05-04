@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class DetailsPanel extends JPanel {
     DetailsPanel(){
-         this.setPreferredSize(new Dimension(200,100));
+         this.setPreferredSize(new Dimension(400,100));
          this.setBackground(Color.PINK);
          this.setVisible(true);
     }
