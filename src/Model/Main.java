@@ -87,7 +87,7 @@ public class Main {
 
 
         GUI g = new GUI();
-        g.DrawMenu();
+        g.DrawAll();
 
 
 

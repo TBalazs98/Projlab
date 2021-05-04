@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DetailsPanel extends JPanel {
-    DetailsPanel(){
-         this.setPreferredSize(new Dimension(400,100));
+    DetailsPanel(GUI g){
+         this.setPreferredSize(new Dimension(g.width/2,200));
          this.setBackground(Color.PINK);
          this.setVisible(true);
     }
