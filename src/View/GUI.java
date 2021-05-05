@@ -20,6 +20,7 @@ public class GUI extends JFrame implements ActionListener {
     public int x, y, width, height;
     Image img;
     JButton startgame, loadgame, settings, exit;
+    MenuBar bar = new MenuBar(this);
 
     public GUI() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,6 +33,9 @@ public class GUI extends JFrame implements ActionListener {
         this.setVisible(true);
         this.width = getWidth();
         this.height = getHeight();
+        this.setJMenuBar(null);
+        ImageIcon img = new ImageIcon("Files/Pictures/space.jpg");
+        this.setIconImage(img.getImage());
     }
 
     public int GetWidth(){
@@ -61,9 +65,9 @@ public class GUI extends JFrame implements ActionListener {
         controls.add(cp);
         controls.add(dp);
         this.add(controls, BorderLayout.PAGE_END);
+        this.setJMenuBar(bar);
 
-
-
+        this.setJMenuBar(bar);
         //this.pack();
         this.setVisible(true);
     }
@@ -81,7 +85,10 @@ public class GUI extends JFrame implements ActionListener {
         LoadPanel loadpanel = new LoadPanel(this);
         //loadpanel.setBackground(new Color(0,0,0,64));
         this.add(loadpanel);
+
+        this.setJMenuBar(bar);
         this.setVisible(true);
+
     }
 
     public void  DrawMenu(){
@@ -132,7 +139,9 @@ public class GUI extends JFrame implements ActionListener {
         ex.setOpaque(false);
         this.add(ex);
 
+        this.setJMenuBar(null);
         this.setVisible(true);
+
     }
 
     public void SetButton(JButton button) {
