@@ -13,6 +13,7 @@ import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.Flow;
 
@@ -23,6 +24,9 @@ public class GUI extends JFrame implements ActionListener {
     JButton startgame, loadgame, settings, exit;
     MenuBar bar = new MenuBar(this);
     public JPanel gamespace;
+
+    private ArrayList<IDrawable> drawables;
+    private int asd[][];
 
     public GUI() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,6 +42,8 @@ public class GUI extends JFrame implements ActionListener {
         this.setJMenuBar(null);
         ImageIcon img = new ImageIcon("Files/Pictures/space.jpg");
         this.setIconImage(img.getImage());
+
+        drawables = new ArrayList<>();
     }
 
     public int GetWidth(){
@@ -56,8 +62,8 @@ public class GUI extends JFrame implements ActionListener {
         controls.setBackground(new Color(0,0,0,64));
         controls.setLayout(new FlowLayout());
         SetPanel(gamespace);
-        //gamespace.setLayout(null);
-        gamespace.setBackground(Color.GREEN);
+        gamespace.setLayout(null);
+        //gamespace.setBackground(Color.GREEN);
         this.add(gamespace, BorderLayout.CENTER);
 
         /**
@@ -66,22 +72,32 @@ public class GUI extends JFrame implements ActionListener {
 
         Asteroid asteroid = new Asteroid();
         AsteroidView a = new AsteroidView(asteroid);
-        a.Draw(this);
+        drawables.add(a);
+
+        for(IDrawable i : drawables){
+            {
+
+            }
+
+            i.Draw(this);
+        }
+
+        //gamespace.repaint();
 
 
         this.add(dp, BorderLayout.PAGE_END);
         controls.add(cp);
         controls.add(dp);
         this.add(controls, BorderLayout.PAGE_END);
-        this.setJMenuBar(bar);
 
-        this.setJMenuBar(bar);
+        //this.setJMenuBar(bar);
         //this.pack();
         this.setVisible(true);
     }
 
     public void Update(){
         this.setPreferredSize(new Dimension(800,800));
+        DrawAll();
         this.setVisible(true);
     }
 
