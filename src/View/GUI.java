@@ -11,9 +11,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.Flow;
 
@@ -26,7 +29,8 @@ public class GUI extends JFrame implements ActionListener {
     public JPanel gamespace;
 
     private ArrayList<IDrawable> drawables;
-    private int asd[][];
+    private ArrayList<AsteroidView> asteroids;
+
 
     public GUI() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,15 +76,14 @@ public class GUI extends JFrame implements ActionListener {
 
         Asteroid asteroid = new Asteroid();
         AsteroidView a = new AsteroidView(asteroid);
+        a.SetCoords(30,400);
         drawables.add(a);
 
         for(IDrawable i : drawables){
-            {
-
-            }
-
             i.Draw(this);
         }
+
+
 
         //gamespace.repaint();
 
@@ -90,9 +93,10 @@ public class GUI extends JFrame implements ActionListener {
         controls.add(dp);
         this.add(controls, BorderLayout.PAGE_END);
 
-        //this.setJMenuBar(bar);
+        this.setJMenuBar(bar);
         //this.pack();
         this.setVisible(true);
+
     }
 
     public void Update(){
