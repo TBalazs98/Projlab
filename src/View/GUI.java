@@ -7,11 +7,13 @@ import Controller.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
+import java.util.concurrent.Flow;
 
 
 public class GUI extends JFrame implements ActionListener {
@@ -25,6 +27,7 @@ public class GUI extends JFrame implements ActionListener {
         this.setContentPane(new JLabel(new ImageIcon("Files/Pictures/space.jpg")));
         this.setLayout(new FlowLayout());
         this.setResizable(false);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.pack();
         this.setVisible(true);
         this.width = getWidth();
@@ -45,6 +48,7 @@ public class GUI extends JFrame implements ActionListener {
         SetPanel(gamespace);
 
         JPanel controls = new JPanel();
+        controls.setBackground(new Color(0,0,0,64));
         controls.setLayout(new FlowLayout());
         this.add(gamespace, BorderLayout.CENTER);
 
@@ -66,6 +70,17 @@ public class GUI extends JFrame implements ActionListener {
 
     public void Update(){
         this.setPreferredSize(new Dimension(800,800));
+        this.setVisible(true);
+    }
+
+    public void Load(){
+        FlowLayout layout = new FlowLayout();
+        layout.setVgap(this.height/12);
+        this.setLayout(layout);
+
+        LoadPanel loadpanel = new LoadPanel(this);
+        //loadpanel.setBackground(new Color(0,0,0,64));
+        this.add(loadpanel);
         this.setVisible(true);
     }
 
@@ -140,6 +155,9 @@ public class GUI extends JFrame implements ActionListener {
             this.repaint();
             DrawAll();
         } else if (e.getSource() == loadgame){
+            this.getContentPane().removeAll();
+            this.repaint();
+            this.Load();
 
         } else if (e.getSource() == settings) {
 
@@ -147,4 +165,8 @@ public class GUI extends JFrame implements ActionListener {
         else if(e.getSource() == exit)
             System.exit(0);
     }
+
+
+
+
 }
