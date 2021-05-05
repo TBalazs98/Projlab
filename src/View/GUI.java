@@ -3,6 +3,7 @@ package View;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import Controller.*;
+import Model.Asteroid;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,7 @@ public class GUI extends JFrame implements ActionListener {
     Image img;
     JButton startgame, loadgame, settings, exit;
     MenuBar bar = new MenuBar(this);
+    public JPanel gamespace;
 
     public GUI() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,21 +46,27 @@ public class GUI extends JFrame implements ActionListener {
 
     public void DrawAll(){
         this.setLayout(new FlowLayout());
-        JPanel gamespace = new JPanel();
+        gamespace = new JPanel();
 
         gamespace.setPreferredSize(new Dimension(width,height-200));
         JPanel dp = new DetailsPanel(this);
         JPanel cp = new CommandPanel(this);
-        SetPanel(gamespace);
 
         JPanel controls = new JPanel();
         controls.setBackground(new Color(0,0,0,64));
         controls.setLayout(new FlowLayout());
+        SetPanel(gamespace);
+        //gamespace.setLayout(null);
+        gamespace.setBackground(Color.GREEN);
         this.add(gamespace, BorderLayout.CENTER);
 
         /**
          * RAJZOLASOK IDE gamespacebe
          */
+
+        Asteroid asteroid = new Asteroid();
+        AsteroidView a = new AsteroidView(asteroid);
+        a.Draw(this);
 
 
         this.add(dp, BorderLayout.PAGE_END);
