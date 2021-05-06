@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.Flow;
@@ -73,11 +74,26 @@ public class GUI extends JFrame implements ActionListener {
         /**
          * RAJZOLASOK IDE gamespacebe
          */
+        int asteroidx=0, asteroidy=0;
 
-        Asteroid asteroid = new Asteroid();
-        AsteroidView a = new AsteroidView(asteroid);
-        a.SetCoords(30,400);
-        drawables.add(a);
+        Random rnd = new Random();
+        for(int i=0; i<10; i++){
+            int newasteroidx, newasteroidy;
+            Asteroid asteroid = new Asteroid();
+            AsteroidView a = new AsteroidView(asteroid);
+            a.SetCoords(asteroidx,asteroidy);
+            drawables.add(a);
+            newasteroidx = rnd.nextInt(30);
+            newasteroidy = rnd.nextInt(30);
+            while(newasteroidx-asteroidx<20 && newasteroidy-asteroidy<20) {
+                newasteroidx = rnd.nextInt(30);
+                newasteroidy = rnd.nextInt(30);
+            }
+
+        }
+
+
+
 
         for(IDrawable i : drawables){
             i.Draw(this);

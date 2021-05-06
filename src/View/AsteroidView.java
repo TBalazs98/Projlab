@@ -16,15 +16,17 @@ public class AsteroidView implements IDrawable {
     public AsteroidView(Asteroid a){
         this.asteroid = a;
         //if (asteroid.GetisEmpty()) {
+
+        int scaling = 130;
         if(a.GetisEmpty() && a.getLayers()>0)
-            p = new ImageIcon("Files/Pictures/hollowasteroid.png");
+            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
         else if(a.GetisEmpty() && a.getLayers() == 0)
-            p = new ImageIcon("Files/Pictures/hollowasteroid.png");
+            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
         else if(!a.GetisEmpty()){
-            p = new ImageIcon("Files/Pictures/asteroid.png");
+            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
         }
             //as = new JButton(p );
-            l = new JLabel( p);
+            l = new JLabel((Icon)p);
 
             //as.setRolloverIcon(new ImageIcon("Files/Pictures/explosion.png"));
            /* as.setBorderPainted(false);
