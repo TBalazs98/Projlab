@@ -54,22 +54,21 @@ public  class AsteroidView implements IDrawable {
     public int getY() {
         return y;
     }
-    public void Draw(GUI g){
+    public void Draw(GUI g) {
         //as.setPreferredSize(new Dimension(20,20));
         //g.gamespace.setLocation(20,20);
 
         //as.setLocation(20,20);
 
         g.gamespace.add(l);
-        g.gamespace.getComponent(compnum).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
-
-    public  void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
+        g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+    }
+    public void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
         l.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("x = "+av.x+ "y = " + av.y);
-                av.valami=13423;
                // GuiController.moveSettler(av.x,av.y);
 
             }
@@ -77,7 +76,7 @@ public  class AsteroidView implements IDrawable {
     }
 
 
-    }
+
     public void setCompNum(int n) {
         compnum = n;
     }
