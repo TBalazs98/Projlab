@@ -12,25 +12,26 @@ public  class AsteroidView implements IDrawable {
     private JButton as;
     private ImageIcon p;
     private JLabel l;
-    public int x,y;
-    private int valami=1;
+    private int x,y;
+    private int compnum = 0;
+
 
     public AsteroidView(Asteroid a){
         this.asteroid = a;
         //if (asteroid.GetisEmpty()) {
-        if(a.GetisEmpty() && a.getLayers()>0)
-            p = new ImageIcon("Files/Pictures/hollowasteroid.png");
-        else if(a.GetisEmpty() && a.getLayers() == 0)
-            p = new ImageIcon("Files/Pictures/hollowasteroid.png");
-        else if(!a.GetisEmpty()){
-            p = new ImageIcon("Files/Pictures/asteroid.png");
-        }
-        //as = new JButton(p );
-        l = new JLabel( p);
-        this.x = 100;
-        this.y = 100;
 
-        //as.setRolloverIcon(new ImageIcon("Files/Pictures/explosion.png"));
+        int scaling = 130;
+        if(a.GetisEmpty() && a.getLayers()>0)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
+        else if(a.GetisEmpty() && a.getLayers() == 0)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
+        else if(!a.GetisEmpty()){
+            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
+        }
+            //as = new JButton(p );
+            l = new JLabel((Icon)p);
+
+            //as.setRolloverIcon(new ImageIcon("Files/Pictures/explosion.png"));
            /* as.setBorderPainted(false);
             as.setContentAreaFilled(false);
             as.setFocusPainted(false);
@@ -47,6 +48,12 @@ public  class AsteroidView implements IDrawable {
         this.y = y;
     }
 
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
     public void Draw(GUI g){
         //as.setPreferredSize(new Dimension(20,20));
         //g.gamespace.setLocation(20,20);
@@ -54,10 +61,7 @@ public  class AsteroidView implements IDrawable {
         //as.setLocation(20,20);
 
         g.gamespace.add(l);
-       // g.gamespace.getComponent(0).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
-        l.setBounds(this.x,this.y,p.getIconWidth(),p.getIconHeight());
-
-    }
+        g.gamespace.getComponent(compnum).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
 
     public  void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
         l.addMouseListener(new MouseAdapter() {
@@ -73,6 +77,8 @@ public  class AsteroidView implements IDrawable {
     }
 
 
+    }
+    public void setCompNum(int n) {
+        compnum = n;
+    }
 }
-
-

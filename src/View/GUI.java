@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.Flow;
@@ -28,7 +29,6 @@ public class GUI extends JFrame implements ActionListener {
     JButton startgame, loadgame, settings, exit;
     MenuBar bar = new MenuBar(this);
     public JPanel gamespace;
-
 
     private ArrayList<IDrawable> drawables;
     private ArrayList<AsteroidView> asteroids = new ArrayList<AsteroidView>();
@@ -51,7 +51,6 @@ public class GUI extends JFrame implements ActionListener {
         this.setJMenuBar(null);
         ImageIcon img = new ImageIcon("Files/Pictures/sus.jpg");
         this.setIconImage(img.getImage());
-
 
         drawables = new ArrayList<>();
     }
@@ -79,23 +78,26 @@ public class GUI extends JFrame implements ActionListener {
         /**
          * RAJZOLASOK IDE gamespacebe
          */
+        int asteroidx=0, asteroidy=0;
 
-//        Asteroid asteroid = new Asteroid();
-//        AsteroidView a = new AsteroidView(asteroid);
-//        asteroids.add(a);
-//
-//        Settler s =new Settler();
-//        SettlerView sw= new SettlerView(s);
-//        settlers.add(sw);
-//
-//        a.SetCoords(30,400);
-//        drawables.add(a);
-//        drawables.add(sw);
-        for(int i=0; i<settlers.size();i++ ){
-            settlers.get(i).SetCoords(i*100,i*50);
+        Random rnd = new Random();
+        for(int i=0; i<10; i++){
+            int newasteroidx, newasteroidy;
+            Asteroid asteroid = new Asteroid();
+            AsteroidView a = new AsteroidView(asteroid);
+            a.SetCoords(asteroidx,asteroidy);
+            drawables.add(a);
+            newasteroidx = rnd.nextInt(30);
+            newasteroidy = rnd.nextInt(30);
+            while(newasteroidx-asteroidx<20 && newasteroidy-asteroidy<20) {
+                newasteroidx = rnd.nextInt(30);
+                newasteroidy = rnd.nextInt(30);
+            }
+
         }
-        asteroids.get(0).SetCoords(200,200);
-        asteroids.get(1).SetCoords(200,400);
+
+
+
 
         for(IDrawable i : drawables){
             i.Draw(this);
