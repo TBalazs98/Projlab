@@ -1,7 +1,6 @@
 package Model;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
+import Controller.Main;
 
 /**
  * A szublimalo nyersanyagokat kezeli.

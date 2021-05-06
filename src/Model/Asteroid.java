@@ -1,9 +1,8 @@
 package Model;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import Controller.Main;
+
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  *Egy, az aszteroida ovben talalhato aszteroidat reprezentalja.

@@ -3,6 +3,8 @@ package View;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class MenuBar extends JMenuBar {
     private JMenu file;
@@ -45,7 +47,14 @@ public class MenuBar extends JMenuBar {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO egesz
+            try {
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("students.dat"));
+                oos.writeObject(null);//TODO
+                oos.close();
+            } catch(Exception ex) {
+                ex.printStackTrace();
+            }
+
             System.out.println("save");
         }
     }

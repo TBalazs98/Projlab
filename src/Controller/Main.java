@@ -1,5 +1,6 @@
-package Model;
+package Controller;
 import Controller.InputManager;
+import Model.*;
 import View.GUI;
 
 import java.util.ArrayList;

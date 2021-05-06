@@ -1,5 +1,4 @@
 import Controller.InputManager;
-import Model.Main;
 import org.junit.Assert;
 import org.junit.Test;
 
