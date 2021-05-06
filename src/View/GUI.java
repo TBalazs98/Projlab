@@ -49,6 +49,7 @@ public class GUI extends JFrame implements ActionListener {
         this.setIconImage(img.getImage());
 
         drawables = new ArrayList<>();
+        asteroids = new ArrayList<>();
     }
 
     public int GetWidth(){
@@ -74,28 +75,56 @@ public class GUI extends JFrame implements ActionListener {
         /**
          * RAJZOLASOK IDE gamespacebe
          */
-        int asteroidx=0, asteroidy=0;
-
         Random rnd = new Random();
+        int asteroidx=0;
+        int asteroidy = 0;
+        Asteroid asteroid;
+        AsteroidView a;
         for(int i=0; i<10; i++){
             int newasteroidx, newasteroidy;
-            Asteroid asteroid = new Asteroid();
-            AsteroidView a = new AsteroidView(asteroid);
+            asteroid = new Asteroid();
+            a = new AsteroidView(asteroid);
             a.SetCoords(asteroidx,asteroidy);
-            drawables.add(a);
-            newasteroidx = rnd.nextInt(30);
-            newasteroidy = rnd.nextInt(30);
-            while(newasteroidx-asteroidx<20 && newasteroidy-asteroidy<20) {
-                newasteroidx = rnd.nextInt(30);
-                newasteroidy = rnd.nextInt(30);
-            }
+            a.setCompNum(i);
+            asteroids.add(a);
+            newasteroidx = rnd.nextInt(width-130);
+            newasteroidy = rnd.nextInt(height-330);
+            int counter =0;
+            boolean allisfar = false;
+            while(allisfar == false && i < 9) {
+                boolean breakout = false;
+                for(int j = 0; j < i; j++) {
+                    int first = newasteroidx-asteroids.get(j).getX();
+                    int second = newasteroidy-asteroids.get(j).getY();
+                    int scale = 130;
+                    if((first < scale && first > (scale *-1)) || (second < scale && second > (scale *-1))) {
+                        breakout = true;
+                        break;
+                    }
+                }
+                if(breakout == false) {
+                    asteroidx = newasteroidx;
+                    asteroidy = newasteroidy;
+                    allisfar = true;
 
+                }
+                else {
+                    if(counter >= 7) {
+                        i--;
+                        asteroids.remove(asteroids.size()-1);
+                        break;
+                    }
+                    newasteroidx = rnd.nextInt(width-130);
+                    newasteroidy = rnd.nextInt(height-330);
+                    counter++;
+                }
+            }
         }
 
 
 
 
-        for(IDrawable i : drawables){
+        for(IDrawable i : asteroids){
             i.Draw(this);
         }
 
@@ -116,7 +145,7 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public void Update(){
-        this.setPreferredSize(new Dimension(800,800));
+        this.setPreferredSize(new Dimension(1200,600));
         DrawAll();
         this.setVisible(true);
     }
