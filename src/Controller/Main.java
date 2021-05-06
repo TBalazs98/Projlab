@@ -86,12 +86,24 @@ public class Main {
 
 
         //ProtoTest.menu();
-
+        Asteroid a1 = new Asteroid();
+        Asteroid a2 = new Asteroid();
+        Settler s1 = new Settler();
+        Settler s2 = new Settler();
+        Settler s3 = new Settler();
+        Settler s4 = new Settler();
+        asteroids.add(a1);
+        asteroids.add(a2);
+        settlers.add(s1);
+        settlers.add(s2);
+        settlers.add(s3);
+        settlers.add(s4);
 
         GUI g = new GUI();
+        GuiController gc= new GuiController(g);
         g.DrawMenu();
 
-
-
     }
+
+
 }

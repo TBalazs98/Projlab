@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import Controller.*;
 import Model.Asteroid;
+import Model.Settler;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +31,10 @@ public class GUI extends JFrame implements ActionListener {
     public JPanel gamespace;
 
     private ArrayList<IDrawable> drawables;
-    private ArrayList<AsteroidView> asteroids;
+    private ArrayList<AsteroidView> asteroids = new ArrayList<AsteroidView>();
+    private  ArrayList<SettlerView> settlers=new ArrayList<SettlerView>();
+    //private ArrayList<AsteroidView> asteroids;
+   // private ArrayList<AsteroidView> asteroids;
 
 
     public GUI() {
@@ -45,7 +49,7 @@ public class GUI extends JFrame implements ActionListener {
         this.width = getWidth();
         this.height = getHeight();
         this.setJMenuBar(null);
-        ImageIcon img = new ImageIcon("Files/Pictures/space.jpg");
+        ImageIcon img = new ImageIcon("Files/Pictures/sus.jpg");
         this.setIconImage(img.getImage());
 
         drawables = new ArrayList<>();
@@ -248,7 +252,19 @@ public class GUI extends JFrame implements ActionListener {
             System.exit(0);
     }
 
+    public  ArrayList<SettlerView> GetSettlerView(){return settlers;}
+    public  ArrayList<AsteroidView> GetAsteroidView(){return asteroids;}
 
 
+    public void addSettler(Settler s ){
+        SettlerView sw = new SettlerView(s,this);
+        settlers.add(sw);
+        drawables.add(sw);
+    }
 
+    public void addAsteroid(Asteroid a ){
+        AsteroidView av = new AsteroidView(a);
+        asteroids.add(av);
+        drawables.add(av);
+    }
 }

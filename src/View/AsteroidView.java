@@ -3,8 +3,10 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import Controller.GuiController;
 
-public class AsteroidView implements IDrawable {
+public  class AsteroidView implements IDrawable {
 
     private Asteroid asteroid;
     private JButton as;
@@ -36,6 +38,8 @@ public class AsteroidView implements IDrawable {
             as.setOpaque(false);
 */
         //}
+        getAsteroidCoordsListener(l,this);
+
 
     }
 
@@ -59,7 +63,18 @@ public class AsteroidView implements IDrawable {
         g.gamespace.add(l);
         g.gamespace.getComponent(compnum).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
 
+    public  void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
+        l.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println("x = "+av.x+ "y = " + av.y);
+                av.valami=13423;
+               // GuiController.moveSettler(av.x,av.y);
 
+            }
+        });
+    }
 
 
     }
