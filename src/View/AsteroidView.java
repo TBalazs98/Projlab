@@ -11,6 +11,7 @@ public class AsteroidView implements IDrawable {
     private ImageIcon p;
     private JLabel l;
     private int x,y;
+    private int compnum = 0;
 
 
     public AsteroidView(Asteroid a){
@@ -43,6 +44,12 @@ public class AsteroidView implements IDrawable {
         this.y = y;
     }
 
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
     public void Draw(GUI g){
         //as.setPreferredSize(new Dimension(20,20));
         //g.gamespace.setLocation(20,20);
@@ -50,10 +57,13 @@ public class AsteroidView implements IDrawable {
         //as.setLocation(20,20);
 
         g.gamespace.add(l);
-        g.gamespace.getComponent(0).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
+        g.gamespace.getComponent(compnum).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
 
 
 
 
+    }
+    public void setCompNum(int n) {
+        compnum = n;
     }
 }
