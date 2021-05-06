@@ -3,15 +3,17 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import Controller.GuiController;
 
-public class AsteroidView implements IDrawable {
+public  class AsteroidView implements IDrawable {
 
     private Asteroid asteroid;
     private JButton as;
     private ImageIcon p;
     private JLabel l;
-    private int x,y;
-
+    public int x,y;
+    private int valami=1;
 
     public AsteroidView(Asteroid a){
         this.asteroid = a;
@@ -23,16 +25,20 @@ public class AsteroidView implements IDrawable {
         else if(!a.GetisEmpty()){
             p = new ImageIcon("Files/Pictures/asteroid.png");
         }
-            //as = new JButton(p );
-            l = new JLabel( p);
+        //as = new JButton(p );
+        l = new JLabel( p);
+        this.x = 100;
+        this.y = 100;
 
-            //as.setRolloverIcon(new ImageIcon("Files/Pictures/explosion.png"));
+        //as.setRolloverIcon(new ImageIcon("Files/Pictures/explosion.png"));
            /* as.setBorderPainted(false);
             as.setContentAreaFilled(false);
             as.setFocusPainted(false);
             as.setOpaque(false);
 */
         //}
+        getAsteroidCoordsListener(l,this);
+
 
     }
 
@@ -48,10 +54,25 @@ public class AsteroidView implements IDrawable {
         //as.setLocation(20,20);
 
         g.gamespace.add(l);
-        g.gamespace.getComponent(0).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
-
-
-
+       // g.gamespace.getComponent(0).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
+        l.setBounds(this.x,this.y,p.getIconWidth(),p.getIconHeight());
 
     }
+
+    public  void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
+        l.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println("x = "+av.x+ "y = " + av.y);
+                av.valami=13423;
+               // GuiController.moveSettler(av.x,av.y);
+
+            }
+        });
+    }
+
+
 }
+
+

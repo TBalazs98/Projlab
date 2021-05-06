@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import Controller.*;
 import Model.Asteroid;
+import Model.Settler;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,8 +29,12 @@ public class GUI extends JFrame implements ActionListener {
     MenuBar bar = new MenuBar(this);
     public JPanel gamespace;
 
+
     private ArrayList<IDrawable> drawables;
-    private ArrayList<AsteroidView> asteroids;
+    private ArrayList<AsteroidView> asteroids = new ArrayList<AsteroidView>();
+    private  ArrayList<SettlerView> settlers=new ArrayList<SettlerView>();
+    //private ArrayList<AsteroidView> asteroids;
+   // private ArrayList<AsteroidView> asteroids;
 
 
     public GUI() {
@@ -44,8 +49,9 @@ public class GUI extends JFrame implements ActionListener {
         this.width = getWidth();
         this.height = getHeight();
         this.setJMenuBar(null);
-        ImageIcon img = new ImageIcon("Files/Pictures/space.jpg");
+        ImageIcon img = new ImageIcon("Files/Pictures/sus.jpg");
         this.setIconImage(img.getImage());
+
 
         drawables = new ArrayList<>();
     }
@@ -74,10 +80,22 @@ public class GUI extends JFrame implements ActionListener {
          * RAJZOLASOK IDE gamespacebe
          */
 
-        Asteroid asteroid = new Asteroid();
-        AsteroidView a = new AsteroidView(asteroid);
-        a.SetCoords(30,400);
-        drawables.add(a);
+//        Asteroid asteroid = new Asteroid();
+//        AsteroidView a = new AsteroidView(asteroid);
+//        asteroids.add(a);
+//
+//        Settler s =new Settler();
+//        SettlerView sw= new SettlerView(s);
+//        settlers.add(sw);
+//
+//        a.SetCoords(30,400);
+//        drawables.add(a);
+//        drawables.add(sw);
+        for(int i=0; i<settlers.size();i++ ){
+            settlers.get(i).SetCoords(i*100,i*50);
+        }
+        asteroids.get(0).SetCoords(200,200);
+        asteroids.get(1).SetCoords(200,400);
 
         for(IDrawable i : drawables){
             i.Draw(this);
@@ -203,7 +221,19 @@ public class GUI extends JFrame implements ActionListener {
             System.exit(0);
     }
 
+    public  ArrayList<SettlerView> GetSettlerView(){return settlers;}
+    public  ArrayList<AsteroidView> GetAsteroidView(){return asteroids;}
 
 
+    public void addSettler(Settler s ){
+        SettlerView sw = new SettlerView(s,this);
+        settlers.add(sw);
+        drawables.add(sw);
+    }
 
+    public void addAsteroid(Asteroid a ){
+        AsteroidView av = new AsteroidView(a);
+        asteroids.add(av);
+        drawables.add(av);
+    }
 }

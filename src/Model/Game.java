@@ -1,8 +1,8 @@
 package Model;
 
 import Controller.InputManager;
+import Controller.Main;
 
-import java.util.*;
 import java.util.ArrayList;
 
 /**
