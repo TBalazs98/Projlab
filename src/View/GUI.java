@@ -32,7 +32,7 @@ public class GUI extends JFrame implements ActionListener {
     public JPanel gamespace;
 
     private ArrayList<IDrawable> drawables;
-    private ArrayList<AsteroidView> asteroids;
+    private ArrayList<AsteroidView> asteroids = new ArrayList<>();
     private  ArrayList<SettlerView> settlers=new ArrayList<SettlerView>();
     //private ArrayList<AsteroidView> asteroids;
    // private ArrayList<AsteroidView> asteroids;

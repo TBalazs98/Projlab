@@ -23,7 +23,7 @@ public class CharacterView implements IDrawable{
     public void Draw(GUI _g) {
         g = _g;
         for(int i = 0; i < chars.size(); i++) {
-            Call(chars.get(i));
+            //Call(chars.get(i));
             compnum++;
         }
     }
