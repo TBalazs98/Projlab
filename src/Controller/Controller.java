@@ -6,17 +6,16 @@ import View.GUI;
 import java.util.ArrayList;
 
 public  class Controller {
-    GUI g= new GUI();
+    public GUI g;
     public static ArrayList<Settler> settlers=new ArrayList<>();
-
-
-
 
 
     int command;
 
-    public Controller(GUI g){
+    public Controller(){
        // InitViews(g);
+        g=new GUI(this);
+        g.DrawMenu();
         settlers=Main.settlers;
     }
 
@@ -29,10 +28,12 @@ public  class Controller {
         }
     }
 
-    public void updateCommand(GUI g){
-        command = g.cp.getCurrentCommand();
+    public void updateCommand(int commandindex){
+        command = commandindex;
         System.out.println(command);
     }
+
+    public int getCurrentCommand(){return command;}
 
     public void moveSettler(int x, int  y){
 

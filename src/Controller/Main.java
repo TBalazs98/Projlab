@@ -19,7 +19,8 @@ public class Main {
      */
 
 
-    public static GUI g = new GUI();
+    //public static GUI g = new GUI();
+    public static Controller c;
     public static Game game = Game.getInstance();
     public static AsteroidBelt ab = AsteroidBelt.getInstance();
     public static boolean Randomize = false;
@@ -103,8 +104,8 @@ public class Main {
 
 
         GuiController gc= new GuiController(g);*/
-        g.DrawMenu();
-
+        //g.DrawMenu();
+        c=new Controller();
     }
 
 

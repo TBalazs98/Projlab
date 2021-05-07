@@ -20,7 +20,7 @@ public class GUI extends JFrame implements ActionListener {
     public JPanel gamespace;
     public DetailsPanel dp;
     public CommandPanel cp ;/*= new CommandPanel(this);*/
-    public Controller gc= new Controller(this);
+   public Controller gc;
 
     private ArrayList<IDrawable> drawables;
     private ArrayList<AsteroidView> asteroids = new ArrayList<>();
@@ -30,7 +30,8 @@ public class GUI extends JFrame implements ActionListener {
     private int coordsheight;
     Random gen = new Random();
 
-    public GUI() {
+    public GUI(Controller c) {
+        gc = c;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("AsteroidMine");
         this.setContentPane(new JLabel(new ImageIcon("Files/Pictures/space.jpg")));
@@ -91,8 +92,8 @@ public class GUI extends JFrame implements ActionListener {
         gamespace = new JPanel();
 
         gamespace.setPreferredSize(new Dimension(width,height-200));
-         dp = new DetailsPanel(this);
-         cp = new CommandPanel(this);
+         dp = new DetailsPanel(gc,this);
+         cp = new CommandPanel(gc,this);
 
         JPanel controls = new JPanel();
         controls.setBackground(new Color(0,0,0,64));
