@@ -14,7 +14,7 @@ public class CharacterView implements IDrawable{
     private int x,y;
     private int compnum = 0;
     private ArrayList<Character> chars;
-    GUI g;
+    private GUI g;
 
     CharacterView(ArrayList<Character> ch) {
         chars = ch;
@@ -22,8 +22,18 @@ public class CharacterView implements IDrawable{
 
     public void Draw(GUI _g) {
         g = _g;
+        compnum = g.getCompnum();
         for(int i = 0; i < chars.size(); i++) {
-            //Call(chars.get(i));
+            if(chars.get(i) instanceof Settler) {
+                Call((Settler)chars.get(i));
+            }
+            if(chars.get(i) instanceof Robot) {
+                Call((Robot)chars.get(i));
+            }
+            if(chars.get(i) instanceof UFO) {
+                Call((UFO)chars.get(i));
+            }
+
             compnum++;
         }
     }

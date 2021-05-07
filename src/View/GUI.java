@@ -4,6 +4,7 @@ import javax.swing.*;
 import Controller.*;
 import Model.Asteroid;
 import Model.Settler;
+import Model.UFO;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,10 +18,11 @@ public class GUI extends JFrame implements ActionListener {
     Image img;
     JButton startgame, loadgame, settings, exit;
     MenuBar bar = new MenuBar(this);
-    public JPanel gamespace;
+    public JLayeredPane gamespace;
     public DetailsPanel dp;
     public CommandPanel cp ;/*= new CommandPanel(this);*/
    public Controller gc;
+   private int compnum;
 
     private ArrayList<IDrawable> drawables;
     private ArrayList<AsteroidView> asteroids = new ArrayList<>();
@@ -28,10 +30,11 @@ public class GUI extends JFrame implements ActionListener {
     private Coordinates[][] coords;
     private int coordswidth;
     private int coordsheight;
-    Random gen = new Random();
+    private Random gen = new Random();
+    private Controller c;
+    private ArrayList<Model.Character> chars = new ArrayList<>();
 
-    public GUI(Controller c) {
-        gc = c;
+    public GUI(Controller _c) {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("AsteroidMine");
         this.setContentPane(new JLabel(new ImageIcon("Files/Pictures/space.jpg")));
@@ -45,6 +48,7 @@ public class GUI extends JFrame implements ActionListener {
         this.setJMenuBar(null);
         ImageIcon img = new ImageIcon("Files/Pictures/sus.jpg");
         this.setIconImage(img.getImage());
+        c = _c;
 
         drawables = new ArrayList<>();
 
@@ -59,6 +63,7 @@ public class GUI extends JFrame implements ActionListener {
                 coords[j][i] = new Coordinates(i*130+offsetX, j*130+offsetY);
             }
         }
+        createChar();
     }
 
 
@@ -89,16 +94,16 @@ public class GUI extends JFrame implements ActionListener {
 
     public void DrawAll(){
         this.setLayout(new FlowLayout());
-        gamespace = new JPanel();
+        gamespace = new JLayeredPane();
 
         gamespace.setPreferredSize(new Dimension(width,height-200));
-         dp = new DetailsPanel(gc,this);
-         cp = new CommandPanel(gc,this);
+         dp = new DetailsPanel(c,this);
+         cp = new CommandPanel(c,this);
 
         JPanel controls = new JPanel();
         controls.setBackground(new Color(0,0,0,64));
         controls.setLayout(new FlowLayout());
-        SetPanel(gamespace);
+        //SetPanel(gamespace);
         gamespace.setLayout(null);
         //gamespace.setBackground(Color.GREEN);
         this.add(gamespace, BorderLayout.CENTER);
@@ -109,75 +114,32 @@ public class GUI extends JFrame implements ActionListener {
         Asteroid asteroid;
         AsteroidView a;
         for(int i=0; i<10; i++){
-//            int newasteroidx, newasteroidy;
-//            asteroid = new Asteroid();
-//            a = new AsteroidView(asteroid);
-//            a.SetCoords(asteroidx,asteroidy);
-//            a.setCompNum(i);
-//            asteroids.add(a);
-//            newasteroidx = rnd.nextInt(width-130);
-//            newasteroidy = rnd.nextInt(height-330);
-//            int counter =0;
-//            boolean allisfar = false;
-//            while(allisfar == false && i < 9) {
-//                boolean breakout = false;
-//                for(int j = 0; j < i; j++) {
-//                    int first = newasteroidx-asteroids.get(j).getX();
-//                    int second = newasteroidy-asteroids.get(j).getY();
-//                    int scale = 130;
-//                    if((first < scale && first > (scale *-1)) || (second < scale && second > (scale *-1))) {
-//                        breakout = true;
-//                        break;
-//                    }
-//                }
-//                if(breakout == false) {
-//                    asteroidx = newasteroidx;
-//                    asteroidy = newasteroidy;
-//                    allisfar = true;
-//
-//                }
-//                else {
-//                    if(counter >= 7) {
-//                        i--;
-//                        asteroids.remove(asteroids.size()-1);
-//                        break;
-//                    }
-//                    newasteroidx = rnd.nextInt(width-130);
-//                    newasteroidy = rnd.nextInt(height-330);
-//                    counter++;
-//                }
-//            }
-
-
             asteroid = new Asteroid();
+            asteroid.setCharacter(chars.get(i));
+            asteroid.setCharacter(chars.get(i+1));
             a = new AsteroidView(asteroid);
             Coordinates coord = getLonelyCoord();
             a.SetCoords(coord.getX(), coord.getY());
             coord.toggle();
             a.setCompNum(i);
             asteroids.add(a);
+            compnum = i;
         }
         Settler s=new Settler();
         SettlerView sv=new SettlerView(s);
         Coordinates coord2 = getLonelyCoord();
-        sv.SetCoords(coord2.getX(), coord2.getY());
+        //sv.SetCoords(coord2.getX(), coord2.getY());
         coord2.toggle();
         sv.setCompnum(10);
         settlers.add(sv);
 
-
-
-
-
-
-        for(IDrawable i : asteroids){
+        for(AsteroidView i : asteroids){
+            x = i.getX();
+            y = i.getY();
             i.Draw(this);
         }
 
-
-
         //gamespace.repaint();
-
 
         this.add(dp, BorderLayout.PAGE_END);
         controls.add(cp);
@@ -208,6 +170,9 @@ public class GUI extends JFrame implements ActionListener {
         this.setJMenuBar(bar);
         this.setVisible(true);
 
+    }
+    public int getCompnum() {
+        return compnum;
     }
 
     public void Settings() {
@@ -328,5 +293,23 @@ public class GUI extends JFrame implements ActionListener {
     }
     public int getY() {
         return y;
+    }
+
+//    public void ActionGiven(String s) {
+//        c.updateCommand(s);
+//    }
+
+    private void createChar() {
+        chars.add(new Settler());
+        chars.add(new Model.Robot());
+        chars.add(new Settler());
+        chars.add(new Settler());
+        chars.add(new Model.Robot());
+        chars.add(new UFO());
+        chars.add(new UFO());
+        chars.add(new Settler());
+        chars.add(new Model.Robot());
+        chars.add(new Settler());
+        chars.add(new Model.Robot());
     }
 }

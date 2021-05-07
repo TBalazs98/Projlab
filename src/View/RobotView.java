@@ -6,6 +6,7 @@ import com.sun.source.tree.IdentifierTree;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class RobotView implements IDrawable {
     private Icon p;
@@ -13,19 +14,26 @@ public class RobotView implements IDrawable {
     private int x,y;
     private Robot r;
     private int compnum;
+    private Random rnd = new Random();
 
     RobotView(Robot _r) {
         r = _r;
-        p=new ImageIcon(new ImageIcon("Files/Pictures/robot.png").getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
+        p=new ImageIcon(new ImageIcon("Files/Pictures/robot.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         l=new JLabel(p);
     }
 
     @Override
     public void Draw(GUI g) {
+        int offsetX = rnd.nextInt(20);
+        int offsetY = rnd.nextInt(20);
+        x = g.getX()+offsetX+60;
+        y = g.getY()+offsetY+60;
+
         g.gamespace.add(l);
-        x = g.getX();
-        y = g.getY();
-        g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        g.gamespace.setComponentZOrder(l, 0);
+        //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+
     }
 
     public void setCompnum(int n) {

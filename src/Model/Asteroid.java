@@ -26,7 +26,7 @@ public class Asteroid implements DestinationObject {
      */
     public Asteroid(){
         //Logger.getInstance().printCommandCall(this);
-        this.layers = 0;
+        this.layers = 3;
         this.isEmpty = true;
         this.material = null;
         this.isNearSun = false;
@@ -437,5 +437,8 @@ public class Asteroid implements DestinationObject {
         return  neighbours.size();
     }
 
+    public ArrayList<Character> getCharacters() {
+        return characters;
+    }
 
 }

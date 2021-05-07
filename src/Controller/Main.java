@@ -105,7 +105,8 @@ public class Main {
 
         GuiController gc= new GuiController(g);*/
         //g.DrawMenu();
-        c=new Controller();
+        c = new Controller();
+
     }
 
 

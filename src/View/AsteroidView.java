@@ -1,9 +1,11 @@
 package View;
 import Model.*;
+import Model.Character;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public  class AsteroidView implements IDrawable {
 
@@ -62,7 +64,12 @@ public  class AsteroidView implements IDrawable {
         //as.setLocation(20,20);
 
         g.gamespace.add(l);
-        g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        //g.gamespace.setComponentZOrder(l, 1);//BIGNONO
+        //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        CharacterView cv = new CharacterView(asteroid.getCharacters());
+        cv.Draw(g);
+
     }
     public void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
         l.addMouseListener(new MouseAdapter() {

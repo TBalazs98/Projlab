@@ -3,17 +3,20 @@ package View;
 import Model.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 
 public class SettlerView implements IDrawable{
 
     private Settler s;
-    private ImageIcon p;
+    private Icon p;
     public JLabel l;
     private int x,y;
     private int compnum;
+    private Random rnd = new Random();
 
     SettlerView(Settler s,GUI g){
         this.s=s;
@@ -21,28 +24,33 @@ public class SettlerView implements IDrawable{
         l=new JLabel(p);
        // this.x = 50;
         //this.y = 50;
-        MoveToAsteroidListener(l,this,g);
+        //MoveToAsteroidListener(l,this,g);
 
     }
 
     SettlerView(Settler _s) {
+        p=new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        l=new JLabel(p);
         s = _s;
     }
 
-    public void SetCoords(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
+//    public void SetCoords(int x, int y){
+//        this.x = x;
+//        this.y = y;
+//    }
 
     public void Draw(GUI g){
-
-
+        int offsetX = rnd.nextInt(20);
+        int offsetY = rnd.nextInt(20);
+        x = g.getX()+offsetX+10;
+        y = g.getY()+offsetY+10;
         g.gamespace.add(l);
+        g.gamespace.setComponentZOrder(l, 0);
         //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
        // g.gamespace.getComponent(index).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
-
-        l.setBounds(this.x,this.y,p.getIconWidth(),p.getIconHeight());
-        System.out.println(g.GetAsteroidView().indexOf(s.getAsteroid()));
+        //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        //System.out.println(g.GetAsteroidView().indexOf(s.getAsteroid()));
         //index = Arrays.asList(container.getComponents()).indexOf(container.getComponentAt(x, y));
 
     }
