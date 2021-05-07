@@ -1,13 +1,23 @@
 package Controller;
 
+import Model.Settler;
 import View.GUI;
 
-public  class GuiController {
+import java.util.ArrayList;
+
+public  class Controller {
+    GUI g= new GUI();
+    public static ArrayList<Settler> settlers=new ArrayList<>();
+
+
+
+
+
     int command;
 
-    public GuiController(GUI g){
+    public Controller(GUI g){
        // InitViews(g);
-
+        settlers=Main.settlers;
     }
 
     public void InitViews(GUI g){

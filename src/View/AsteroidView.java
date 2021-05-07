@@ -4,7 +4,6 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import Controller.GuiController;
 
 public  class AsteroidView implements IDrawable {
 

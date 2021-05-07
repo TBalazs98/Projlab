@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Controller;
 import Controller.Main;
 
 import java.util.*;
@@ -175,7 +176,7 @@ public class Settler extends Worker implements drillable, moveable {
         asteroid.Remove(this);                  //levesszuk az adott Settlert az aszteroidarol (mert meghalt)
         AsteroidBelt.getInstance().SetSettlersAlive();  //Es atallitjuk a jelenleg eletben levo Settlereket
         this.inventory.CharacterDied();
-        Main.settlers.set(Main.settlers.indexOf(this), null);
+        Controller.settlers.set(Controller.settlers.indexOf(this), null);
 
 
         //Logger.getInstance().printReturnCommand();
