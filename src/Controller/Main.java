@@ -18,6 +18,8 @@ public class Main {
      * Jelenleg a Test nevu tesztosztalyunk segitsegevel ellenorizzuk modellunk helyesseget.
      */
 
+
+    public static GUI g = new GUI();
     public static Game game = Game.getInstance();
     public static AsteroidBelt ab = AsteroidBelt.getInstance();
     public static boolean Randomize = false;
@@ -86,7 +88,7 @@ public class Main {
 
 
         //ProtoTest.menu();
-        Asteroid a1 = new Asteroid();
+        /*Asteroid a1 = new Asteroid();
         Asteroid a2 = new Asteroid();
         Settler s1 = new Settler();
         Settler s2 = new Settler();
@@ -99,8 +101,8 @@ public class Main {
         settlers.add(s3);
         settlers.add(s4);
 
-        GUI g = new GUI();
-        GuiController gc= new GuiController(g);
+
+        GuiController gc= new GuiController(g);*/
         g.DrawMenu();
 
     }
