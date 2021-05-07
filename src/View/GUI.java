@@ -34,8 +34,6 @@ public class GUI extends JFrame implements ActionListener {
     private ArrayList<IDrawable> drawables;
     private ArrayList<AsteroidView> asteroids;
     private  ArrayList<SettlerView> settlers=new ArrayList<SettlerView>();
-    //private ArrayList<AsteroidView> asteroids;
-   // private ArrayList<AsteroidView> asteroids;
     private Coordinates[][] coords;
     private int coordswidth;
     private int coordsheight;
@@ -209,6 +207,18 @@ public class GUI extends JFrame implements ActionListener {
 
     }
 
+    public void Settings() {
+        FlowLayout layout = new FlowLayout();
+        layout.setVgap(this.height/12);
+        this.setLayout(layout);
+
+        SettingsPanel settings = new SettingsPanel(this);
+
+        this.add(settings);
+        this.setJMenuBar(bar);
+        this.setVisible(true);
+    }
+
     public void  DrawMenu(){
         JPanel  title, sg, lg, st, ex;
 
@@ -287,7 +297,9 @@ public class GUI extends JFrame implements ActionListener {
             this.Load();
 
         } else if (e.getSource() == settings) {
-
+            this.getContentPane().removeAll();
+            this.repaint();
+            this.Settings();
         }
         else if(e.getSource() == exit)
             System.exit(0);
