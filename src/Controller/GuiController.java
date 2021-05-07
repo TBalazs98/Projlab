@@ -3,9 +3,10 @@ package Controller;
 import View.GUI;
 
 public  class GuiController {
+    int command;
 
-    GuiController(GUI g){
-        InitViews(g);
+    public GuiController(GUI g){
+       // InitViews(g);
 
     }
 
@@ -16,6 +17,11 @@ public  class GuiController {
         for(int i=0; i<Main.asteroids.size();i++){
             g.addAsteroid(Main.asteroids.get(i));
         }
+    }
+
+    public void updateCommand(GUI g){
+        command = g.cp.getCurrentCommand();
+        System.out.println(command);
     }
 
     public void moveSettler(int x, int  y){

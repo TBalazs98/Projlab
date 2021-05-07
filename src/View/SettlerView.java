@@ -19,8 +19,8 @@ public class SettlerView implements IDrawable{
         this.s=s;
         p=new ImageIcon("Files/Pictures/sus.png");
         l=new JLabel(p);
-        this.x = 50;
-        this.y = 50;
+       // this.x = 50;
+        //this.y = 50;
         MoveToAsteroidListener(l,this,g);
 
     }

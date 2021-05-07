@@ -30,6 +30,9 @@ public class GUI extends JFrame implements ActionListener {
     JButton startgame, loadgame, settings, exit;
     MenuBar bar = new MenuBar(this);
     public JPanel gamespace;
+    public DetailsPanel dp;
+    public CommandPanel cp ;/*= new CommandPanel(this);*/
+    public GuiController gc= new GuiController(this);
 
     private ArrayList<IDrawable> drawables;
     private ArrayList<AsteroidView> asteroids = new ArrayList<>();
@@ -100,8 +103,8 @@ public class GUI extends JFrame implements ActionListener {
         gamespace = new JPanel();
 
         gamespace.setPreferredSize(new Dimension(width,height-200));
-        JPanel dp = new DetailsPanel(this);
-        JPanel cp = new CommandPanel(this);
+         dp = new DetailsPanel(this);
+         cp = new CommandPanel(this);
 
         JPanel controls = new JPanel();
         controls.setBackground(new Color(0,0,0,64));
@@ -155,6 +158,8 @@ public class GUI extends JFrame implements ActionListener {
 //                    counter++;
 //                }
 //            }
+
+
             asteroid = new Asteroid();
             a = new AsteroidView(asteroid);
             Coordinates coord = getLonelyCoord();
@@ -163,6 +168,15 @@ public class GUI extends JFrame implements ActionListener {
             a.setCompNum(i);
             asteroids.add(a);
         }
+        Settler s=new Settler();
+        SettlerView sv=new SettlerView(s);
+        Coordinates coord2 = getLonelyCoord();
+        sv.SetCoords(coord2.getX(), coord2.getY());
+        coord2.toggle();
+        sv.setCompnum(10);
+        settlers.add(sv);
+
+
 
 
 
