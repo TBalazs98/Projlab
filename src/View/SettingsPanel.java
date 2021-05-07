@@ -16,13 +16,14 @@ public class SettingsPanel extends JPanel {
     final private ChoserPanel water;
     final private ChoserPanel uran;
     final private ChoserPanel portal;
+    final private ChoserPanel random;
 
 
     public SettingsPanel(GUI g){
 
         this.setPreferredSize(new Dimension(g.height/2,g.height/2+g.height/4));
         this.setOpaque(true);
-        this.setLayout(new GridLayout(11,1));
+        this.setLayout(new GridLayout(12,1));
 
         JLabel up = new JLabel("New Game settings");
         up.setHorizontalAlignment(JLabel.CENTER);
@@ -63,6 +64,14 @@ public class SettingsPanel extends JPanel {
         vector = vector_zero(3,10);
         portal = new ChoserPanel(g, vector, "Portals");
         this.add(portal);
+
+        Vector rand = new Vector<Boolean>();
+        rand.add(true);
+        rand.add(false);
+
+        random = new ChoserPanel(g, rand, "Random");
+        this.add(random);
+
 
         JButton save = new JButton("Save settings");
         save.addActionListener(new setListener("Hello"));
