@@ -18,7 +18,7 @@ public class RobotView implements IDrawable {
 
     RobotView(Robot _r) {
         r = _r;
-        p=new ImageIcon(new ImageIcon("Files/Pictures/robot.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        p=new ImageIcon(new ImageIcon("Files/Pictures/robot.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
         l=new JLabel(p);
     }
 

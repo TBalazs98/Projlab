@@ -16,7 +16,7 @@ public class UfoView implements IDrawable{
 
     UfoView(UFO _u) {
         u = _u;
-        p=new ImageIcon(new ImageIcon("Files/Pictures/ufo.png").getImage().getScaledInstance(30, 20, Image.SCALE_SMOOTH));
+        p=new ImageIcon(new ImageIcon("Files/Pictures/ufo.png").getImage().getScaledInstance(20, 30, Image.SCALE_SMOOTH));
         l=new JLabel(p);
     }
 
