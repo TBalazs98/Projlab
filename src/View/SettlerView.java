@@ -13,6 +13,7 @@ public class SettlerView implements IDrawable{
     private ImageIcon p;
     public JLabel l;
     private int x,y;
+    private int compnum;
 
     SettlerView(Settler s,GUI g){
         this.s=s;
@@ -22,6 +23,10 @@ public class SettlerView implements IDrawable{
         this.y = 50;
         MoveToAsteroidListener(l,this,g);
 
+    }
+
+    SettlerView(Settler _s) {
+        s = _s;
     }
 
     public void SetCoords(int x, int y){
@@ -56,4 +61,7 @@ public class SettlerView implements IDrawable{
         });
     }
 
+    public void setCompnum(int n) {
+        compnum = n;
+    }
 }

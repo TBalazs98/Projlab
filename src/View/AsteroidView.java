@@ -10,7 +10,7 @@ public  class AsteroidView implements IDrawable {
 
     private Asteroid asteroid;
     private JButton as;
-    private ImageIcon p;
+    private Icon p;
     private JLabel l;
     private int x,y;
     private int compnum = 0;
@@ -21,15 +21,17 @@ public  class AsteroidView implements IDrawable {
         //if (asteroid.GetisEmpty()) {
 
         int scaling = 130;
-        if(a.GetisEmpty() && a.getLayers()>0)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
-        else if(a.GetisEmpty() && a.getLayers() == 0)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
-        else if(!a.GetisEmpty()){
-            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
+        if(a.getLayers()>0) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
         }
+        else if(a.getLayers() == 0) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+        }
+//        else if(!a.GetisEmpty()){
+//            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
+//        }
             //as = new JButton(p );
-            l = new JLabel((Icon)p);
+            l = new JLabel(p);
 
             //as.setRolloverIcon(new ImageIcon("Files/Pictures/explosion.png"));
            /* as.setBorderPainted(false);

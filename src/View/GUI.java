@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import Controller.*;
 import Model.Asteroid;
+import Model.AsteroidBelt;
 import Model.Settler;
 
 import java.awt.*;
@@ -31,11 +32,14 @@ public class GUI extends JFrame implements ActionListener {
     public JPanel gamespace;
 
     private ArrayList<IDrawable> drawables;
-    private ArrayList<AsteroidView> asteroids = new ArrayList<AsteroidView>();
+    private ArrayList<AsteroidView> asteroids;
     private  ArrayList<SettlerView> settlers=new ArrayList<SettlerView>();
     //private ArrayList<AsteroidView> asteroids;
    // private ArrayList<AsteroidView> asteroids;
-
+    private Coordinates[][] coords;
+    private int coordswidth;
+    private int coordsheight;
+    Random gen = new Random();
 
     public GUI() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +57,40 @@ public class GUI extends JFrame implements ActionListener {
         this.setIconImage(img.getImage());
 
         drawables = new ArrayList<>();
-        asteroids = new ArrayList<>();
+
+        coordsheight = (height-330)/130;
+        coordswidth = (width-130)/130;
+        coords = new Coordinates[coordsheight][coordswidth];
+
+        for(int i = 0; i < coordswidth; i++) {
+            for(int j = 0; j < coordsheight; j++) {
+                int offsetX = gen.nextInt(60);
+                int offsetY = gen.nextInt(60);
+                coords[j][i] = new Coordinates(i*130+offsetX, j*130+offsetY);
+            }
+        }
+    }
+
+
+    private Coordinates getRandEmptyCoord() {
+        int x = gen.nextInt(coordsheight);
+        int y = gen.nextInt(coordswidth);
+        while(coords[x][y].isToggled() == true) {
+            x = gen.nextInt(coordsheight);
+            y = gen.nextInt(coordswidth);
+        }
+        return coords[x][y];
+    }
+
+    private Coordinates getLonelyCoord() {
+        int x = gen.nextInt(coordsheight);
+        int y = gen.nextInt(coordswidth);
+
+        while(coords[x][y].isToggled() ||coords[(x-1 < 0) ? 0 : x-1][y].isToggled() || coords[x][(y-1 < 0) ? 0 : y-1].isToggled() || coords[x][(y+1 >= coordswidth) ? y : y+1].isToggled() || coords[(x+1 >= coordsheight) ?  x : x+1][y].isToggled()) {
+            x = gen.nextInt(coordsheight);
+            y = gen.nextInt(coordswidth);
+        }
+        return coords[x][y];
     }
 
     public int GetWidth(){
@@ -79,50 +116,54 @@ public class GUI extends JFrame implements ActionListener {
         /**
          * RAJZOLASOK IDE gamespacebe
          */
-        Random rnd = new Random();
-        int asteroidx=0;
-        int asteroidy = 0;
         Asteroid asteroid;
         AsteroidView a;
         for(int i=0; i<10; i++){
-            int newasteroidx, newasteroidy;
+//            int newasteroidx, newasteroidy;
+//            asteroid = new Asteroid();
+//            a = new AsteroidView(asteroid);
+//            a.SetCoords(asteroidx,asteroidy);
+//            a.setCompNum(i);
+//            asteroids.add(a);
+//            newasteroidx = rnd.nextInt(width-130);
+//            newasteroidy = rnd.nextInt(height-330);
+//            int counter =0;
+//            boolean allisfar = false;
+//            while(allisfar == false && i < 9) {
+//                boolean breakout = false;
+//                for(int j = 0; j < i; j++) {
+//                    int first = newasteroidx-asteroids.get(j).getX();
+//                    int second = newasteroidy-asteroids.get(j).getY();
+//                    int scale = 130;
+//                    if((first < scale && first > (scale *-1)) || (second < scale && second > (scale *-1))) {
+//                        breakout = true;
+//                        break;
+//                    }
+//                }
+//                if(breakout == false) {
+//                    asteroidx = newasteroidx;
+//                    asteroidy = newasteroidy;
+//                    allisfar = true;
+//
+//                }
+//                else {
+//                    if(counter >= 7) {
+//                        i--;
+//                        asteroids.remove(asteroids.size()-1);
+//                        break;
+//                    }
+//                    newasteroidx = rnd.nextInt(width-130);
+//                    newasteroidy = rnd.nextInt(height-330);
+//                    counter++;
+//                }
+//            }
             asteroid = new Asteroid();
             a = new AsteroidView(asteroid);
-            a.SetCoords(asteroidx,asteroidy);
+            Coordinates coord = getLonelyCoord();
+            a.SetCoords(coord.getX(), coord.getY());
+            coord.toggle();
             a.setCompNum(i);
             asteroids.add(a);
-            newasteroidx = rnd.nextInt(width-130);
-            newasteroidy = rnd.nextInt(height-330);
-            int counter =0;
-            boolean allisfar = false;
-            while(allisfar == false && i < 9) {
-                boolean breakout = false;
-                for(int j = 0; j < i; j++) {
-                    int first = newasteroidx-asteroids.get(j).getX();
-                    int second = newasteroidy-asteroids.get(j).getY();
-                    int scale = 130;
-                    if((first < scale && first > (scale *-1)) || (second < scale && second > (scale *-1))) {
-                        breakout = true;
-                        break;
-                    }
-                }
-                if(breakout == false) {
-                    asteroidx = newasteroidx;
-                    asteroidy = newasteroidy;
-                    allisfar = true;
-
-                }
-                else {
-                    if(counter >= 7) {
-                        i--;
-                        asteroids.remove(asteroids.size()-1);
-                        break;
-                    }
-                    newasteroidx = rnd.nextInt(width-130);
-                    newasteroidy = rnd.nextInt(height-330);
-                    counter++;
-                }
-            }
         }
 
 
@@ -266,5 +307,11 @@ public class GUI extends JFrame implements ActionListener {
         AsteroidView av = new AsteroidView(a);
         asteroids.add(av);
         drawables.add(av);
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
     }
 }
