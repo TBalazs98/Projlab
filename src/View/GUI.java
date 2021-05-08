@@ -22,7 +22,7 @@ public class GUI extends JFrame implements ActionListener {
     public CommandPanel cp ;/*= new CommandPanel(this);*/
     public Controller gc;
     private int compnum;
-    public SettingsPanel settingspanel;
+    public CustomGamePanel settingspanel;
 
     private ArrayList<IDrawable> drawables;
     private ArrayList<AsteroidView> asteroids = new ArrayList<>();
@@ -137,6 +137,7 @@ public class GUI extends JFrame implements ActionListener {
 //            y = i.getY();
 //            i.Draw();
 //        }
+
         for(int i=0; i<asteroids.size();i++){
             Coordinates coordinates = getLonelyCoord();
             coordinates.toggle();
@@ -193,7 +194,7 @@ public class GUI extends JFrame implements ActionListener {
         layout.setVgap(this.height/12);
         this.setLayout(layout);
 
-       settingspanel = new SettingsPanel(this);
+       settingspanel = new CustomGamePanel(this);
 
         this.add(settingspanel);
         this.setJMenuBar(bar);
@@ -272,8 +273,8 @@ public class GUI extends JFrame implements ActionListener {
         if(e.getSource() == startgame){
             this.getContentPane().removeAll();
             this.repaint();
-            //this.CreateCustomMap();
-            DrawAll();
+            this.CreateCustomMap();
+            this.DrawAll();
         } else if (e.getSource() == loadgame){
             this.getContentPane().removeAll();
             this.repaint();
@@ -327,6 +328,14 @@ public class GUI extends JFrame implements ActionListener {
 
     }
     public void CreateCustomMap(){
+        Main.asteroids.clear();
+        this.settlers.clear();
+        Main.settlers.clear();
+        Main.ufos.clear();
+        Main.robots.clear();
+        Main.materials.clear();
+        Main.teleportgates.clear();
+        this.asteroids.clear();
         ArrayList<Integer> datas = settingspanel.GetCreatecount();
         int I = datas.get(0);
         int C = datas.get(1);
@@ -337,11 +346,9 @@ public class GUI extends JFrame implements ActionListener {
         int S = datas.get(6);
         int R = datas.get(7);
         int U = datas.get(8);
+        int materials = I+C+Ra+W;
 
-
-        /**
-         * Nyersanyagok leterhozasa
-         */
+        //Nyersanyagok leterhozasa
 
         for(int i = 0; i< I;i++){
             Material m = new Material();
@@ -363,118 +370,117 @@ public class GUI extends JFrame implements ActionListener {
             sm.setName(SublimableMaterialName.ICEWATER);
             Main.materials.add(sm);
         }
-
-        /**
-         * Nyersanyag END.
-         */
+        //Nyersanyag END.
 
 
-        /**
-         * Aszteroidak letrehozas
-         */
+        //Aszteroidak letrehozas
         for(int i = 0; i< A;i++){
             Asteroid a = new Asteroid();
             Main.asteroids.add(a);
+            this.addAsteroid(a);
+        }
+        if(materials > 0) {
+            for (int i = 0; i < materials; i++) {
+                Main.asteroids.get(i).SetMaterial(Main.materials.get(i));
+                Main.asteroids.get(i).SetEmpty(false);
+                Main.asteroids.get(i).setLayer(3);
+            }
         }
 
-        for(int i = 0; i < A;i++){
-            Main.asteroids.get(i).AddMaterial(Main.materials.get(i));
-            Main.asteroids.get(i).SetEmpty(false);
-        }
+        if(A > 1) {
+            for (int i = 0; i < A; i++) {
+                    Random rand = new Random();
+                    int rand_int = rand.nextInt(Main.asteroids.size());
+                    int db = 0;
+                    System.out.println(i);
+                    System.out.println(Main.asteroids.get(i).GetNeighbourCount());
+                    if (Main.asteroids.get(i).GetNeighbourCount() != -1) {
+                        for (DestinationObject o : Main.asteroids.get(i).GetNeighbours()) {
+                            if (o == Main.asteroids.get(rand_int)) {
+                                db++;
+                            }
+                        }
+                    }
 
-        for(int i = 0; i < A;i++){
-            for(int j = 0; j < A%3;i++){
-                Random rand = new Random();
-                int rand_int = rand.nextInt(Main.asteroids.size());
-                int db = 0;
-                for (DestinationObject o : Main.asteroids.get(i).GetNeighbours()) {
-                    if (o == Main.asteroids.get(rand_int)) {
-                        db++;
+                    if (db == 0)
+                        Main.asteroids.get(i).AddNeighbour(Main.asteroids.get(rand_int));
+            }
+        }
+        //Aszteroida END.
+
+        //TeleportGate letrehozas, par beallitas es elhelyezes aszteroidan
+        if(T > 0) {
+            for (int i = 0; i < T; i++) {
+                TeleportGate t = new TeleportGate();
+                Main.teleportgates.add(t);
+            }
+
+            if(T > 2) {
+                int j = 0;
+                if (T % 2 == 0) {
+                    while (j < T) {
+                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(j++));
+                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(j - 1));
+                        j++;
+                    }
+                } else {
+                    while (j < T - 1) {
+                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(j++));
+                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(j - 1));
+                        j++;
                     }
                 }
-                if(db == 0)
-                    Main.asteroids.get(i).AddNeighbour(Main.asteroids.get(rand_int));
             }
+            for (int i = 0; i < T; i++)
+                while (Main.teleportgates.get(i).GetAsteroid() != null) {
+                    Random rand = new Random();
+                    int rand_int = rand.nextInt(A);
+                    if (Main.teleportgates.get(i).GetPair().GetAsteroid() != Main.asteroids.get(rand_int))
+                        Main.teleportgates.get(i).setAsteroid(Main.asteroids.get(rand_int));
+                }
+
         }
-        /**
-         * Aszteroida END.
-         */
+        //TeleportGate END.
 
-
-        /**
-         * TeleportGate letrehozas, par beallitas es elhelyezes aszteroidan
-         */
-
-        for(int i = 0; i < T;i++){
-            TeleportGate t = new TeleportGate();
-            Main.teleportgates.add(t);
-        }
-
-        if(T % 2 == 0){
-            Integer i = 0;
-            while (i < T){
-                Main.teleportgates.get(i).setPair(Main.teleportgates.get(i++));
-                Main.teleportgates.get(i).setPair(Main.teleportgates.get(i-1));
-                i++;
-            }
-        }
-        else{
-            Integer i = 0;
-            while (i < T-1){
-                Main.teleportgates.get(i).setPair(Main.teleportgates.get(i++));
-                Main.teleportgates.get(i).setPair(Main.teleportgates.get(i-1));
-                i++;
-            }
-        }
-
-        for(int i = 0; i < T;i++)
-            while (Main.teleportgates.get(i).GetAsteroid() != null){
-                Random rand = new Random();
-                int rand_int = rand.nextInt(A);
-                if (Main.teleportgates.get(i).GetPair().GetAsteroid() != Main.asteroids.get(rand_int))
-                    Main.teleportgates.get(i).setAsteroid(Main.asteroids.get(rand_int));
-          }
-        /**
-         * TeleportGate END.
-         */
-
-        /**
-         * Settler letrehozas, lehejezes
-         */
+        //Settler letrehozas, lehejezes
         for(int i = 0; i < S;i++){
             Settler s = new Settler();
             Random rand = new Random();
-            int rand_int = rand.nextInt(S);
+            int rand_int = rand.nextInt(A);
             s.setAsteroid(Main.asteroids.get(rand_int));
             Main.asteroids.get(rand_int).setCharacter(s);
             Main.settlers.add(s);
+            SettlerView sv = new SettlerView(s);
+            this.settlers.add(sv);
         }
 
-        /**
-         * Robot letrehozas, lehejezes
-         */
-        for(int i = 0; i < R;i++){
-            Model.Robot r = new Robot();
-            Random rand = new Random();
-            int rand_int = rand.nextInt(R);
-            r.setAsteroid(Main.asteroids.get(rand_int));
-            Main.asteroids.get(rand_int).setCharacter(r);
-            Main.robots.add(r);
+        //Robot letrehozas, lehejezes
+        if(R > 0) {
+            for (int i = 0; i < R; i++) {
+                Model.Robot r = new Robot();
+                Random rand = new Random();
+                int rand_int = rand.nextInt(A);
+                r.setAsteroid(Main.asteroids.get(rand_int));
+                Main.asteroids.get(rand_int).setCharacter(r);
+                Main.robots.add(r);
+            }
         }
-        /**
-         * UFO letrehozas, lehejezes
-         */
-        for(int i = 0; i < U;i++){
-            UFO u = new UFO();
-            Random rand = new Random();
-            int rand_int = rand.nextInt(U);
-            u.setAsteroid(Main.asteroids.get(rand_int));
-            Main.asteroids.get(rand_int).setCharacter(u);
-            Main.ufos.add(u);
+
+        //UFO letrehozas, lehejezes
+        if(U > 0) {
+            for (int i = 0; i < U; i++) {
+                UFO u = new UFO();
+                Random rand = new Random();
+                int rand_int = rand.nextInt(A);
+                u.setAsteroid(Main.asteroids.get(rand_int));
+                Main.asteroids.get(rand_int).setCharacter(u);
+                Main.ufos.add(u);
+            }
         }
 
         //lehet nem jó h melyik mi
-        Main.Randomize = ((datas.get(9) == 0) ? true : false);
+        Main.Randomize = (datas.get(9) == 0);
+
 
     }
 }

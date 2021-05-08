@@ -106,48 +106,48 @@ public class Main {
         GuiController gc= new GuiController(g);*/
         //g.DrawMenu();
         //c = new Controller();
-        Asteroid a = new Asteroid();
-        a.SetEmpty(false);
-        SublimableMaterial sm = new SublimableMaterial();
-        a.SetMaterial(sm);
-        a.setLayer(4);
-        a.SetSunProximityManual(true);
-
-
-        Asteroid a2 = new Asteroid();
-        a2.SetEmpty(false);
-        SublimableMaterial sm2 = new SublimableMaterial();
-        a.SetMaterial(sm2);
-        a.setLayer(5);
-        a.SetSunProximityManual(true);
-
-
-
-        Asteroid a3 = new Asteroid();
-        a3.SetEmpty(false);
-        SublimableMaterial sm3 = new SublimableMaterial();
-        a.SetMaterial(sm3);
-        a.setLayer(2);
-        a.SetSunProximityManual(true);
-
-        a3.setNeighbour(a2);
-        a3.setNeighbour(a);
-
-
-        Settler s = new Settler();
-        s.setAsteroid(a);
-        a.setCharacter(s);
-
-        Settler s2 = new Settler();
-        s2.setAsteroid(a2);
-        a2.setCharacter(s2);
-
-        asteroids.add(a);
-        asteroids.add(a2);
-        asteroids.add(a3);
-
-        settlers.add(s);
-        settlers.add(s2);
+//        Asteroid a = new Asteroid();
+//        a.SetEmpty(false);
+//        SublimableMaterial sm = new SublimableMaterial();
+//        a.SetMaterial(sm);
+//        a.setLayer(4);
+//        a.SetSunProximityManual(true);
+//
+//
+//        Asteroid a2 = new Asteroid();
+//        a2.SetEmpty(false);
+//        SublimableMaterial sm2 = new SublimableMaterial();
+//        a.SetMaterial(sm2);
+//        a.setLayer(5);
+//        a.SetSunProximityManual(true);
+//
+//
+//
+//        Asteroid a3 = new Asteroid();
+//        a3.SetEmpty(false);
+//        SublimableMaterial sm3 = new SublimableMaterial();
+//        a.SetMaterial(sm3);
+//        a.setLayer(2);
+//        a.SetSunProximityManual(true);
+//
+//        a3.setNeighbour(a2);
+//        a3.setNeighbour(a);
+//
+//
+//        Settler s = new Settler();
+//        s.setAsteroid(a);
+//        a.setCharacter(s);
+//
+//        Settler s2 = new Settler();
+//        s2.setAsteroid(a2);
+//        a2.setCharacter(s2);
+//
+//        asteroids.add(a);
+//        asteroids.add(a2);
+//        asteroids.add(a3);
+//
+//        settlers.add(s);
+//        settlers.add(s2);
 
 
         game.StartGame();
