@@ -17,6 +17,7 @@ public class SettlerView implements IDrawable{
     private int x,y;
     private int compnum;
     private Random rnd = new Random();
+    boolean currentlySelected = false;
 
 //    SettlerView(Settler s){
 //        this.s=s;
@@ -69,6 +70,13 @@ public class SettlerView implements IDrawable{
             }
         });
     }
+
+    public void step(){
+
+
+
+    }
+    public Settler getSettler(){return this.s;}
 
     public void setCompnum(int n) {
         compnum = n;

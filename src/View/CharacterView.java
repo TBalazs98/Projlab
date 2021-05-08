@@ -16,11 +16,13 @@ public class CharacterView implements IDrawable{
 
     CharacterView(ArrayList<Character> ch) {
         chars = ch;
+
+
     }
 
     public void Draw() {
         g = Game.getInstance().c.g;
-        compnum = g.getCompnum();
+        //compnum = g.getCompnum();
         for(int i = 0; i < chars.size(); i++) {
             if(chars.get(i) instanceof Settler) {
                 Call((Settler)chars.get(i));
@@ -32,25 +34,26 @@ public class CharacterView implements IDrawable{
                 Call((UFO)chars.get(i));
             }
 
-            compnum++;
+            //compnum++;
         }
     }
 
     private void Call(Settler s){
         SettlerView sv = new SettlerView(s);
-        sv.setCompnum(compnum);
+       // sv.setCompnum(compnum);
+
         sv.Draw();
     }
 
     private void Call(UFO u) {
         UfoView uv = new UfoView(u);
-        uv.setCompnum(compnum);
+        //uv.setCompnum(compnum);
         uv.Draw();
     }
 
     private void Call(Robot r) {
         RobotView rv = new RobotView(r);
-        rv.setCompnum(compnum);
+        //rv.setCompnum(compnum);
         rv.Draw();
     }
 }

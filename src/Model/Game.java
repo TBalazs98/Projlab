@@ -11,6 +11,8 @@ import java.util.ArrayList;
  */
 public class Game {
     public Controller c ;
+    public boolean lostgame = false;
+
     /**
      *Privat konstruktor.
      */

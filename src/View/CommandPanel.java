@@ -10,10 +10,14 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class CommandPanel extends JPanel {
     JList<String> list ;
+    private JButton cpactionDone = new JButton("DOIT");
+
     int CurrentCommand;
 
     CommandPanel(){
@@ -26,6 +30,16 @@ public class CommandPanel extends JPanel {
         Icon dig=new ImageIcon("Files/Pictures/minebtn.png");
         Icon place=new ImageIcon("Files/Pictures/sus.png");
         Icon[] images ={build,mine,dig,place};
+
+
+        cpactionDone.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game.getInstance().c.stepsettlers();
+            }
+        });
+
+        this.add(cpactionDone);
 
         list = new JList<String >(data);
         //list.addListSelectionListener(new list_lis());
@@ -100,6 +114,10 @@ public class CommandPanel extends JPanel {
 
 
     public int getCurrentCommand(){return CurrentCommand;}
+
+    public JButton getActionDone1(){return cpactionDone;}
+
+
 
 
 

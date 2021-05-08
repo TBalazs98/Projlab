@@ -26,7 +26,7 @@ public class GUI extends JFrame implements ActionListener {
 
     private ArrayList<IDrawable> drawables;
     private ArrayList<AsteroidView> asteroids = new ArrayList<>();
-    private  ArrayList<SettlerView> settlers=new ArrayList<SettlerView>();
+    private  ArrayList<SettlerView> settlers=new ArrayList<>();
     private Coordinates[][] coords;
     private int coordswidth;
     private int coordsheight;
@@ -63,7 +63,9 @@ public class GUI extends JFrame implements ActionListener {
                 coords[j][i] = new Coordinates(i*130+offsetX, j*130+offsetY);
             }
         }
-        createChar();
+        //createChar();
+
+
     }
 
 
@@ -97,8 +99,8 @@ public class GUI extends JFrame implements ActionListener {
         gamespace = new JLayeredPane();
 
         gamespace.setPreferredSize(new Dimension(width,height-200));
-         dp = new DetailsPanel();
-         cp = new CommandPanel();
+        dp = new DetailsPanel();
+        cp = new CommandPanel();
 
         JPanel controls = new JPanel();
         controls.setBackground(new Color(0,0,0,64));
@@ -111,38 +113,47 @@ public class GUI extends JFrame implements ActionListener {
         /**
          * RAJZOLASOK IDE gamespacebe
          */
-        Asteroid asteroid;
-        AsteroidView a;
-        for(int i=0; i<10; i++){
-            asteroid = new Asteroid();
-            asteroid.setCharacter(chars.get(i));
-            asteroid.setCharacter(chars.get(i+1));
-            a = new AsteroidView(asteroid);
-            Coordinates coord = getLonelyCoord();
-            a.SetCoords(coord.getX(), coord.getY());
-            coord.toggle();
-            a.setCompNum(i);
-            asteroids.add(a);
-            compnum = i;
-        }
-        Settler s=new Settler();
-        SettlerView sv=new SettlerView(s);
-        Coordinates coord2 = getLonelyCoord();
-        //sv.SetCoords(coord2.getX(), coord2.getY());
-        coord2.toggle();
-        sv.setCompnum(10);
-        settlers.add(sv);
+        //Asteroid asteroid;
+        //AsteroidView a;
+//        for(int i=0; i<10; i++){
+//            asteroid = new Asteroid();
+//            Main.asteroids.add(asteroid);
+//            //asteroid.setCharacter(chars.get(i));
+//            //asteroid.setCharacter(chars.get(i+1));
+//            a = new AsteroidView(asteroid);
+//            Coordinates coord = getLonelyCoord();
+//            a.SetCoords(coord.getX(), coord.getY());
+//            coord.toggle();
+//            a.setCompNum(i);
+//            asteroids.add(a);
+//            compnum = i;
+//        }
+
 
         //asteroids.get(0).highlight();
 
-        for(AsteroidView i : asteroids){
-            x = i.getX();
-            y = i.getY();
-            i.Draw();
+//        for(AsteroidView i : asteroids){
+//            x = i.getX();
+//            y = i.getY();
+//            i.Draw();
+//        }
+        for(int i=0; i<asteroids.size();i++){
+            Coordinates coordinates = getLonelyCoord();
+            coordinates.toggle();
+
+            asteroids.get(i).SetCoords(coordinates.getX(),coordinates.getY());
+            x = asteroids.get(i).getX();
+            y = asteroids.get(i).getY();
+            asteroids.get(i).Draw();
         }
 
-        //gamespace.repaint();
 
+//        for(IDrawable i : drawables){
+//            i.Draw();
+//        }
+
+
+//region buzisagok
         this.add(dp, BorderLayout.PAGE_END);
         controls.add(cp);
         controls.add(dp);
@@ -151,7 +162,7 @@ public class GUI extends JFrame implements ActionListener {
         this.setJMenuBar(bar);
         //this.pack();
         this.setVisible(true);
-
+//endregion
     }
 
     public void Update(){
@@ -297,9 +308,6 @@ public class GUI extends JFrame implements ActionListener {
         return y;
     }
 
-//    public void ActionGiven(String s) {
-//        c.updateCommand(s);
-//    }
 
     private void createChar() {
         chars.add(new Settler());

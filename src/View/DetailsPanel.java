@@ -21,6 +21,7 @@ public class DetailsPanel extends JPanel {
     CommandPanel com;
     ArrayList<JPanel> panels = new ArrayList<>();
     JList<String> list;
+    private JButton dpactionDone = new JButton("DOIT");
 
     DetailsPanel( ){
        // panels.add(buildpanel);
@@ -33,7 +34,7 @@ public class DetailsPanel extends JPanel {
         this.setVisible(true);
         this.setPreferredSize(new Dimension(Game.getInstance().c.g.width/2,200));
         this.setBackground(Color.RED);
-
+        this.add(dpactionDone);
         list = new JList<String >();
         list.setPreferredSize(new Dimension(Game.getInstance().c.g.width/4,100));
 
