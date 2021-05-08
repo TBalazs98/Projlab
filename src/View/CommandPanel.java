@@ -3,6 +3,7 @@ package View;
 import Controller.Controller;
 
 import Model.DestinationObject;
+import Model.Game;
 import Model.Material;
 
 import javax.swing.*;
@@ -15,8 +16,8 @@ public class CommandPanel extends JPanel {
     JList<String> list ;
     int CurrentCommand;
 
-    CommandPanel(Controller c, GUI g){
-        this.setPreferredSize(new Dimension(g.width/2,200));
+    CommandPanel(){
+        this.setPreferredSize(new Dimension(Game.getInstance().c.g.width/2,200));
         this.setBackground(Color.GREEN);
         this.setVisible(true);
         String[] data = {"Build", "Mine", "Dig", "Place", "Move"};
@@ -28,58 +29,65 @@ public class CommandPanel extends JPanel {
 
         list = new JList<String >(data);
         //list.addListSelectionListener(new list_lis());
-        fasz(list,c);
+        fasz(list);
         //g.gamespace.add(this);
-        list.setPreferredSize(new Dimension(g.width/8,100));
+        list.setPreferredSize(new Dimension(Game.getInstance().c.g.width/8,100));
         this.add(new JScrollPane(list),BorderLayout.CENTER);
 
 
     }
-    public void fasz(JList list, Controller c) {
+    public void fasz(JList list ) {
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if(e.getValueIsAdjusting()){
                     CurrentCommand = list.getSelectedIndex();
-                    c.updateCommand(CurrentCommand);
+                    Game.getInstance().c.updateCommand(CurrentCommand);
                     if(CurrentCommand == 0){
                         Vector<String> vector = new Vector<>();
                         vector.add("TeleportGate");
                         vector.add("Robot");
                         vector.add("Base");
-                        c.g.dp.buildDetails(vector, c.g);
+                        Game.getInstance().c.g.dp.buildDetails(vector, Game.getInstance().c.g);
+                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(true,Game.getInstance().c.g);
                     }
                     else if(CurrentCommand == 1){
                         Vector<String> vector = new Vector<>();
                         vector.add("Mine");
-                        c.g.dp.mineDetails(vector, c.g);
+                        //c.g.dp.mineDetails(vector, c.g);
+                        Game.getInstance().c.g.dp.mineDetails(vector,Game.getInstance().c.g);
+                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
                     }
                     else  if(CurrentCommand == 2){
                         Vector<String> vector = new Vector<>();
                         vector.add("Dig");
-                        c.g.dp.digDetails(vector, c.g);
+                        //c.g.dp.digDetails(vector, c.g);
+                        Game.getInstance().c.g.dp.digDetails(vector,Game.getInstance().c.g);
                         System.out.println(list.getSelectedValue());
+                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
                     }
 
                     else  if(CurrentCommand == 3){
                         Vector<Material> vector = new Vector<>();
 
-                        for(Material i: Controller.settlers.get(c.selectedSettler).GetInventory().GetMaterials()){
+                        for(Material i: Controller.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials()){
                             vector.add(i);
                             System.out.println(vector.size());
                         }
-                        c.g.dp.placeDetails(vector, c.g);
+                        Game.getInstance().c.g.dp.placeDetails(vector, Game.getInstance().c.g);
+                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
                     }
                     else  if(CurrentCommand == 4){
                         Vector<Integer> vector = new Vector<>();
                         int id = 0;
 
-                        for(DestinationObject i: Controller.settlers.get(c.selectedSettler).getAsteroid().GetNeighbours()){
+                        for(DestinationObject i: Controller.settlers.get(Game.getInstance().c.selectedSettler).getAsteroid().GetNeighbours()){
                             vector.add((id));
                             id++;
                             System.out.println(vector.size());
                         }
-                        c.g.dp.moveDetails(vector, c.g);
+                        Game.getInstance().c.g.dp.moveDetails(vector, Game.getInstance().c.g);
+                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
                     }
 
 

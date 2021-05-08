@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Controller;
 import Controller.InputManager;
 import Controller.Main;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  *A jatek peldanyat testesiti meg, egyetlen peldany letezhet belole egyszerre.
  */
 public class Game {
-
+    public Controller c ;
     /**
      *Privat konstruktor.
      */
@@ -26,6 +27,7 @@ public class Game {
      *Jatek inditasa.
      */
     public void StartGame() {
+        c=new Controller();
     }
 
     /**

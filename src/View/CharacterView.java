@@ -1,9 +1,7 @@
 package View;
 
+import Model.*;
 import Model.Character;
-import Model.Robot;
-import Model.Settler;
-import Model.UFO;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -20,8 +18,8 @@ public class CharacterView implements IDrawable{
         chars = ch;
     }
 
-    public void Draw(GUI _g) {
-        g = _g;
+    public void Draw() {
+        g = Game.getInstance().c.g;
         compnum = g.getCompnum();
         for(int i = 0; i < chars.size(); i++) {
             if(chars.get(i) instanceof Settler) {
@@ -41,18 +39,18 @@ public class CharacterView implements IDrawable{
     private void Call(Settler s){
         SettlerView sv = new SettlerView(s);
         sv.setCompnum(compnum);
-        sv.Draw(g);
+        sv.Draw();
     }
 
     private void Call(UFO u) {
         UfoView uv = new UfoView(u);
         uv.setCompnum(compnum);
-        uv.Draw(g);
+        uv.Draw();
     }
 
     private void Call(Robot r) {
         RobotView rv = new RobotView(r);
         rv.setCompnum(compnum);
-        rv.Draw(g);
+        rv.Draw();
     }
 }

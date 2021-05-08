@@ -1,5 +1,6 @@
 package View;
 
+import Model.Game;
 import Model.UFO;
 
 import javax.swing.*;
@@ -21,13 +22,13 @@ public class UfoView implements IDrawable{
     }
 
     @Override
-    public void Draw(GUI g) {
-        g.gamespace.add(l);
+    public void Draw() {
+        Game.getInstance().c.g.gamespace.add(l);
         int offsetX = rnd.nextInt(20);
         int offsetY = rnd.nextInt(20);
-        x = g.getX()+offsetX+40;
-        y = g.getY()+offsetY+40;
-        g.gamespace.setComponentZOrder(l, 0);
+        x = Game.getInstance().c.g.getX()+offsetX+40;
+        y = Game.getInstance().c.g.getY()+offsetY+40;
+        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
     }

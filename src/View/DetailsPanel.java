@@ -3,6 +3,7 @@ package View;
 import Controller.Controller;
 import Model.Asteroid;
 import Model.DestinationObject;
+import Model.Game;
 import Model.Material;
 
 import javax.swing.*;
@@ -16,25 +17,25 @@ public class DetailsPanel extends JPanel {
     JPanel buildpanel=new JPanel();
     JPanel materialpanel=new JPanel();
     JPanel movepanel=new JPanel();
-    final Controller controller;
+   // final Controller controller;
     CommandPanel com;
     ArrayList<JPanel> panels = new ArrayList<>();
     JList<String> list;
 
-    DetailsPanel(Controller c, GUI g){
-        panels.add(buildpanel);
-        panels.add(materialpanel);
-        panels.add(movepanel);
-        com = new CommandPanel(c,g);
-        controller = c;
+    DetailsPanel( ){
+       // panels.add(buildpanel);
+       // panels.add(materialpanel);
+       // panels.add(movepanel);
+       // com = new CommandPanel(c,g);
+
 
         this.setOpaque(true);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(g.width/2,200));
+        this.setPreferredSize(new Dimension(Game.getInstance().c.g.width/2,200));
         this.setBackground(Color.RED);
 
         list = new JList<String >();
-        list.setPreferredSize(new Dimension(g.width/4,100));
+        list.setPreferredSize(new Dimension(Game.getInstance().c.g.width/4,100));
 
         this.add(new JScrollPane(list),BorderLayout.CENTER);
 
@@ -51,7 +52,7 @@ public class DetailsPanel extends JPanel {
         this.removeAll();
 
         list = new JList<>(vector);
-        list.addListSelectionListener(new buildListener(list.getSelectedIndex() ,controller));
+        list.addListSelectionListener(new buildListener(list.getSelectedIndex() , Game.getInstance().c));
         list.setPreferredSize(new Dimension(g.width/4,100));
         this.add(new JScrollPane(list),BorderLayout.CENTER);
 
@@ -63,7 +64,7 @@ public class DetailsPanel extends JPanel {
         this.removeAll();
 
         list = new JList<>(vector);
-        list.addListSelectionListener(new mineListener(controller));
+        list.addListSelectionListener(new mineListener(Game.getInstance().c));
         list.setPreferredSize(new Dimension(g.width/4,100));
         this.add(new JScrollPane(list),BorderLayout.CENTER);
 
@@ -75,7 +76,7 @@ public class DetailsPanel extends JPanel {
 
         list = new JList<>(vector);
         list.setPreferredSize(new Dimension(g.width/4,100));
-        list.addListSelectionListener(new digListener(controller));
+        list.addListSelectionListener(new digListener(Game.getInstance().c));
         this.add(new JScrollPane(list),BorderLayout.CENTER);
 
         this.updateUI();
@@ -98,7 +99,7 @@ public class DetailsPanel extends JPanel {
 
         list = new JList<>(vector);
         list.setPreferredSize(new Dimension(g.width/4,100));
-        list.addListSelectionListener(new moveListener(controller, list.getSelectedIndex()));
+        list.addListSelectionListener(new moveListener(Game.getInstance().c, list.getSelectedIndex()));
         this.add(new JScrollPane(list),BorderLayout.CENTER);
 
         this.updateUI();

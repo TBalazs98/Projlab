@@ -97,8 +97,8 @@ public class GUI extends JFrame implements ActionListener {
         gamespace = new JLayeredPane();
 
         gamespace.setPreferredSize(new Dimension(width,height-200));
-         dp = new DetailsPanel(c,this);
-         cp = new CommandPanel(c,this);
+         dp = new DetailsPanel();
+         cp = new CommandPanel();
 
         JPanel controls = new JPanel();
         controls.setBackground(new Color(0,0,0,64));
@@ -133,10 +133,12 @@ public class GUI extends JFrame implements ActionListener {
         sv.setCompnum(10);
         settlers.add(sv);
 
+        //asteroids.get(0).highlight();
+
         for(AsteroidView i : asteroids){
             x = i.getX();
             y = i.getY();
-            i.Draw(this);
+            i.Draw();
         }
 
         //gamespace.repaint();
@@ -278,7 +280,7 @@ public class GUI extends JFrame implements ActionListener {
 
 
     public void addSettler(Settler s ){
-        SettlerView sw = new SettlerView(s,this);
+        SettlerView sw = new SettlerView(s);
         settlers.add(sw);
         drawables.add(sw);
     }

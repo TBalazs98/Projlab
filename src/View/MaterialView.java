@@ -61,10 +61,11 @@ public class MaterialView implements IDrawable {
         this.y = y;
     }
 
-    public void Draw(GUI g){
+    public void Draw(){
 
-        g.gamespace.add(l);
-        g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
+        Game.getInstance().c.g.gamespace.add(l);
+        //Game.getInstance().c.g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
+        l.setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
 
     }
 }

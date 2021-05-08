@@ -18,15 +18,15 @@ public class SettlerView implements IDrawable{
     private int compnum;
     private Random rnd = new Random();
 
-    SettlerView(Settler s,GUI g){
-        this.s=s;
-        p=new ImageIcon("Files/Pictures/sus.png");
-        l=new JLabel(p);
-       // this.x = 50;
-        //this.y = 50;
-        //MoveToAsteroidListener(l,this,g);
+//    SettlerView(Settler s){
+//        this.s=s;
+//        p=new ImageIcon("Files/Pictures/sus.png");
+//        l=new JLabel(p);
+//       // this.x = 50;
+//        //this.y = 50;
+//        //MoveToAsteroidListener(l,this,g);
 
-    }
+    //}
 
     SettlerView(Settler _s) {
         p=new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
@@ -39,13 +39,14 @@ public class SettlerView implements IDrawable{
 //        this.y = y;
 //    }
 
-    public void Draw(GUI g){
+    public void Draw(){
         int offsetX = rnd.nextInt(20);
         int offsetY = rnd.nextInt(20);
-        x = g.getX()+offsetX+10;
-        y = g.getY()+offsetY+10;
-        g.gamespace.add(l);
-        g.gamespace.setComponentZOrder(l, 0);
+        x = Game.getInstance().c.g.getX()+offsetX+10;
+        y = Game.getInstance().c.g.getY()+offsetY+10;
+        //g.gamespace.add(l);
+        Game.getInstance().c.g.gamespace.add(l);
+        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
         //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
        // g.gamespace.getComponent(index).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());

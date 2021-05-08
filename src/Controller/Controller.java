@@ -10,9 +10,8 @@ public  class Controller {
     public static ArrayList<Settler> settlers=new ArrayList<>();
 
 
-    public int command;
+    public int command=4;
     public int selectedSettler = 0;
-
 
     public Controller(){
        // InitViews(g);
@@ -33,6 +32,15 @@ public  class Controller {
     public void updateCommand(int commandindex){
         command = commandindex;
         System.out.println(command);
+        //g.dp.Update(command);
+    }
+
+    public void switchCommand(){
+        System.out.println("switchcommand");
+        switch (command){
+            case 4:
+                //g.GetAsteroidView().get(0).highlight(g);
+        }
     }
 
     public int getCurrentCommand(){return command;}

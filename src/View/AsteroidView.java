@@ -15,6 +15,7 @@ public  class AsteroidView implements IDrawable {
     private JLabel l;
     private int x,y;
     private int compnum = 0;
+    private boolean highlight=false;
 
 
     public AsteroidView(Asteroid a){
@@ -57,18 +58,21 @@ public  class AsteroidView implements IDrawable {
     public int getY() {
         return y;
     }
-    public void Draw(GUI g) {
+    public void Draw() {
         //as.setPreferredSize(new Dimension(20,20));
         //g.gamespace.setLocation(20,20);
 
         //as.setLocation(20,20);
 
-        g.gamespace.add(l);
+        Game.getInstance().c.g.gamespace.add(l);
         //g.gamespace.setComponentZOrder(l, 1);//BIGNONO
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         CharacterView cv = new CharacterView(asteroid.getCharacters());
-        cv.Draw(g);
+        cv.Draw();
+       // highlight(g);
+
+
 
     }
     public void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
@@ -82,6 +86,25 @@ public  class AsteroidView implements IDrawable {
             }
         });
     }
+
+    public void highlight(boolean b,GUI g){
+        highlight=b;
+        setImage();
+
+
+    }
+    private void setImage(){
+        if(highlight==true) {
+            int scaling = 130;
+            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+            l.setIcon(p);
+        }else {
+            int scaling = 130;
+            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+            l.setIcon(p);
+        }
+    }
+
 
 
 

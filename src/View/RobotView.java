@@ -1,5 +1,6 @@
 package View;
 
+import Model.Game;
 import Model.Robot;
 import Model.UFO;
 import com.sun.source.tree.IdentifierTree;
@@ -23,14 +24,14 @@ public class RobotView implements IDrawable {
     }
 
     @Override
-    public void Draw(GUI g) {
+    public void Draw() {
         int offsetX = rnd.nextInt(20);
         int offsetY = rnd.nextInt(20);
-        x = g.getX()+offsetX+60;
-        y = g.getY()+offsetY+60;
+        x = Game.getInstance().c.g.getX()+offsetX+60;
+        y = Game.getInstance().c.g.getY()+offsetY+60;
 
-        g.gamespace.add(l);
-        g.gamespace.setComponentZOrder(l, 0);
+        Game.getInstance().c.g.gamespace.add(l);
+        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
 
