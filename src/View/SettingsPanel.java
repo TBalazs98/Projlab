@@ -1,9 +1,13 @@
 package View;
 
+import Controller.Main;
+import Model.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class SettingsPanel extends JPanel {
@@ -19,7 +23,8 @@ public class SettingsPanel extends JPanel {
     private ChoserPanel portal;
     private JComboBox randbox;
     private int asteroidnumber = 12;
-
+    private JButton save;
+    private ArrayList<Integer> data = new ArrayList<>();
 
 
     public SettingsPanel(GUI g){
@@ -86,7 +91,7 @@ public class SettingsPanel extends JPanel {
         this.add(random);
 
 
-        JButton save = new JButton("Save settings");
+        save = new JButton("Save settings");
         save.addActionListener(new setListener());
         save.setBorder(BorderFactory.createEmptyBorder(0, g.width/16, 0, g.width/16));
         this.add(save);
@@ -118,7 +123,7 @@ public class SettingsPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(asteroid.getSelected());
+              /*System.out.println(asteroid.getSelected());
             System.out.println(settler.getSelected());
             System.out.println(robot.getSelected());
             System.out.println(ufo.getSelected());
@@ -128,6 +133,23 @@ public class SettingsPanel extends JPanel {
             System.out.println(uran.getSelected());
             System.out.println(portal.getSelected());
             System.out.println(randbox.getSelectedItem());
+            */
+            if(e.getSource() == save){
+                Game.getInstance().c.g.getContentPane().removeAll();
+                Game.getInstance().c.g.DrawMenu();
+                Game.getInstance().c.g.repaint();
+
+                data.add((Integer) iron.getSelected());
+                data.add((Integer) coal.getSelected());
+                data.add((Integer) uran.getSelected());
+                data.add((Integer) water.getSelected());
+                data.add((Integer) asteroid.getSelected());
+                data.add((Integer) portal.getSelected());
+                data.add((Integer) settler.getSelected());
+                data.add((Integer) robot.getSelected());
+                data.add((Integer) ufo.getSelected());
+                data.add(((Boolean)randbox.getSelectedItem() ? 1 : 0));
+            }
 
         }
     }
@@ -136,5 +158,8 @@ public class SettingsPanel extends JPanel {
         return asteroid;
     }
 
+    public ArrayList<Integer> GetCreatecount(){
+        return this.data;
+    }
 
 }

@@ -2,9 +2,8 @@ package View;
 
 import javax.swing.*;
 import Controller.*;
-import Model.Asteroid;
-import Model.Settler;
-import Model.UFO;
+import Model.*;
+import Model.Robot;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,8 +20,9 @@ public class GUI extends JFrame implements ActionListener {
     public JLayeredPane gamespace;
     public DetailsPanel dp;
     public CommandPanel cp ;/*= new CommandPanel(this);*/
-   public Controller gc;
-   private int compnum;
+    public Controller gc;
+    private int compnum;
+    public SettingsPanel settingspanel;
 
     private ArrayList<IDrawable> drawables;
     private ArrayList<AsteroidView> asteroids = new ArrayList<>();
@@ -193,14 +193,15 @@ public class GUI extends JFrame implements ActionListener {
         layout.setVgap(this.height/12);
         this.setLayout(layout);
 
-        SettingsPanel settings = new SettingsPanel(this);
+       settingspanel = new SettingsPanel(this);
 
-        this.add(settings);
+        this.add(settingspanel);
         this.setJMenuBar(bar);
         this.setVisible(true);
     }
 
     public void  DrawMenu(){
+        this.setLayout(new FlowLayout());
         JPanel  title, sg, lg, st, ex;
 
         this.setPreferredSize(new Dimension(getWidth(),getHeight()));
@@ -271,6 +272,7 @@ public class GUI extends JFrame implements ActionListener {
         if(e.getSource() == startgame){
             this.getContentPane().removeAll();
             this.repaint();
+            //this.CreateCustomMap();
             DrawAll();
         } else if (e.getSource() == loadgame){
             this.getContentPane().removeAll();
@@ -322,6 +324,157 @@ public class GUI extends JFrame implements ActionListener {
         chars.add(new Settler());
         chars.add(new Model.Robot());
 
+
+    }
+    public void CreateCustomMap(){
+        ArrayList<Integer> datas = settingspanel.GetCreatecount();
+        int I = datas.get(0);
+        int C = datas.get(1);
+        int Ra = datas.get(2);
+        int W = datas.get(3);
+        int A = datas.get(4);
+        int T = datas.get(5);
+        int S = datas.get(6);
+        int R = datas.get(7);
+        int U = datas.get(8);
+
+
+        /**
+         * Nyersanyagok leterhozasa
+         */
+
+        for(int i = 0; i< I;i++){
+            Material m = new Material();
+            m.setName(NormalMaterialName.IRON);
+            Main.materials.add(m);
+        }
+        for(int i = 0; i< C;i++){
+            Material m = new Material();
+            m.setName(NormalMaterialName.COAL);
+            Main.materials.add(m);
+        }
+        for(int i = 0; i< Ra;i++){
+            RadioactiveMaterial rm = new RadioactiveMaterial();
+            rm.setName(RadioactiveMaterialName.URAN);
+            Main.materials.add(rm);
+        }
+        for(int i = 0; i< W;i++){
+            SublimableMaterial sm = new SublimableMaterial();
+            sm.setName(SublimableMaterialName.ICEWATER);
+            Main.materials.add(sm);
+        }
+
+        /**
+         * Nyersanyag END.
+         */
+
+
+        /**
+         * Aszteroidak letrehozas
+         */
+        for(int i = 0; i< A;i++){
+            Asteroid a = new Asteroid();
+            Main.asteroids.add(a);
+        }
+
+        for(int i = 0; i < A;i++){
+            Main.asteroids.get(i).AddMaterial(Main.materials.get(i));
+            Main.asteroids.get(i).SetEmpty(false);
+        }
+
+        for(int i = 0; i < A;i++){
+            for(int j = 0; j < A%3;i++){
+                Random rand = new Random();
+                int rand_int = rand.nextInt(Main.asteroids.size());
+                int db = 0;
+                for (DestinationObject o : Main.asteroids.get(i).GetNeighbours()) {
+                    if (o == Main.asteroids.get(rand_int)) {
+                        db++;
+                    }
+                }
+                if(db == 0)
+                    Main.asteroids.get(i).AddNeighbour(Main.asteroids.get(rand_int));
+            }
+        }
+        /**
+         * Aszteroida END.
+         */
+
+
+        /**
+         * TeleportGate letrehozas, par beallitas es elhelyezes aszteroidan
+         */
+
+        for(int i = 0; i < T;i++){
+            TeleportGate t = new TeleportGate();
+            Main.teleportgates.add(t);
+        }
+
+        if(T % 2 == 0){
+            Integer i = 0;
+            while (i < T){
+                Main.teleportgates.get(i).setPair(Main.teleportgates.get(i++));
+                Main.teleportgates.get(i).setPair(Main.teleportgates.get(i-1));
+                i++;
+            }
+        }
+        else{
+            Integer i = 0;
+            while (i < T-1){
+                Main.teleportgates.get(i).setPair(Main.teleportgates.get(i++));
+                Main.teleportgates.get(i).setPair(Main.teleportgates.get(i-1));
+                i++;
+            }
+        }
+
+        for(int i = 0; i < T;i++)
+            while (Main.teleportgates.get(i).GetAsteroid() != null){
+                Random rand = new Random();
+                int rand_int = rand.nextInt(A);
+                if (Main.teleportgates.get(i).GetPair().GetAsteroid() != Main.asteroids.get(rand_int))
+                    Main.teleportgates.get(i).setAsteroid(Main.asteroids.get(rand_int));
+          }
+        /**
+         * TeleportGate END.
+         */
+
+        /**
+         * Settler letrehozas, lehejezes
+         */
+        for(int i = 0; i < S;i++){
+            Settler s = new Settler();
+            Random rand = new Random();
+            int rand_int = rand.nextInt(S);
+            s.setAsteroid(Main.asteroids.get(rand_int));
+            Main.asteroids.get(rand_int).setCharacter(s);
+            Main.settlers.add(s);
+        }
+
+        /**
+         * Robot letrehozas, lehejezes
+         */
+        for(int i = 0; i < R;i++){
+            Model.Robot r = new Robot();
+            Random rand = new Random();
+            int rand_int = rand.nextInt(R);
+            r.setAsteroid(Main.asteroids.get(rand_int));
+            Main.asteroids.get(rand_int).setCharacter(r);
+            Main.robots.add(r);
+        }
+        /**
+         * UFO letrehozas, lehejezes
+         */
+        for(int i = 0; i < U;i++){
+            UFO u = new UFO();
+            Random rand = new Random();
+            int rand_int = rand.nextInt(U);
+            u.setAsteroid(Main.asteroids.get(rand_int));
+            Main.asteroids.get(rand_int).setCharacter(u);
+            Main.ufos.add(u);
+        }
+
+        //lehet nem jó h melyik mi
+        Main.Randomize = ((datas.get(9) == 0) ? true : false);
 
     }
 }
