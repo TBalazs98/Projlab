@@ -11,9 +11,6 @@ public class GameData extends AbstractTableModel {
     private List<Integer> games;
 
     public GameData(){
-
-
-
         try {
             games = new ArrayList<Integer>();
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Files/Saved/savedgames.txt"));
@@ -22,7 +19,6 @@ public class GameData extends AbstractTableModel {
         } catch(Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
 

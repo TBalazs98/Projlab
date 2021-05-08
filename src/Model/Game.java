@@ -3,6 +3,7 @@ package Model;
 import Controller.Controller;
 import Controller.InputManager;
 import Controller.Main;
+import View.SettlerView;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,8 @@ import java.util.ArrayList;
 public class Game {
     public Controller c ;
     public boolean lostgame = false;
-
+    private ArrayList<Settler> settlers = new ArrayList<Settler>();
+    private Settler currentSettler;
     /**
      *Privat konstruktor.
      */
@@ -30,6 +32,7 @@ public class Game {
      */
     public void StartGame() {
         c=new Controller();
+        settlers = Main.settlers;
     }
 
     /**
@@ -70,9 +73,22 @@ public class Game {
     public void NextRound() {
         //Logger.getInstance().printCommandCall(this);
 
-        if(Main.Randomize == true)
+        if(Main.Randomize == true) {
             for(Steppable s: steppables)
                 s.Step();
+        }
+        //for(int i = 0; i < settlers.size(); i++) {
+            currentSettler = settlers.get(0);
+            SettlerView csv = null;
+            for(int j = 0; j < c.g.settlers.size(); j++) {
+                if(c.g.settlers.get(j).getSettler() == currentSettler) {
+                    csv = c.g.settlers.get(j);
+                    csv.Highlight();
+                }
+            }
+            //do something();
+        //}
+
 
         //Logger.getInstance().printReturnCommand();
     }

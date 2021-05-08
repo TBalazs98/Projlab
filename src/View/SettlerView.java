@@ -18,6 +18,7 @@ public class SettlerView implements IDrawable{
     private int compnum;
     private Random rnd = new Random();
     boolean currentlySelected = false;
+    private boolean highlighted = false;
 
 //    SettlerView(Settler s){
 //        this.s=s;
@@ -55,6 +56,22 @@ public class SettlerView implements IDrawable{
         //System.out.println(g.GetAsteroidView().indexOf(s.getAsteroid()));
         //index = Arrays.asList(container.getComponents()).indexOf(container.getComponentAt(x, y));
 
+    }
+
+    public void Highlight() {
+        highlighted = !highlighted;
+        //Game.getInstance().c.g.gamespace.remove(l);
+        if(highlighted) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selectedsus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+            l.setIcon(p);
+        }
+        else {
+            p=new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+            l.setIcon(p);
+        }
+        //Game.getInstance().c.g.gamespace.add(l);
+        //Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
+        //l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
     }
 
     public static void MoveToAsteroidListener(JLabel l, SettlerView sv,GUI g){

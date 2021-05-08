@@ -151,6 +151,7 @@ public class Main {
 
 
         game.StartGame();
+        //game.NextRound();
 
     }
 

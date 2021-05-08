@@ -17,7 +17,6 @@ public class CharacterView implements IDrawable{
     CharacterView(ArrayList<Character> ch) {
         chars = ch;
 
-
     }
 
     public void Draw() {
@@ -39,7 +38,16 @@ public class CharacterView implements IDrawable{
     }
 
     private void Call(Settler s){
-        SettlerView sv = new SettlerView(s);
+        SettlerView sv = null;
+        for(int i = 0; i < g.settlers.size(); i++) {
+            if(g.settlers.get(i).getSettler() == s) {
+                sv = g.settlers.get(i);
+            }
+        }
+        if(sv == null) {
+            sv = new SettlerView(s);
+            g.settlers.add(sv);
+        }
        // sv.setCompnum(compnum);
 
         sv.Draw();

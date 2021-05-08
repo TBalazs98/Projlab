@@ -26,7 +26,7 @@ public class GUI extends JFrame implements ActionListener {
 
     private ArrayList<IDrawable> drawables;
     private ArrayList<AsteroidView> asteroids = new ArrayList<>();
-    private  ArrayList<SettlerView> settlers=new ArrayList<>();
+    public  ArrayList<SettlerView> settlers=new ArrayList<>();
     private Coordinates[][] coords;
     private int coordswidth;
     private int coordsheight;
@@ -147,7 +147,7 @@ public class GUI extends JFrame implements ActionListener {
             asteroids.get(i).Draw();
         }
 
-
+        Game.getInstance().NextRound();
 //        for(IDrawable i : drawables){
 //            i.Draw();
 //        }
