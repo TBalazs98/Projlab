@@ -10,7 +10,9 @@ public  class Controller {
     public static ArrayList<Settler> settlers=new ArrayList<>();
 
 
-    int command;
+    public int command;
+    public int selectedSettler = 0;
+
 
     public Controller(){
        // InitViews(g);

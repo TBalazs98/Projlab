@@ -164,7 +164,7 @@ public class GUI extends JFrame implements ActionListener {
         this.setLayout(layout);
 
         LoadPanel loadpanel = new LoadPanel(this);
-        //loadpanel.setBackground(new Color(0,0,0,64));
+
         this.add(loadpanel);
 
         this.setJMenuBar(bar);
@@ -311,5 +311,7 @@ public class GUI extends JFrame implements ActionListener {
         chars.add(new Model.Robot());
         chars.add(new Settler());
         chars.add(new Model.Robot());
+
+
     }
 }

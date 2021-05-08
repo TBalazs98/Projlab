@@ -87,7 +87,6 @@ public class Main {
 //            System.out.println(asd.get(i));
 //        }
 
-
         //ProtoTest.menu();
         /*Asteroid a1 = new Asteroid();
         Asteroid a2 = new Asteroid();
