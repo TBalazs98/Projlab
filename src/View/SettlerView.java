@@ -29,7 +29,7 @@ public class SettlerView implements IDrawable{
 
     //}
 
-    SettlerView(Settler _s) {
+    public SettlerView(Settler _s) {
         p=new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         l=new JLabel(p);
         s = _s;

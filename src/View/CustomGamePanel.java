@@ -140,6 +140,7 @@ public class CustomGamePanel extends JPanel {
                 data.add((Integer) robot.getSelected());
                 data.add((Integer) ufo.getSelected());
                 data.add((Boolean)randbox.getSelectedItem() ? 1 : 0);
+                Game.getInstance().c.g.startgame.setEnabled(true);
             }
         }
     }

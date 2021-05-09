@@ -1,5 +1,7 @@
 package View;
 
+import Model.Game;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,6 +41,9 @@ public class MenuBar extends JMenuBar {
             //TODO jatek mentes
             gui.getContentPane().removeAll();
             gui.DrawMenu();
+            Game.getInstance().c.g.startgame.setEnabled(true);
+            gui.repaint();
+            gui.validate();
         }
     }
 
