@@ -3,12 +3,12 @@ package View;
 import javax.swing.*;
 import Controller.*;
 import Model.Asteroid;
+import Model.Game;
 import Model.Settler;
 import Model.UFO;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -142,9 +142,14 @@ public class GUI extends JFrame implements ActionListener {
             coordinates.toggle();
 
             asteroids.get(i).SetCoords(coordinates.getX(),coordinates.getY());
-            x = asteroids.get(i).getX();
-            y = asteroids.get(i).getY();
+            //x = asteroids.get(i).getX();
+            //y = asteroids.get(i).getY();
             asteroids.get(i).Draw();
+        }
+        for(int i=0; i<settlers.size();i++){
+            settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+            System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+            settlers.get(i).Draw();
         }
 
 
@@ -152,7 +157,7 @@ public class GUI extends JFrame implements ActionListener {
 //            i.Draw();
 //        }
 
-
+        c.printxy();
 //region buzisagok
         this.add(dp, BorderLayout.PAGE_END);
         controls.add(cp);
@@ -164,6 +169,30 @@ public class GUI extends JFrame implements ActionListener {
         this.setVisible(true);
 //endregion
     }
+
+    public AsteroidView getAsteroidViewByAsteroid(Asteroid a){
+        for (int i=0; i<this.asteroids.size();i++){
+            if(this.asteroids.get(i).getAsteroid()==a){
+               // System.out.println("fasz");
+                return this.asteroids.get(i);
+            }
+
+        }
+        return null;
+    }
+
+    public SettlerView getSettlerViewBySettler(Settler s){
+        for (int i=0; i<settlers.size();i++){
+            if(settlers.get(i).getSettler()==s){
+                //System.out.println("fasz");
+                return settlers.get(i);
+            }
+
+        }
+        return null;
+    }
+
+
 
     public void Update(){
         this.setPreferredSize(new Dimension(1200,600));
@@ -270,8 +299,9 @@ public class GUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == startgame){
             this.getContentPane().removeAll();
-            this.repaint();
             DrawAll();
+            this.repaint();
+            this.validate();
         } else if (e.getSource() == loadgame){
             this.getContentPane().removeAll();
             this.repaint();

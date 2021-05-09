@@ -110,37 +110,51 @@ public class Main {
         a.SetEmpty(false);
         SublimableMaterial sm = new SublimableMaterial();
         a.SetMaterial(sm);
-        a.setLayer(4);
+        a.setLayer(11);
         a.SetSunProximityManual(true);
 
 
         Asteroid a2 = new Asteroid();
         a2.SetEmpty(false);
         SublimableMaterial sm2 = new SublimableMaterial();
-        a.SetMaterial(sm2);
-        a.setLayer(5);
-        a.SetSunProximityManual(true);
+        a2.SetMaterial(sm2);
+        a2.setLayer(5);
+        a2.SetSunProximityManual(true);
 
 
 
         Asteroid a3 = new Asteroid();
         a3.SetEmpty(false);
         SublimableMaterial sm3 = new SublimableMaterial();
-        a.SetMaterial(sm3);
-        a.setLayer(2);
-        a.SetSunProximityManual(true);
+        a3.SetMaterial(sm3);
+        a3.setLayer(1);
+        a3.SetSunProximityManual(true);
 
         a3.setNeighbour(a2);
         a3.setNeighbour(a);
+        a2.setNeighbour(a3);
+        a.setNeighbour(a3);
+
+//        a3.AddNeighbour(a2);
+//        a3.AddNeighbour(a);
+//        a2.AddNeighbour(a3);
+//        a.AddNeighbour(a3);
+
+
 
 
         Settler s = new Settler();
         s.setAsteroid(a);
         a.setCharacter(s);
 
+
         Settler s2 = new Settler();
         s2.setAsteroid(a2);
         a2.setCharacter(s2);
+
+        Settler s3 = new Settler();
+        s3.setAsteroid(a3);
+        a3.setCharacter(s3);
 
         asteroids.add(a);
         asteroids.add(a2);
@@ -148,9 +162,11 @@ public class Main {
 
         settlers.add(s);
         settlers.add(s2);
+        settlers.add(s3);
 
 
         game.StartGame();
+        //game.c.isNeighbour(s,a2);
 
     }
 

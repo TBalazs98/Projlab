@@ -42,6 +42,7 @@ public  class AsteroidView implements IDrawable {
             as.setOpaque(false);
 */
         //}
+
         getAsteroidCoordsListener(l,this);
 
 
@@ -68,8 +69,8 @@ public  class AsteroidView implements IDrawable {
         //g.gamespace.setComponentZOrder(l, 1);//BIGNONO
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-        CharacterView cv = new CharacterView(asteroid.getCharacters());
-        cv.Draw();
+       // CharacterView cv = new CharacterView(asteroid.getCharacters());
+        //cv.Draw();
        // highlight(g);
 
 
@@ -81,7 +82,8 @@ public  class AsteroidView implements IDrawable {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("x = "+av.x+ "y = " + av.y);
-               // GuiController.moveSettler(av.x,av.y);
+               Game.getInstance().c.mx=av.x;
+               Game.getInstance().c.mx=av.y;
 
             }
         });
@@ -90,9 +92,8 @@ public  class AsteroidView implements IDrawable {
     public void highlight(boolean b,GUI g){
         highlight=b;
         setImage();
-
-
     }
+
     private void setImage(){
         if(highlight==true) {
             int scaling = 130;
@@ -105,10 +106,11 @@ public  class AsteroidView implements IDrawable {
         }
     }
 
-
+    public Asteroid getAsteroid(){return asteroid;}
 
 
     public void setCompNum(int n) {
         compnum = n;
     }
+
 }

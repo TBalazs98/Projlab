@@ -36,6 +36,10 @@ public class RobotView implements IDrawable {
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
 
     }
+    public void SetCoords(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
 
     public void setCompnum(int n) {
         compnum = n;

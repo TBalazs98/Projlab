@@ -17,7 +17,7 @@ public class SettlerView implements IDrawable{
     private int x,y;
     private int compnum;
     private Random rnd = new Random();
-    boolean currentlySelected = false;
+    boolean currentlySelected =false;
 
 //    SettlerView(Settler s){
 //        this.s=s;
@@ -35,16 +35,16 @@ public class SettlerView implements IDrawable{
         s = _s;
     }
 
-//    public void SetCoords(int x, int y){
-//        this.x = x;
-//        this.y = y;
-//    }
+    public void SetCoords(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
 
     public void Draw(){
         int offsetX = rnd.nextInt(20);
         int offsetY = rnd.nextInt(20);
-        x = Game.getInstance().c.g.getX()+offsetX+10;
-        y = Game.getInstance().c.g.getY()+offsetY+10;
+       // x = Game.getInstance().c.g.getX()+offsetX+10;
+        //y = Game.getInstance().c.g.getY()+offsetY+10;
         //g.gamespace.add(l);
         Game.getInstance().c.g.gamespace.add(l);
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
@@ -73,12 +73,28 @@ public class SettlerView implements IDrawable{
 
     public void step(){
 
-
-
     }
+
     public Settler getSettler(){return this.s;}
 
-    public void setCompnum(int n) {
-        compnum = n;
+    public void SelectHighlighted(boolean b){
+        currentlySelected = b;
+        SetPicture();
     }
+    public void SetPicture(){
+        if(this.currentlySelected==true){
+           Icon pp= new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+            l.setIcon(pp);
+
+
+        }else {
+            p= new ImageIcon(new ImageIcon("Files/Pictures/placebtn.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+            l.setIcon(p);
+
+        }
+
+
+    }
+
+
 }

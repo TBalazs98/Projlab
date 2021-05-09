@@ -36,6 +36,7 @@ public class CommandPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.getInstance().c.stepsettlers();
+                //System.out.println("asd");
             }
         });
 
@@ -84,10 +85,10 @@ public class CommandPanel extends JPanel {
                     else  if(CurrentCommand == 3){
                         Vector<Material> vector = new Vector<>();
 
-                        for(Material i: Controller.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials()){
-                            vector.add(i);
-                            System.out.println(vector.size());
-                        }
+//                        for(Material i: Controller.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials()){
+//          #TODO                  vector.add(i);
+//                            System.out.println(vector.size());
+//                        }
                         Game.getInstance().c.g.dp.placeDetails(vector, Game.getInstance().c.g);
                         Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
                     }
@@ -95,11 +96,11 @@ public class CommandPanel extends JPanel {
                         Vector<Integer> vector = new Vector<>();
                         int id = 0;
 
-                        for(DestinationObject i: Controller.settlers.get(Game.getInstance().c.selectedSettler).getAsteroid().GetNeighbours()){
-                            vector.add((id));
-                            id++;
-                            System.out.println(vector.size());
-                        }
+//                        for(DestinationObject i: Controller.settlers.get(Game.getInstance().c.selectedSettler).getAsteroid().GetNeighbours()){
+//          #TODO                  vector.add((id));
+//                            id++;
+//                            System.out.println(vector.size());
+//                        }
                         Game.getInstance().c.g.dp.moveDetails(vector, Game.getInstance().c.g);
                         Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
                     }

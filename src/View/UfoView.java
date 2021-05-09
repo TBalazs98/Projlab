@@ -21,6 +21,10 @@ public class UfoView implements IDrawable{
         l=new JLabel(p);
     }
 
+    public void SetCoords(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
     @Override
     public void Draw() {
         Game.getInstance().c.g.gamespace.add(l);
