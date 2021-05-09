@@ -73,24 +73,24 @@ public class Game {
     public void NextRound() {
         //Logger.getInstance().printCommandCall(this);
 
-        if(Main.Randomize == true) {
-            for(Steppable s: steppables)
-                s.Step();
-        }
-        //for(int i = 0; i < settlers.size(); i++) {
-            currentSettler = settlers.get(0);
-            SettlerView csv = null;
-            for(int j = 0; j < c.g.settlers.size(); j++) {
-                if(c.g.settlers.get(j).getSettler() == currentSettler) {
-                    csv = c.g.settlers.get(j);
-                    csv.Highlight();
-                }
-            }
-            //do something();
-        //}
-
-
-        //Logger.getInstance().printReturnCommand();
+//        if(Main.Randomize == true) {
+//            for(Steppable s: steppables)
+//                s.Step();
+//        }
+//        //for(int i = 0; i < settlers.size(); i++) {
+//            currentSettler = settlers.get(0);
+//            SettlerView csv = null;
+//            for(int j = 0; j < c.g.settlers.size(); j++) {
+//                if(c.g.settlers.get(j).getSettler() == currentSettler) {
+//                    csv = c.g.settlers.get(j);
+//                    csv.Highlight();
+//                }
+//            }
+//            //do something();
+//        //}
+//
+//
+//        //Logger.getInstance().printReturnCommand();
     }
 
     public void AddSteppable(Object s){

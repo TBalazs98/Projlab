@@ -492,7 +492,7 @@ public class GUI extends JFrame implements ActionListener {
         //Robot letrehozas, lehejezes
         if(R > 0) {
             for (int i = 0; i < R; i++) {
-                Model.Robot r = new Robot();
+                Model.Robot r = new Model.Robot();
                 Random rand = new Random();
                 int rand_int = rand.nextInt(A);
                 r.setAsteroid(Main.asteroids.get(rand_int));
