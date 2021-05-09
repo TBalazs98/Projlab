@@ -7,14 +7,13 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-public class DetailsPanel extends JPanel implements ActionListener {
+public class DetailsPanel extends JPanel{
     JPanel buildpanel=new JPanel();
     JPanel materialpanel=new JPanel();
     JPanel movepanel=new JPanel();
@@ -24,16 +23,13 @@ public class DetailsPanel extends JPanel implements ActionListener {
     JList<String> list;
     private JButton dpactionDone = new JButton("DOIT");
     private ArrayList<JButton> materials = new ArrayList<>();
+    private ArrayList<JButton> gates = new ArrayList<>();
+    private ArrayList<TeleportGate> tgate = new ArrayList<>();
     private ArrayList<Material> mat = new ArrayList<>();
     int db = 0, index = -1;
+    AsteroidView asd;
 
     DetailsPanel( ){
-       // panels.add(buildpanel);
-       // panels.add(materialpanel);
-       // panels.add(movepanel);
-       // com = new CommandPanel(c,g);
-
-
         this.setOpaque(true);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(Game.getInstance().c.g.width/2,200));
@@ -43,36 +39,94 @@ public class DetailsPanel extends JPanel implements ActionListener {
         list.setPreferredSize(new Dimension(Game.getInstance().c.g.width/4,100));
 
         this.add(new JScrollPane(list),BorderLayout.CENTER);
-/*
-         //this.add(panels.get(c.getCurrentCommand()));
-          */
+
 
     }
 
 
 
 
-    public void moveDetails(Vector vector, GUI g){
+    public void moveDetails(GUI g){
         this.removeAll();
+        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
+        int set;
+        if (Game.getInstance().c.selectedSettler == (Main.settlers.size())-2)
+            set = 0;
+        else
+            set = Game.getInstance().c.selectedSettler + 1;
+
+        System.out.println("MOVE" + set);
+        Game.getInstance().c.g.gamespace.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                System.out.println("dfdfd");
+
+//                for(AsteroidView av : Game.getInstance().c.g.GetAsteroidView()){
+//                    System.out.println("ASTEROIDV: " + av.getX()+ " : " + av.getY() + "CLIK: " +  e.getX() + " : " + e.getY() );
+//                    if((e.getX() == av.getX()) && ( e.getY() == av.getY())){
+//                        asd = av;
+//                        System.out.println("HAPPAY??");
+//                    }
 //
+//                }
+//                Main.settlers.get(set).Move(Main.settlers.get(set).getAsteroid().GetNeighbourIndex(asd.getAsteroid()));
+////                Game.getInstance().c.g.
+////                Main.settlers.get(set).Move(Main.asteroids.indexOf(asd.getAsteroid()));
+//
+//                Game.getInstance().c.g.gamespace.repaint();
+//                Game.getInstance().c.g.gamespace.validate();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+                for(AsteroidView av : Game.getInstance().c.g.GetAsteroidView()){
+                    System.out.println("ASTEROIDV: " + av.getX()+ " : " + av.getY() + "CLIK: " +  e.getX() + " : " + e.getY() );
+                    if((e.getComponent().getX() == av.getX()) && ( e.getComponent().getY() == av.getY())){
+                        asd = av;
+                        System.out.println("HAPPAY??");
+                    }
+
+                }
+                Main.settlers.get(set).Move(Main.settlers.get(set).getAsteroid().GetNeighbourIndex(asd.getAsteroid()));
+//                Game.getInstance().c.g.
+//                Main.settlers.get(set).Move(Main.asteroids.indexOf(asd.getAsteroid()));
+
+                Game.getInstance().c.g.gamespace.repaint();
+                Game.getInstance().c.g.gamespace.validate();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 //        list = new JList<>(vector);
 //        list.setPreferredSize(new Dimension(g.width/4,100));
 //        list.addListSelectionListener(new moveListener(Game.getInstance().c, list.getSelectedIndex()));
 //        this.add(new JScrollPane(list),BorderLayout.CENTER);
 
-        this.repaint();
-        this.validate();
+//        Main.settlers.get(set).Move();
 
     }
 
 
-    public void drillDetails(Vector vector, GUI g){
+    public void drillDetails(GUI g){
         this.removeAll();
 
-        list = new JList<>(vector);
-        list.setPreferredSize(new Dimension(g.width/4,100));
-//        list.addListSelectionListener(new digListener(Game.getInstance().c));
-        this.add(new JScrollPane(list),BorderLayout.CENTER);
+        Main.settlers.get(Game.getInstance().c.selectedSettler).Drill();
 
         this.repaint();
         this.validate();
@@ -89,7 +143,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
 
 
-    public void placeDetails(Vector vector, GUI g){
+    public void placeDetails(GUI g){
         this.removeAll();
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
         materials.clear();
@@ -131,7 +185,6 @@ public class DetailsPanel extends JPanel implements ActionListener {
             a.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println(materials.indexOf(a) + " " + mat.get(materials.indexOf(a)).getName() +  " " + Game.getInstance().c.selectedSettler);
                     Main.settlers.get(set).PlaceMaterial(mat.get(materials.indexOf(a)));
                     Main.settlers.get(set).GetInventory().Remove(mat.get(materials.indexOf(a)));
                     Main.materials.remove(mat.get(materials.indexOf(a)));
@@ -142,135 +195,78 @@ public class DetailsPanel extends JPanel implements ActionListener {
             inventory.add(a);
         }
 
+        for(TeleportGate t : Main.settlers.get(set).GetGates()) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            tgate.add(t);
+            JButton a = new JButton(p);
+            a.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Main.settlers.get(set).PlaceGate(tgate.get(tgate.indexOf(a)));
+                    Main.teleportgates.remove(tgate.get(gates.indexOf(a)));
+
+                }
+            });
+            gates.add(a);
+            inventory.add(a);
+        }
         this.add(inventory);
 
         this.repaint();
         this.validate();
     }
 
-    public void buildDetails(Vector vector, GUI g){
+    public void buildDetails(GUI g){
         this.removeAll();
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        list = new JList<>(vector);
-//        list.addListSelectionListener(new buildListener(list.getSelectedIndex() , Game.getInstance().c));
-        list.setPreferredSize(new Dimension(g.width/4,100));
-        this.add(new JScrollPane(list),BorderLayout.CENTER);
 
+
+        int scaling = 90, height = 70;
+
+        JButton buildrobot = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/robot.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        buildrobot.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/builddarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        SetButton(buildrobot);
+        buildrobot.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.settlers.get(Game.getInstance().c.selectedSettler).BuildRobot();
+            }
+        });
+
+        JButton buildteleportgate = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        buildteleportgate.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/drilldarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        SetButton(buildteleportgate);
+        buildteleportgate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.settlers.get(Game.getInstance().c.selectedSettler).BuildGate();
+            }
+        });
+
+        JButton buildbase = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/base.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        buildbase.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/movedarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        SetButton(buildbase);
+        buildbase.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.settlers.get(Game.getInstance().c.selectedSettler).BuildBase();
+            }
+        });
+
+
+        this.add(buildrobot);
+        this.add(buildteleportgate);
+        this.add(buildbase);
         this.repaint();
         this.validate();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-//        if(e.getSource() == e.getSource()){
-//        Main.settlers.get(Game.getInstance().c.selectedSettler).PlaceMaterial(materials.get(e.getSource()));
-//        Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().Remove(materials.get(e.getSource()));
-//        Main.materials.remove(materials.get(e.getSource()));
+    public void SetButton(JButton button) {
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setOpaque(false);
 
-
-//    }
-        System.out.println(materials.size());
-        if(e.getSource() == materials.get(0)){
-            Main.settlers.get(Game.getInstance().c.selectedSettler).PlaceMaterial(Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials().get(0));
-            Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().Remove(Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials().get(0));
-            mineDetails(Game.getInstance().c.g);
-            System.out.println(":(((");
-        }
     }
-/*
-    private class buildListener implements ListSelectionListener{
-
-        private final int str;
-        private final Controller control;
-
-        public buildListener(int v, Controller c){
-            str = v;
-            control = c;
-        }
-
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if(e.getValueIsAdjusting()){
-                if(str == 0){
-                    Controller.settlers.get(control.selectedSettler).BuildGate();
-                }
-                else if(str == 1){
-                    Controller.settlers.get(control.selectedSettler).BuildRobot();
-                }
-                else if(str == 2){
-                    Controller.settlers.get(control.selectedSettler).BuildBase();
-                }
-            }
-        }
-    }
-
-    private class mineListener implements ListSelectionListener{
-        private final Controller control;
-
-        public mineListener(Controller c){
-            control = c;
-        }
-
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if(e.getValueIsAdjusting()) {
-                Controller.settlers.get(control.selectedSettler).Mine();
-            }
-        }
-    }
-
-
-    private class digListener implements ListSelectionListener{
-        private final Controller control;
-
-        public digListener(Controller c){
-            control = c;
-        }
-
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if(e.getValueIsAdjusting()){
-                Controller.settlers.get(control.selectedSettler).Mine();
-            }
-        }
-    }
-
-    private class placeListener implements ListSelectionListener{
-        private final Controller control;
-        private final Material material;
-
-        public placeListener(Controller c, Material m){
-            control = c;
-            material = m;
-        }
-
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if(e.getValueIsAdjusting()) {
-                Controller.settlers.get(control.selectedSettler).getAsteroid().AddMaterial(material);
-            }
-
-        }
-    }
-
-
-    private class moveListener implements ListSelectionListener{
-        private final Controller control;
-        private final int ide;
-
-        public moveListener(Controller c, int i){
-            control = c;
-            ide = i;
-        }
-
-
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if(e.getValueIsAdjusting()) {
-                Controller.settlers.get(control.selectedSettler).Move(ide);
-            }
-        }
-    }
-
-*/
 }
