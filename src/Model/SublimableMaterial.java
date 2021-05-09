@@ -59,7 +59,7 @@ public class SublimableMaterial extends Material {
         //Object[] p = {sname};
         //Logger.getInstance().printCommandCall(this, p);
 
-        name = sname;
+        super.name = sname;
 
         //Logger.getInstance().printReturnCommand();
     }

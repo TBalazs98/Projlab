@@ -169,10 +169,27 @@ public class Main {
         settlers.add(s3);
         settlers.add(s4);
 
+        Material m = new Material();
+        m.setName(NormalMaterialName.COAL);
 
+        RadioactiveMaterial rm = new RadioactiveMaterial();
+        rm.setName(RadioactiveMaterialName.URAN);
 
+        /*SublimableMaterial rm = new SublimableMaterial();
+        rm.setName(SublimableMaterialName.ICEWATER);*/
+
+        materials.add(m);
+        materials.add(rm);
+
+        s.AddMaterial(m);
+        s.AddMaterial(rm);
+
+        System.out.println(Main.materials.get(1).name);
         game.StartGame();
         //game.c.isNeighbour(s,a2);
+
+
+
 
     }
 
