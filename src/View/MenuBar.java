@@ -38,7 +38,6 @@ public class MenuBar extends JMenuBar {
         public void actionPerformed(ActionEvent e) {
             //TODO jatek mentes
             gui.getContentPane().removeAll();
-            gui.repaint();
             gui.DrawMenu();
         }
     }
@@ -65,8 +64,9 @@ public class MenuBar extends JMenuBar {
         public void actionPerformed(ActionEvent e) {
             //TODO jatek mentes
             gui.getContentPane().removeAll();
-            gui.repaint();
             gui.Load();
+            gui.repaint();
+            gui.validate();
         }
     }
 

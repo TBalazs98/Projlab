@@ -1,30 +1,30 @@
 package View;
 
+import Model.Game;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
-public class SettingsPanel extends JPanel {
-    public ChoserPanel asteroid;
-    final private GUI gui;
-    private ChoserPanel settler;
-    private ChoserPanel robot;
-    private ChoserPanel ufo;
-    private ChoserPanel coal;
-    private ChoserPanel iron;
-    private ChoserPanel water;
-    private ChoserPanel uran;
-    private ChoserPanel portal;
-    private JComboBox randbox;
+public class CustomGamePanel extends JPanel {
+    final private  ChoserPanel asteroid;
+    final private ChoserPanel settler;
+    final private ChoserPanel robot;
+    final private ChoserPanel ufo;
+    final private ChoserPanel coal;
+    final private ChoserPanel iron;
+    final private ChoserPanel water;
+    final private ChoserPanel uran;
+    final private ChoserPanel portal;
+    final private JComboBox randbox;
     private int asteroidnumber = 12;
+    final private JButton save;
+    final private ArrayList<Integer> data = new ArrayList<>();
 
 
-
-    public SettingsPanel(GUI g){
-        gui = g;
-
+    public CustomGamePanel(GUI g, int x,int  y){
         this.setPreferredSize(new Dimension(g.height/2,g.height/2+g.height/4));
         this.setOpaque(true);
         this.setLayout(new GridLayout(12,1));
@@ -33,39 +33,41 @@ public class SettingsPanel extends JPanel {
         up.setHorizontalAlignment(JLabel.CENTER);
         this.add(up);
 
-        Vector<Integer> vector = vector_zero(12,50);
+        int maximumasteroids = (int) Math.floor(x * y * 0.37);
+
+        Vector<Integer> vector = vector_zero(1,maximumasteroids);
         asteroid = new ChoserPanel(g, vector, "Asteroids", this);
         this.add(asteroid);
 
-        vector = vector_zero(2,10);
+        vector = vector_zero(1,40);
         settler = new ChoserPanel(g, vector, "Settlers", this);
         this.add(settler);
 
-        vector = vector_zero(3,10);
+        vector = vector_zero(0,40);
         robot = new ChoserPanel(g, vector, "Robots", this);
         this.add(robot);
 
-        vector = vector_zero(3,10);
+        vector = vector_zero(0,40);
         ufo = new ChoserPanel(g, vector, "UFOs", this);
         this.add(ufo);
 
-        vector = vector_zero(3,asteroidnumber/4);
+        vector = vector_zero(0,asteroidnumber/4);
         coal = new ChoserPanel(g, vector, "Coal", this);
         this.add(coal);
 
-        vector = vector_zero(3,asteroidnumber/4);
+        vector = vector_zero(0,asteroidnumber/4);
         iron = new ChoserPanel(g, vector, "Iron", this);
         this.add(iron);
 
-        vector = vector_zero(3,asteroidnumber/4);
+        vector = vector_zero(0,asteroidnumber/4);
         water = new ChoserPanel(g, vector, "Water", this);
         this.add(water);
 
-        vector = vector_zero(3,asteroidnumber/4);
+        vector = vector_zero(0,asteroidnumber/4);
         uran = new ChoserPanel(g, vector, "Uran", this);
         this.add(uran);
 
-        vector = vector_zero(3,10);
+        vector = vector_zero(0,12);
         portal = new ChoserPanel(g, vector, "Portals", this);
         this.add(portal);
 
@@ -85,8 +87,7 @@ public class SettingsPanel extends JPanel {
 
         this.add(random);
 
-
-        JButton save = new JButton("Save settings");
+        save = new JButton("Save settings");
         save.addActionListener(new setListener());
         save.setBorder(BorderFactory.createEmptyBorder(0, g.width/16, 0, g.width/16));
         this.add(save);
@@ -114,21 +115,32 @@ public class SettingsPanel extends JPanel {
     }
 
     private class setListener implements ActionListener{
-
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(asteroid.getSelected());
-            System.out.println(settler.getSelected());
-            System.out.println(robot.getSelected());
-            System.out.println(ufo.getSelected());
-            System.out.println(coal.getSelected());
-            System.out.println(iron.getSelected());
-            System.out.println(water.getSelected());
-            System.out.println(uran.getSelected());
-            System.out.println(portal.getSelected());
-            System.out.println(randbox.getSelectedItem());
+            if(e.getSource() == save){
+                Game.getInstance().c.g.getContentPane().removeAll();
+                Game.getInstance().c.g.DrawMenu();
+                Game.getInstance().c.g.repaint();
 
+                if(iron.getSelected() != null) {
+                    data.add((Integer) iron.getSelected());
+                } else data.add(0);
+                if(coal.getSelected() != null) {
+                    data.add((Integer) coal.getSelected());
+                } else data.add(0);
+                if(uran.getSelected() != null) {
+                    data.add((Integer) uran.getSelected());
+                } else data.add(0);
+                if(water.getSelected() != null) {
+                    data.add((Integer) water.getSelected());
+                } else data.add(0);
+                data.add((Integer) asteroid.getSelected());
+                data.add((Integer) portal.getSelected());
+                data.add((Integer) settler.getSelected());
+                data.add((Integer) robot.getSelected());
+                data.add((Integer) ufo.getSelected());
+                data.add((Boolean)randbox.getSelectedItem() ? 1 : 0);
+            }
         }
     }
 
@@ -136,5 +148,7 @@ public class SettingsPanel extends JPanel {
         return asteroid;
     }
 
-
+    public ArrayList<Integer> GetCreatecount(){
+        return this.data;
+    }
 }

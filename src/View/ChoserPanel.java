@@ -8,9 +8,9 @@ import java.util.Vector;
 
 public class ChoserPanel extends JPanel {
     private JComboBox<Integer> box;
-    final private SettingsPanel panel;
+    final private CustomGamePanel panel;
 
-    public ChoserPanel(GUI g, Vector<Integer> list, String text, SettingsPanel p){
+    public ChoserPanel(GUI g, Vector<Integer> list, String text, CustomGamePanel p){
         panel = p;
 
         this.setPreferredSize(new Dimension(g.height/4,g.height/2+g.height/4));
@@ -41,9 +41,9 @@ public class ChoserPanel extends JPanel {
 
     private class updateListener implements ActionListener{
 
-        private final SettingsPanel panel;
+        private final CustomGamePanel panel;
 
-        public updateListener(SettingsPanel p){
+        public updateListener(CustomGamePanel p){
             panel = p;
         }
 

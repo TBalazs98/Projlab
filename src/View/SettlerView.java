@@ -73,8 +73,9 @@ public class SettlerView implements IDrawable{
 
     public void step(){
 
-    }
 
+
+    }
     public Settler getSettler(){return this.s;}
 
     public void SelectHighlighted(boolean b){
