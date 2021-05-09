@@ -70,9 +70,12 @@ public class RadioactiveMaterial extends Material {
        // Object[] p = {rname};
         //Logger.getInstance().printCommandCall(this, p);
 
-        name = rname;
-        super.name = null;
+
+        //name = rname;
+        super.name = rname;
         //Logger.getInstance().printReturnCommand();
+
+
     }
 
     /**

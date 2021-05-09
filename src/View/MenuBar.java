@@ -1,5 +1,6 @@
 package View;
 
+import Controller.CommandManager;
 import Model.Game;
 
 import javax.swing.*;
@@ -51,13 +52,7 @@ public class MenuBar extends JMenuBar {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("students.dat"));
-                oos.writeObject(null);//TODO
-                oos.close();
-            } catch(Exception ex) {
-                ex.printStackTrace();
-            }
+            CommandManager.saveMap("savedmap");
 
             System.out.println("save");
         }
