@@ -66,7 +66,6 @@ public class GUI extends JFrame implements ActionListener {
 
         System.out.println(this.width + " x " + this.height + "\t" + coordswidth + " x " + coordsheight);
 
-
     }
 
 
