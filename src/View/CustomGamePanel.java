@@ -24,7 +24,7 @@ public class CustomGamePanel extends JPanel {
     final private ArrayList<Integer> data = new ArrayList<>();
 
 
-    public CustomGamePanel(GUI g){
+    public CustomGamePanel(GUI g, int x,int  y){
         this.setPreferredSize(new Dimension(g.height/2,g.height/2+g.height/4));
         this.setOpaque(true);
         this.setLayout(new GridLayout(12,1));
@@ -33,7 +33,9 @@ public class CustomGamePanel extends JPanel {
         up.setHorizontalAlignment(JLabel.CENTER);
         this.add(up);
 
-        Vector<Integer> vector = vector_zero(1,24);
+        int maximumasteroids = (int) Math.floor(x * y * 0.37);
+
+        Vector<Integer> vector = vector_zero(1,maximumasteroids);
         asteroid = new ChoserPanel(g, vector, "Asteroids", this);
         this.add(asteroid);
 

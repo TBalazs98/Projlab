@@ -65,6 +65,8 @@ public class GUI extends JFrame implements ActionListener {
         }
         //createChar();
 
+        System.out.println(this.width + " x " + this.height + "\t" + coordswidth + " x " + coordsheight);
+
 
     }
 
@@ -194,7 +196,7 @@ public class GUI extends JFrame implements ActionListener {
         layout.setVgap(this.height/12);
         this.setLayout(layout);
 
-       settingspanel = new CustomGamePanel(this);
+       settingspanel = new CustomGamePanel(this, this.coordswidth, this.coordsheight);
 
         this.add(settingspanel);
         this.setJMenuBar(bar);
