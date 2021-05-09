@@ -24,7 +24,8 @@ public class DetailsPanel extends JPanel implements ActionListener {
     JList<String> list;
     private JButton dpactionDone = new JButton("DOIT");
     private ArrayList<JButton> materials = new ArrayList<>();
-    int db = 0;
+    private ArrayList<Material> mat = new ArrayList<>();
+    int db = 0, index = -1;
 
     DetailsPanel( ){
        // panels.add(buildpanel);
@@ -70,68 +71,17 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
         list = new JList<>(vector);
         list.setPreferredSize(new Dimension(g.width/4,100));
-        list.addListSelectionListener(new digListener(Game.getInstance().c));
+//        list.addListSelectionListener(new digListener(Game.getInstance().c));
         this.add(new JScrollPane(list),BorderLayout.CENTER);
 
         this.repaint();
         this.validate();
     }
 
-    public void mineDetails(Vector vector, GUI g){
+    public void mineDetails(GUI g){
         this.removeAll();
 
-//        list = new JList<>(vector);
-//        list.addListSelectionListener(new mineListener(Game.getInstance().c));
-//        list.setPreferredSize(new Dimension(g.width/4,100));
-//        this.add(new JScrollPane(list),BorderLayout.CENTER);
-
-        JPanel inventory = new JPanel(new GridLayout(1,13));
-        inventory.setBackground(Color.YELLOW);
-
-        ImageIcon p = null;
-        int scalingx, scalingy;
-        for(Material m : Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials()) {
-            db++;
-//            if(m.getName()== NormalMaterialName.IRON) {
-//                scalingx = 110;
-//                scalingy = 90;
-//                p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//            }
-//            if(m.getName()==NormalMaterialName.COAL) {
-//                scalingx = 40;
-//                scalingy = 40;
-//                p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//            }
-//            if(m.getName()== SublimableMaterialName.ICEWATER) {
-//                scalingx = 40;
-//                scalingy = 40;
-//                p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//            }
-//            if(m.getName()== RadioactiveMaterialName.URAN) {
-//                scalingx = 120;
-//                scalingy = 100;
-//                RadioactiveMaterial rm = (RadioactiveMaterial)m;
-//                if(rm.GetExposure()==0)
-//                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//                else if(rm.GetExposure()==1)
-//                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//                else if(rm.GetExposure()==2)
-//                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//            }
-//            JButton a = new JButton(p);
-//            a.addActionListener(new ActionListener() {
-//                public void actionPerformed(ActionEvent e) {
-//                    Main.settlers.get(Game.getInstance().c.selectedSettler).PlaceMaterial(Main.materials.get(db));
-//                }
-//            });
-//            materials.add(a);
-            this.add(new MaterialList());
-//        }
-//
-//        for(JButton jb : materials)
-//            inventory.add(jb);
-        }
-        this.add(inventory);
+        Main.settlers.get(Game.getInstance().c.selectedSettler).Mine();
 
         this.repaint();
         this.validate();
@@ -141,11 +91,58 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
     public void placeDetails(Vector vector, GUI g){
         this.removeAll();
+        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+        materials.clear();
+        mat.clear();
 
-        list = new JList<>(vector);
-        list.setPreferredSize(new Dimension(g.width/4,100));
-        //list.addListSelectionListener(new placeListener(controller, ));
-        this.add(new JScrollPane(list),BorderLayout.CENTER);
+        JPanel inventory = new JPanel(new GridLayout(1,13));
+        inventory.setBackground(Color.YELLOW);
+
+        ImageIcon p = null;
+        int scalingx= 50, scalingy = 50;
+        int set;
+        if (Game.getInstance().c.selectedSettler == (Main.settlers.size())-2)
+            set = 0;
+            else
+                set = Game.getInstance().c.selectedSettler + 1;
+        System.out.println("DETAILS" + set);
+        for(Material m : Main.settlers.get(set).GetInventory().GetMaterials()) {
+            db++;
+            mat.add(m);
+            if (m.getName() == NormalMaterialName.IRON) {
+                p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            }
+            if (m.getName() == NormalMaterialName.COAL) {
+                p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            }
+            if (m.getName() == SublimableMaterialName.ICEWATER) {
+                p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            }
+            if (m.getName() == RadioactiveMaterialName.URAN) {
+                RadioactiveMaterial rm = (RadioactiveMaterial) m;
+                if (rm.GetExposure() == 0)
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+                else if (rm.GetExposure() == 1)
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+                else if (rm.GetExposure() == 2)
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            }
+            JButton a = new JButton(p);
+            a.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println(materials.indexOf(a) + " " + mat.get(materials.indexOf(a)).getName() +  " " + Game.getInstance().c.selectedSettler);
+                    Main.settlers.get(set).PlaceMaterial(mat.get(materials.indexOf(a)));
+                    Main.settlers.get(set).GetInventory().Remove(mat.get(materials.indexOf(a)));
+                    Main.materials.remove(mat.get(materials.indexOf(a)));
+
+                }
+            });
+            materials.add(a);
+            inventory.add(a);
+        }
+
+        this.add(inventory);
 
         this.repaint();
         this.validate();
@@ -155,7 +152,7 @@ public class DetailsPanel extends JPanel implements ActionListener {
         this.removeAll();
 
         list = new JList<>(vector);
-        list.addListSelectionListener(new buildListener(list.getSelectedIndex() , Game.getInstance().c));
+//        list.addListSelectionListener(new buildListener(list.getSelectedIndex() , Game.getInstance().c));
         list.setPreferredSize(new Dimension(g.width/4,100));
         this.add(new JScrollPane(list),BorderLayout.CENTER);
 
@@ -165,12 +162,22 @@ public class DetailsPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+//        if(e.getSource() == e.getSource()){
+//        Main.settlers.get(Game.getInstance().c.selectedSettler).PlaceMaterial(materials.get(e.getSource()));
+//        Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().Remove(materials.get(e.getSource()));
+//        Main.materials.remove(materials.get(e.getSource()));
+
+
+//    }
+        System.out.println(materials.size());
         if(e.getSource() == materials.get(0)){
-            System.out.println("SZEDJ KI!");
-                Main.settlers.get(Game.getInstance().c.selectedSettler).PlaceMaterial(Main.materials.get(e.getID()));
+            Main.settlers.get(Game.getInstance().c.selectedSettler).PlaceMaterial(Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials().get(0));
+            Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().Remove(Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials().get(0));
+            mineDetails(Game.getInstance().c.g);
+            System.out.println(":(((");
         }
     }
-
+/*
     private class buildListener implements ListSelectionListener{
 
         private final int str;
@@ -265,5 +272,5 @@ public class DetailsPanel extends JPanel implements ActionListener {
         }
     }
 
-
+*/
 }
