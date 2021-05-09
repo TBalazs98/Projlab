@@ -204,6 +204,8 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public void  DrawMenu(){
+        this.repaint();
+        this.validate();
         this.setLayout(new FlowLayout());
         JPanel  title, sg, lg, st, ex;
 
@@ -274,18 +276,21 @@ public class GUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == startgame){
             this.getContentPane().removeAll();
-            this.repaint();
             this.CreateCustomMap();
             this.DrawAll();
+            this.repaint();
+            this.validate();
         } else if (e.getSource() == loadgame){
             this.getContentPane().removeAll();
-            this.repaint();
             this.Load();
+            this.repaint();
+            this.validate();
 
         } else if (e.getSource() == settings) {
             this.getContentPane().removeAll();
-            this.repaint();
             this.Settings();
+            this.repaint();
+            this.validate();
         }
         else if(e.getSource() == exit)
             System.exit(0);
