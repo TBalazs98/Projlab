@@ -87,40 +87,8 @@ public  class Controller {
         }
     }
 
- //   public void HighlightAsteroids(){
-//        for(int i=0; i< Main.settlers.size();i++){
-//            for(int j=0; j<Main.asteroids.size();j++){
-//                if(isNeighbour(Main.settlers.get(i),Main.asteroids.get(j))){
-//                    Game.getInstance().c.g.getAsteroidViewByAsteroid(Main.asteroids.get(j)).highlight(true,g);
-//                }
-//                Game.getInstance().c.g.getAsteroidViewByAsteroid(Main.asteroids.get(j)).highlight(false,g);
-//            }
-//
-//        }
-       // Settler s=Main.settlers.get(selectedSettler%(Game.getInstance().c.g.GetSettlerView().size()));
 
-//            for(int j=0; j<Main.asteroids.size();j++){
-//
-//                if(isNeighbour(Main.settlers.get(selectedSettler%(Game.getInstance().c.g.GetSettlerView().size())), Main.asteroids.get(j))){
-//                    System.out.println("faszomat a jebe " + j);
-//                    Game.getInstance().c.g.getAsteroidViewByAsteroid(Main.asteroids.get(j)).highlight(true,g);
-//                }
-//                Game.getInstance().c.g.getAsteroidViewByAsteroid(Main.asteroids.get(j)).highlight(false,g);
-//            }
 
-  //  }
-
-    public boolean isNeighbour(Settler s , DestinationObject d){
-        //System.out.println("----"+s.getAsteroid().GetNeighbours().contains(d));
-
-        for(int i=0; i< s.getAsteroid().GetNeighbours().size();i++){
-            if(s.getAsteroid().GetNeighbours().get(i)==d){
-                System.out.println("----isneighbour");
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void switchCommand(Settler s){
         g.cp.getActionDone1().addActionListener(new ActionListener() {

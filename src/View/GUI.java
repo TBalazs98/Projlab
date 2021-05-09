@@ -148,11 +148,12 @@ public class GUI extends JFrame implements ActionListener {
             //y = asteroids.get(i).getY();
             asteroids.get(i).Draw();
         }
-        for(int i=0; i<settlers.size();i++){
+        for(int i=0; i<this.settlers.size();i++){
             settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             settlers.get(i).Draw();
         }
+
 
        // Game.getInstance().NextRound(); #REKA
 //        for(IDrawable i : drawables){
@@ -251,7 +252,7 @@ public class GUI extends JFrame implements ActionListener {
         startgame = new JButton( new ImageIcon("Files/Pictures/startbtn.png"));
         startgame.setRolloverIcon(new ImageIcon("Files/Pictures/startdarkbtn.png"));
         SetButton(startgame);
-        startgame.setEnabled(false);
+        //startgame.setEnabled(false);
         SetPanel(sg);
         sg.add(startgame);
         this.add(sg);
@@ -305,7 +306,7 @@ public class GUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == startgame){
             this.getContentPane().removeAll();
-            Game.getInstance().c.CreateCustomMap();
+            //Game.getInstance().c.CreateCustomMap();
             this.DrawAll();
             this.repaint();
             this.validate();

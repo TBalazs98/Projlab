@@ -69,7 +69,7 @@ public  class AsteroidView implements IDrawable {
         //g.gamespace.setComponentZOrder(l, 1);//BIGNONO
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-       // CharacterView cv = new CharacterView(asteroid.getCharacters());
+        //CharacterView cv = new CharacterView(asteroid.getCharacters());
         //cv.Draw();
        // highlight(g);
 
@@ -97,7 +97,7 @@ public  class AsteroidView implements IDrawable {
     private void setImage(){
         if(highlight==true) {
             int scaling = 130;
-            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selectedasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
             l.setIcon(p);
         }else {
             int scaling = 130;

@@ -156,13 +156,19 @@ public class Main {
         s3.setAsteroid(a3);
         a3.setCharacter(s3);
 
-//        asteroids.add(a);
-//        asteroids.add(a2);
-//        asteroids.add(a3);
-//
-//        settlers.add(s);
-//        settlers.add(s2);
-//        settlers.add(s3);
+        Settler s4 = new Settler();
+        s4.setAsteroid(a3);
+        a3.setCharacter(s4);
+
+        asteroids.add(a);
+        asteroids.add(a2);
+        asteroids.add(a3);
+
+        settlers.add(s);
+        settlers.add(s2);
+        settlers.add(s3);
+        settlers.add(s4);
+
 
 
         game.StartGame();

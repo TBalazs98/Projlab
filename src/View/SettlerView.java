@@ -51,7 +51,7 @@ public class SettlerView implements IDrawable{
         //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
        // g.gamespace.getComponent(index).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        l.setBounds(this.x+offsetX, this.y+offsetY, p.getIconWidth(), p.getIconWidth());
         //System.out.println(g.GetAsteroidView().indexOf(s.getAsteroid()));
         //index = Arrays.asList(container.getComponents()).indexOf(container.getComponentAt(x, y));
 
@@ -84,12 +84,12 @@ public class SettlerView implements IDrawable{
     }
     public void SetPicture(){
         if(this.currentlySelected==true){
-           Icon pp= new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+           Icon pp= new ImageIcon(new ImageIcon("Files/Pictures/selectedsus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
             l.setIcon(pp);
 
 
         }else {
-            p= new ImageIcon(new ImageIcon("Files/Pictures/placebtn.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+            p= new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
             l.setIcon(p);
 
         }
