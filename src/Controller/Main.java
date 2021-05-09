@@ -160,14 +160,14 @@ public class Main {
         s4.setAsteroid(a3);
         a3.setCharacter(s4);
 
-        asteroids.add(a);
-        asteroids.add(a2);
-        asteroids.add(a3);
-
-        settlers.add(s);
-        settlers.add(s2);
-        settlers.add(s3);
-        settlers.add(s4);
+//        asteroids.add(a);
+//        asteroids.add(a2);
+//        asteroids.add(a3);
+//
+//        settlers.add(s);
+//        settlers.add(s2);
+//        settlers.add(s3);
+//        settlers.add(s4);
 
         Material m = new Material();
         m.setName(NormalMaterialName.COAL);
@@ -177,14 +177,16 @@ public class Main {
 
         /*SublimableMaterial rm = new SublimableMaterial();
         rm.setName(SublimableMaterialName.ICEWATER);*/
+//
+//        materials.add(m);
+//        materials.add(rm);
+//
+//        s.AddMaterial(m);
+//        s.AddMaterial(rm);
 
-        materials.add(m);
-        materials.add(rm);
 
-        s.AddMaterial(m);
-        s.AddMaterial(rm);
 
-        System.out.println(Main.materials.get(1).name);
+        //System.out.println(Main.materials.get(1).name);
         game.StartGame();
         //game.c.isNeighbour(s,a2);
 

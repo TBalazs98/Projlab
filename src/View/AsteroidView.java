@@ -60,30 +60,21 @@ public  class AsteroidView implements IDrawable {
         return y;
     }
     public void Draw() {
-        //as.setPreferredSize(new Dimension(20,20));
-        //g.gamespace.setLocation(20,20);
-
-        //as.setLocation(20,20);
 
         Game.getInstance().c.g.gamespace.add(l);
-        //g.gamespace.setComponentZOrder(l, 1);//BIGNONO
-        //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-        //CharacterView cv = new CharacterView(asteroid.getCharacters());
-        //cv.Draw();
-       // highlight(g);
-
-
+        CharacterView cv = new CharacterView(asteroid.getCharacters());
+        cv.Draw();
 
     }
+
+
     public void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
         l.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("x = "+av.x+ "y = " + av.y);
-               Game.getInstance().c.mx=av.x;
-               Game.getInstance().c.mx=av.y;
 
             }
         });
@@ -108,9 +99,5 @@ public  class AsteroidView implements IDrawable {
 
     public Asteroid getAsteroid(){return asteroid;}
 
-
-    public void setCompNum(int n) {
-        compnum = n;
-    }
 
 }

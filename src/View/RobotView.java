@@ -14,7 +14,6 @@ public class RobotView implements IDrawable {
     private JLabel l;
     private int x,y;
     private Robot r;
-    private int compnum;
     private Random rnd = new Random();
 
     RobotView(Robot _r) {
@@ -27,13 +26,10 @@ public class RobotView implements IDrawable {
     public void Draw() {
         int offsetX = rnd.nextInt(20);
         int offsetY = rnd.nextInt(20);
-        x = Game.getInstance().c.g.getX()+offsetX+60;
-        y = Game.getInstance().c.g.getY()+offsetY+60;
 
         Game.getInstance().c.g.gamespace.add(l);
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
-        //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        l.setBounds(this.x+offsetX, this.y+offsetY, p.getIconWidth(), p.getIconWidth());
 
     }
     public void SetCoords(int x, int y){
@@ -41,7 +37,4 @@ public class RobotView implements IDrawable {
         this.y = y;
     }
 
-    public void setCompnum(int n) {
-        compnum = n;
-    }
 }

@@ -12,20 +12,22 @@ import java.util.Random;
 
 
 public class GUI extends JFrame implements ActionListener {
-    public int x, y, width, height;
-    Image img;
+    public int  width, height;
+
     JButton startgame, loadgame, settings, exit;
     MenuBar bar = new MenuBar(this);
     public JLayeredPane gamespace;
     public DetailsPanel dp;
     public CommandPanel cp ;/*= new CommandPanel(this);*/
-    public Controller gc;
-    private int compnum;
     public CustomGamePanel custompanel;
 
     private ArrayList<IDrawable> drawables;
-    private ArrayList<AsteroidView> asteroids = new ArrayList<>();
     public  ArrayList<SettlerView> settlers=new ArrayList<>();
+    private ArrayList<AsteroidView> asteroids = new ArrayList<>();
+    private ArrayList<RobotView> robots = new ArrayList<>();
+    public  ArrayList<UfoView> ufos=new ArrayList<>();
+    //private ArrayList<Tele> teleportgates = new ArrayList<>();    //#todo
+    public  ArrayList<MaterialView> materials=new ArrayList<>();
     private Coordinates[][] coords;
     private int coordswidth;
     private int coordsheight;
@@ -62,7 +64,6 @@ public class GUI extends JFrame implements ActionListener {
                 coords[j][i] = new Coordinates(i*130+offsetX, j*130+offsetY);
             }
         }
-        //createChar();
 
         System.out.println(this.width + " x " + this.height + "\t" + coordswidth + " x " + coordsheight);
 
@@ -90,61 +91,31 @@ public class GUI extends JFrame implements ActionListener {
         return coords[x][y];
     }
 
-    public int GetWidth(){
-        return this.width;
-    }
+
 
     public void DrawAll(){
+        //region helo
         this.setLayout(new FlowLayout());
         gamespace = new JLayeredPane();
-
         gamespace.setPreferredSize(new Dimension(width,height-200));
         dp = new DetailsPanel();
         cp = new CommandPanel();
-
         JPanel controls = new JPanel();
         controls.setBackground(new Color(0,0,0,64));
         controls.setLayout(new FlowLayout());
-        //SetPanel(gamespace);
         gamespace.setLayout(null);
-        //gamespace.setBackground(Color.GREEN);
         this.add(gamespace, BorderLayout.CENTER);
+        //endregion
 
         /**
          * RAJZOLASOK IDE gamespacebe
          */
-        //Asteroid asteroid;
-        //AsteroidView a;
-//        for(int i=0; i<10; i++){
-//            asteroid = new Asteroid();
-//            Main.asteroids.add(asteroid);
-//            //asteroid.setCharacter(chars.get(i));
-//            //asteroid.setCharacter(chars.get(i+1));
-//            a = new AsteroidView(asteroid);
-//            Coordinates coord = getLonelyCoord();
-//            a.SetCoords(coord.getX(), coord.getY());
-//            coord.toggle();
-//            a.setCompNum(i);
-//            asteroids.add(a);
-//            compnum = i;
-//        }
-
-
-        //asteroids.get(0).highlight();
-
-//        for(AsteroidView i : asteroids){
-//            x = i.getX();
-//            y = i.getY();
-//            i.Draw();
-//        }
 
         for(int i=0; i<asteroids.size();i++){
             Coordinates coordinates = getLonelyCoord();
             coordinates.toggle();
 
             asteroids.get(i).SetCoords(coordinates.getX(),coordinates.getY());
-            //x = asteroids.get(i).getX();
-            //y = asteroids.get(i).getY();
             asteroids.get(i).Draw();
         }
         for(int i=0; i<this.settlers.size();i++){
@@ -154,12 +125,11 @@ public class GUI extends JFrame implements ActionListener {
         }
 
 
-       // Game.getInstance().NextRound(); #REKA
-//        for(IDrawable i : drawables){
-//            i.Draw();
-//        }
+        //materials.get(0).Draw();
 
-        c.printxy();
+
+
+
 //region buzisagok
         this.add(dp, BorderLayout.PAGE_END);
         controls.add(cp);
@@ -193,30 +163,27 @@ public class GUI extends JFrame implements ActionListener {
         }
         return null;
     }
+    public MaterialView getMaterialViewByMaterial(Material m){
+        for (int i=0; i<materials.size();i++){
+            if(materials.get(i).getMaterial()==m){
+                //System.out.println("fasz");
+                return materials.get(i);
+            }
 
-
-
-    public void Update(){
-        this.setPreferredSize(new Dimension(1200,600));
-        DrawAll();
-        this.setVisible(true);
+        }
+        return null;
     }
+
 
     public void Load(){
         FlowLayout layout = new FlowLayout();
         layout.setVgap(this.height/12);
         this.setLayout(layout);
-
         LoadPanel loadpanel = new LoadPanel(this);
-
         this.add(loadpanel);
-
         this.setJMenuBar(bar);
         this.setVisible(true);
 
-    }
-    public int getCompnum() {
-        return compnum;
     }
 
     public void Settings() {
@@ -251,7 +218,7 @@ public class GUI extends JFrame implements ActionListener {
         startgame = new JButton( new ImageIcon("Files/Pictures/startbtn.png"));
         startgame.setRolloverIcon(new ImageIcon("Files/Pictures/startdarkbtn.png"));
         SetButton(startgame);
-        //startgame.setEnabled(false);
+        startgame.setEnabled(false);        //meg ez
         SetPanel(sg);
         sg.add(startgame);
         this.add(sg);
@@ -288,24 +255,11 @@ public class GUI extends JFrame implements ActionListener {
 
     }
 
-    public void SetButton(JButton button) {
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.setOpaque(false);
-        button.addActionListener(this);
-    }
-
-    public void SetPanel(JPanel panel) {
-        panel.setOpaque(false);
-    }
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == startgame){
             this.getContentPane().removeAll();
-            //Game.getInstance().c.CreateCustomMap();
+            Game.getInstance().c.CreateCustomMap();     //ez
             this.DrawAll();
             this.repaint();
             this.validate();
@@ -325,10 +279,6 @@ public class GUI extends JFrame implements ActionListener {
             System.exit(0);
     }
 
-    public  ArrayList<SettlerView> GetSettlerView(){return settlers;}
-    public  ArrayList<AsteroidView> GetAsteroidView(){return asteroids;}
-
-
     public void addSettler(Settler s ){
         SettlerView sw = new SettlerView(s);
         settlers.add(sw);
@@ -340,28 +290,46 @@ public class GUI extends JFrame implements ActionListener {
         asteroids.add(av);
         drawables.add(av);
     }
-    public int getX() {
-        return x;
+    public void addRobot(Model.Robot r ){
+        RobotView rv = new RobotView(r);
+        robots.add(rv);
+        drawables.add(rv);
     }
-    public int getY() {
-        return y;
+
+    public void addUfo(UFO u ){
+        UfoView uv = new UfoView(u);
+        ufos.add(uv);
+        drawables.add(uv);
+    }
+//    public void addSettler(Settler s ){       //#todo teleportgate view
+//        SettlerView sw = new SettlerView(s);
+//        settlers.add(sw);
+//        drawables.add(sw);
+//    }
+
+    public void addMaterial(Material m ){
+        MaterialView mv = new MaterialView(m);
+        materials.add(mv);
+        drawables.add(mv);
+    }
+
+    public void SetButton(JButton button) {
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setOpaque(false);
+        button.addActionListener(this);
+    }
+
+    public int GetWidth(){
+        return this.width;
+    }
+    public  ArrayList<SettlerView> GetSettlerView(){return settlers;}
+    public  ArrayList<AsteroidView> GetAsteroidView(){return asteroids;}
+    public void SetPanel(JPanel panel) {
+        panel.setOpaque(false);
     }
 
 
-    private void createChar() {
-        chars.add(new Settler());
-        chars.add(new Model.Robot());
-        chars.add(new Settler());
-        chars.add(new Settler());
-        chars.add(new Model.Robot());
-        chars.add(new UFO());
-        chars.add(new UFO());
-        chars.add(new Settler());
-        chars.add(new Model.Robot());
-        chars.add(new Settler());
-        chars.add(new Model.Robot());
-
-
-    }
 
 }
