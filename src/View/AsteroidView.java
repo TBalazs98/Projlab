@@ -50,42 +50,41 @@ public  class AsteroidView implements IDrawable {
     }
 
     public void setImage(){
-        if (this.asteroid.getLayers() > 0 && !this.asteroid.GetSunProximity() && !isInsusntorm) {
+        if (this.asteroid.getLayers() > 0 && !this.asteroid.GetSunProximity() && !isInsusntorm && !highlight)
             p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        }
+        if (this.asteroid.getLayers() > 0 && !this.asteroid.GetSunProximity() && !isInsusntorm && highlight)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
-        if (this.asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && !isInsusntorm)
+        if (this.asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && !isInsusntorm && !highlight)
             p = new ImageIcon(new ImageIcon("Files/Pictures/nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+        if (this.asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && !isInsusntorm && highlight)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
-        if (this.asteroid.getLayers() == 0 && !this.asteroid.GetSunProximity() && !isInsusntorm) {
+        if (this.asteroid.getLayers() == 0 && !this.asteroid.GetSunProximity() && !isInsusntorm && !highlight)
             p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        }
+        if (this.asteroid.getLayers() == 0 && !this.asteroid.GetSunProximity() && !isInsusntorm && highlight)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
-        if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && !isInsusntorm) {
+        if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && !isInsusntorm && !highlight)
             p = new ImageIcon(new ImageIcon("Files/Pictures/hollow_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        }
+        if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && !isInsusntorm && highlight)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollow_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
-        if (asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && isInsusntorm) {
+        if (this.asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && isInsusntorm && !highlight)
             p = new ImageIcon(new ImageIcon("Files/Pictures/nearsun_and_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        }
-        if (asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && isInsusntorm) {
+        if (this.asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && isInsusntorm && highlight)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_nearsun_and_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
+        if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && isInsusntorm && !highlight)
             p = new ImageIcon(new ImageIcon("Files/Pictures/hollow_nearsun_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        }
-        if(exploding)
-        p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+        if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && isInsusntorm && highlight)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollow_nearsun_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
-        if(highlight==true) {
-            int scaling = 130;
-            p = new ImageIcon(new ImageIcon("Files/Pictures/selectedasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            l.setIcon(p);
-        }else {
-            int scaling = 130;
-            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            l.setIcon(p);
-        }
+        if (exploding)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+
         l.setIcon(p);
-        l.addMouseListener(new MouseListener() {
+        this.l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -104,14 +103,14 @@ public  class AsteroidView implements IDrawable {
             @Override
             public void mouseEntered(MouseEvent e) {
                 Game.getInstance().c.g.dp.removeAll();
-                JPanel info = new JPanel(new GridLayout(1,5));
+                JPanel info = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 info.add(new JLabel("[ASTEROID]"));
                 info.add(new JLabel("\nA" + (Main.asteroids.indexOf(asteroid)+1)));
                 info.add(new JLabel("\nMATERIAL:"));
                 if (asteroid.GetisEmpty())
                     info.add(new JLabel("\nEMPTY"));
                 else {
-                    info.add(new JLabel("\tM" + Main.materials.indexOf(asteroid.getMaterial() )));
+                    info.add(new JLabel("\nM" + (Main.materials.indexOf(asteroid.getMaterial())+1) ));
                     info.add(new JLabel("" +asteroid.getMaterial().name));
                 }
                 ArrayList<String> neigh = new ArrayList<>();
@@ -127,7 +126,7 @@ public  class AsteroidView implements IDrawable {
                 }
                 else {
                     for (int i = 0; i < neigh.size(); i++)
-                        info.add(new JLabel("\n" + new JLabel(neigh.get(i))));
+                        info.add(new JLabel("\n" + (neigh.get(i))));
                 }
                 Game.getInstance().c.g.dp.add(info);
                 Game.getInstance().c.g.dp.repaint();

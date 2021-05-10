@@ -286,14 +286,17 @@ public  class Controller {
         }
 
         if(A > 1) {
+            int rand_int, randd_int;
             for (int i = 0; i < A; i++) {
-                for(int j=0; j<A%3;j++) {
+                Random randd = new Random();
+                 randd_int = randd.nextInt(Main.asteroids.size());
+                for(int j=0; j<(randd_int);j++) {
                     Random rand = new Random();
-                    int rand_int = rand.nextInt(Main.asteroids.size());
+                    rand_int = rand.nextInt(Main.asteroids.size());
                     int db = 0;
                     System.out.println(i);
                     System.out.println(Main.asteroids.get(i).GetNeighbourCount());
-                    if (Main.asteroids.get(i).GetNeighbourCount() != -1) {
+                    if (Main.asteroids.get(i).GetNeighbours() != null) {
                         for (DestinationObject o : Main.asteroids.get(i).GetNeighbours()) {
                             if (o == Main.asteroids.get(rand_int)) {
                                 db++;
