@@ -224,9 +224,7 @@ public class Main {
 
 
 
-        InputManager.FromFileInput("savedmap", false);
-
-
+        //InputManager.FromFileInput("savedmap", false);
 
 
         game.StartGame();
