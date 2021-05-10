@@ -89,7 +89,7 @@ public  class Controller {
         NextSettler();
     }
     public void HandlePlaceMaterial(){
-//        this.removeAll();
+//        this.removeA ll();
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         ArrayList<JButton> materials = new ArrayList<>();
