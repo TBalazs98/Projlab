@@ -116,7 +116,7 @@ public class TeleportGateView implements IDrawable{
 
     public void setImage(){
 
-        int scaling = 130;
+        int scaling = 25;
         if(!highlight && this.tg.GetIsHit() == false)
 
             p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));

@@ -106,6 +106,7 @@ public  class AsteroidView implements IDrawable {
                 JPanel info = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 info.add(new JLabel("[ASTEROID]"));
                 info.add(new JLabel("\nA" + (Main.asteroids.indexOf(asteroid)+1)));
+                info.add(new JLabel("\nLAYERS: " + asteroid.getLayers()));
                 info.add(new JLabel("\nMATERIAL:"));
                 if (asteroid.GetisEmpty())
                     info.add(new JLabel("\nEMPTY"));

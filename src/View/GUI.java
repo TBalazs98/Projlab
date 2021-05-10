@@ -198,11 +198,32 @@ public class GUI extends JFrame implements ActionListener {
         return null;
     }
 
+    public UfoView getUfoViewByUfo(UFO u){
+        for (int i=0; i<ufos.size();i++){
+            if(ufos.get(i).getUfo()==u){
+                //System.out.println("fasz");
+                return ufos.get(i);
+            }
+
+        }
+        return null;
+    }
+
     public MaterialView getMaterialViewByMaterial(Material m){
         for (int i=0; i<materials.size();i++){
             if(materials.get(i).getMaterial()==m){
                 //System.out.println("fasz");
                 return materials.get(i);
+            }
+
+        }
+        return null;
+    }
+    public RobotView getRobotViewByRobot(Model.Robot r){
+        for (int i=0; i<robots.size();i++){
+            if(robots.get(i).getRobot()==r){
+                //System.out.println("fasz");
+                return robots.get(i);
             }
 
         }

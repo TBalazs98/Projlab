@@ -55,14 +55,14 @@ public class CharacterView implements IDrawable{
     }
 
     private void Call(UFO u) {
-        UfoView uv = new UfoView(u);
+        UfoView uv =Game.getInstance().c.g.getUfoViewByUfo(u);
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( u.getAsteroid());
         uv.SetCoords(av.getX(),av.getY());
         uv.Draw();
     }
 
     private void Call(Robot r) {
-        RobotView rv = new RobotView(r);
+        RobotView rv = Game.getInstance().c.g.getRobotViewByRobot(r);
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( r.getAsteroid());
         rv.SetCoords(av.getX(),av.getY());
         rv.Draw();

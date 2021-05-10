@@ -18,7 +18,6 @@ public class UfoView implements IDrawable{
     private int x,y;
     private UFO u;
     private Random rnd = new Random();
-    private boolean firstDraw = true;
 
     UfoView(UFO _u) {
         u = _u;
@@ -68,28 +67,27 @@ public class UfoView implements IDrawable{
                 Game.getInstance().c.g.dp.validate();
             }
         });
+        Game.getInstance().c.g.gamespace.add(l);
     }
 
     public void SetCoords(int x, int y){
-        this.x = x;
-        this.y = y;
+        int offsetX = rnd.nextInt(31)+50;
+        int offsetY = rnd.nextInt(31)+50;
+        this.x = x+offsetX;
+        this.y = y+offsetY;
     }
     @Override
     public void Draw() {
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( u.getAsteroid());
         SetCoords(av.getX(),av.getY());
-        if(firstDraw) {
-            int offsetX = rnd.nextInt(20)+50;
-            int offsetY = rnd.nextInt(20)+50;
-            x = x + offsetX;
-            y = y + offsetY;
-            firstDraw = false;
-        }
 
-        Game.getInstance().c.g.gamespace.add(l);
 
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
+        //Game.getInstance().c.g.gamespace.add(l);
+
+        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
     }
+
+    public UFO getUfo(){return this.u;}
 
 }

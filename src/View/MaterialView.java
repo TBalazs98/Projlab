@@ -98,7 +98,7 @@ public class MaterialView implements IDrawable {
         mv.SetCoords(newasteroidx+45,newasteroidy+45); //COAL
         // mv.SetCoords(newasteroidx+45,newasteroidy+45); //ICE
         //mv.SetCoords(newasteroidx+36,newasteroidy+30); //IRON
-        // mv.SetCoords(newasteroidx+42,newasteroidy-20); //URAN*/          //EZ A GUIBA VOLT, MINDEN MATERIAL ASZTEROIDÁHOZ KÉPEST RAJZOLJA KI A KÖZEPÉRE
+        // mv.SetCoords(newasteroidx+42,newasteroidy-20); //URAN*/          //EZ A GUIBA VOLT, MINDEN MATERIAL ASZTEROIDAHOZ KEPEST RAJZOLJA KI A KOZEPERE
     }
 
     public void SetCoords(int x, int y){
