@@ -88,6 +88,85 @@ public  class Controller {
         Main.ab.StartStorm(Main.asteroids.get(0));
         NextSettler();
     }
+    public void HandlePlaceMaterial(){
+//        this.removeAll();
+//        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        ArrayList<JButton> materials = new ArrayList<>();
+        ArrayList<JButton> gates = new ArrayList<>();
+        ArrayList<TeleportGate> tgate = new ArrayList<>();
+        ArrayList<Material> mat = new ArrayList<>();
+        int db = 0, index = -1;
+        materials.clear();
+        mat.clear();
+        JPanel inventory = new JPanel(new GridLayout(1,13));
+        inventory.setBackground(Color.YELLOW);
+
+        ImageIcon p = null;
+        int scalingx= 50, scalingy = 50;
+        int set;
+        if (Game.getInstance().c.selectedSettler == (Main.settlers.size())-2)
+            set = 0;
+        else
+            set = Game.getInstance().c.selectedSettler + 1;
+        System.out.println("DETAILS" + set);
+        for(Material m : Main.settlers.get(set).GetInventory().GetMaterials()) {
+            db++;
+            mat.add(m);
+            if (m.getName() == NormalMaterialName.IRON) {
+                p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            }
+            if (m.getName() == NormalMaterialName.COAL) {
+                p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            }
+            if (m.getName() == SublimableMaterialName.ICEWATER) {
+                p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            }
+            if (m.getName() == RadioactiveMaterialName.URAN) {
+                RadioactiveMaterial rm = (RadioactiveMaterial) m;
+                if (rm.GetExposure() == 0)
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+                else if (rm.GetExposure() == 1)
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+                else if (rm.GetExposure() == 2)
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            }
+            JButton a = new JButton(p);
+            a.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Main.settlers.get(set).PlaceMaterial(mat.get(materials.indexOf(a)));
+                    Main.settlers.get(set).GetInventory().Remove(mat.get(materials.indexOf(a)));
+                    Main.materials.remove(mat.get(materials.indexOf(a)));
+
+                }
+            });
+            materials.add(a);
+            inventory.add(a);
+        }
+
+        for(TeleportGate t : Main.settlers.get(set).GetGates()) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            tgate.add(t);
+            JButton a = new JButton(p);
+            a.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Main.settlers.get(set).PlaceGate(tgate.get(tgate.indexOf(a)));
+                    Main.teleportgates.remove(tgate.get(gates.indexOf(a)));
+
+                }
+            });
+            gates.add(a);
+            inventory.add(a);
+        }
+        g.dp.add(inventory);
+        NextSettler();
+        //  this.add(inventory);
+
+//        this.repaint();
+//        this.validate();
+    }
 
 
     public void HighlightEverythingExcept(SettlerView sv){
