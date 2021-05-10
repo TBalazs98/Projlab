@@ -1,5 +1,6 @@
 package Model;
 import Controller.Main;
+import View.AsteroidView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -356,6 +357,15 @@ public class Asteroid implements DestinationObject {
      *Az aszteroidat napvihar eri el.
      */
     public void HitBySunstorm() {
+
+        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
+            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this) {
+                Game.getInstance().c.g.GetAsteroidView().get(i).setInSunstorm(true);
+                System.out.println(Game.getInstance().c.g.GetAsteroidView().get(i).getisInSunstorm());
+            }
+        }
+        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setImg();
+
         //Logger.getInstance().printCommandCall(this);
         if((layers != 0) || (!isEmpty)) {
             int n = characters.size();
@@ -371,7 +381,7 @@ public class Asteroid implements DestinationObject {
                 }
             }
         }
-        //Logger.getInstance().printReturnCommand();
+//
     }
 
     /**
@@ -391,6 +401,10 @@ public class Asteroid implements DestinationObject {
      *Az aszteroida felrobban, errol ertesiti a szomszedait, illetve a rajta levo karakterek ennek megfeleloen viselkednek.
      */
     public void Explode() {
+        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
+            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
+                Game.getInstance().c.g.GetAsteroidView().get(i).setExploding();
+        }
         //Logger.getInstance().printCommandCall(this);;
         int n = characters.size();
         for(int i = n - 1; i >= 0; i--) {
@@ -402,9 +416,14 @@ public class Asteroid implements DestinationObject {
         //this.neighbours.forEach(n -> n.HitByExplosion(this));
         //this.characters.forEach(c -> c.Explode());
 
+        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++)
+            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
+                Game.getInstance().c.g.GetAsteroidView().get(i).setExploding();
+
         Main.materials.remove(this.material);
         //Main.asteroids.remove(this);
         Main.asteroids.set(Main.asteroids.indexOf(this), null);
+
         //Logger.getInstance().printReturnCommand();
     }
 
