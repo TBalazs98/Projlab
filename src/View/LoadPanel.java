@@ -18,12 +18,11 @@ public class LoadPanel extends JPanel {
     JLabel label;
     JButton button;
     JTable table;
-    Integer chosen;
+    String chosen;
 
 
     public LoadPanel(GUI g) {
-
-        this.setPreferredSize(new Dimension(g.height/2+g.height/4,g.height/2+g.height/4));
+        this.setPreferredSize(new Dimension(g.height/4+g.height/4,g.height/4+g.height/4));
         this.setOpaque(true);
         this.setLayout(new BorderLayout());
         table = new JTable();
@@ -73,8 +72,7 @@ public class LoadPanel extends JPanel {
         public void mouseClicked(MouseEvent e) {
             int rowIndex = table.rowAtPoint(e.getPoint());
             int colIndex = table.columnAtPoint(e.getPoint());
-            chosen = (Integer) data.getValueAt(rowIndex, colIndex);
-
+            chosen = (String) data.getValueAt(rowIndex, colIndex);
             label.setText(chosen.toString());
         }
 

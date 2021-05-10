@@ -1,21 +1,39 @@
 package View;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GameData extends AbstractTableModel {
 
-    private List<Integer> games;
+    private ArrayList<String> games;
 
     public GameData(){
         try {
-            games = new ArrayList<Integer>();
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Files/Saved/savedgames.txt"));
-            games = (List<Integer>)ois.readObject();
-            ois.close();
+            File dir_File=new File ("Files");
+            String caononical_path= dir_File.getCanonicalPath();
+            File dir_File_Input=new File(caononical_path,"Saved");
+            String canonical_path_2=dir_File_Input.getCanonicalPath();
+
+            System.out.println(canonical_path_2);
+
+            File asd = new File(canonical_path_2);
+            File[] savedgames =  asd.listFiles();
+
+            games = new ArrayList<String>();
+
+            for(int i = 0; i< Objects.requireNonNull(savedgames).length; i++)
+            {
+                String game = savedgames[i].getName();
+                game = game.replace(".txt","");
+                games.add(game);
+                System.out.println(game);
+            }
+
         } catch(Exception ex) {
             ex.printStackTrace();
         }
@@ -35,11 +53,11 @@ public class GameData extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
 
-        int szam = games.get(rowIndex);
+        String currgame = (games.get(rowIndex));
 
         switch(columnIndex){
-            case 0: return szam;
-            default: return szam;
+            case 0: return currgame;
+            default: return currgame;
         }
     }
 
@@ -53,7 +71,7 @@ public class GameData extends AbstractTableModel {
         }
     }
 
-    public List<Integer> getList(){
+    public List<String> getList(){
         return this.games;
     }
 
