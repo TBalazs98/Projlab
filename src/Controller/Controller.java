@@ -79,8 +79,8 @@ public  class Controller {
         NextSettler();
     }
     public void HandleMine(){
-        Main.settlers.get(SelectedSettler()).Mine();
-
+//        Main.settlers.get(SelectedSettler()).Mine();
+        Main.ab.StartStorm(Main.asteroids.get(0));
         NextSettler();
     }
 
@@ -230,6 +230,7 @@ public  class Controller {
         for(int i = 0; i< A;i++){
             Asteroid a = new Asteroid();
             Main.asteroids.add(a);
+            Main.ab.AddAsteroid(a);
             Game.getInstance().c.g.addAsteroid(a);
         }
         if(materials > 0) {
