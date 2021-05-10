@@ -7,9 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.Vector;
 
 public class CommandPanel extends JPanel implements ActionListener {
     JList<String> list ;
@@ -225,7 +222,7 @@ public class CommandPanel extends JPanel implements ActionListener {
         }
 
 
-        Game.getInstance().c.stepsettlers();
+        Game.getInstance().c.HighlightSettlerStuff();
         if(Game.getInstance().c.selectedSettler == Main.settlers.size()-1)
             Game.getInstance().c.selectedSettler = 0;
 

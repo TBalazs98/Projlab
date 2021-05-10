@@ -4,14 +4,9 @@ import Controller.*;
 import Model.*;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
 
 public class DetailsPanel extends JPanel{
     JPanel buildpanel=new JPanel();
@@ -58,10 +53,16 @@ public class DetailsPanel extends JPanel{
         System.out.println("move details selected szam "+Game.getInstance().c.SelectedSettler());
         Game.getInstance().c.MoveSetSettler(Main.settlers.get(Game.getInstance().c.SelectedSettler()));
         Game.getInstance().c.DoTheMove();
-        Game.getInstance().c.HighAsteroid(Main.settlers.get(Game.getInstance().c.SelectedSettler()));
-        Game.getInstance().c.HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(Game.getInstance().c.SelectedSettler())));
+
+        //Game.getInstance().c.HighAsteroid(Main.settlers.get(Game.getInstance().c.SelectedSettler()));
+        //HighAsteroid(Main.settlers.get(SelectedSettler()));
+
+        //Game.getInstance().c.HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(Game.getInstance().c.SelectedSettler())));
+        //HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(SelectedSettler())));
+
+        Game.getInstance().c.HighlightSettlerStuff();
         System.out.println("---"+Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetNeighbours().contains(Game.getInstance().c.a));
-        Game.getInstance().c.NextSettler();
+       // Game.getInstance().c.NextSettler();
 
         //Game.getInstance().c.stepsettlers();
 
@@ -74,8 +75,8 @@ public class DetailsPanel extends JPanel{
     public void drillDetails(GUI g){
         this.removeAll();
 
-        Main.settlers.get(Game.getInstance().c.selectedSettler).Drill();
-
+        //Main.settlers.get(Game.getInstance().c.selectedSettler).Drill();
+        Game.getInstance().c.HandleDrill();
         this.repaint();
         this.validate();
     }
@@ -83,7 +84,8 @@ public class DetailsPanel extends JPanel{
     public void mineDetails(GUI g){
         this.removeAll();
 
-        Main.settlers.get(Game.getInstance().c.selectedSettler).Mine();
+        //Main.settlers.get(Game.getInstance().c.selectedSettler).Mine();
+        Game.getInstance().c.HandleMine();
 
         this.repaint();
         this.validate();

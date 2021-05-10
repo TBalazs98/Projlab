@@ -121,7 +121,7 @@ public class GUI extends JFrame implements ActionListener {
             System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             settlers.get(i).Draw();
         }
-        Game.getInstance().c.stepsettlers();
+        Game.getInstance().c.HighlightSettlerStuff();
 
 
         //materials.get(0).Draw();
