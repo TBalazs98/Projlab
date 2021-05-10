@@ -19,6 +19,7 @@ public class SettlerView implements IDrawable{
     private int x,y;
     private Random rnd = new Random();
     boolean currentlySelected =false;
+    private boolean firstDraw = true;
 
 
 
@@ -87,9 +88,17 @@ public class SettlerView implements IDrawable{
         this.y = y;
     }
 
-    public void Draw(){
-        int offsetX = rnd.nextInt(20);
-        int offsetY = rnd.nextInt(20);
+    public void Draw() {
+        if(firstDraw) {
+            AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( s.getAsteroid());
+            SetCoords(av.getX(),av.getY());
+            int offsetX = rnd.nextInt(20);
+            int offsetY = rnd.nextInt(20);
+            x = x + offsetX;
+            y = y + offsetY;
+            firstDraw = false;
+        }
+
        // x = Game.getInstance().c.g.getX()+offsetX+10;
         //y = Game.getInstance().c.g.getY()+offsetY+10;
         //g.gamespace.add(l);
@@ -101,7 +110,7 @@ public class SettlerView implements IDrawable{
         //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
        // g.gamespace.getComponent(index).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-        l.setBounds(this.x+offsetX, this.y+offsetY, p.getIconWidth(), p.getIconWidth());
+        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         //System.out.println(g.GetAsteroidView().indexOf(s.getAsteroid()));
         //index = Arrays.asList(container.getComponents()).indexOf(container.getComponentAt(x, y));
 
@@ -136,15 +145,10 @@ public class SettlerView implements IDrawable{
         if(this.currentlySelected==true){
            Icon pp= new ImageIcon(new ImageIcon("Files/Pictures/selectedsus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
             l.setIcon(pp);
-
-
         }else {
             p= new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
             l.setIcon(p);
-
         }
-
-
     }
 
 

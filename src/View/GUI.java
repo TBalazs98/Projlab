@@ -119,14 +119,19 @@ public class GUI extends JFrame implements ActionListener {
             coordinates.toggle();
 
             asteroids.get(i).SetCoords(coordinates.getX(),coordinates.getY());
+            gamespace.add(asteroids.get(i).l);
             asteroids.get(i).Draw();
         }
         for(int i=0; i<this.settlers.size();i++){
-//            settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
-//            System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+            settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+            System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             gamespace.add(settlers.get(i).l);
             settlers.get(i).Draw();
         }
+//        for(int i = 0; i < materials.size(); i++) {
+//            //gamespace.add(materials.get(i).l);
+//            materials.get(i).Draw();
+//        }
 
 //        for(int i = 0; i < this.teleportgates.size();i++){
 //            teleportgates.get(i).Draw();
@@ -183,7 +188,7 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public TeleportGateView getTeleportGateViewByTeleportGate(TeleportGate tg){
-        for (int i=0; i<materials.size();i++){
+        for (int i=0; i<teleportgates.size();i++){
             if(teleportgates.get(i).getTg()==tg){
                 //System.out.println("fasz");
                 return teleportgates.get(i);
@@ -362,6 +367,14 @@ public class GUI extends JFrame implements ActionListener {
         panel.setOpaque(false);
     }
 
+    public void update() {
+        //gamespace.removeAll();
+        for(AsteroidView av: asteroids) {
+            av.Draw();
+        }
 
+        gamespace.repaint();
+        gamespace.validate();
+    }
 
 }

@@ -255,4 +255,14 @@ public class Settler extends Worker implements drillable, moveable {
     public  ArrayList<TeleportGate> GetGates(){
         return this.gates;
     }
+
+//    public Settler copy() {
+//        Settler copy = new Settler();
+//        for(TeleportGate tg: gates) {
+//            copy.AddGate(tg.copy());
+//        }
+//        copy.setAsteroid(asteroid);
+//        copy.setInventory(inventory.copy());
+//        return copy;
+//    }
 }

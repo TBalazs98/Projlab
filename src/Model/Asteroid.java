@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  *Egy, az aszteroida ovben talalhato aszteroidat reprezentalja.
  */
-public class Asteroid implements DestinationObject {
+public class Asteroid implements DestinationObject, Steppable {
 
     private boolean isEmpty;
 
@@ -53,6 +53,8 @@ public class Asteroid implements DestinationObject {
         this.neighbours = new ArrayList<DestinationObject>();
         //Logger.getInstance().printReturnCommand();
     }
+
+
 
     /**
      * Karakter beallitasa
@@ -458,5 +460,17 @@ public class Asteroid implements DestinationObject {
     public ArrayList<Character> getCharacters() {
         return characters;
     }
+
+//    public Asteroid copy() {
+//        Asteroid copy = new Asteroid(layers, isEmpty, isNearSun, material);
+//        for(Character c: characters) {
+//            copy.setCharacter(c.copy());
+//        }
+//        copy.SetMaterial(material.copy());
+//        for(int i = 0; i < neighbours.size(); i++) {
+//            copy.setNeighbour(neighbours.get(i).copy());
+//        }
+//        return copy;
+//    }
 
 }

@@ -71,4 +71,10 @@ public class SublimableMaterial extends Material {
     public MaterialName getName() {
         return this.name;
     }
+
+//    public SublimableMaterial copy() {
+//        SublimableMaterial copy = new SublimableMaterial();
+//        copy.setName(this.name);
+//        return copy;
+//    }
 }

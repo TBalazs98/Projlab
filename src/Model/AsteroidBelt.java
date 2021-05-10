@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  *A jatek palyajat reprezentalja, minden jatekhoz 1 darab tartozik.
  */
-public class AsteroidBelt {
+public class AsteroidBelt implements Steppable{
 
     public int settlersAlive = 0;
 
@@ -124,4 +124,16 @@ public class AsteroidBelt {
         //Logger.getInstance().printReturnCommand();
     }
 
+    public ArrayList<Asteroid> getAsteroids() {
+        return asteroids;
+    }
+
+
+//    public AsteroidBelt copy() {
+//        AsteroidBelt copy = new AsteroidBelt();
+//        for(Asteroid a: asteroids) {
+//            copy.AddAsteroid(a.copy());
+//        }
+//        return copy;
+//    }
 }

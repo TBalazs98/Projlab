@@ -91,4 +91,6 @@ public abstract class Character {
         //Logger.getInstance().printReturnCommand();
     }
 
+//    public abstract Character copy();
+
 }

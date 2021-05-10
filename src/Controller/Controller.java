@@ -78,6 +78,7 @@ public  class Controller {
     public int SelectedSettler(){
         if(selectedSettler==(Main.settlers.size())){
             selectedSettler=0;
+            Game.getInstance().NextRound();
         }
         return selectedSettler;
     }
@@ -85,33 +86,27 @@ public  class Controller {
         Main.settlers.get(SelectedSettler()).Drill();
     }
     public void HandleMine(){
-//        Main.settlers.get(SelectedSettler()).Mine();      //todo ezt vissza
-        Main.ab.StartStorm(Main.asteroids.get(0));
+        Main.settlers.get(SelectedSettler()).Mine();      //todo ezt vissza
+//        Main.ab.StartStorm(Main.asteroids.get(0));
     }
     public void HandlePlaceMaterial(){                      //todo ezzel mi a helyzet?
-                                                            //todo SelectedSettler írtás
+        //todo SelectedSettler írtás
 //        this.removeA ll();
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
+        Game.getInstance().c.g.dp.removeAll();
         ArrayList<JButton> materials = new ArrayList<>();
         ArrayList<JButton> gates = new ArrayList<>();
         ArrayList<TeleportGate> tgate = new ArrayList<>();
         ArrayList<Material> mat = new ArrayList<>();
-        int db = 0, index = -1;
-        materials.clear();
-        mat.clear();
-        JPanel inventory = new JPanel(new GridLayout(1,13));
-        inventory.setBackground(Color.YELLOW);
+
+        int db = 0;
+        JPanel inventory = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        inventory.setBackground(Color.GRAY);
 
         ImageIcon p = null;
         int scalingx= 50, scalingy = 50;
-        int set;
-        if (Game.getInstance().c.selectedSettler == (Main.settlers.size())-2)
-            set = 0;
-        else
-            set = Game.getInstance().c.selectedSettler + 1;
-        System.out.println("DETAILS" + set);
-        for(Material m : Main.settlers.get(set).GetInventory().GetMaterials()) {
+        for(Material m : Main.settlers.get(SelectedSettler()).GetInventory().GetMaterials()) {
             db++;
             mat.add(m);
             if (m.getName() == NormalMaterialName.IRON) {
@@ -136,24 +131,24 @@ public  class Controller {
             a.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Main.settlers.get(set).PlaceMaterial(mat.get(materials.indexOf(a)));
-                    Main.settlers.get(set).GetInventory().Remove(mat.get(materials.indexOf(a)));
-                    Main.materials.remove(mat.get(materials.indexOf(a)));
-
+//                    Main.settlers.get(SelectedSettler()).PlaceMaterial(mat.get(materials.indexOf(a)));
+//                    Main.settlers.get(SelectedSettler()).GetInventory().Remove(mat.get(materials.indexOf(a)));
+//                    Main.materials.remove(mat.get(materials.indexOf(a)));
+                    Main.settlers.get(SelectedSettler()).PlaceMaterial(m);
                 }
             });
             materials.add(a);
             inventory.add(a);
         }
 
-        for(TeleportGate t : Main.settlers.get(set).GetGates()) {
+        for(TeleportGate t : Main.settlers.get(SelectedSettler()).GetGates()) {
             p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
             tgate.add(t);
             JButton a = new JButton(p);
             a.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Main.settlers.get(set).PlaceGate(tgate.get(tgate.indexOf(a)));
+                    Main.settlers.get(SelectedSettler()).PlaceGate(tgate.get(tgate.indexOf(a)));
                     Main.teleportgates.remove(tgate.get(gates.indexOf(a)));
 
                 }
@@ -161,12 +156,12 @@ public  class Controller {
             gates.add(a);
             inventory.add(a);
         }
-        g.dp.add(inventory);
+        Game.getInstance().c.g.dp.add(inventory);
         //NextSettler();
         //  this.add(inventory);
 
-//        this.repaint();
-//        this.validate();
+        Game.getInstance().c.g.dp.repaint();
+        Game.getInstance().c.g.dp.validate();
     }
 
 
@@ -184,8 +179,15 @@ public  class Controller {
         for(Asteroid a : Main.asteroids) {
             Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false, g);
             System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
-            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImage();
+            //Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImage();
         }
+
+        for(TeleportGate tg : Main.teleportgates) {
+            Game.getInstance().c.g.getTeleportGateViewByTeleportGate(tg).highlightt(false, g);
+            //System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
+            //Game.getInstance().c.g.getTeleportGateViewByTeleportGate(tg).setImage();
+        }
+
         for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
             if(a instanceof Asteroid)
                 Game.getInstance().c.g.getAsteroidViewByAsteroid((Asteroid) a).highlight(true,g);
@@ -210,10 +212,11 @@ public  class Controller {
             g.addUfo(Main.ufos.get(i));
             Game.getInstance().AddSteppable(Main.ufos.get(i));
         }
-        System.out.println("TELEPORTGATES SIZE" + Main.teleportgates.size());
+        //System.out.println("TELEPORTGATES SIZE" + Main.teleportgates.size());
         for(int i=0; i<Main.teleportgates.size();i++){
-            System.out.println("TeleportgateIIII" + i);
+            //System.out.println("TeleportgateIIII" + i);
             g.addTeleportGate(Main.teleportgates.get(i));
+            Game.getInstance().AddSteppable(Main.teleportgates.get(i));
         }
         for(int i=0; i<Main.materials.size();i++){
             g.addMaterial(Main.materials.get(i));
@@ -408,9 +411,6 @@ public  class Controller {
         //lehet nem jó h melyik mi
         Main.Randomize = (datas.get(9) == 0);
     }
-
-
-
 
 
 }

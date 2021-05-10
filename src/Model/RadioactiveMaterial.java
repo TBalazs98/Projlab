@@ -104,4 +104,10 @@ public class RadioactiveMaterial extends Material {
     public int GetExposure(){
         return this.exposed;
     }
+
+//    public RadioactiveMaterial copy() {
+//        RadioactiveMaterial copy = new RadioactiveMaterial();
+//        copy.SetExposure(exposed);
+//        return copy;
+//    }
 }
