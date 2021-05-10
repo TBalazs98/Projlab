@@ -16,7 +16,7 @@ public class GUI extends JFrame implements ActionListener {
 
     JButton startgame, loadgame, settings, exit;
     MenuBar bar = new MenuBar(this);
-    public JLayeredPane gamespace;
+    public JLayeredPane gamespace= new JLayeredPane();
     public DetailsPanel dp;
     public CommandPanel cp ;/*= new CommandPanel(this);*/
     public CustomGamePanel custompanel;
@@ -32,7 +32,6 @@ public class GUI extends JFrame implements ActionListener {
     private int coordswidth;
     private int coordsheight;
     private Random gen = new Random();
-    private Controller c;
     private ArrayList<Model.Character> chars = new ArrayList<>();
 
     public GUI(Controller _c) {
@@ -49,7 +48,6 @@ public class GUI extends JFrame implements ActionListener {
         this.setJMenuBar(null);
         ImageIcon img = new ImageIcon("Files/Pictures/sus.jpg");
         this.setIconImage(img.getImage());
-        c = _c;
 
         drawables = new ArrayList<>();
 
@@ -96,7 +94,7 @@ public class GUI extends JFrame implements ActionListener {
     public void DrawAll(){
         //region helo
         this.setLayout(new FlowLayout());
-        gamespace = new JLayeredPane();
+        //gamespace = new JLayeredPane();
         gamespace.setPreferredSize(new Dimension(width,height-200));
         dp = new DetailsPanel();
         cp = new CommandPanel();
@@ -123,6 +121,7 @@ public class GUI extends JFrame implements ActionListener {
             System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             settlers.get(i).Draw();
         }
+        Game.getInstance().c.stepsettlers();
 
 
         //materials.get(0).Draw();
@@ -140,6 +139,14 @@ public class GUI extends JFrame implements ActionListener {
         //this.pack();
         this.setVisible(true);
 //endregion
+    }
+
+    public void DrawSettlers(){
+        for(int i=0; i<this.settlers.size();i++){
+            settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+            System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+            settlers.get(i).Draw();
+        }
     }
 
     public AsteroidView getAsteroidViewByAsteroid(Asteroid a){

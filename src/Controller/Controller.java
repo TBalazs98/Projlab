@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import View.AsteroidView;
 import View.GUI;
 import View.SettlerView;
 
@@ -14,32 +15,63 @@ public  class Controller {
     public static ArrayList<Settler> settlers=new ArrayList<>();
     public int command=0;
     public int selectedSettler=0;
+    public Settler s=new Settler();
+    public Asteroid a = new Asteroid();
 
     public Controller(){
         g=new GUI(this);
         g.DrawMenu();
         InitViews(g);
 
+
+
+    }
+    public void DoTheMove(){
+        System.out.println("neigh index"+s.getAsteroid().GetNeighbourIndex(a));
+        s.Move(s.getAsteroid().GetNeighbourIndex(a));
+        g.DrawSettlers();
+    }
+
+    public void MoveSetSettler(Settler ss){
+        System.out.println("valasztottam settlert"+ss);
+        s=ss;
+    }
+
+    public void MoveSetAsteroid(AsteroidView av){
+        System.out.println("valasztottam aszteroidat"+av);
+        a=av.getAsteroid();
     }
 
     public void stepsettlers(){
-        Settler s=Main.settlers.get(selectedSettler%(Main.settlers.size()));
+        Settler s=Main.settlers.get(SelectedSettler());
         //SettlerView sv =Game.getInstance().c.g.GetSettlerView().get(selectedSettler%Game.getInstance().c.g.GetSettlerView().size());
         SettlerView sv =Game.getInstance().c.g.getSettlerViewBySettler(s);
 
         //sv.l.setIcon(new ImageIcon("Files/Pictures/ice.png"));
         //sv.SelectHighlighted(true);
-        HighlightEverythingExcept(g.GetSettlerView().get(selectedSettler%(Game.getInstance().c.g.GetSettlerView().size())));
+        HighlightEverythingExcept(g.GetSettlerView().get(SelectedSettler()));
         HighAsteroid(s);
         //switchCommand(s);
         //HighlightAsteroids();
 
 
         //if(selectedSettler%settlers.size()!=0)
-        NextSettler();
+        //NextSettler();
         //sv.SelectHighlighted(false);
        // else
            // Game.getInstance().NextRound();
+    }
+
+    public void NextSettler(){
+
+        selectedSettler++;
+    }
+
+    public int SelectedSettler(){
+        if(selectedSettler>=Main.settlers.size()-1){
+            selectedSettler=0;
+        }
+        return selectedSettler;
     }
 
     public void HighlightEverythingExcept(SettlerView sv){
@@ -93,10 +125,7 @@ public  class Controller {
     }
 
 
-    public void NextSettler(){
 
-            selectedSettler++;
-    }
 
     public void InitViews(GUI g){
         for(int i=0; i<Main.settlers.size();i++){

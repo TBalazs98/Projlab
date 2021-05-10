@@ -15,24 +15,16 @@ public class SettlerView implements IDrawable{
     private Icon p;
     public JLabel l;
     private int x,y;
-    private int compnum;
     private Random rnd = new Random();
     boolean currentlySelected =false;
 
-//    SettlerView(Settler s){
-//        this.s=s;
-//        p=new ImageIcon("Files/Pictures/sus.png");
-//        l=new JLabel(p);
-//       // this.x = 50;
-//        //this.y = 50;
-//        //MoveToAsteroidListener(l,this,g);
 
-    //}
 
     public SettlerView(Settler _s) {
         p=new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         l=new JLabel(p);
         s = _s;
+        Game.getInstance().c.g.gamespace.add(l);
     }
 
     public void SetCoords(int x, int y){
@@ -46,7 +38,7 @@ public class SettlerView implements IDrawable{
        // x = Game.getInstance().c.g.getX()+offsetX+10;
         //y = Game.getInstance().c.g.getY()+offsetY+10;
         //g.gamespace.add(l);
-        Game.getInstance().c.g.gamespace.add(l);
+        //Game.getInstance().c.g.gamespace.add(l);
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
         //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
        // g.gamespace.getComponent(index).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());

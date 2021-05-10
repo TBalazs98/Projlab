@@ -48,77 +48,25 @@ public class DetailsPanel extends JPanel{
 
     public void moveDetails(GUI g){
         this.removeAll();
-        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
-        int set;
-        if (Game.getInstance().c.selectedSettler == (Main.settlers.size())-2)
-            set = 0;
-        else
-            set = Game.getInstance().c.selectedSettler + 1;
+        //Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
+//        int set;
+//        if (Game.getInstance().c.selectedSettler == (Main.settlers.size())-2)
+//            set = 0;
+//        else
+//            set = Game.getInstance().c.selectedSettler + 1;
 
-        System.out.println("MOVE" + set);
-        Game.getInstance().c.g.gamespace.addMouseListener(new MouseListener() {
+        System.out.println("move details selected szam "+Game.getInstance().c.SelectedSettler());
+        Game.getInstance().c.MoveSetSettler(Main.settlers.get(Game.getInstance().c.SelectedSettler()));
+        Game.getInstance().c.DoTheMove();
+        Game.getInstance().c.HighAsteroid(Main.settlers.get(Game.getInstance().c.SelectedSettler()));
+        Game.getInstance().c.HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(Game.getInstance().c.SelectedSettler())));
+        System.out.println("---"+Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetNeighbours().contains(Game.getInstance().c.a));
+        Game.getInstance().c.NextSettler();
 
-            @Override
-            public void mouseClicked(MouseEvent e) {
+        //Game.getInstance().c.stepsettlers();
 
-                System.out.println("dfdfd");
 
-//                for(AsteroidView av : Game.getInstance().c.g.GetAsteroidView()){
-//                    System.out.println("ASTEROIDV: " + av.getX()+ " : " + av.getY() + "CLIK: " +  e.getX() + " : " + e.getY() );
-//                    if((e.getX() == av.getX()) && ( e.getY() == av.getY())){
-//                        asd = av;
-//                        System.out.println("HAPPAY??");
-//                    }
-//
-//                }
-//                Main.settlers.get(set).Move(Main.settlers.get(set).getAsteroid().GetNeighbourIndex(asd.getAsteroid()));
-////                Game.getInstance().c.g.
-////                Main.settlers.get(set).Move(Main.asteroids.indexOf(asd.getAsteroid()));
-//
-//                Game.getInstance().c.g.gamespace.repaint();
-//                Game.getInstance().c.g.gamespace.validate();
-            }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-                for(AsteroidView av : Game.getInstance().c.g.GetAsteroidView()){
-                    System.out.println("ASTEROIDV: " + av.getX()+ " : " + av.getY() + "CLIK: " +  e.getX() + " : " + e.getY() );
-                    if((e.getComponent().getX() == av.getX()) && ( e.getComponent().getY() == av.getY())){
-                        asd = av;
-                        System.out.println("HAPPAY??");
-                    }
-
-                }
-                Main.settlers.get(set).Move(Main.settlers.get(set).getAsteroid().GetNeighbourIndex(asd.getAsteroid()));
-//                Game.getInstance().c.g.
-//                Main.settlers.get(set).Move(Main.asteroids.indexOf(asd.getAsteroid()));
-
-                Game.getInstance().c.g.gamespace.repaint();
-                Game.getInstance().c.g.gamespace.validate();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-//        list = new JList<>(vector);
-//        list.setPreferredSize(new Dimension(g.width/4,100));
-//        list.addListSelectionListener(new moveListener(Game.getInstance().c, list.getSelectedIndex()));
-//        this.add(new JScrollPane(list),BorderLayout.CENTER);
-
-//        Main.settlers.get(set).Move();
 
     }
 
