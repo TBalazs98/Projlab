@@ -1,4 +1,5 @@
 package View;
+import Controller.Main;
 import Model.*;
 import Model.Character;
 
@@ -75,6 +76,62 @@ public  class AsteroidView implements IDrawable {
         p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
         l.setIcon(p);
+        l.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                JPanel info = new JPanel(new GridLayout(1,5));
+                info.add(new JLabel("[ASTEROID]"));
+                info.add(new JLabel("\nA" + (Main.asteroids.indexOf(asteroid)+1)));
+                info.add(new JLabel("\nMATERIAL:"));
+                if (asteroid.GetisEmpty())
+                    info.add(new JLabel("\nEMPTY"));
+                else {
+                    info.add(new JLabel("\tM" + Main.materials.indexOf(asteroid.getMaterial() )));
+                    info.add(new JLabel("" +asteroid.getMaterial().name));
+                }
+                ArrayList<String> neigh = new ArrayList<>();
+                for (DestinationObject o : asteroid.GetNeighbours()) {
+                    if (Main.asteroids.indexOf(o) != -1)
+                        neigh.add("\nA" + (Main.asteroids.indexOf(o) + 1));
+                    if (Main.teleportgates.indexOf(o) != -1)
+                        neigh.add("\nG" + (Main.teleportgates.indexOf(o) + 1));
+                }
+                info.add(new JLabel("\nNEIGHBOURS:"));
+                if(neigh.size() == 0){
+                    info.add(new JLabel("\nNO NEIGHBOUR"));
+                }
+                else {
+                    for (int i = 0; i < neigh.size(); i++)
+                        info.add(new JLabel("\n" + new JLabel(neigh.get(i))));
+                }
+                Game.getInstance().c.g.dp.add(info);
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+        });
     }
 
     public void SetCoords(int x, int y) {

@@ -1,11 +1,13 @@
 package View;
 
+import Controller.Main;
 import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 
 
@@ -24,6 +26,58 @@ public class SettlerView implements IDrawable{
         p=new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         l=new JLabel(p);
         s = _s;
+
+        l.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                JPanel info = new JPanel(new GridLayout(1,5));
+                info.add(new JLabel("[SETTLER]"));
+                info.add(new JLabel("\nS" + (Main.settlers.indexOf(s)+1)));
+                info.add(new JLabel("\nASTEROID:\nA" + (Main.asteroids.indexOf(s.getAsteroid()) +1) ));
+                info.add(new JLabel("\nINVENTORY:"));
+                if(s.GetInventory().GetMaterials().size() > 0){
+                    for(Material m : s.GetInventory().GetMaterials())
+                        info.add(new JLabel("\nM" + (Main.materials.indexOf(m) +1)));
+                }else {
+                    info.add(new JLabel("\nINVENTORY IS EMPTY"));
+                }
+                info.add(new JLabel("\nTELEPORTGATES:"));
+                if(s.GetGates().size() > 0){
+                    for(TeleportGate tg : s.GetGates())
+                        info.add(new JLabel("\nG" + (Main.teleportgates.indexOf(tg) +1)));
+                }else {
+                    info.add(new JLabel("\nNO TELEPORTGATES"));
+                }
+
+                Game.getInstance().c.g.dp.add(info);
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+        });
+
 //        Game.getInstance().c.g.gamespace.add(l);
     }
 

@@ -1,12 +1,14 @@
 package View;
 
-import Model.Game;
+import Controller.Main;
+import Model.*;
 import Model.Robot;
-import Model.UFO;
 import com.sun.source.tree.IdentifierTree;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 
 public class RobotView implements IDrawable {
@@ -20,6 +22,43 @@ public class RobotView implements IDrawable {
         r = _r;
         p=new ImageIcon(new ImageIcon("Files/Pictures/robot.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
         l=new JLabel(p);
+
+        l.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                JPanel info = new JPanel(new GridLayout(1,5));
+                info.add(new JLabel("[ROBOT]"));
+                info.add(new JLabel("\nR" + (Main.settlers.indexOf(r)+1)));
+                info.add(new JLabel("\nASTEROID:\nA" + (Main.asteroids.indexOf(r.getAsteroid()) +1) ));
+
+                Game.getInstance().c.g.dp.add(info);
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+        });
     }
 
     @Override

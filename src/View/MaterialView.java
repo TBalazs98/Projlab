@@ -1,8 +1,11 @@
 package View;
+import Controller.Main;
 import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class MaterialView implements IDrawable {
 
@@ -42,6 +45,47 @@ public class MaterialView implements IDrawable {
                 p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
         }
        l = new JLabel((Icon)p);
+
+        l.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                JPanel info = new JPanel(new GridLayout(1,5));
+                info.add(new JLabel("[MATERIAL]"));
+                info.add(new JLabel("\nM" + (Main.materials.indexOf(material)+1)));
+                info.add(new JLabel("\n" + material.name));
+                if(material.name == RadioactiveMaterialName.URAN) {
+                    RadioactiveMaterial rm = (RadioactiveMaterial) material;
+                    info.add(new JLabel("\nEXPOSURE:" +  rm.exposed));
+                }
+
+                Game.getInstance().c.g.dp.add(info);
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+        });
 
 
        /* Material mat = new Material();

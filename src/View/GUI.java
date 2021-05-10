@@ -33,6 +33,7 @@ public class GUI extends JFrame implements ActionListener {
     private int coordsheight;
     private Random gen = new Random();
     private ArrayList<Model.Character> chars = new ArrayList<>();
+    public JPanel inpudialog = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
     public GUI(Controller _c) {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,6 +104,7 @@ public class GUI extends JFrame implements ActionListener {
         controls.setBackground(new Color(0,0,0,64));
         controls.setLayout(new FlowLayout());
         gamespace.setLayout(null);
+        gamespace.add(inpudialog);
         this.add(gamespace, BorderLayout.CENTER);
         //endregion
 

@@ -48,14 +48,13 @@ public class TeleportGateView implements IDrawable{
             @Override
             public void mouseEntered(MouseEvent e) {
                 Game.getInstance().c.g.dp.removeAll();
-                Game.getInstance().c.g.dp.setLayout(new FlowLayout());
                 JPanel info = new JPanel(new GridLayout(1,5));
-                info.add(new Label("[TELEPORTATE]"));
-                info.add(new JLabel("T\t" + (Main.teleportgates.indexOf(tg)+1)));
-                info.add(new JLabel("\nAsteroid:\tA" + ((tg.GetAsteroid() == null)? "not placed yet: ": (Main.asteroids.indexOf(tg.GetAsteroid()) +1) )));
-                info.add(new JLabel(((tg.GetPair() == null)?"\nNo Pair" : "\nPair:\tT" + Main.teleportgates.indexOf(tg.GetPair()))));
+                info.add(new JLabel("[TELEPORTATE]"));
+                info.add(new JLabel("\nT" + (Main.teleportgates.indexOf(tg)+1)));
+                info.add(new JLabel("\nASTEROID:\n" + ((tg.GetAsteroid() == null)? "NOT PLACED YET: ": "A"+(Main.asteroids.indexOf(tg.GetAsteroid()) +1) )));
+                info.add(new JLabel(((tg.GetPair() == null)?"\nNO PAIR" : "\nPAIR:\nT" + Main.teleportgates.indexOf(tg.GetPair()))));
                 if(tg.GetPair() !=null)
-                info.add(new JLabel(((tg.GetPair().GetAsteroid() == null)? "\nPair has not been placed " : "\nPair Asteroid:\tA" + (Main.asteroids.indexOf(tg.GetPair().GetAsteroid()) + 1))));
+                info.add(new JLabel(((tg.GetPair().GetAsteroid() == null)? "\nPAIR HAS NOT BEEN PLACED " : "\nPAIR ASTEROID:\nA" + (Main.asteroids.indexOf(tg.GetPair().GetAsteroid()) + 1))));
 
                 Game.getInstance().c.g.dp.add(info);
                 Game.getInstance().c.g.dp.repaint();
