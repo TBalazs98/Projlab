@@ -61,8 +61,10 @@ public class AsteroidBelt {
         //Logger.getInstance().printCommandCall(this);
         ArrayList<DestinationObject> aneighb = a.GetNeighbours();
         a.HitBySunstorm();
+        Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImg();
         for(int i = 0; i < a.GetNeighbourCount(); i++) {
             aneighb.get(i).HitBySunstorm();
+            Game.getInstance().c.g.getAsteroidViewByAsteroid((Asteroid) aneighb.get(i)).setImg();
         }
 
         //Logger.getInstance().printReturnCommand();
