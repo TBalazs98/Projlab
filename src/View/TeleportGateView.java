@@ -76,11 +76,14 @@ public class TeleportGateView implements IDrawable{
                 Game.getInstance().c.g.dp.validate();
             }
         });
+        Game.getInstance().c.g.gamespace.add(l);
     }
 
     public void SetCoords(int x, int y){
-        this.x = x;
-        this.y = y;
+        int offsetX = rnd.nextInt(20)+10;
+        int offsetY = rnd.nextInt(20)+100;
+        this.x = x+offsetX;
+        this.y = y+offsetY;
     }
     public int getX() {
         return x;
@@ -92,15 +95,8 @@ public class TeleportGateView implements IDrawable{
     public void Draw() {
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( tg.GetAsteroid());
         SetCoords(av.getX(),av.getY());
-        if(firstDraw) {
-            int offsetX = rnd.nextInt(20)+10;
-            int offsetY = rnd.nextInt(20)+100;
-            x = x + offsetX;
-            y = y + offsetY;
-            firstDraw = false;
-        }
 
-        Game.getInstance().c.g.gamespace.add(l);
+        //Game.getInstance().c.g.gamespace.add(l);
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
 
 

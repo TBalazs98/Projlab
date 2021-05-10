@@ -203,6 +203,7 @@ public  class Controller {
         }
         for(int i=0; i<Main.asteroids.size();i++){
             g.addAsteroid(Main.asteroids.get(i));
+            Game.getInstance().AddSteppable(Main.asteroids.get(i));
         }
         for(int i=0; i<Main.robots.size();i++){
             g.addRobot(Main.robots.get(i));

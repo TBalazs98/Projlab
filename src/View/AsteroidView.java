@@ -160,8 +160,8 @@ public  class AsteroidView implements IDrawable {
 //        Game.getInstance().c.g.gamespace.add(l);
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         CharacterView cv = new CharacterView(asteroid.getCharacters());
-
         cv.Draw();
+
         if(asteroid.getLayers() == 0) {
             Material m = asteroid.getMaterial();
             if(m != null) {
