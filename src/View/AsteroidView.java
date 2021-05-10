@@ -154,12 +154,28 @@ public  class AsteroidView implements IDrawable {
         return y;
     }
     public void Draw() {
-
+        p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+        l.setIcon(p);
         Game.getInstance().c.g.gamespace.add(l);
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         CharacterView cv = new CharacterView(asteroid.getCharacters());
-        cv.Draw();
 
+        cv.Draw();
+        if(asteroid.getLayers() == 0) {
+            Material m = asteroid.getMaterial();
+            if(m != null) {
+                MaterialView mv = new MaterialView(m);
+                mv.SetCoords(x, y);
+                mv.Draw();
+            }
+        }
+
+        for(int i = 0; i < asteroid.GetNeighbours().size(); i++) {
+            if(asteroid.GetNeighbours().get(i) instanceof TeleportGate) {
+
+                Game.getInstance().c.g.getTeleportGateViewByTeleportGate((TeleportGate)asteroid.GetNeighbours().get(i)).Draw();
+            }
+        }
     }
 
 

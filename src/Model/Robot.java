@@ -141,4 +141,9 @@ public class Robot extends Worker implements drillable{
         this.asteroid.Remove(this);
     }
 
+//    public Robot copy() {
+//        Robot copy = new Robot();
+//        copy.setAsteroid(asteroid);
+//        return copy;
+//    }
 }

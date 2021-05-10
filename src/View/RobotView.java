@@ -17,6 +17,7 @@ public class RobotView implements IDrawable {
     private int x,y;
     private Robot r;
     private Random rnd = new Random();
+    private boolean firstDraw = true;
 
     RobotView(Robot _r) {
         r = _r;
@@ -63,12 +64,19 @@ public class RobotView implements IDrawable {
 
     @Override
     public void Draw() {
-        int offsetX = rnd.nextInt(20);
-        int offsetY = rnd.nextInt(20);
+        AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( r.getAsteroid());
+        SetCoords(av.getX(),av.getY());
+        if(firstDraw) {
+            int offsetX = rnd.nextInt(20)+40;
+            int offsetY = rnd.nextInt(20)+40;
+            x = x + offsetX;
+            y = y + offsetY;
+            firstDraw = false;
+        }
 
         Game.getInstance().c.g.gamespace.add(l);
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
-        l.setBounds(this.x+offsetX, this.y+offsetY, p.getIconWidth(), p.getIconWidth());
+        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
 
     }
     public void SetCoords(int x, int y){

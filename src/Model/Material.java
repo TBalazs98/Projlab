@@ -68,4 +68,9 @@ public class Material  {
         return this.name;
     }
 
+//    public Material copy() {
+//        Material copy = new Material();
+//        copy.setName(name);
+//        return copy;
+//    }
 }

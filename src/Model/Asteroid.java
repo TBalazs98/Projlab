@@ -54,6 +54,8 @@ public class Asteroid implements DestinationObject {
         //Logger.getInstance().printReturnCommand();
     }
 
+
+
     /**
      * Karakter beallitasa
      * @param c karakter, akit rateszunk az aszteroidara
@@ -458,5 +460,17 @@ public class Asteroid implements DestinationObject {
     public ArrayList<Character> getCharacters() {
         return characters;
     }
+
+//    public Asteroid copy() {
+//        Asteroid copy = new Asteroid(layers, isEmpty, isNearSun, material);
+//        for(Character c: characters) {
+//            copy.setCharacter(c.copy());
+//        }
+//        copy.SetMaterial(material.copy());
+//        for(int i = 0; i < neighbours.size(); i++) {
+//            copy.setNeighbour(neighbours.get(i).copy());
+//        }
+//        return copy;
+//    }
 
 }

@@ -361,4 +361,13 @@ public class TeleportGate implements DestinationObject, Steppable {
         isHit = state;
     }
 
+//    public TeleportGate copy() {
+//        TeleportGate copy = new TeleportGate();
+//        copy.setPair(pair);
+//        copy.setCrazy(isHit);
+//        copy.setAsteroid(asteroid);
+//        copy.setActive(isActive);
+//        copy.setPlaced(isPlaced);
+//        return copy;
+//    }
 }

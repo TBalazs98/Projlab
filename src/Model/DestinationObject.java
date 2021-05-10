@@ -25,4 +25,5 @@ public interface DestinationObject {
      */
     public void HitBySunstorm();
 
+//    public DestinationObject copy();
 }

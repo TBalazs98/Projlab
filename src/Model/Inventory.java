@@ -161,4 +161,13 @@ public class Inventory {
         }
         this.inventory.clear();
     }
+
+//    public Inventory copy() {
+//        Inventory copy = new Inventory();
+//        for(Material m: materials) {
+//            copy.Add(m);
+//        }
+//        copy.fill(inventory);
+//        return copy;
+//    }
 }

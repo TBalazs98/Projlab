@@ -21,12 +21,20 @@ public class TeleportGateView implements IDrawable{
     private JLabel l;
     private int x,y;
     private boolean highlight=false;
+    private boolean firstDraw = true;
+    private Random rnd = new Random();
 
     public TeleportGateView(TeleportGate tg){
         this.tg=tg;
        // int scaling =130;
        // p=new ImageIcon("Files/Pictures/teleportgate.jpg");
-        p=new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+        if(tg.GetIsHit()) {
+            p=new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        }
+        else {
+            p=new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        }
+
         l=new JLabel(p);
 
         l.addMouseListener(new MouseListener() {
@@ -82,28 +90,31 @@ public class TeleportGateView implements IDrawable{
     }
 
     public void Draw() {
-
-        Random rnd = new Random();
-        int offsetX = rnd.nextInt(20)+100;
-        int offsetY = rnd.nextInt(20)+100;
+        AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( tg.GetAsteroid());
+        SetCoords(av.getX(),av.getY());
+        if(firstDraw) {
+            int offsetX = rnd.nextInt(20)+10;
+            int offsetY = rnd.nextInt(20)+100;
+            x = x + offsetX;
+            y = y + offsetY;
+            firstDraw = false;
+        }
 
         Game.getInstance().c.g.gamespace.add(l);
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
-        AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( tg.GetAsteroid());
-        SetCoords(av.getX(),av.getY());
+
+
 //        System.out.println("Asteroid: " + tg.GetAsteroid() + " Párja: " + ((tg.GetPair() == null) ? (" nincs párja") :(" " + tg.GetPair().GetAsteroid())));
-        l.setBounds(this.x+offsetX, this.y+offsetY, p.getIconWidth(), p.getIconWidth());
-
-
+        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
     }
 
     public void highlightt(boolean b,GUI g){
         highlight=b;
         setImage();
-        System.out.println("faszssss");
+        //System.out.println("faszssss");
     }
 
-    private void setImage(){
+    public void setImage(){
 //        if(highlight==true && this.tg.GetIsHit() == false) {
 //            int scaling = 130;
 //            p = new ImageIcon(new ImageIcon("Files/Pictures/buildbtn.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
@@ -120,11 +131,11 @@ public class TeleportGateView implements IDrawable{
 //        }
 //        l.setIcon(p);
         if(highlight==true) {
-            int scaling = 130;
-            p = new ImageIcon(new ImageIcon("Files/Pictures/placebtn.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+            int scaling = 25;
+            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
             l.setIcon(p);
         }else {
-            int scaling = 130;
+            int scaling = 25;
             p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
             l.setIcon(p);
         }

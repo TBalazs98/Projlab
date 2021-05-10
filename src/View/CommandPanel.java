@@ -134,25 +134,30 @@ public class CommandPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == move){
 //            Game.getInstance().c.DoTheMove();
+            Game.getInstance().c.g.dp.removeAll();
             Game.getInstance().c.g.dp.moveDetails(Game.getInstance().c.g);
             next = true;
         }
         if(e.getSource() == drill){
+            Game.getInstance().c.g.dp.removeAll();
             Game.getInstance().c.HandleDrill();     //todo @Klau ez miért van itt is meg a details panelben is??
 //            Game.getInstance().c.g.dp.drillDetails(Game.getInstance().c.g);
             next = true;
         }
         if(e.getSource() == mine){
+            Game.getInstance().c.g.dp.removeAll();
             Game.getInstance().c.HandleMine();      //todo @Klau meg ez is?
 //            Game.getInstance().c.g.dp.mineDetails(Game.getInstance().c.g);
             next = true;
         }
         if(e.getSource() == place){
-            //Game.getInstance().c.HandlePlaceMaterial();
+            Game.getInstance().c.g.dp.removeAll();
+            Game.getInstance().c.HandlePlaceMaterial();
 //            Game.getInstance().c.g.dp.placeDetails(Game.getInstance().c.g);
             next = true;
         }
         if(e.getSource() == build){
+            Game.getInstance().c.g.dp.removeAll();
             Game.getInstance().c.g.dp.buildDetails(Game.getInstance().c.g);
             next = true;
         }
@@ -164,6 +169,7 @@ public class CommandPanel extends JPanel implements ActionListener {
 //                Game.getInstance().NextRound();
 //            }
 //            //Game.getInstance().c.HighlightSettlerStuff();
+            Game.getInstance().c.g.dp.removeAll();
             Game.getInstance().c.NextSettler();
         }
         this.removeAll();

@@ -15,6 +15,11 @@ public class Game {
     public boolean lostgame = false;
     private ArrayList<Settler> settlers = new ArrayList<Settler>();
     private Settler currentSettler;
+    private static final Game game = new Game();
+
+    private int rounds;
+    private ArrayList<Steppable> steppables = new ArrayList<Steppable>();
+
     /**
      *Privat konstruktor.
      */
@@ -22,10 +27,6 @@ public class Game {
         //Logger.getInstance().printCommandCall(this);
         //Logger.getInstance().printReturnCommand();
     }
-
-    private static final Game game = new Game();
-    private int rounds;
-    private ArrayList<Steppable> steppables;
 
     /**
      *Jatek inditasa.
@@ -73,10 +74,12 @@ public class Game {
     public void NextRound() {
         //Logger.getInstance().printCommandCall(this);
 
-//        if(Main.Randomize == true) {
-//            for(Steppable s: steppables)
-//                s.Step();
-//        }
+        if(Main.Randomize == true) {
+            for(Steppable s: steppables) {
+                s.Step();
+                c.g.update();
+            }
+        }
 //        //for(int i = 0; i < settlers.size(); i++) {
 //            currentSettler = settlers.get(0);
 //            SettlerView csv = null;
@@ -91,9 +94,9 @@ public class Game {
 //
 //
 //        //Logger.getInstance().printReturnCommand();
-        for(Asteroid a: Main.asteroids) {
-            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setInSunstorm(false);
-        }
+//        for(Asteroid a: Main.asteroids) {
+//            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setInSunstorm(false);
+//        }
     }
 
     public void AddSteppable(Object s){
