@@ -49,7 +49,7 @@ public  class AsteroidView implements IDrawable {
 
     }
 
-    public void setImg(){
+    public void setImage(){
         if (this.asteroid.getLayers() > 0 && !this.asteroid.GetSunProximity() && !isInsusntorm) {
             p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
         }
@@ -75,6 +75,15 @@ public  class AsteroidView implements IDrawable {
         if(exploding)
         p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
+        if(highlight==true) {
+            int scaling = 130;
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selectedasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+            l.setIcon(p);
+        }else {
+            int scaling = 130;
+            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+            l.setIcon(p);
+        }
         l.setIcon(p);
         l.addMouseListener(new MouseListener() {
             @Override
@@ -170,18 +179,6 @@ public  class AsteroidView implements IDrawable {
     public void highlight(boolean b,GUI g){
         highlight=b;
         setImage();
-    }
-
-    private void setImage(){
-        if(highlight==true) {
-            int scaling = 130;
-            p = new ImageIcon(new ImageIcon("Files/Pictures/selectedasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            l.setIcon(p);
-        }else {
-            int scaling = 130;
-            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            l.setIcon(p);
-        }
     }
 
     public Asteroid getAsteroid(){return asteroid;}

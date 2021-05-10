@@ -58,18 +58,25 @@ public JPanel getPanel()
         public void actionPerformed(ActionEvent e) {
             try {
                 InputManager.FromFileInput(chosen,false);
-                getPanel().removeAll();
-                Game.getInstance().c.InitViews(Game.getInstance().c.g);
+                Game.getInstance().c.g.remove(getPanel());
+
+//                Game.getInstance().c.g.DrawAll();
+//
+
+                Game.getInstance().c.g.DrawAll();
+                Game.getInstance().c.InitViews( Game.getInstance().c.g);
                 Game.getInstance().c.g.DrawAll();
                 Game.getInstance().c.g.repaint();
                 Game.getInstance().c.g.validate();
+
                //TODO játék indítása
             } catch(Exception ex) {
                 ex.printStackTrace();
             }
-            getPanel().repaint();
-            getPanel().validate();
+
+
         }
+
     }
 
 

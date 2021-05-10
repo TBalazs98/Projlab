@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.*;
-import Model.Robot;
 import View.AsteroidView;
 import View.GUI;
 import View.SettlerView;
@@ -176,7 +175,7 @@ public  class Controller {
         for(Asteroid a : Main.asteroids) {
             Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false, g);
             System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
-            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImg();
+            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImage();
         }
         for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
             if(a instanceof Asteroid)

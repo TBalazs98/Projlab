@@ -20,6 +20,7 @@ public class GUI extends JFrame implements ActionListener {
     public DetailsPanel dp;
     public CommandPanel cp ;/*= new CommandPanel(this);*/
     public CustomGamePanel custompanel;
+    public LoadPanel loadpanel;
 
     private ArrayList<IDrawable> drawables;
     public  ArrayList<SettlerView> settlers=new ArrayList<>();
@@ -104,7 +105,7 @@ public class GUI extends JFrame implements ActionListener {
         controls.setBackground(new Color(0,0,0,64));
         controls.setLayout(new FlowLayout());
         gamespace.setLayout(null);
-        gamespace.add(inpudialog);
+//        gamespace.add(inpudialog);
         this.add(gamespace, BorderLayout.CENTER);
         //endregion
 
@@ -129,7 +130,7 @@ public class GUI extends JFrame implements ActionListener {
             teleportgates.get(i).Draw();
         }
 
-        Game.getInstance().c.HighlightSettlerStuff();
+//        Game.getInstance().c.HighlightSettlerStuff();
 
 
         //materials.get(0).Draw();
@@ -206,7 +207,7 @@ public class GUI extends JFrame implements ActionListener {
         FlowLayout layout = new FlowLayout();
         layout.setVgap(this.height/12);
         this.setLayout(layout);
-        LoadPanel loadpanel = new LoadPanel(this);
+        loadpanel = new LoadPanel(this);
         this.add(loadpanel);
         this.setJMenuBar(bar);
         this.setVisible(true);

@@ -97,7 +97,7 @@ public class Game {
     }
 
     public void AddSteppable(Object s){
-        this.steppables.add((Steppable)s);
+//        this.steppables.add((Steppable)s);
     }
 
     public void RemoveSteppabe(Object s){

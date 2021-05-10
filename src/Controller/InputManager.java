@@ -504,7 +504,7 @@ public class InputManager {
      * @param actual hanyad objektumrol van szo
      */
     public static void createRobot(String robot_settings, int actual){
-        Robot r = Main.robots.get(actual);
+        Model.Robot r = Main.robots.get(actual);
         String[] cmd=robot_settings.split("\\t");
         Main.robots.get(actual).setAsteroid(Main.asteroids.get(Integer.parseInt(cmd[0])-1));
         Main.asteroids.get(Integer.parseInt(cmd[0])-1).Accept(r);

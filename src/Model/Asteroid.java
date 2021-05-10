@@ -1,6 +1,5 @@
 package Model;
 import Controller.Main;
-import View.AsteroidView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -364,7 +363,7 @@ public class Asteroid implements DestinationObject {
                 System.out.println(Game.getInstance().c.g.GetAsteroidView().get(i).getisInSunstorm());
             }
         }
-        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setImg();
+        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setImage();
 
         //Logger.getInstance().printCommandCall(this);
         if((layers != 0) || (!isEmpty)) {
