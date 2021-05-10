@@ -357,10 +357,14 @@ public class Asteroid implements DestinationObject {
      *Az aszteroidat napvihar eri el.
      */
     public void HitBySunstorm() {
+
         for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
-            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
+            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this) {
                 Game.getInstance().c.g.GetAsteroidView().get(i).setInSunstorm(true);
+                System.out.println(Game.getInstance().c.g.GetAsteroidView().get(i).getisInSunstorm());
+            }
         }
+        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setImg();
 
         //Logger.getInstance().printCommandCall(this);
         if((layers != 0) || (!isEmpty)) {
@@ -377,17 +381,7 @@ public class Asteroid implements DestinationObject {
                 }
             }
         }
-
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
-            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
-                Game.getInstance().c.g.GetAsteroidView().get(i).setInSunstorm(false);
-        }
-        //Logger.getInstance().printReturnCommand();
+//
     }
 
     /**
@@ -422,9 +416,14 @@ public class Asteroid implements DestinationObject {
         //this.neighbours.forEach(n -> n.HitByExplosion(this));
         //this.characters.forEach(c -> c.Explode());
 
+        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++)
+            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
+                Game.getInstance().c.g.GetAsteroidView().get(i).setExploding();
+
         Main.materials.remove(this.material);
         //Main.asteroids.remove(this);
         Main.asteroids.set(Main.asteroids.indexOf(this), null);
+
         //Logger.getInstance().printReturnCommand();
     }
 

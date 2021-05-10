@@ -76,16 +76,17 @@ public  class AsteroidView implements IDrawable {
             p = new ImageIcon(new ImageIcon("Files/Pictures/hollow_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
         }
 
-        if (asteroid.getLayers() > 0 && asteroid.GetSunProximity() && isInsusntorm) {
+        if (asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && isInsusntorm) {
             p = new ImageIcon(new ImageIcon("Files/Pictures/nearsun_and_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
         }
-        if (asteroid.getLayers() == 0 && asteroid.GetSunProximity() && isInsusntorm) {
+        if (asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && isInsusntorm) {
+
             p = new ImageIcon(new ImageIcon("Files/Pictures/hollow_nearsun_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
         }
         if(exploding)
         p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
-        l .setIcon(p);
+        l.setIcon(p);
     }
 
     public void SetCoords(int x, int y) {
@@ -146,6 +147,10 @@ public  class AsteroidView implements IDrawable {
 
     public void setInSunstorm(boolean bool) {
         this.isInsusntorm = bool;
+    }
+
+    public boolean getisInSunstorm(){
+        return isInsusntorm;
     }
 
     public void setExploding() {

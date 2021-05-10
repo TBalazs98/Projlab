@@ -91,6 +91,9 @@ public class Game {
 //
 //
 //        //Logger.getInstance().printReturnCommand();
+        for(Asteroid a: Main.asteroids) {
+            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setInSunstorm(false);
+        }
     }
 
     public void AddSteppable(Object s){
