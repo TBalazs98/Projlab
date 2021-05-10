@@ -122,15 +122,15 @@ public class GUI extends JFrame implements ActionListener {
             asteroids.get(i).Draw();
         }
         for(int i=0; i<this.settlers.size();i++){
-            settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
-            System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+//            settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+//            System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             gamespace.add(settlers.get(i).l);
             settlers.get(i).Draw();
         }
 
-        for(int i = 0; i < this.teleportgates.size();i++){
-            teleportgates.get(i).Draw();
-        }
+//        for(int i = 0; i < this.teleportgates.size();i++){
+//            teleportgates.get(i).Draw();
+//        }
 
         Game.getInstance().c.HighlightSettlerStuff();
 
