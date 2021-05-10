@@ -1,5 +1,6 @@
 package View;
 
+import Controller.CommandManager;
 import Model.Game;
 import Model.TeleportGate;
 
@@ -34,6 +35,7 @@ public class TeleportGateView implements IDrawable{
     }
 
     public void Draw() {
+
         Random rnd = new Random();
         int offsetX = rnd.nextInt(20)+100;
         int offsetY = rnd.nextInt(20)+100;
@@ -42,6 +44,7 @@ public class TeleportGateView implements IDrawable{
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( tg.GetAsteroid());
         SetCoords(av.getX(),av.getY());
+//        System.out.println("Asteroid: " + tg.GetAsteroid() + " Párja: " + ((tg.GetPair() == null) ? (" nincs párja") :(" " + tg.GetPair().GetAsteroid())));
         l.setBounds(this.x+offsetX, this.y+offsetY, p.getIconWidth(), p.getIconWidth());
 
 
@@ -53,15 +56,21 @@ public class TeleportGateView implements IDrawable{
     }
 
     private void setImage(){
-        if(highlight==true) {
+        if(highlight==true && this.tg.GetIsHit() == false) {
+            int scaling = 130;
+            p = new ImageIcon(new ImageIcon("Files/Pictures/buildbtn.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+        }if(highlight==true && this.tg.GetIsHit() == true) {
+            int scaling = 130;
+            p = new ImageIcon(new ImageIcon("Files/Pictures/startbtn.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+        }
+        if(highlight==false && this.tg.GetIsHit() == false) {
             int scaling = 130;
             p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            l.setIcon(p);
-        }else {
+        }if(highlight==false && this.tg.GetIsHit() == true) {
             int scaling = 130;
-            p = new ImageIcon(new ImageIcon("Files/Pictures/drillbtn.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            l.setIcon(p);
+            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
         }
+        l.setIcon(p);
     }
     public TeleportGate getTg(){return this.tg;}
 

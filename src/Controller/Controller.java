@@ -185,9 +185,9 @@ public  class Controller {
             System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
             Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImg();
         }
-        for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
-            Game.getInstance().c.g.getAsteroidViewByAsteroid((Asteroid) a).highlight(true,g);
-        }
+//        for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
+//            Game.getInstance().c.g.getAsteroidViewByAsteroid((Asteroid) a).highlight(true,g);
+//        }
     }
 
 
@@ -281,7 +281,6 @@ public  class Controller {
         int materials = I+C+Ra+W;
 
         //Nyersanyagok leterhozasa
-
         for(int i = 0; i< I;i++){
             Material m = new Material();
             m.setName(NormalMaterialName.IRON);
@@ -356,30 +355,45 @@ public  class Controller {
                 Game.getInstance().c.g.addTeleportGate(t);
             }
 
-            if(T > 2) {
+            if (T >= 2) {
                 int j = 0;
                 if (T % 2 == 0) {
                     while (j < T) {
-                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(j++));
+                        System.out.println("T1: " + j);
+                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(++j));
+                        System.out.println("T2: " + j);
                         Main.teleportgates.get(j).setPair(Main.teleportgates.get(j - 1));
                         j++;
                     }
                 } else {
-                    while (j < T - 1) {
-                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(j++));
-                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(j - 1));
+                    while (j < (T - 1)) {
+                        System.out.println("T1: " + j);
+                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(++j));
+                        System.out.println("T2: " + j);
+                        Main.teleportgates.get(j).setPair(Main.teleportgates.get(j-1));
                         j++;
                     }
-                }
-            }
-            for (int i = 0; i < T; i++)
-                while (Main.teleportgates.get(i).GetAsteroid() != null) {
-                    Random rand = new Random();
-                    int rand_int = rand.nextInt(A);
-                    if (Main.teleportgates.get(i).GetPair().GetAsteroid() != Main.asteroids.get(rand_int))
-                        Main.teleportgates.get(i).setAsteroid(Main.asteroids.get(rand_int));
+                    System.out.println("T3: " + j);
+                    Main.teleportgates.get(j).setPair(null);
                 }
 
+            }
+
+            for (int i = 0; i < T; i++)
+                while (Main.teleportgates.get(i).GetAsteroid() == null) {
+                    Random rand = new Random();
+                    int rand_int = rand.nextInt(A);
+                    if (Main.teleportgates.get(i).GetPair() != null) {
+                        if (Main.teleportgates.get(i).GetPair().GetAsteroid() != Main.asteroids.get(rand_int)) {
+                            Main.teleportgates.get(i).setAsteroid(Main.asteroids.get(rand_int));
+                            Main.asteroids.get(rand_int).AddNeighbour(Main.teleportgates.get(i));
+                        }
+                    } else {
+                        Main.teleportgates.get(i).setAsteroid(Main.asteroids.get(rand_int));
+                        Main.asteroids.get(rand_int).AddNeighbour(Main.teleportgates.get(i));
+                    }
+
+                }
         }
         //TeleportGate END.
 

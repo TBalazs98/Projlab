@@ -15,11 +15,12 @@ public class TeleportGate implements DestinationObject, Steppable {
      */
     public TeleportGate() {
         setInventory();
+        this.asteroid = null;
     }
 
     private boolean isActive;
     private boolean isPlaced;
-    private TeleportGate pair ;
+    private TeleportGate pair = null;
     private Asteroid asteroid = null;
     private static final Inventory inventory = new Inventory();
     private boolean isHit = false;
