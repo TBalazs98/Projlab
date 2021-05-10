@@ -1,5 +1,8 @@
 package View;
 
+import Controller.InputManager;
+import Model.Game;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,7 +25,7 @@ public class LoadPanel extends JPanel {
 
 
     public LoadPanel(GUI g) {
-        this.setPreferredSize(new Dimension(g.height/4+g.height/4,g.height/4+g.height/4));
+        this.setPreferredSize(new Dimension(g.height/5+g.height/5,g.height/5+g.height/5));
         this.setOpaque(true);
         this.setLayout(new BorderLayout());
         table = new JTable();
@@ -31,9 +34,10 @@ public class LoadPanel extends JPanel {
         table.setColumnSelectionAllowed(true);
         table.addMouseListener(new gameChoseListener());
         label = new JLabel("Chosen game to load");
-        label.setPreferredSize(new Dimension(g.width/8, 50));
-        button = new JButton("Load");
-        button.setPreferredSize(new Dimension(g.width/8, 50));
+        label.setPreferredSize(new Dimension(g.width/12, 50));
+        button = new JButton("Load Game");
+        button.setEnabled(false);
+        button.setPreferredSize(new Dimension(g.width/10, 40));
         button.addActionListener(new loadGameListener());
         also.setPreferredSize(new Dimension(g.width/4,75));
         also.add(label);
@@ -43,24 +47,28 @@ public class LoadPanel extends JPanel {
         table.setModel(data);
     }
 
-
+public JPanel getPanel()
+{
+    return this;
+}
 
     private class loadGameListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //Todo kivalasztott jatek inditasa
-
             try {
-                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Files/Saved/savedgames.txt"));
-                oos.writeObject(data.getList());//TODO
-                oos.close();
+                InputManager.FromFileInput(chosen,false);
+                getPanel().removeAll();
+                Game.getInstance().c.InitViews(Game.getInstance().c.g);
+                Game.getInstance().c.g.DrawAll();
+                Game.getInstance().c.g.repaint();
+                Game.getInstance().c.g.validate();
+               //TODO játék indítása
             } catch(Exception ex) {
                 ex.printStackTrace();
             }
-
-
-
+            getPanel().repaint();
+            getPanel().validate();
         }
     }
 
@@ -74,6 +82,7 @@ public class LoadPanel extends JPanel {
             int colIndex = table.columnAtPoint(e.getPoint());
             chosen = (String) data.getValueAt(rowIndex, colIndex);
             label.setText(chosen.toString());
+            button.setEnabled(true);
         }
 
         @Override
