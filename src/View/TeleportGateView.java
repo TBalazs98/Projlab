@@ -115,30 +115,27 @@ public class TeleportGateView implements IDrawable{
     }
 
     public void setImage(){
-//        if(highlight==true && this.tg.GetIsHit() == false) {
-//            int scaling = 130;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/buildbtn.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//        }if(highlight==true && this.tg.GetIsHit() == true) {
-//            int scaling = 130;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/startbtn.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//        }
-//        if(highlight==false && this.tg.GetIsHit() == false) {
-//            int scaling = 130;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//        }if(highlight==false && this.tg.GetIsHit() == true) {
-//            int scaling = 130;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//        }
-//        l.setIcon(p);
-        if(highlight==true) {
-            int scaling = 25;
-            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            l.setIcon(p);
-        }else {
-            int scaling = 25;
+
+        int scaling = 130;
+        if(!highlight && this.tg.GetIsHit() == false)
+
             p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            l.setIcon(p);
-        }
+        if(!highlight && this.tg.GetIsHit() == true)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+
+        if(highlight)
+            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_teleportgate.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+
+        l.setIcon(p);
+//        if(highlight==true) {
+//            int scaling = 25;
+//            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+//            l.setIcon(p);
+//        }else {
+//            int scaling = 25;
+//            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+//            l.setIcon(p);
+//        }
     }
     public TeleportGate getTg(){return this.tg;}
 
