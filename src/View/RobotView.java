@@ -60,6 +60,7 @@ public class RobotView implements IDrawable {
                 Game.getInstance().c.g.dp.validate();
             }
         });
+        Game.getInstance().c.g.gamespace.add(l);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class RobotView implements IDrawable {
             firstDraw = false;
         }
 
-        Game.getInstance().c.g.gamespace.add(l);
+//        Game.getInstance().c.g.gamespace.add(l);
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
 

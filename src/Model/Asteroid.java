@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  *Egy, az aszteroida ovben talalhato aszteroidat reprezentalja.
  */
-public class Asteroid implements DestinationObject {
+public class Asteroid implements DestinationObject, Steppable {
 
     private boolean isEmpty;
 

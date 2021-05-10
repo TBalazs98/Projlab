@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Jatekosok autonom segitoit reprezentalja. Karakterek altal epithetoek.
  */
-public class Robot extends Worker implements drillable{
+public class Robot extends Worker implements drillable, Steppable{
     private static final Inventory inventory = new Inventory();
 
     /**

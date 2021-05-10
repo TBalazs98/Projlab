@@ -74,12 +74,18 @@ public class Game {
     public void NextRound() {
         //Logger.getInstance().printCommandCall(this);
 
-        if(Main.Randomize == true) {
+        //if(Main.Randomize == true) {
             for(Steppable s: steppables) {
+                System.out.println("haliak");
                 s.Step();
                 c.g.update();
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
             }
-        }
+        //}
 //        //for(int i = 0; i < settlers.size(); i++) {
 //            currentSettler = settlers.get(0);
 //            SettlerView csv = null;
@@ -99,8 +105,8 @@ public class Game {
 //        }
     }
 
-    public void AddSteppable(Object s){
-//        this.steppables.add((Steppable)s);
+    public void AddSteppable(Steppable s){
+        this.steppables.add(s);
     }
 
     public void RemoveSteppabe(Object s){

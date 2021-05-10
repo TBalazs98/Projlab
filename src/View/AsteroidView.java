@@ -12,7 +12,7 @@ public  class AsteroidView implements IDrawable {
 
     private Asteroid asteroid;
     private Icon p;
-    private JLabel l;
+    public JLabel l;
     private int x, y;
     private boolean highlight = false;
     int scaling = 130;
@@ -156,7 +156,7 @@ public  class AsteroidView implements IDrawable {
     public void Draw() {
         p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
         l.setIcon(p);
-        Game.getInstance().c.g.gamespace.add(l);
+//        Game.getInstance().c.g.gamespace.add(l);
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         CharacterView cv = new CharacterView(asteroid.getCharacters());
 

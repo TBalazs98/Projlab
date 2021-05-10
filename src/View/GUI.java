@@ -119,6 +119,7 @@ public class GUI extends JFrame implements ActionListener {
             coordinates.toggle();
 
             asteroids.get(i).SetCoords(coordinates.getX(),coordinates.getY());
+            gamespace.add(asteroids.get(i).l);
             asteroids.get(i).Draw();
         }
         for(int i=0; i<this.settlers.size();i++){
@@ -367,9 +368,13 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public void update() {
+        //gamespace.removeAll();
         for(AsteroidView av: asteroids) {
             av.Draw();
         }
+
+        gamespace.repaint();
+        gamespace.validate();
     }
 
 }
