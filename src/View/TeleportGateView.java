@@ -54,7 +54,8 @@ public class TeleportGateView implements IDrawable{
                 info.add(new JLabel("T\t" + (Main.teleportgates.indexOf(tg)+1)));
                 info.add(new JLabel("\nAsteroid:\tA" + ((tg.GetAsteroid() == null)? "not placed yet: ": (Main.asteroids.indexOf(tg.GetAsteroid()) +1) )));
                 info.add(new JLabel(((tg.GetPair() == null)?"\nNo Pair" : "\nPair:\tT" + Main.teleportgates.indexOf(tg.GetPair()))));
-                info.add(new JLabel(((tg.GetPair() != null && tg.GetPair().GetAsteroid() == null)? "\nPair has not been placed " : "\nPair Asteroid:\tA" + (Main.asteroids.indexOf(tg.GetPair().GetAsteroid()) + 1))));
+                if(tg.GetPair() !=null)
+                info.add(new JLabel(((tg.GetPair().GetAsteroid() == null)? "\nPair has not been placed " : "\nPair Asteroid:\tA" + (Main.asteroids.indexOf(tg.GetPair().GetAsteroid()) + 1))));
 
                 Game.getInstance().c.g.dp.add(info);
                 Game.getInstance().c.g.dp.repaint();
