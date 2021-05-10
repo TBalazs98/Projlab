@@ -359,7 +359,7 @@ public class Asteroid implements DestinationObject {
     public void HitBySunstorm() {
         for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
             if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
-                Game.getInstance().c.g.GetAsteroidView().get(i).setInSunstorm();
+                Game.getInstance().c.g.GetAsteroidView().get(i).setInSunstorm(true);
         }
 
         //Logger.getInstance().printCommandCall(this);
@@ -385,7 +385,7 @@ public class Asteroid implements DestinationObject {
         }
         for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
             if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
-                Game.getInstance().c.g.GetAsteroidView().get(i).setOutSunstorm();
+                Game.getInstance().c.g.GetAsteroidView().get(i).setInSunstorm(false);
         }
         //Logger.getInstance().printReturnCommand();
     }

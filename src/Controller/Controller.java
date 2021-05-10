@@ -75,11 +75,12 @@ public  class Controller {
         return selectedSettler;
     }
     public void HandleDrill(){
-        Main.settlers.get(SelectedSettler());
+        Main.settlers.get(SelectedSettler()).Drill();
         NextSettler();
     }
     public void HandleMine(){
-        Main.settlers.get(SelectedSettler());
+        Main.settlers.get(SelectedSettler()).Mine();
+
         NextSettler();
     }
 
@@ -95,8 +96,10 @@ public  class Controller {
     }
 
     public void HighAsteroid(Settler sv){
-        for(Asteroid a : Main.asteroids){
-            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false,g);
+        for(Asteroid a : Main.asteroids) {
+            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false, g);
+            System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
+            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImg();
         }
         for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
             Game.getInstance().c.g.getAsteroidViewByAsteroid((Asteroid) a).highlight(true,g);
