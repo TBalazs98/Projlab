@@ -32,7 +32,7 @@ public class Game {
      */
     public void StartGame() {
         c=new Controller();
-        settlers = Main.settlers;
+        //settlers = Main.settlers;
     }
 
     /**

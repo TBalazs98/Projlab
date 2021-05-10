@@ -21,11 +21,11 @@ public class CharacterView implements IDrawable{
 
     public void Draw() {
         g = Game.getInstance().c.g;
-        //compnum = g.getCompnum();
+
         for(int i = 0; i < chars.size(); i++) {
-            if(chars.get(i) instanceof Settler) {
-                Call((Settler)chars.get(i));
-            }
+//            if(chars.get(i) instanceof Settler) {
+//                Call((Settler)chars.get(i));
+//            }
             if(chars.get(i) instanceof Robot) {
                 Call((Robot)chars.get(i));
             }
@@ -33,7 +33,6 @@ public class CharacterView implements IDrawable{
                 Call((UFO)chars.get(i));
             }
 
-            //compnum++;
         }
     }
 
@@ -49,7 +48,6 @@ public class CharacterView implements IDrawable{
 //            g.settlers.add(sv);
 //        }
         SettlerView sv = new SettlerView(s);
-       // sv.setCompnum(compnum);
        // Game.c.g.GetSettlerView().get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( s.getAsteroid());
         sv.SetCoords(av.getX(),av.getY());
@@ -58,8 +56,6 @@ public class CharacterView implements IDrawable{
 
     private void Call(UFO u) {
         UfoView uv = new UfoView(u);
-        //uv.setCompnum(compnum);
-        //SetCharXY(u);
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( u.getAsteroid());
         uv.SetCoords(av.getX(),av.getY());
         uv.Draw();
@@ -67,17 +63,12 @@ public class CharacterView implements IDrawable{
 
     private void Call(Robot r) {
         RobotView rv = new RobotView(r);
-        //rv.setCompnum(compnum);
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( r.getAsteroid());
         rv.SetCoords(av.getX(),av.getY());
         rv.Draw();
     }
 
-    private void SetCharXY(Character c){
-       AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( c.getAsteroid());
 
-
-    }
 
 
 }

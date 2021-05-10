@@ -68,4 +68,6 @@ public class MaterialView implements IDrawable {
         l.setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
 
     }
+
+    public Material getMaterial(){return material;}
 }

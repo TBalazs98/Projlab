@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import View.AsteroidView;
 import View.GUI;
 import View.SettlerView;
 
@@ -12,41 +13,77 @@ import java.util.Random;
 public  class Controller {
     public GUI g;
     public static ArrayList<Settler> settlers=new ArrayList<>();
-
-
     public int command=0;
     public int selectedSettler=0;
-    public int mx=0,my=0;
+    public Settler s=new Settler();
+    public Asteroid a = new Asteroid();
 
     public Controller(){
-        //InitViews(g);
-        //Main.settlers.add(new Settler());
         g=new GUI(this);
         g.DrawMenu();
-        //settlers=Main.settlers;
         InitViews(g);
 
+
+
+    }
+    public void DoTheMove(){
+        System.out.println("neigh index"+s.getAsteroid().GetNeighbourIndex(a));
+        s.Move(s.getAsteroid().GetNeighbourIndex(a));
+        NextSettler();      //ezt kell hülyebiztosan lekezelni
+        g.DrawSettlers();
     }
 
-    public void stepsettlers(){
-        Settler s=Main.settlers.get(selectedSettler%(Main.settlers.size()));
-        //SettlerView sv =Game.getInstance().c.g.GetSettlerView().get(selectedSettler%Game.getInstance().c.g.GetSettlerView().size());
-        SettlerView sv =Game.getInstance().c.g.getSettlerViewBySettler(s);
+    public void MoveSetSettler(Settler ss){
+        System.out.println("valasztottam settlert"+ss);
+        s=ss;
+    }
 
-        //sv.l.setIcon(new ImageIcon("Files/Pictures/ice.png"));
-        //sv.SelectHighlighted(true);
-        HighlightEverythingExcept(g.GetSettlerView().get(selectedSettler%(Game.getInstance().c.g.GetSettlerView().size())));
-        HighAsteroid(s);
+    public void MoveSetAsteroid(AsteroidView av){
+        System.out.println("valasztottam aszteroidat"+av);
+        a=av.getAsteroid();
+    }
+
+    public void HighlightSettlerStuff(){
+        //Settler s=Main.settlers.get(SelectedSettler());
+       // SettlerView sv =Game.getInstance().c.g.getSettlerViewBySettler(s);
+
+
+        //HighlightEverythingExcept(g.GetSettlerView().get(SelectedSettler()));
+        HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(SelectedSettler())));
+        //HighAsteroid(s);
+        HighAsteroid(Main.settlers.get(SelectedSettler()));
         //switchCommand(s);
         //HighlightAsteroids();
 
 
         //if(selectedSettler%settlers.size()!=0)
-        NextSettler();
+        //NextSettler();
         //sv.SelectHighlighted(false);
        // else
            // Game.getInstance().NextRound();
     }
+
+    public void NextSettler(){
+
+        selectedSettler++;
+    }
+
+    public int SelectedSettler(){
+        if(selectedSettler>=Main.settlers.size()-1){
+            selectedSettler=0;
+        }
+        return selectedSettler;
+    }
+    public void HandleDrill(){
+        Main.settlers.get(SelectedSettler()).Drill();
+        NextSettler();
+    }
+    public void HandleMine(){
+        Main.settlers.get(SelectedSettler()).Mine();
+
+        NextSettler();
+    }
+
 
     public void HighlightEverythingExcept(SettlerView sv){
        // HighlightAsteroids();
@@ -59,28 +96,10 @@ public  class Controller {
     }
 
     public void HighAsteroid(Settler sv){
-//        for  (DestinationObject o :sv.getSettler().getAsteroid().GetNeighbours()){
-//            g.getAsteroidViewByAsteroid((Asteroid)o).highlight(true,g);
-//
-//        }
-
-//        for(int j=0; j<Main.asteroids.size();j++){
-//            System.out.println("J, aminek az értéke [0,1,2]" + j);
-//            for(int i=0; i<sv.getAsteroid().GetNeighbours().size();i++){
-//                System.out.println("I, aminak az értéke az aktuális aszteroida szomszédaitól fugg"+i);
-//                System.out.println("get(j) = "+ Main.asteroids.get(j) + "get(i) = "+ sv.getAsteroid().GetNeighbour(i));
-//                if((DestinationObject) Main.asteroids.get(j)==sv.getAsteroid().GetNeighbour(i)){
-//                    g.getAsteroidViewByAsteroid(Main.asteroids.get(j)).highlight(true,g);
-//                }else
-//                    g.getAsteroidViewByAsteroid(Main.asteroids.get(j)).highlight(false,g);
-//            }
-//        }
-//        System.out.println("-----");
-
-
-
-        for(Asteroid a : Main.asteroids){
-            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false,g);
+        for(Asteroid a : Main.asteroids) {
+            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false, g);
+            System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
+            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImg();
         }
         for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
             Game.getInstance().c.g.getAsteroidViewByAsteroid((Asteroid) a).highlight(true,g);
@@ -109,7 +128,7 @@ public  class Controller {
                         break;
                     case 4:
                         Settler s=Main.settlers.get(selectedSettler%Game.getInstance().c.g.GetSettlerView().size());
-                        System.out.println("mx = "+mx+ " my"+ my);
+
                         break;
 
                 }
@@ -118,21 +137,29 @@ public  class Controller {
         });
     }
 
-    public void printxy(){
-        System.out.println("cx = " + mx + " cy = " + my );
-    }
 
-    public void NextSettler(){
 
-            selectedSettler++;
-    }
 
     public void InitViews(GUI g){
-       for(int i=0; i<Main.settlers.size();i++){
+        for(int i=0; i<Main.settlers.size();i++){
             g.addSettler(Main.settlers.get(i));
         }
         for(int i=0; i<Main.asteroids.size();i++){
             g.addAsteroid(Main.asteroids.get(i));
+        }
+        for(int i=0; i<Main.robots.size();i++){
+            g.addRobot(Main.robots.get(i));
+            Game.getInstance().AddSteppable(Main.robots.get(i));
+        }
+        for(int i=0; i<Main.ufos.size();i++){
+            g.addUfo(Main.ufos.get(i));
+            Game.getInstance().AddSteppable(Main.ufos.get(i));
+        }
+//        for(int i=0; i<Main.teleportgates.size();i++){
+//            g.addSettler(Main.settlers.get(i));
+//        }
+        for(int i=0; i<Main.materials.size();i++){
+            g.addMaterial(Main.materials.get(i));
         }
     }
 
@@ -175,21 +202,26 @@ public  class Controller {
             Material m = new Material();
             m.setName(NormalMaterialName.IRON);
             Main.materials.add(m);
+
+            Game.getInstance().c.g.addMaterial(m);
         }
         for(int i = 0; i< C;i++){
             Material m = new Material();
             m.setName(NormalMaterialName.COAL);
             Main.materials.add(m);
+            Game.getInstance().c.g.addMaterial(m);
         }
         for(int i = 0; i< Ra;i++){
             RadioactiveMaterial rm = new RadioactiveMaterial();
             rm.setName(RadioactiveMaterialName.URAN);
             Main.materials.add(rm);
+            Game.getInstance().c.g.addMaterial(rm);
         }
         for(int i = 0; i< W;i++){
             SublimableMaterial sm = new SublimableMaterial();
             sm.setName(SublimableMaterialName.ICEWATER);
             Main.materials.add(sm);
+            Game.getInstance().c.g.addMaterial(sm);
         }
         //Nyersanyag END.
 
@@ -210,21 +242,23 @@ public  class Controller {
 
         if(A > 1) {
             for (int i = 0; i < A; i++) {
-                Random rand = new Random();
-                int rand_int = rand.nextInt(Main.asteroids.size());
-                int db = 0;
-                System.out.println(i);
-                System.out.println(Main.asteroids.get(i).GetNeighbourCount());
-                if (Main.asteroids.get(i).GetNeighbourCount() != -1) {
-                    for (DestinationObject o : Main.asteroids.get(i).GetNeighbours()) {
-                        if (o == Main.asteroids.get(rand_int)) {
-                            db++;
+                for(int j=0; j<A%3;j++) {
+                    Random rand = new Random();
+                    int rand_int = rand.nextInt(Main.asteroids.size());
+                    int db = 0;
+                    System.out.println(i);
+                    System.out.println(Main.asteroids.get(i).GetNeighbourCount());
+                    if (Main.asteroids.get(i).GetNeighbourCount() != -1) {
+                        for (DestinationObject o : Main.asteroids.get(i).GetNeighbours()) {
+                            if (o == Main.asteroids.get(rand_int)) {
+                                db++;
+                            }
                         }
                     }
-                }
 
-                if (db == 0)
-                    Main.asteroids.get(i).AddNeighbour(Main.asteroids.get(rand_int));
+                    if (db == 0)
+                        Main.asteroids.get(i).AddNeighbour(Main.asteroids.get(rand_int));
+                }
             }
         }
         //Aszteroida END.
@@ -271,8 +305,8 @@ public  class Controller {
             s.setAsteroid(Main.asteroids.get(rand_int));
             Main.asteroids.get(rand_int).setCharacter(s);
             Main.settlers.add(s);
-            SettlerView sv = new SettlerView(s);
-            Game.getInstance().c.g.settlers.add(sv);
+            Game.getInstance().c.g.addSettler(s);
+
         }
 
         //Robot letrehozas, lehejezes
@@ -284,6 +318,7 @@ public  class Controller {
                 r.setAsteroid(Main.asteroids.get(rand_int));
                 Main.asteroids.get(rand_int).setCharacter(r);
                 Main.robots.add(r);
+                Game.getInstance().c.g.addRobot(r);
             }
         }
 
@@ -296,6 +331,7 @@ public  class Controller {
                 u.setAsteroid(Main.asteroids.get(rand_int));
                 Main.asteroids.get(rand_int).setCharacter(u);
                 Main.ufos.add(u);
+                Game.getInstance().c.g.addUfo(u);
             }
         }
 

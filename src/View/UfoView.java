@@ -12,7 +12,6 @@ public class UfoView implements IDrawable{
     private JLabel l;
     private int x,y;
     private UFO u;
-    private int compnum;
     private Random rnd = new Random();
 
     UfoView(UFO _u) {
@@ -30,14 +29,9 @@ public class UfoView implements IDrawable{
         Game.getInstance().c.g.gamespace.add(l);
         int offsetX = rnd.nextInt(20);
         int offsetY = rnd.nextInt(20);
-        x = Game.getInstance().c.g.getX()+offsetX+40;
-        y = Game.getInstance().c.g.getY()+offsetY+40;
+
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
-        //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        l.setBounds(this.x+offsetX, this.y+offsetY, p.getIconWidth(), p.getIconWidth());
     }
 
-    public void setCompnum(int n) {
-        compnum = n;
-    }
 }

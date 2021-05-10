@@ -1,5 +1,6 @@
 package Model;
 import Controller.Main;
+import View.AsteroidView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -356,6 +357,11 @@ public class Asteroid implements DestinationObject {
      *Az aszteroidat napvihar eri el.
      */
     public void HitBySunstorm() {
+        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
+            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
+                Game.getInstance().c.g.GetAsteroidView().get(i).setInSunstorm(true);
+        }
+
         //Logger.getInstance().printCommandCall(this);
         if((layers != 0) || (!isEmpty)) {
             int n = characters.size();
@@ -370,6 +376,16 @@ public class Asteroid implements DestinationObject {
                     t.HitBySunstorm();
                 }
             }
+        }
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
+            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
+                Game.getInstance().c.g.GetAsteroidView().get(i).setInSunstorm(false);
         }
         //Logger.getInstance().printReturnCommand();
     }
@@ -391,6 +407,10 @@ public class Asteroid implements DestinationObject {
      *Az aszteroida felrobban, errol ertesiti a szomszedait, illetve a rajta levo karakterek ennek megfeleloen viselkednek.
      */
     public void Explode() {
+        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
+            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
+                Game.getInstance().c.g.GetAsteroidView().get(i).setExploding();
+        }
         //Logger.getInstance().printCommandCall(this);;
         int n = characters.size();
         for(int i = n - 1; i >= 0; i--) {

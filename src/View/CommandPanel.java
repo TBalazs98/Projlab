@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 public class CommandPanel extends JPanel implements ActionListener {
     JList<String> list ;
@@ -173,7 +172,7 @@ public class CommandPanel extends JPanel implements ActionListener {
         inventory.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
         ImageIcon p = null;
         scaling = 50;
-        System.out.println("INVENTORY: " + Game.getInstance().c.selectedSettler);
+//        System.out.println("INVENTORY: " + Game.getInstance().c.selectedSettler);
         for(Material m : Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials()){
             if(m.getName()== NormalMaterialName.IRON) {
                 p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
@@ -195,56 +194,35 @@ public class CommandPanel extends JPanel implements ActionListener {
             }
             inventory.add(new JLabel((p)));
         }
+
+        for(TeleportGate t : Main.settlers.get(Game.getInstance().c.selectedSettler).GetGates()) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+            inventory.add(new JLabel(p));
+        }
         this.add(inventory);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == move){
-
-            Vector<Integer> vector = new Vector<>();
-            int id = 0;
-
-//                        for(DestinationObject i: Controller.settlers.get(Game.getInstance().c.selectedSettler).getAsteroid().GetNeighbours()){
-//          #TODO                  vector.add((id));
-//                            id++;
-//                            System.out.println(vector.size());
-//                        }
-            Game.getInstance().c.g.dp.moveDetails(vector, Game.getInstance().c.g);
-            Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
+            Game.getInstance().c.g.dp.moveDetails(Game.getInstance().c.g);
         }
         if(e.getSource() == drill){
-            Vector<String> vector = new Vector<>();
-            vector.add("Dig");
-            //c.g.dp.digDetails(vector, c.g);
-            Game.getInstance().c.g.dp.drillDetails(vector,Game.getInstance().c.g);
-            //System.out.println(list.getSelectedValue());
+            Game.getInstance().c.g.dp.drillDetails(Game.getInstance().c.g);
         }
         if(e.getSource() == mine){
-            Vector<String> vector = new Vector<>();
-            vector.add("Mine");
-            //c.g.dp.mineDetails(vector, c.g);
             Game.getInstance().c.g.dp.mineDetails(Game.getInstance().c.g);
         }
         if(e.getSource() == place){
-            Vector<Material> vector = new Vector<>();
-
-//                        for(Material i: Controller.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials()){
-//          #TODO                  vector.add(i);
-//                            System.out.println(vector.size());
-//                        }
-            Game.getInstance().c.g.dp.placeDetails(vector, Game.getInstance().c.g);
+            Game.getInstance().c.g.dp.placeDetails(Game.getInstance().c.g);
         }
         if(e.getSource() == build){
-            Vector<String> vector = new Vector<>();
-            vector.add("TeleportGate");
-            vector.add("Robot");
-            vector.add("Base");
-            Game.getInstance().c.g.dp.buildDetails(vector, Game.getInstance().c.g);
+
+            Game.getInstance().c.g.dp.buildDetails(Game.getInstance().c.g);
         }
 
 
-        Game.getInstance().c.stepsettlers();
+        Game.getInstance().c.HighlightSettlerStuff();
         if(Game.getInstance().c.selectedSettler == Main.settlers.size()-1)
             Game.getInstance().c.selectedSettler = 0;
 
