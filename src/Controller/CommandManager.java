@@ -303,6 +303,7 @@ public class CommandManager {
      * @param generateoutput ha iagaz az erteke, elemnti a kimenetet egy Stringbe
      */
     public static void listMaterials (boolean generateoutput){
+
         int i = 0;
         if (Main.materials.size() == 0) {
 //            System.out.println("No Material!");
@@ -445,6 +446,8 @@ public class CommandManager {
         /**
          * Robotok kilistazasa
          */
+
+
         i = 0;
         for(Robot r : Main.robots){
             i++;
@@ -457,6 +460,9 @@ public class CommandManager {
         /**
          * Ufok kilistazasa
          */
+
+
+
         i = 0;
         for(UFO u : Main.ufos){
             i++;
@@ -647,6 +653,7 @@ public class CommandManager {
                         neigh.add(""+(Main.teleportgates.indexOf(o) + 1));
                 }
                 pw.print(String.join(",",neigh));
+                pw.print("\t");
             }
             if(a.GetSunProximity())
                 pw.print(1);
@@ -693,9 +700,12 @@ public class CommandManager {
                     mat.add(Integer.toString((Main.materials.indexOf(m) + 1)));
 
                 pw.print(String.join(",",mat));
+                pw.print("\t");
             }
+
             pw.print(s.GetGates().size());
             if(s.GetGates().size() != 0) {
+                pw.print("\t");
                 ArrayList<String> gat = new ArrayList<>();
                 for (TeleportGate t : s.GetGates())
                     gat.add(Integer.toString((Main.teleportgates.indexOf(t))+ 1));
@@ -703,6 +713,7 @@ public class CommandManager {
 
             }
             System.out.println("");
+            pw.print("\n");
         }
 
         for(Robot r : Main.robots){
@@ -710,8 +721,9 @@ public class CommandManager {
         }
 
         for(UFO u : Main.ufos){
-            pw.print((Main.asteroids.indexOf(u.getAsteroid()) + 1) + "\t");
+            pw.print((Main.asteroids.indexOf(u.getAsteroid()) + 1));
             if(u.GetInventory().Size() != 0) {
+                pw.print("\t");
                 ArrayList<String> mat = new ArrayList<>();
                 for (Material m : u.GetInventory().GetMaterials())
                     mat.add(Integer.toString((Main.materials.indexOf(m) + 1)));

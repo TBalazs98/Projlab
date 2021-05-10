@@ -85,25 +85,25 @@ public class InputManager {
                 }
             }
 
-            reader.readLine();      //ures sor beolvasasa, doksi szerint
+            /*reader.readLine();      //ures sor beolvasasa, doksi szerint
 
             while(cm.IsRunning()){      //addig amig a bemenetben nem talalja meg a stop-ot
                 line=reader.readLine();
                 cm.command(line,generateoutput);
-            }
-            System.out.println("[Actual output]");
+            }*/
+            /*System.out.println("[Actual output]");
             cm.listMaterials(generateoutput);   //
             cm.listAsteroids(generateoutput);
             cm.listTeleportGates(generateoutput);
             cm.listCharacters(generateoutput);
-            //cm.saveMap("savedmap");
+            //cm.saveMap("savedmap");*/
 
-            removeObjects(Main.materials);  //uritjuk a tarolokat
+            /*removeObjects(Main.materials);  //uritjuk a tarolokat
             removeObjects(Main.asteroids);
             removeObjects(Main.teleportgates);
             removeObjects(Main.settlers);
             removeObjects(Main.robots);
-            removeObjects(Main.ufos);
+            removeObjects(Main.ufos);*/
 
             cm.Reset();
 
@@ -120,7 +120,7 @@ public class InputManager {
      */
     public static void FromFileInput(String filename,boolean generateoutput){
         try {
-            File currentfile = InputManager.getFile("Files","Input" ,filename);
+            File currentfile = InputManager.getFile("Files","Saved" ,filename);
             reader = new BufferedReader(new FileReader(currentfile));
             InputManager.InputCore(generateoutput);   //TODO ezt kell átváltoztatni bool generateoutput-ra, meg paraméterben felvenni
         }catch (IOException e){                       //TODO és a ParamTest-ben átváltoztatni minden hívást, kiegészíteni false-ra

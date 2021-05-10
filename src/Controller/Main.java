@@ -106,7 +106,7 @@ public class Main {
         GuiController gc= new GuiController(g);*/
         //g.DrawMenu();
         //c = new Controller();
-        Asteroid a = new Asteroid();
+/*        Asteroid a = new Asteroid();
         a.SetEmpty(false);
         SublimableMaterial sm = new SublimableMaterial();
         a.SetMaterial(sm);
@@ -140,8 +140,31 @@ public class Main {
 //        a2.AddNeighbour(a3);
 //        a.AddNeighbour(a3);
 
+        Robot robot = new Robot();
+        robot.setAsteroid(a2);
+
+        robots.add(robot);
+
+        UFO ufo = new UFO();
+        ufo.setAsteroid(a3);
+
+        ufos.add(ufo);
 
 
+        TeleportGate tp1 = new TeleportGate();
+        TeleportGate tp2 = new TeleportGate();
+
+        tp1.setActive(false);
+        tp2.setActive(false);
+
+        tp1.setPair(tp2);
+        tp2.setPair(tp1);
+
+        tp1.setPlaced(false);
+        tp2.setPlaced(false);
+
+        teleportgates.add(tp1);
+        teleportgates.add(tp2);
 
         Settler s = new Settler();
         s.setAsteroid(a);
@@ -175,16 +198,37 @@ public class Main {
         RadioactiveMaterial rm = new RadioactiveMaterial();
         rm.setName(RadioactiveMaterialName.URAN);
 
-        /*SublimableMaterial rm = new SublimableMaterial();
-        rm.setName(SublimableMaterialName.ICEWATER);*/
+        SublimableMaterial sub = new SublimableMaterial();
+        sub.setName(SublimableMaterialName.ICEWATER);
 
         materials.add(m);
         materials.add(rm);
+        materials.add(sub);
 
         s.AddMaterial(m);
         s.AddMaterial(rm);
+        s3.AddMaterial(sub);
 
-        System.out.println(Main.materials.get(1).name);
+        s4.AddGate(tp1);
+        s4.AddGate(tp2);
+
+        a.SetMaterial(m);
+        //a.SetEmpty(false);
+        //a2.SetEmpty(false);
+        a3.SetEmpty(true);
+        a2.SetMaterial(rm);*/
+
+        //System.out.println(s.GetInventory().Size());
+
+
+
+
+
+        InputManager.FromFileInput("savedmap", false);
+
+
+
+
         game.StartGame();
         //game.c.isNeighbour(s,a2);
 
