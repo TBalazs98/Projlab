@@ -63,9 +63,9 @@ public JPanel getPanel()
 //                Game.getInstance().c.g.DrawAll();
 //
 
-                Game.getInstance().c.g.DrawAll();
+//                Game.getInstance().c.g.DrawAll();
                 Game.getInstance().c.InitViews( Game.getInstance().c.g);
-                Game.getInstance().c.g.DrawAll();
+//                Game.getInstance().c.g.DrawAll();
                 Game.getInstance().c.g.repaint();
                 Game.getInstance().c.g.validate();
 

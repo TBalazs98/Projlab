@@ -76,7 +76,7 @@ public  class Controller {
     }
 
     public int SelectedSettler(){
-        if(selectedSettler>=Main.settlers.size()-1){
+        if(selectedSettler==(Main.settlers.size())){
             selectedSettler=0;
         }
         return selectedSettler;
@@ -289,10 +289,10 @@ public  class Controller {
             int rand_int, randd_int;
             for (int i = 0; i < A; i++) {
                 Random randd = new Random();
-                 randd_int = randd.nextInt(Main.asteroids.size());
+                 randd_int = randd.nextInt(A/3)+1;
                 for(int j=0; j<(randd_int);j++) {
                     Random rand = new Random();
-                    rand_int = rand.nextInt(Main.asteroids.size());
+                    rand_int = rand.nextInt(A);
                     int db = 0;
                     System.out.println(i);
                     System.out.println(Main.asteroids.get(i).GetNeighbourCount());
