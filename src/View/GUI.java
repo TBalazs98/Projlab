@@ -26,7 +26,7 @@ public class GUI extends JFrame implements ActionListener {
     private ArrayList<AsteroidView> asteroids = new ArrayList<>();
     private ArrayList<RobotView> robots = new ArrayList<>();
     public  ArrayList<UfoView> ufos=new ArrayList<>();
-    //private ArrayList<Tele> teleportgates = new ArrayList<>();    //#todo
+    private ArrayList<TeleportGateView> teleportgates = new ArrayList<>();    //#todo
     public  ArrayList<MaterialView> materials=new ArrayList<>();
     private Coordinates[][] coords;
     private int coordswidth;
@@ -121,6 +121,7 @@ public class GUI extends JFrame implements ActionListener {
             System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             settlers.get(i).Draw();
         }
+        //teleportgates.get(0).Draw();
         Game.getInstance().c.HighlightSettlerStuff();
 
 
@@ -308,11 +309,11 @@ public class GUI extends JFrame implements ActionListener {
         ufos.add(uv);
         drawables.add(uv);
     }
-//    public void addSettler(Settler s ){       //#todo teleportgate view
-//        SettlerView sw = new SettlerView(s);
-//        settlers.add(sw);
-//        drawables.add(sw);
-//    }
+    public void addTeleportGate(TeleportGate tg ){       //#todo teleportgate view
+        TeleportGateView tgv = new TeleportGateView(tg);
+        teleportgates.add(tgv);
+        drawables.add(tgv);
+    }
 
     public void addMaterial(Material m ){
         MaterialView mv = new MaterialView(m);

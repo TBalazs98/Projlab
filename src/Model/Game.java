@@ -91,6 +91,7 @@ public class Game {
 //
 //
 //        //Logger.getInstance().printReturnCommand();
+
     }
 
     public void AddSteppable(Object s){

@@ -10,11 +10,9 @@ import java.util.ArrayList;
 public  class AsteroidView implements IDrawable {
 
     private Asteroid asteroid;
-    private JButton as;
     private Icon p;
     private JLabel l;
     private int x,y;
-    private int compnum = 0;
     private boolean highlight=false;
 
 

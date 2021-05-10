@@ -107,10 +107,10 @@ public class Main {
         //g.DrawMenu();
         //c = new Controller();
         Asteroid a = new Asteroid();
-        a.SetEmpty(false);
+        a.SetEmpty(true);
         SublimableMaterial sm = new SublimableMaterial();
-        a.SetMaterial(sm);
-        a.setLayer(11);
+        a.SetMaterial(null);
+        a.setLayer(0);
         a.SetSunProximityManual(true);
 
 
@@ -129,6 +129,13 @@ public class Main {
         a3.SetMaterial(sm3);
         a3.setLayer(1);
         a3.SetSunProximityManual(true);
+
+        TeleportGate tg=new TeleportGate();
+        tg.setPlaced(true);
+        tg.setAsteroid(a3);
+        tg.AddNeighbour(a2);
+
+        a3.setNeighbour(tg);
 
         a3.setNeighbour(a2);
         a3.setNeighbour(a);
@@ -163,6 +170,7 @@ public class Main {
 //        asteroids.add(a);
 //        asteroids.add(a2);
 //        asteroids.add(a3);
+//        teleportgates.add(tg);
 //
 //        settlers.add(s);
 //        settlers.add(s2);
@@ -178,11 +186,11 @@ public class Main {
         /*SublimableMaterial rm = new SublimableMaterial();
         rm.setName(SublimableMaterialName.ICEWATER);*/
 //
-//        materials.add(m);
-//        materials.add(rm);
-//
-//        s.AddMaterial(m);
-//        s.AddMaterial(rm);
+        materials.add(m);
+        materials.add(rm);
+
+        s.AddMaterial(m);
+        s.AddMaterial(rm);
 
 
 

@@ -24,7 +24,7 @@ public class SettlerView implements IDrawable{
         p=new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
         l=new JLabel(p);
         s = _s;
-        Game.getInstance().c.g.gamespace.add(l);
+//        Game.getInstance().c.g.gamespace.add(l);
     }
 
     public void SetCoords(int x, int y){
@@ -38,7 +38,7 @@ public class SettlerView implements IDrawable{
        // x = Game.getInstance().c.g.getX()+offsetX+10;
         //y = Game.getInstance().c.g.getY()+offsetY+10;
         //g.gamespace.add(l);
-        //Game.getInstance().c.g.gamespace.add(l);
+        Game.getInstance().c.g.gamespace.add(l);
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
         //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
        // g.gamespace.getComponent(index).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());

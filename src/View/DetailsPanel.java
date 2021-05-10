@@ -22,7 +22,7 @@ public class DetailsPanel extends JPanel{
     private ArrayList<TeleportGate> tgate = new ArrayList<>();
     private ArrayList<Material> mat = new ArrayList<>();
     int db = 0, index = -1;
-    AsteroidView asd;
+
 
     DetailsPanel( ){
         this.setOpaque(true);
@@ -96,6 +96,7 @@ public class DetailsPanel extends JPanel{
     public void placeDetails(GUI g){
         this.removeAll();
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
+        //Game.getInstance().c.HandlePlaceMaterial();
         materials.clear();
         mat.clear();
 
@@ -160,6 +161,7 @@ public class DetailsPanel extends JPanel{
             gates.add(a);
             inventory.add(a);
         }
+        Game.getInstance().c.NextSettler();
         this.add(inventory);
 
         this.repaint();

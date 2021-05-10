@@ -222,9 +222,9 @@ public class CommandPanel extends JPanel implements ActionListener {
         }
 
 
-        Game.getInstance().c.HighlightSettlerStuff();
-        if(Game.getInstance().c.selectedSettler == Main.settlers.size()-1)
-            Game.getInstance().c.selectedSettler = 0;
+//        Game.getInstance().c.HighlightSettlerStuff();
+//        if(Game.getInstance().c.selectedSettler == Main.settlers.size()-1)
+//            Game.getInstance().c.selectedSettler = 0;
 
         this.removeAll();
         Buttons();
