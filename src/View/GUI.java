@@ -93,6 +93,7 @@ public class GUI extends JFrame implements ActionListener {
 
     public void DrawAll(){
         //region helo
+//        Game.getInstance().c.InitViews(this);
         this.setLayout(new FlowLayout());
         //gamespace = new JLayeredPane();
         gamespace.setPreferredSize(new Dimension(width,height-200));
@@ -175,6 +176,18 @@ public class GUI extends JFrame implements ActionListener {
         }
         return null;
     }
+
+    public TeleportGateView getTeleportGateViewByTeleportGate(TeleportGate tg){
+        for (int i=0; i<materials.size();i++){
+            if(teleportgates.get(i).getTg()==tg){
+                //System.out.println("fasz");
+                return teleportgates.get(i);
+            }
+
+        }
+        return null;
+    }
+
     public MaterialView getMaterialViewByMaterial(Material m){
         for (int i=0; i<materials.size();i++){
             if(materials.get(i).getMaterial()==m){
@@ -211,6 +224,7 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public void  DrawMenu(){
+
         this.repaint();
         this.validate();
         this.setLayout(new FlowLayout());
@@ -273,6 +287,7 @@ public class GUI extends JFrame implements ActionListener {
             this.getContentPane().removeAll();
             Game.getInstance().c.CreateCustomMap();     //ez
             this.DrawAll();
+            Game.getInstance().c.InitViews(this);
             this.repaint();
             this.validate();
         } else if (e.getSource() == loadgame){

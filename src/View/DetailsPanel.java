@@ -9,14 +9,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class DetailsPanel extends JPanel{
-    JPanel buildpanel=new JPanel();
-    JPanel materialpanel=new JPanel();
-    JPanel movepanel=new JPanel();
-   // final Controller controller;
-    CommandPanel com;
-    ArrayList<JPanel> panels = new ArrayList<>();
-    JList<String> list;
-    private JButton dpactionDone = new JButton("DOIT");
     private ArrayList<JButton> materials = new ArrayList<>();
     private ArrayList<JButton> gates = new ArrayList<>();
     private ArrayList<TeleportGate> tgate = new ArrayList<>();
@@ -29,11 +21,6 @@ public class DetailsPanel extends JPanel{
         this.setVisible(true);
         this.setPreferredSize(new Dimension(Game.getInstance().c.g.width/2,200));
         this.setBackground(Color.RED);
-        this.add(dpactionDone);
-        list = new JList<String >();
-        list.setPreferredSize(new Dimension(Game.getInstance().c.g.width/4,100));
-
-        this.add(new JScrollPane(list),BorderLayout.CENTER);
 
 
     }
@@ -71,102 +58,80 @@ public class DetailsPanel extends JPanel{
 
     }
 
-
-    public void drillDetails(GUI g){
-        this.removeAll();
-
-        //Main.settlers.get(Game.getInstance().c.selectedSettler).Drill();
-        Game.getInstance().c.HandleDrill();
-        this.repaint();
-        this.validate();
-    }
-
-    public void mineDetails(GUI g){
-        this.removeAll();
-
-        //Main.settlers.get(Game.getInstance().c.selectedSettler).Mine();
-        Game.getInstance().c.HandleMine();
-
-        this.repaint();
-        this.validate();
-    }
-
-
-
-    public void placeDetails(GUI g){
-        this.removeAll();
-        this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        //Game.getInstance().c.HandlePlaceMaterial();
-        materials.clear();
-        mat.clear();
-
-        JPanel inventory = new JPanel(new GridLayout(1,13));
-        inventory.setBackground(Color.YELLOW);
-
-        ImageIcon p = null;
-        int scalingx= 50, scalingy = 50;
-        int set;
-        if (Game.getInstance().c.selectedSettler == (Main.settlers.size())-2)
-            set = 0;
-            else
-                set = Game.getInstance().c.selectedSettler + 1;
-        System.out.println("DETAILS" + set);
-        for(Material m : Main.settlers.get(set).GetInventory().GetMaterials()) {
-            db++;
-            mat.add(m);
-            if (m.getName() == NormalMaterialName.IRON) {
-                p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-            }
-            if (m.getName() == NormalMaterialName.COAL) {
-                p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-            }
-            if (m.getName() == SublimableMaterialName.ICEWATER) {
-                p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-            }
-            if (m.getName() == RadioactiveMaterialName.URAN) {
-                RadioactiveMaterial rm = (RadioactiveMaterial) m;
-                if (rm.GetExposure() == 0)
-                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-                else if (rm.GetExposure() == 1)
-                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-                else if (rm.GetExposure() == 2)
-                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-            }
-            JButton a = new JButton(p);
-            a.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    Main.settlers.get(set).PlaceMaterial(mat.get(materials.indexOf(a)));
-                    Main.settlers.get(set).GetInventory().Remove(mat.get(materials.indexOf(a)));
-                    Main.materials.remove(mat.get(materials.indexOf(a)));
-
-                }
-            });
-            materials.add(a);
-            inventory.add(a);
-        }
-
-        for(TeleportGate t : Main.settlers.get(set).GetGates()) {
-            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-            tgate.add(t);
-            JButton a = new JButton(p);
-            a.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    Main.settlers.get(set).PlaceGate(tgate.get(tgate.indexOf(a)));
-                    Main.teleportgates.remove(tgate.get(gates.indexOf(a)));
-
-                }
-            });
-            gates.add(a);
-            inventory.add(a);
-        }
-        Game.getInstance().c.NextSettler();
-        this.add(inventory);
-
-        this.repaint();
-        this.validate();
-    }
+//    public void placeDetails(GUI g){
+//        this.removeAll();
+//        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+//        //Game.getInstance().c.HandlePlaceMaterial();
+//        materials.clear();
+//        mat.clear();
+//
+//        JPanel inventory = new JPanel(new GridLayout(1,13));
+//        inventory.setBackground(Color.YELLOW);
+//
+//        ImageIcon p = null;
+//        int scalingx= 50, scalingy = 50;
+//        int set;
+//        if (Game.getInstance().c.selectedSettler == (Main.settlers.size())-2)
+//            set = 0;
+//            else
+//                set = Game.getInstance().c.selectedSettler + 1;
+//        System.out.println("DETAILS" + set);
+//        for(Material m : Main.settlers.get(set).GetInventory().GetMaterials()) {
+//            db++;
+//            mat.add(m);
+//            if (m.getName() == NormalMaterialName.IRON) {
+//                p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+//            }
+//            if (m.getName() == NormalMaterialName.COAL) {
+//                p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+//            }
+//            if (m.getName() == SublimableMaterialName.ICEWATER) {
+//                p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+//            }
+//            if (m.getName() == RadioactiveMaterialName.URAN) {
+//                RadioactiveMaterial rm = (RadioactiveMaterial) m;
+//                if (rm.GetExposure() == 0)
+//                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+//                else if (rm.GetExposure() == 1)
+//                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+//                else if (rm.GetExposure() == 2)
+//                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+//            }
+//            JButton a = new JButton(p);
+//            a.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    Main.settlers.get(set).PlaceMaterial(mat.get(materials.indexOf(a)));
+//                    Main.settlers.get(set).GetInventory().Remove(mat.get(materials.indexOf(a)));
+//                    Main.materials.remove(mat.get(materials.indexOf(a)));
+//
+//                }
+//            });
+//            materials.add(a);
+//            inventory.add(a);
+//        }
+//
+//        for(TeleportGate t : Main.settlers.get(set).GetGates()) {
+//            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+//            tgate.add(t);
+//            JButton a = new JButton(p);
+//            a.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    Main.settlers.get(set).PlaceGate(tgate.get(tgate.indexOf(a)));
+//                    Main.teleportgates.remove(tgate.get(gates.indexOf(a)));
+//
+//                }
+//            });
+//            gates.add(a);
+//            inventory.add(a);
+//        }
+//        Game.getInstance().c.NextSettler();
+//        this.add(inventory);
+//
+//        this.repaint();
+//        this.validate();
+//    }
 
     public void buildDetails(GUI g){
         this.removeAll();

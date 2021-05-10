@@ -24,10 +24,7 @@ public  class Controller {
     public Controller(){
         g=new GUI(this);
         g.DrawMenu();
-        InitViews(g);
-
-
-
+//        InitViews(g);
     }
     public void DoTheMove(){
         System.out.println("neigh index"+s.getAsteroid().GetNeighbourIndex(a));
@@ -79,14 +76,10 @@ public  class Controller {
     }
     public void HandleDrill(){
         Main.settlers.get(SelectedSettler()).Drill();
-        HighlightSettlerStuff();
-        NextSettler();
     }
     public void HandleMine(){
 //        Main.settlers.get(SelectedSettler()).Mine();
-        HighlightSettlerStuff();
         Main.ab.StartStorm(Main.asteroids.get(0));
-        NextSettler();
     }
     public void HandlePlaceMaterial(){
 //        this.removeA ll();
@@ -185,44 +178,14 @@ public  class Controller {
             System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
             Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImg();
         }
-//        for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
-//            Game.getInstance().c.g.getAsteroidViewByAsteroid((Asteroid) a).highlight(true,g);
-//        }
+        for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
+            if(a instanceof Asteroid)
+                Game.getInstance().c.g.getAsteroidViewByAsteroid((Asteroid) a).highlight(true,g);
+            if(a instanceof TeleportGate)
+                Game.getInstance().c.g.getTeleportGateViewByTeleportGate((TeleportGate) a).highlightt(true,g);
+
+        }
     }
-
-
-
-
-    public void switchCommand(Settler s){
-        g.cp.getActionDone1().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switch (command){
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        System.out.println("before"+s.getAsteroid().getLayers());
-                        s.Drill();
-                        System.out.println("after"+s.getAsteroid().getLayers());
-                        System.out.println("------------------");
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        Settler s=Main.settlers.get(selectedSettler%Game.getInstance().c.g.GetSettlerView().size());
-
-                        break;
-
-                }
-
-            }
-        });
-    }
-
-
-
 
     public void InitViews(GUI g){
         for(int i=0; i<Main.settlers.size();i++){
@@ -239,25 +202,15 @@ public  class Controller {
             g.addUfo(Main.ufos.get(i));
             Game.getInstance().AddSteppable(Main.ufos.get(i));
         }
+        System.out.println("TELEPORTGATES SIZE" + Main.teleportgates.size());
         for(int i=0; i<Main.teleportgates.size();i++){
+            System.out.println("TeleportgateIIII" + i);
             g.addTeleportGate(Main.teleportgates.get(i));
         }
         for(int i=0; i<Main.materials.size();i++){
             g.addMaterial(Main.materials.get(i));
         }
     }
-
-    public void updateCommand(int commandindex){
-        command = commandindex;
-        System.out.println(command);
-        //g.dp.Update(command);
-    }
-
-
-
-    public int getCurrentCommand(){return command;}
-
-
 
     public void CreateCustomMap(){
         Main.asteroids.clear();
@@ -349,7 +302,9 @@ public  class Controller {
 
         //TeleportGate letrehozas, par beallitas es elhelyezes aszteroidan
         if(T > 0) {
+            System.out.println("Teleportgate count: " + T);
             for (int i = 0; i < T; i++) {
+                System.out.println(i);
                 TeleportGate t = new TeleportGate();
                 Main.teleportgates.add(t);
                 Game.getInstance().c.g.addTeleportGate(t);
@@ -374,7 +329,7 @@ public  class Controller {
                         j++;
                     }
                     System.out.println("T3: " + j);
-                    Main.teleportgates.get(j).setPair(null);
+                    Main.teleportgates.get(j).setPlaced(true);
                 }
 
             }
@@ -387,10 +342,14 @@ public  class Controller {
                         if (Main.teleportgates.get(i).GetPair().GetAsteroid() != Main.asteroids.get(rand_int)) {
                             Main.teleportgates.get(i).setAsteroid(Main.asteroids.get(rand_int));
                             Main.asteroids.get(rand_int).AddNeighbour(Main.teleportgates.get(i));
+                            Main.teleportgates.get(i).setActive(true);
+                            Main.teleportgates.get(i).setPlaced(true);
                         }
                     } else {
                         Main.teleportgates.get(i).setAsteroid(Main.asteroids.get(rand_int));
                         Main.asteroids.get(rand_int).AddNeighbour(Main.teleportgates.get(i));
+                        Main.teleportgates.get(i).setActive(true);
+                        Main.teleportgates.get(i).setPlaced(true);
                     }
 
                 }

@@ -12,8 +12,9 @@ public class CommandPanel extends JPanel implements ActionListener {
     JList<String> list ;
     private JButton cpactionDone = new JButton("DOIT");
     private JPanel buttons;
-    private JButton build, drill, move, mine, place;
+    private JButton build, drill, move, mine, place, nextsettler;
     private int scaling;
+    private boolean next = false;
 
     int CurrentCommand;
 
@@ -38,95 +39,10 @@ public class CommandPanel extends JPanel implements ActionListener {
         button.addActionListener(this);
     }
 
-/*
-        cpactionDone.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Game.getInstance().c.stepsettlers();
-                //System.out.println("asd");
-            }
-        });
-
-        this.add(cpactionDone);
-
-        list = new JList<String >(data);
-        //list.addListSelectionListener(new list_lis());
-        fasz(list);
-        //g.gamespace.add(this);
-        list.setPreferredSize(new Dimension(Game.getInstance().c.g.width/8,100));
-        this.add(new JScrollPane(list),BorderLayout.CENTER);
-
-
-    }
-    public void fasz(JList list ) {
-        list.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if(e.getValueIsAdjusting()){
-                    CurrentCommand = list.getSelectedIndex();
-                    Game.getInstance().c.updateCommand(CurrentCommand);
-                    if(CurrentCommand == 0){
-                        Vector<String> vector = new Vector<>();
-                        vector.add("TeleportGate");
-                        vector.add("Robot");
-                        vector.add("Base");
-                        Game.getInstance().c.g.dp.buildDetails(vector, Game.getInstance().c.g);
-                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(true,Game.getInstance().c.g);
-                    }
-                    else if(CurrentCommand == 1){
-                        Vector<String> vector = new Vector<>();
-                        vector.add("Mine");
-                        //c.g.dp.mineDetails(vector, c.g);
-                        Game.getInstance().c.g.dp.mineDetails(vector,Game.getInstance().c.g);
-                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
-                    }
-                    else  if(CurrentCommand == 2){
-                        Vector<String> vector = new Vector<>();
-                        vector.add("Dig");
-                        //c.g.dp.digDetails(vector, c.g);
-                        Game.getInstance().c.g.dp.digDetails(vector,Game.getInstance().c.g);
-                        System.out.println(list.getSelectedValue());
-                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
-                    }
-
-                    else  if(CurrentCommand == 3){
-                        Vector<Material> vector = new Vector<>();
-
-//                        for(Material i: Controller.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials()){
-//          #TODO                  vector.add(i);
-//                            System.out.println(vector.size());
-//                        }
-                        Game.getInstance().c.g.dp.placeDetails(vector, Game.getInstance().c.g);
-                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
-                    }
-                    else  if(CurrentCommand == 4){
-                        Vector<Integer> vector = new Vector<>();
-                        int id = 0;
-
-//                        for(DestinationObject i: Controller.settlers.get(Game.getInstance().c.selectedSettler).getAsteroid().GetNeighbours()){
-//          #TODO                  vector.add((id));
-//                            id++;
-//                            System.out.println(vector.size());
-//                        }
-                        Game.getInstance().c.g.dp.moveDetails(vector, Game.getInstance().c.g);
-                        Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
-                    }
-
-
-                }
-
-            }
-        });
-    }
-
-
-
-    public int getCurrentCommand(){return CurrentCommand;}
-*/
     public JButton getActionDone1(){return cpactionDone;}
 
     public void Buttons(){
-        scaling = Game.getInstance().c.g.GetWidth()/13;
+        scaling = Game.getInstance().c.g.GetWidth()/20;
         int height = 45;
 
 
@@ -150,6 +66,10 @@ public class CommandPanel extends JPanel implements ActionListener {
         mine.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/minedarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         SetButton(mine);
 
+        nextsettler = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/minebtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        nextsettler.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/minedarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        SetButton(nextsettler);
+
 
         buttons = new JPanel(new FlowLayout());
         buttons.add(move);
@@ -157,6 +77,7 @@ public class CommandPanel extends JPanel implements ActionListener {
         buttons.add(mine);
         buttons.add(place);
         buttons.add(build);
+        buttons.add(nextsettler);
 
         buttons.setOpaque(false);
 
@@ -205,45 +126,56 @@ public class CommandPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == move){
+//            Game.getInstance().c.DoTheMove();
             Game.getInstance().c.g.dp.moveDetails(Game.getInstance().c.g);
+            next = true;
         }
         if(e.getSource() == drill){
-            Game.getInstance().c.g.dp.drillDetails(Game.getInstance().c.g);
+            Game.getInstance().c.HandleDrill();
+//            Game.getInstance().c.g.dp.drillDetails(Game.getInstance().c.g);
+            next = true;
         }
         if(e.getSource() == mine){
-            Game.getInstance().c.g.dp.mineDetails(Game.getInstance().c.g);
+            Game.getInstance().c.HandleMine();
+//            Game.getInstance().c.g.dp.mineDetails(Game.getInstance().c.g);
+            next = true;
         }
         if(e.getSource() == place){
-            Game.getInstance().c.g.dp.placeDetails(Game.getInstance().c.g);
+            Game.getInstance().c.HandlePlaceMaterial();
+//            Game.getInstance().c.g.dp.placeDetails(Game.getInstance().c.g);
+            next = true;
         }
         if(e.getSource() == build){
-
             Game.getInstance().c.g.dp.buildDetails(Game.getInstance().c.g);
+            next = true;
         }
-
-
-//        Game.getInstance().c.HighlightSettlerStuff();
-//        if(Game.getInstance().c.selectedSettler == Main.settlers.size()-1)
-//            Game.getInstance().c.selectedSettler = 0;
-
+        if(e.getSource() == nextsettler){
+//            System.out.println("Actual settler: " + Game.getInstance().c.selectedSettler);
+            Game.getInstance().c.NextSettler();
+            if (Game.getInstance().c.selectedSettler == Main.settlers.size()) {
+                Game.getInstance().c.selectedSettler = 0;
+                Game.getInstance().NextRound();
+            }
+            Game.getInstance().c.HighlightSettlerStuff();
+        }
         this.removeAll();
         Buttons();
+        if(next) {
+            setButtonsOff();
+            next = false;
+        }
         InventoryPanel();
         this.repaint();
         this.validate();
     }
 
+    public void setButtonsOff(){
+        this.move.setEnabled(false);
+        this.drill.setEnabled(false);
+        this.mine.setEnabled(false);
+        this.build.setEnabled(false);
+        this.place.setEnabled(false);
+    }
 
-
-
-
-    /*final class list_lis implements ListSelectionListener {
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            CurrentCommand = list.getSelectedIndex();
-
-        }
-
-    }*/
 
 }

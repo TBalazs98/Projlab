@@ -1,11 +1,18 @@
 package View;
 
 import Controller.CommandManager;
+import Controller.Main;
 import Model.Game;
 import Model.TeleportGate;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.net.http.WebSocket;
 import java.util.Random;
 
 public class TeleportGateView implements IDrawable{
@@ -21,6 +28,46 @@ public class TeleportGateView implements IDrawable{
        // p=new ImageIcon("Files/Pictures/teleportgate.jpg");
         p=new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
         l=new JLabel(p);
+
+        l.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                Game.getInstance().c.g.dp.setLayout(new FlowLayout());
+                JPanel info = new JPanel(new GridLayout(1,5));
+                info.add(new Label("[TELEPORTATE]"));
+                info.add(new JLabel("T\t" + (Main.teleportgates.indexOf(tg)+1)));
+                info.add(new JLabel("\nAsteroid:\tA" + ((tg.GetAsteroid() == null)? "not placed yet: ": (Main.asteroids.indexOf(tg.GetAsteroid()) +1) )));
+                info.add(new JLabel(((tg.GetPair() == null)?"\nNo Pair" : "\nPair:\tT" + Main.teleportgates.indexOf(tg.GetPair()))));
+                info.add(new JLabel(((tg.GetPair() != null && tg.GetPair().GetAsteroid() == null)? "\nPair has not been placed " : "\nPair Asteroid:\tA" + (Main.asteroids.indexOf(tg.GetPair().GetAsteroid()) + 1))));
+
+                Game.getInstance().c.g.dp.add(info);
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Game.getInstance().c.g.dp.removeAll();
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+            }
+        });
     }
 
     public void SetCoords(int x, int y){
