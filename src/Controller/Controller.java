@@ -15,10 +15,14 @@ import java.util.Random;
 public  class Controller {
     public GUI g;
     public static ArrayList<Settler> settlers=new ArrayList<>();
-    public int command=0;
     public int selectedSettler=0;
     public Settler s=new Settler();
     public Asteroid a = new Asteroid();
+
+    // TODO
+    //      Minden felesleges NextSettler hívást, plusszolást akármit ki kell írtani
+    //                      A settler ++ olását csak a NextSettler() végzi
+    //       Az aktuális Settler helyes lekérdezését csak és kizárólag a SelectedSettler végzi!!
 
     public Controller(){
         g=new GUI(this);
@@ -27,8 +31,11 @@ public  class Controller {
     }
     public void DoTheMove(){
         System.out.println("neigh index"+s.getAsteroid().GetNeighbourIndex(a));
+
+        System.out.println("-- leptem : Eddig itt voltam"+s.getAsteroid());
         s.Move(s.getAsteroid().GetNeighbourIndex(a));
-        NextSettler();      //ezt kell hülyebiztosan lekezelni
+        System.out.println("++ leptem : ide erkeztem"+s.getAsteroid());
+        //NextSettler();      //ezt kell hülyebiztosan lekezelni
         g.DrawSettlers();
     }
 
@@ -65,6 +72,7 @@ public  class Controller {
     public void NextSettler(){
 
         selectedSettler++;
+        HighlightSettlerStuff();
     }
 
     public int SelectedSettler(){
@@ -77,10 +85,11 @@ public  class Controller {
         Main.settlers.get(SelectedSettler()).Drill();
     }
     public void HandleMine(){
-//        Main.settlers.get(SelectedSettler()).Mine();
+//        Main.settlers.get(SelectedSettler()).Mine();      //todo ezt vissza
         Main.ab.StartStorm(Main.asteroids.get(0));
     }
-    public void HandlePlaceMaterial(){
+    public void HandlePlaceMaterial(){                      //todo ezzel mi a helyzet?
+                                                            //todo SelectedSettler írtás
 //        this.removeA ll();
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -153,7 +162,7 @@ public  class Controller {
             inventory.add(a);
         }
         g.dp.add(inventory);
-        NextSettler();
+        //NextSettler();
         //  this.add(inventory);
 
 //        this.repaint();
@@ -162,7 +171,7 @@ public  class Controller {
 
 
     public void HighlightEverythingExcept(SettlerView sv){
-       // HighlightAsteroids();
+
        for(int i=0; i<Game.getInstance().c.g.GetSettlerView().size();i++){
            if(Game.getInstance().c.g.GetSettlerView().get(i)==sv)
                Game.getInstance().c.g.GetSettlerView().get(i).SelectHighlighted(true);

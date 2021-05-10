@@ -94,6 +94,7 @@ public class GUI extends JFrame implements ActionListener {
 
 
     public void DrawAll(){
+        //gamespace.add(settlers.get(0).l);
         //region helo
 //        Game.getInstance().c.InitViews(this);
         this.setLayout(new FlowLayout());
@@ -123,6 +124,7 @@ public class GUI extends JFrame implements ActionListener {
         for(int i=0; i<this.settlers.size();i++){
             settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+            gamespace.add(settlers.get(i).l);
             settlers.get(i).Draw();
         }
 
@@ -130,7 +132,7 @@ public class GUI extends JFrame implements ActionListener {
             teleportgates.get(i).Draw();
         }
 
-//        Game.getInstance().c.HighlightSettlerStuff();
+        Game.getInstance().c.HighlightSettlerStuff();
 
 
         //materials.get(0).Draw();

@@ -47,7 +47,7 @@ public class DetailsPanel extends JPanel{
         //Game.getInstance().c.HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(Game.getInstance().c.SelectedSettler())));
         //HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(SelectedSettler())));
 
-        Game.getInstance().c.HighlightSettlerStuff();
+        //Game.getInstance().c.HighlightSettlerStuff();
         System.out.println("---"+Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetNeighbours().contains(Game.getInstance().c.a));
        // Game.getInstance().c.NextSettler();
 
@@ -132,7 +132,7 @@ public class DetailsPanel extends JPanel{
 //        this.repaint();
 //        this.validate();
 //    }
-
+        //todo selectedSettlerÍrtás
     public void buildDetails(GUI g){
         this.removeAll();
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -147,7 +147,7 @@ public class DetailsPanel extends JPanel{
         buildrobot.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.settlers.get(Game.getInstance().c.selectedSettler).BuildRobot();
+                Main.settlers.get(Game.getInstance().c.SelectedSettler()).BuildRobot();
             }
         });
 
@@ -157,7 +157,7 @@ public class DetailsPanel extends JPanel{
         buildteleportgate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.settlers.get(Game.getInstance().c.selectedSettler).BuildGate();
+                Main.settlers.get(Game.getInstance().c.SelectedSettler()).BuildGate();
             }
         });
 
@@ -167,7 +167,7 @@ public class DetailsPanel extends JPanel{
         buildbase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.settlers.get(Game.getInstance().c.selectedSettler).BuildBase();
+                Main.settlers.get(Game.getInstance().c.SelectedSettler()).BuildBase();
             }
         });
 

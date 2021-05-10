@@ -9,14 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CommandPanel extends JPanel implements ActionListener {
-    JList<String> list ;
     private JButton cpactionDone = new JButton("DOIT");
     private JPanel buttons;
     private JButton build, drill, move, mine, place, nextsettler;
     private int scaling;
     private boolean next = false;
 
-    int CurrentCommand;
+
 
     CommandPanel() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -42,7 +41,7 @@ public class CommandPanel extends JPanel implements ActionListener {
     public JButton getActionDone1(){return cpactionDone;}
 
     public void Buttons(){
-        scaling = Game.getInstance().c.g.GetWidth()/20;
+        scaling = Game.getInstance().c.g.GetWidth()/16;
         int height = 45;
 
 
@@ -85,6 +84,14 @@ public class CommandPanel extends JPanel implements ActionListener {
         this.add(buttons);
 
     }
+
+
+    //  TODO TODO TODO ITT A VÉGTELEN SELECTEDSETTLERT KI KELL CSERÉLNI  Game.getInstance().c.SelectedSettler() - re
+    //                                  @Klau approve pls
+    //      Minden felesleges NextSettler hívást, plusszolást akármit ki kell írtani
+    //                      A settler ++ olását csak a NextSettler() végzi
+    //       Az aktuális Settler helyes lekérdezését csak és kizárólag a SelectedSettler végzi!!
+
     public void InventoryPanel() {
         JPanel inventory = new JPanel(new GridLayout(1,13));
 
@@ -94,7 +101,7 @@ public class CommandPanel extends JPanel implements ActionListener {
         ImageIcon p = null;
         scaling = 50;
 //        System.out.println("INVENTORY: " + Game.getInstance().c.selectedSettler);
-        for(Material m : Main.settlers.get(Game.getInstance().c.selectedSettler).GetInventory().GetMaterials()){
+        for(Material m : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials()){
             if(m.getName()== NormalMaterialName.IRON) {
                 p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
             }
@@ -116,7 +123,7 @@ public class CommandPanel extends JPanel implements ActionListener {
             inventory.add(new JLabel((p)));
         }
 
-        for(TeleportGate t : Main.settlers.get(Game.getInstance().c.selectedSettler).GetGates()) {
+        for(TeleportGate t : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetGates()) {
             p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
             inventory.add(new JLabel(p));
         }
@@ -131,17 +138,17 @@ public class CommandPanel extends JPanel implements ActionListener {
             next = true;
         }
         if(e.getSource() == drill){
-            Game.getInstance().c.HandleDrill();
+            Game.getInstance().c.HandleDrill();     //todo @Klau ez miért van itt is meg a details panelben is??
 //            Game.getInstance().c.g.dp.drillDetails(Game.getInstance().c.g);
             next = true;
         }
         if(e.getSource() == mine){
-            Game.getInstance().c.HandleMine();
+            Game.getInstance().c.HandleMine();      //todo @Klau meg ez is?
 //            Game.getInstance().c.g.dp.mineDetails(Game.getInstance().c.g);
             next = true;
         }
         if(e.getSource() == place){
-            Game.getInstance().c.HandlePlaceMaterial();
+            //Game.getInstance().c.HandlePlaceMaterial();
 //            Game.getInstance().c.g.dp.placeDetails(Game.getInstance().c.g);
             next = true;
         }
@@ -150,13 +157,14 @@ public class CommandPanel extends JPanel implements ActionListener {
             next = true;
         }
         if(e.getSource() == nextsettler){
-//            System.out.println("Actual settler: " + Game.getInstance().c.selectedSettler);
+////            System.out.println("Actual settler: " + Game.getInstance().c.selectedSettler);
+//            Game.getInstance().c.NextSettler();
+//            if (Game.getInstance().c.selectedSettler == Main.settlers.size()) {
+//                Game.getInstance().c.selectedSettler = 0;
+//                Game.getInstance().NextRound();
+//            }
+//            //Game.getInstance().c.HighlightSettlerStuff();
             Game.getInstance().c.NextSettler();
-            if (Game.getInstance().c.selectedSettler == Main.settlers.size()) {
-                Game.getInstance().c.selectedSettler = 0;
-                Game.getInstance().NextRound();
-            }
-            Game.getInstance().c.HighlightSettlerStuff();
         }
         this.removeAll();
         Buttons();

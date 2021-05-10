@@ -27,6 +27,7 @@ public class SettlerView implements IDrawable{
         l=new JLabel(p);
         s = _s;
 
+
         l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -92,8 +93,11 @@ public class SettlerView implements IDrawable{
        // x = Game.getInstance().c.g.getX()+offsetX+10;
         //y = Game.getInstance().c.g.getY()+offsetY+10;
         //g.gamespace.add(l);
-        Game.getInstance().c.g.gamespace.add(l);
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
+
+        //Game.getInstance().c.g.gamespace.add(l);
+        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
+
+
         //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
        // g.gamespace.getComponent(index).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
