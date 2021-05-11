@@ -15,15 +15,20 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 
+/**
+ * A jatek betolteseert, illetve megjeleniteseert felelos osztaly, mely egy JPanel leszarmazott
+ */
 public class LoadPanel extends JPanel {
 
     private GameData data = new GameData();
-    JLabel label;
     JButton button;
     JTable table;
     String chosen;
 
-
+    /**
+     * A LoadPanel publikus konstruktora
+     * @param g A felhasznaloi felulet ahova felrajzoljuk a jatek kivalaszto panelt
+     */
     public LoadPanel(GUI g) {
         this.setPreferredSize(new Dimension(g.height/5+g.height/5,g.height/5+g.height/5));
         this.setOpaque(true);
@@ -32,21 +37,16 @@ public class LoadPanel extends JPanel {
         JPanel also = new JPanel(new CardLayout());
         table.setRowSelectionAllowed(true);
         table.setColumnSelectionAllowed(true);
-        table.addMouseListener(new gameChoseListener());
-        label = new JLabel("Chosen game to load");
-        label.setPreferredSize(new Dimension(g.width/20, 50));
+        table.getSelectionModel().addListSelectionListener(new gameChoseListener());
         button = new JButton(new ImageIcon("Files/Pictures/button_load-game_l.png"));
         button.setRolloverIcon(new ImageIcon("Files/Pictures/button_load-game_d.png"));
-       // button.setPreferredSize(new Dimension(5,5));
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
         button.setOpaque(false);
         button.setEnabled(false);
-        //button.setPreferredSize(new Dimension(g.width/10, 40));
         button.addActionListener(new loadGameListener());
         also.setPreferredSize(new Dimension(g.width/4,75));
-     //   also.add(label);
         also.add(button);
         this.add(new JScrollPane(table), BorderLayout.CENTER);
         this.add(also, BorderLayout.SOUTH);
@@ -59,69 +59,42 @@ public JPanel getPanel()
     return this;
 }
 
-    private class loadGameListener implements ActionListener{
+    /**
+     * Figyeli, ha megnyomtuk a Load Game gombot a mentett jatekot betolti a kepernyore
+     */
+    private class loadGameListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
                 InputManager.FromFileInput(chosen,false);
                 Game.getInstance().c.g.remove(getPanel());
-
-//                Game.getInstance().c.g.DrawAll();
-//
-
-//                Game.getInstance().c.g.DrawAll();
                 Game.getInstance().c.InitViews( Game.getInstance().c.g);
                 Game.getInstance().c.g.DrawAll();
                 Game.getInstance().c.g.repaint();
                 Game.getInstance().c.g.validate();
 
-               //TODO játék indítása
             } catch(Exception ex) {
                 ex.printStackTrace();
             }
-
-
-        }
-
-    }
-
-
-    private class gameChoseListener implements MouseListener {
-
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            int rowIndex = table.rowAtPoint(e.getPoint());
-            int colIndex = table.columnAtPoint(e.getPoint());
-            chosen = (String) data.getValueAt(rowIndex, colIndex);
-            label.setText(chosen.toString());
-            button.setEnabled(true);
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
         }
     }
 
+    /**
+     * Figyeli, ha kivalasztottunk a mentett jatokok tablazatbol egy elemet, akkor a Load Gomb-ot bekapcsolja,
+     * valamint a kivalasztott mentett jatek fajl elerhetoseget inicializalja string formatumban
+     */
+    private class gameChoseListener implements ListSelectionListener {
 
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if(e.getValueIsAdjusting())
+            {
+                chosen = (String) data.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
+                button.setEnabled(true);
+            }
 
-
+        }
+    }
 
 }

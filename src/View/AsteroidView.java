@@ -8,7 +8,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public  class AsteroidView implements IDrawable {
+/**
+ * Az AsteroidView osztaly az aszertoiak a felhasznaloi feluleten valo megjeleniteseert felelos, ezen okbol implementalja az IDrawable interfeszt
+ */
+public class AsteroidView implements IDrawable {
 
     private Asteroid asteroid;
     private Icon p;
@@ -19,7 +22,11 @@ public  class AsteroidView implements IDrawable {
     private boolean isInsusntorm = false, exploding = false;
 
 
-    public AsteroidView(Asteroid a){
+    /**
+     * AsteroidView publikus konstruktora
+     * @param a az aszteroida, melyet ki szeretnenk rajzolni a felhasznaloi feluleten
+     */
+    public AsteroidView(Asteroid a) {
         this.asteroid = a;
         //if (asteroid.GetisEmpty()) {
 
@@ -49,6 +56,10 @@ public  class AsteroidView implements IDrawable {
 
     }
 
+    /**
+     * Az aszeteroida tulajdonsagainak megfeleloen meghivjuk az arra illeszkedo kepet, valamint a jelenleg kivalasztott aszteroida tulajdonsagainak
+     * megjeleniteset az info panelben itt vegezzuk el.
+     */
     public void setImage(){
         if (this.asteroid.getLayers() > 0 && !this.asteroid.GetSunProximity() && !isInsusntorm && !highlight)
             p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
@@ -87,28 +98,17 @@ public  class AsteroidView implements IDrawable {
             p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
             this.asteroid.explodecount++;
         }
-//        System.out.println("ASZTEROID JHVGHSALÉD" + explodingcount);
-//        if (exploding && (explodingcount==0)){
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//            explodingcount++;
-//        }
 
         l.setIcon(p);
         this.l.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
+            public void mouseClicked(MouseEvent e) { }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) { }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseReleased(MouseEvent e) { }
 
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -123,13 +123,12 @@ public  class AsteroidView implements IDrawable {
                     info.add(new JLabel("\nEMPTY"));
                 else {
                     info.add(new JLabel("\nM" + (Main.materials.indexOf(asteroid.getMaterial())+1) ));
-//                    info.add(new JLabel("" +asteroid.getMaterial().name));
                 }
                 ArrayList<String> neigh = new ArrayList<>();
                 for (DestinationObject o : asteroid.GetNeighbours()) {
-                    if (Main.asteroids.indexOf(o) != -1)
+                    if (Main.asteroids.contains(o))
                         neigh.add("\nA" + (Main.asteroids.indexOf(o) + 1));
-                    if (Main.teleportgates.indexOf(o) != -1)
+                    if (Main.teleportgates.contains(o))
                         neigh.add("\nG" + (Main.teleportgates.indexOf(o) + 1));
                 }
                 info.add(new JLabel("\nNEIGHBOURS:"));
@@ -137,8 +136,8 @@ public  class AsteroidView implements IDrawable {
                     info.add(new JLabel("\nNO NEIGHBOUR"));
                 }
                 else {
-                    for (int i = 0; i < neigh.size(); i++)
-                        info.add(new JLabel("\n" + (neigh.get(i))));
+                    for (String s : neigh)
+                        info.add(new JLabel("\n" + s));
                 }
                 Game.getInstance().c.g.dp.add(info);
                 Game.getInstance().c.g.dp.repaint();
@@ -159,18 +158,15 @@ public  class AsteroidView implements IDrawable {
         this.y = y;
     }
 
-    public int getX() {
-        return x;
-    }
+    public int getX() { return x; }
     public int getY() {
         return y;
     }
 
+    /**
+     * Az interfeszbol megvalositott Draw metodus, amely felrajzolja az aszteroidat a felhasznaloi feluletre
+     */
     public void Draw() {
-//        p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//        setImage();
-//        l.setIcon(p);
-//        Game.getInstance().c.g.gamespace.add(l);
             if(p == null){
                 l.setBounds(this.x,this.y,0,0);
             }else {
@@ -184,56 +180,49 @@ public  class AsteroidView implements IDrawable {
                 Game.getInstance().c.g.getUfoViewByUfo((UFO)asteroid.getCharacters().get(i)).Draw();
             }
         }
-
-        //cv.Draw();
-
             if (asteroid.getLayers() == 0) {
                 Material m = asteroid.getMaterial();
                 if (m != null) {
                     MaterialView mv = new MaterialView(m);
-//                    mv.setImage();
-                    if (mv != null) {
-                        mv.SetCoords(x, y);
-                        mv.Draw();
-                    }
+                    mv.SetCoords(x, y);
+                    mv.Draw();
                 }
 
             }
-
             for (int i = 0; i < asteroid.GetNeighbours().size(); i++) {
                 if (asteroid.GetNeighbours().get(i) instanceof TeleportGate) {
 
                     Game.getInstance().c.g.getTeleportGateViewByTeleportGate((TeleportGate) asteroid.GetNeighbours().get(i)).Draw();
                 }
             }
-//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
-
             Game.getInstance().c.g.repaint();
             Game.getInstance().c.g.validate();
-
-
     }
 
+//    public void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
+//        l.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                super.mouseClicked(e);
+//                System.out.println("x = "+av.x+ "y = " + av.y);
+//                Game.getInstance().c.MoveSetAsteroid(av);
+//                Game.getInstance().c.MoveSetDestination(av.asteroid);
+//
+//            }
+//        });
+//    }
 
-    public void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
-        l.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                System.out.println("x = "+av.x+ "y = " + av.y);
-                Game.getInstance().c.MoveSetAsteroid(av);
-                Game.getInstance().c.MoveSetDestination(av.asteroid);
-
-            }
-        });
-    }
-
-    public void highlight(boolean b,GUI g){
-        highlight=b;
+    /**
+     * Az aszteoirda kijeloltsegenek beallitasaiert felelos metodus
+     * @param isHiglighted a kijelolest allithatjuk be, ha igaz, ki lesz jelolve a jelenlegi aszteroida
+     * @param g a megjelenito felulet ahova kirajzoljuk
+     */
+    public void highlight(boolean isHiglighted,GUI g){
+        highlight=isHiglighted;
         setImage();
     }
 
-    public Asteroid getAsteroid(){return asteroid;}
+    public Asteroid getAsteroid(){ return asteroid; }
 
     public void setInSunstorm(boolean bool) {
         this.isInsusntorm = bool;
