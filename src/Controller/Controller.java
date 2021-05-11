@@ -312,7 +312,7 @@ public  class Controller {
             int rand_int, randd_int;
             for (int i = 0; i < A; i++) {
                 Random randd = new Random();
-                 randd_int = randd.nextInt(A/3)+1;
+                 randd_int = randd.nextInt(A/4)+1;
                 for(int j=0; j<(randd_int);j++) {
                     Random rand = new Random();
                     rand_int = rand.nextInt(A);
@@ -327,8 +327,10 @@ public  class Controller {
                         }
                     }
 
-                    if (db == 0)
+                    if (db == 0) {
                         Main.asteroids.get(i).AddNeighbour(Main.asteroids.get(rand_int));
+                        Main.asteroids.get(rand_int).AddNeighbour(Main.asteroids.get(i));
+                    }
                 }
             }
         }

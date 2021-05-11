@@ -30,8 +30,8 @@ public class GUI extends JFrame implements ActionListener {
     private ArrayList<TeleportGateView> teleportgates = new ArrayList<>();    //#todo
     public  ArrayList<MaterialView> materials=new ArrayList<>();
     private Coordinates[][] coords;
-    private int coordswidth;
-    private int coordsheight;
+    private final int coordswidth;
+    private final int coordsheight;
     private Random gen = new Random();
     private ArrayList<Model.Character> chars = new ArrayList<>();
     public JPanel inpudialog = new JPanel(new FlowLayout(FlowLayout.RIGHT));

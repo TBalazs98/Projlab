@@ -33,9 +33,9 @@ public class CustomGamePanel extends JPanel {
         up.setHorizontalAlignment(JLabel.CENTER);
         this.add(up);
 
-        int maximumasteroids = (int) Math.floor(x * y * 0.37);
+        //int maximumasteroids = (int) Math.floor(x * y * 0.37);
 
-        Vector<Integer> vector = vector_zero(1,maximumasteroids);
+        Vector<Integer> vector = vector_zero(12,24);
         asteroid = new ChoserPanel(g, vector, "Asteroids", this);
         this.add(asteroid);
 
@@ -67,7 +67,7 @@ public class CustomGamePanel extends JPanel {
         uran = new ChoserPanel(g, vector, "Uran", this);
         this.add(uran);
 
-        vector = vector_zero(0,12);
+        vector = vector_portal(6);
         portal = new ChoserPanel(g, vector, "Portals", this);
         this.add(portal);
 
@@ -102,6 +102,17 @@ public class CustomGamePanel extends JPanel {
         }
         return vector;
     }
+
+
+    private Vector<Integer> vector_portal(int max){
+        Vector<Integer> vector = new Vector<>();
+
+        for(int i=0; i<=max; i = i+2){
+            vector.add(i);
+        }
+        return vector;
+    }
+
 
     public void update(){
         asteroidnumber = (int)asteroid.getSelected();

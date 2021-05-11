@@ -106,7 +106,7 @@ public class Main {
         GuiController gc= new GuiController(g);*/
         //g.DrawMenu();
         //c = new Controller();
-        Asteroid a = new Asteroid();
+ /*       Asteroid a = new Asteroid();
         a.SetEmpty(true);
         SublimableMaterial sm = new SublimableMaterial();
         a.SetMaterial(null);
@@ -184,13 +184,13 @@ public class Main {
         rm.setName(RadioactiveMaterialName.URAN);
 
         /*SublimableMaterial rm = new SublimableMaterial();
-        rm.setName(SublimableMaterialName.ICEWATER);*/
+        rm.setName(SublimableMaterialName.ICEWATER);
 //
         materials.add(m);
         materials.add(rm);
 
         s.AddMaterial(m);
-        s.AddMaterial(rm);
+        s.AddMaterial(rm);*/
 
 
 
