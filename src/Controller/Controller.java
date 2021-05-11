@@ -306,6 +306,8 @@ public  class Controller {
     }
 
     public void CreateCustomMap(){
+        g.GetAsteroidView().clear();
+        g.GetSettlerView().clear();
         Main.asteroids.clear();
         this.settlers.clear();
         Main.settlers.clear();
