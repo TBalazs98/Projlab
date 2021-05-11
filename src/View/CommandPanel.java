@@ -14,6 +14,7 @@ public class CommandPanel extends JPanel implements ActionListener {
     private JButton build, drill, move, mine, place, nextsettler;
     private int scaling;
     private boolean next = false;
+    JPanel inventory = new JPanel();
 
 
 
@@ -93,7 +94,8 @@ public class CommandPanel extends JPanel implements ActionListener {
     //       Az aktuális Settler helyes lekérdezését csak és kizárólag a SelectedSettler végzi!!
 
     public void InventoryPanel() {
-        JPanel inventory = new JPanel(new GridLayout(1,13));
+        inventory.removeAll();
+        inventory = new JPanel(new GridLayout(1,13));
 
         //inventory.setPreferredSize(new Dimension(Game.getInstance().c.g.getWidth(),50));
         inventory.setBackground(Color.GRAY);
@@ -103,16 +105,16 @@ public class CommandPanel extends JPanel implements ActionListener {
 //        System.out.println("INVENTORY: " + Game.getInstance().c.selectedSettler);
         if(Main.settlers.get(Game.getInstance().c.SelectedSettler())!=null) {
             for (Material m : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials()) {
-                if (m.getName() == NormalMaterialName.IRON) {
+                if (m.name == NormalMaterialName.IRON) {
                     p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
                 }
-                if (m.getName() == NormalMaterialName.COAL) {
+                if (m.name == NormalMaterialName.COAL) {
                     p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
                 }
-                if (m.getName() == SublimableMaterialName.ICEWATER) {
+                if (m.name == SublimableMaterialName.ICEWATER) {
                     p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
                 }
-                if (m.getName() == RadioactiveMaterialName.URAN) {
+                if (m.name == RadioactiveMaterialName.URAN) {
                     RadioactiveMaterial rm = (RadioactiveMaterial) m;
                     if (rm.GetExposure() == 0)
                         p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
@@ -130,7 +132,8 @@ public class CommandPanel extends JPanel implements ActionListener {
             }
         }
         this.add(inventory);
-
+        this.repaint();
+        this.validate();
     }
 
     @Override

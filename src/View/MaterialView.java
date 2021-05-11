@@ -58,7 +58,7 @@ public class MaterialView implements IDrawable {
                 p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
             else if(rm.GetExposure()==2)
                 p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-            else if(rm.GetExposure()>=3)
+            else if(rm.GetExposure()==3)
                 p = null;
         }
         l.setIcon(p);

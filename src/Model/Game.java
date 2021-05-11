@@ -122,15 +122,9 @@ public class Game {
 //        ArrayList<Asteroid> prev = Main.asteroids;
         Asteroid helper = new Asteroid();
         for(Steppable s: steppables) {
-            if(s instanceof Asteroid)
-                helper = (Asteroid) s;
-            if(helper !=null){
-            if(Game.getInstance().c.g.getAsteroidViewByAsteroid(helper)!=null) {
+
                 s.Step();
                 c.g.update();
-            }
-            }
-
         }
 //        ArrayList<Asteroid> after = Main.asteroids;
 //        ArrayList<Integer> indexes = lookfordifference(prev,after);

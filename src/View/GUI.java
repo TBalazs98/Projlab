@@ -48,7 +48,7 @@ public class GUI extends JFrame implements ActionListener {
         this.width = getWidth();
         this.height = getHeight();
         this.setJMenuBar(null);
-        ImageIcon img = new ImageIcon("Files/Pictures/sus.jpg");
+        ImageIcon img = new ImageIcon("Files/Pictures/icon.jpg");
         this.setIconImage(img.getImage());
 
         drawables = new ArrayList<>();

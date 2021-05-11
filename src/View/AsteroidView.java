@@ -176,8 +176,19 @@ public  class AsteroidView implements IDrawable {
             }else {
                 l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
             }
-            CharacterView cv = new CharacterView(asteroid.getCharacters());
-            cv.Draw();
+        for(int i=0;i<asteroid.getCharacters().size();i++){
+            if(asteroid.getCharacters().get(i) instanceof Model.Robot){
+                Game.getInstance().c.g.getRobotViewByRobot((Model.Robot)asteroid.getCharacters().get(i)).Draw();
+            }
+
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+        }
+
+        //cv.Draw();
 
             if (asteroid.getLayers() == 0) {
                 Material m = asteroid.getMaterial();
@@ -198,7 +209,7 @@ public  class AsteroidView implements IDrawable {
                     Game.getInstance().c.g.getTeleportGateViewByTeleportGate((TeleportGate) asteroid.GetNeighbours().get(i)).Draw();
                 }
             }
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
+//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
 
             Game.getInstance().c.g.repaint();
             Game.getInstance().c.g.validate();
