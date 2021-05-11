@@ -11,41 +11,12 @@ public class MaterialView implements IDrawable {
 
     private Material material;
     private Icon p;
-    public JLabel l;
-    private int x,y;
+    public JLabel l = new JLabel();
+    private int x,y, scalingx = 40,scalingy = 40;
 
     public MaterialView(Material m){
         this.material = m;
-        int scalingx = 40;
-        int scalingy = 40;
-//        if(material.getName()==NormalMaterialName.IRON) {
-////            scalingx = 110;
-////            scalingy = 90;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//        }
-//        if(material.getName()==NormalMaterialName.COAL) {
-////            scalingx = 40;
-////            scalingy = 40;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//        }
-//        if(material.getName()==SublimableMaterialName.ICEWATER) {
-////            scalingx = 40;
-////            scalingy = 40;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//        }
-//        if(material.getName()==RadioactiveMaterialName.URAN) {
-////            scalingx = 120;
-////            scalingy = 100;
-//            RadioactiveMaterial rm = (RadioactiveMaterial)material;
-//            if(rm.GetExposure()==0)
-//                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//            else if(rm.GetExposure()==1)
-//                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//            else if(rm.GetExposure()==2)
-//                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//        }
-        p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-       l = new JLabel(p);
+        setImage();
         //Game.getInstance().c.g.gamespace.add(l);
         l.addMouseListener(new MouseListener() {
             @Override
@@ -106,7 +77,30 @@ public class MaterialView implements IDrawable {
         this.y = y + 50;
     }
 
+    public void setImage() {
+        if(material.name==NormalMaterialName.IRON) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+        }
+        if(material.name==NormalMaterialName.COAL) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+        }
+        if(material.name==SublimableMaterialName.ICEWATER) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+        }
+        if(material.name==RadioactiveMaterialName.URAN) {
+
+            RadioactiveMaterial rm = (RadioactiveMaterial)material;
+            if(rm.GetExposure()==0)
+                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            else if(rm.GetExposure()==1)
+                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            else if(rm.GetExposure()==2)
+                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+        }
+        l.setIcon(p);
+    }
     public void Draw(){
+//        setImage();
         for(AsteroidView av: Game.getInstance().c.g.GetAsteroidView()) {
             if(av.getAsteroid().getMaterial() == material) {
                 x = av.getX()+45;

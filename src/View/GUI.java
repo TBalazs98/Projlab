@@ -391,7 +391,9 @@ public class GUI extends JFrame implements ActionListener {
     public void update() {
         //gamespace.removeAll();
         for(AsteroidView av: asteroids) {
-            av.Draw();
+            if(av.getAsteroid() != null) {
+                av.Draw();
+            }
         }
 
         gamespace.repaint();

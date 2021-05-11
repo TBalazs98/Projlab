@@ -179,19 +179,21 @@ public class Settler extends Worker implements drillable, moveable {
         AsteroidBelt.getInstance().SetSettlersAlive();  //Es atallitjuk a jelenleg eletben levo Settlereket
         this.inventory.CharacterDied();
 //        Controller.settlers.set(Controller.settlers.indexOf(this), null);
-        ArrayList<SettlerView> help = Game.getInstance().c.g.GetSettlerView();
-        for (int i = 0; i < Game.getInstance().c.g.settlers.size(); i++) {
-            sv = help.get(i);
-            if (sv != null && sv.getSettler() == this) {
+//        ArrayList<SettlerView> help = Game.getInstance().c.g.GetSettlerView();
+//        for (int i = 0; i < Game.getInstance().c.g.settlers.size(); i++) {
+//            sv = help.get(i);
+//            if (sv != null && sv.getSettler() == this) {
 //                Game.getInstance().c.g.settlers.indexOf(this).set(Game.getInstance().c.g.settlers.indexOf(sv.getSettler()), null);
 //                Game.getInstance().c.g.settlers.remove(this);
 //                Game.getInstance().c.g.GetSettlerView().remove(sv);//set(Game.getInstance().c.g.GetSettlerView().indexOf(sv), null);
-//                Main.settlers.remove(this);//set(Main.settlers.indexOf(this), null);
+                Main.settlers.remove(this);//set(Main.settlers.indexOf(this), null);
 
 
                 //Logger.getInstance().printReturnCommand();
-            }
-        }
+//            }
+//        }
+        Game.getInstance().c.g.gamespace.repaint();
+        Game.getInstance().c.g.gamespace.validate();
     }
 
     /**

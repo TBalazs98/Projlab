@@ -402,11 +402,12 @@ public class Asteroid implements DestinationObject, Steppable {
      *Az aszteroida felrobban, errol ertesiti a szomszedait, illetve a rajta levo karakterek ennek megfeleloen viselkednek.
      */
     public void Explode() {
-        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
-            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
-                Game.getInstance().c.g.GetAsteroidView().get(i).setExploding();
-        }
+
         //Logger.getInstance().printCommandCall(this);;
+//        AsteroidBelt.getInstance().getAsteroids().remove(this);
+        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setExploding();
+        Game.getInstance().c.g.gamespace.repaint();
+        Game.getInstance().c.g.gamespace.validate();
         int n = characters.size();
         for(int i = n - 1; i >= 0; i--) {
             characters.get(i).Explode();
@@ -417,14 +418,16 @@ public class Asteroid implements DestinationObject, Steppable {
         //this.neighbours.forEach(n -> n.HitByExplosion(this));
         //this.characters.forEach(c -> c.Explode());
 
-        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++)
-            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this)
-                Game.getInstance().c.g.GetAsteroidView().get(i).setExploding();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        Main.materials.remove(this.material);
+//        Game.getInstance().c.g.GetAsteroidView().remove(Game.getInstance().c.g.getAsteroidViewByAsteroid(this));
         //Main.asteroids.remove(this);
         Main.asteroids.set(Main.asteroids.indexOf(this), null);
-
+//        Game.getInstance().RemoveSteppabe(this);
         //Logger.getInstance().printReturnCommand();
     }
 
