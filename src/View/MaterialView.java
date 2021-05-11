@@ -11,42 +11,57 @@ public class MaterialView implements IDrawable {
 
     private Material material;
     private Icon p;
-    public JLabel l;
-    private int x,y;
+    public JLabel l = new JLabel();
+    private int x,y, scalingx = 40,scalingy = 40;
 
     public MaterialView(Material m){
         this.material = m;
-        int scalingx = 40;
-        int scalingy = 40;
-//        if(material.getName()==NormalMaterialName.IRON) {
-////            scalingx = 110;
-////            scalingy = 90;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//        }
-//        if(material.getName()==NormalMaterialName.COAL) {
-////            scalingx = 40;
-////            scalingy = 40;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//        }
-//        if(material.getName()==SublimableMaterialName.ICEWATER) {
-////            scalingx = 40;
-////            scalingy = 40;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//        }
-//        if(material.getName()==RadioactiveMaterialName.URAN) {
-////            scalingx = 120;
-////            scalingy = 100;
-//            RadioactiveMaterial rm = (RadioactiveMaterial)material;
-//            if(rm.GetExposure()==0)
-//                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//            else if(rm.GetExposure()==1)
-//                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//            else if(rm.GetExposure()==2)
-//                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-//        }
-        p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
-       l = new JLabel(p);
+        setImage();
+//        l = new JLabel(p);
         //Game.getInstance().c.g.gamespace.add(l);
+
+
+
+       /* Material mat = new Material();
+        mat.setName(NormalMaterialName.COAL);
+        RadioactiveMaterial rm = new RadioactiveMaterial();
+        rm.setName(RadioactiveMaterialName.URAN);
+        rm.SetExposure(0);
+        MaterialView mv = new MaterialView(mat);
+        mv.SetCoords(newasteroidx+45,newasteroidy+45); //COAL
+        // mv.SetCoords(newasteroidx+45,newasteroidy+45); //ICE
+        //mv.SetCoords(newasteroidx+36,newasteroidy+30); //IRON
+        // mv.SetCoords(newasteroidx+42,newasteroidy-20); //URAN*/          //EZ A GUIBA VOLT, MINDEN MATERIAL ASZTEROIDAHOZ KEPEST RAJZOLJA KI A KOZEPERE
+    }
+
+    public void SetCoords(int x, int y){
+        this.x = x + 50;
+        this.y = y + 50;
+    }
+
+    public void setImage() {
+        if(material.name==NormalMaterialName.IRON) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+        }
+        if(material.name==NormalMaterialName.COAL) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+        }
+        if(material.name==SublimableMaterialName.ICEWATER) {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+        }
+        if(material.name==RadioactiveMaterialName.URAN) {
+
+            RadioactiveMaterial rm = (RadioactiveMaterial)material;
+            if(rm.GetExposure()==0)
+                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            else if(rm.GetExposure()==1)
+                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            else if(rm.GetExposure()==2)
+                p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
+            else if(rm.GetExposure()>=3)
+                p = null;
+        }
+        l.setIcon(p);
         l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -87,26 +102,9 @@ public class MaterialView implements IDrawable {
                 Game.getInstance().c.g.dp.validate();
             }
         });
-
-
-       /* Material mat = new Material();
-        mat.setName(NormalMaterialName.COAL);
-        RadioactiveMaterial rm = new RadioactiveMaterial();
-        rm.setName(RadioactiveMaterialName.URAN);
-        rm.SetExposure(0);
-        MaterialView mv = new MaterialView(mat);
-        mv.SetCoords(newasteroidx+45,newasteroidy+45); //COAL
-        // mv.SetCoords(newasteroidx+45,newasteroidy+45); //ICE
-        //mv.SetCoords(newasteroidx+36,newasteroidy+30); //IRON
-        // mv.SetCoords(newasteroidx+42,newasteroidy-20); //URAN*/          //EZ A GUIBA VOLT, MINDEN MATERIAL ASZTEROIDAHOZ KEPEST RAJZOLJA KI A KOZEPERE
     }
-
-    public void SetCoords(int x, int y){
-        this.x = x + 50;
-        this.y = y + 50;
-    }
-
     public void Draw(){
+        setImage();
         for(AsteroidView av: Game.getInstance().c.g.GetAsteroidView()) {
             if(av.getAsteroid().getMaterial() == material) {
                 x = av.getX()+45;
@@ -117,8 +115,13 @@ public class MaterialView implements IDrawable {
 
         //Game.getInstance().c.g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
         Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
+        if(p == null){
+            l.setBounds(this.x,this.y,0,0);
+        }else
         l.setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
 
+        Game.getInstance().c.g.repaint();
+        Game.getInstance().c.g.validate();
     }
 
     public Material getMaterial(){return material;}

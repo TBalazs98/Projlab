@@ -68,23 +68,76 @@ public class Game {
         //Logger.getInstance().printReturnCommand();
     }
 
+    public void checkForNullAsteroid(Asteroid a){
+//        for(Asteroid b : Main.asteroids) {
+//            if (b == a) {
+//                if(b ==  null){
+//
+//                }
+//            }
+//        }
+    }
+
     /**
      *Kovetkezo kor inditasa.
      */
+//    public void NextRound() {
+//        //Logger.getInstance().printCommandCall(this);
+//        ArrayList<Steppable> copy = steppables;
+//        //if(Main.Randomize == true) {
+//            for(Steppable s: steppables) {
+////                if (s instanceof Asteroid){
+////
+////                }
+//                System.out.println("haliak");
+//                s.Step();
+//                c.g.update();
+////                try {
+////                    Thread.sleep(1000);
+////                } catch (InterruptedException e) {
+////                    e.printStackTrace();
+////                }
+//            }
+//        //}
+////        //for(int i = 0; i < settlers.size(); i++) {
+////            currentSettler = settlers.get(0);
+////            SettlerView csv = null;
+////            for(int j = 0; j < c.g.settlers.size(); j++) {
+////                if(c.g.settlers.get(j).getSettler() == currentSettler) {
+////                    csv = c.g.settlers.get(j);
+////                    csv.Highlight();
+////                }
+////            }
+////            //do something();
+////        //}
+////
+////
+////        //Logger.getInstance().printReturnCommand();
+////        for(Asteroid a: Main.asteroids) {
+////            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setInSunstorm(false);
+////        }
+//    }
+
     public void NextRound() {
-        ArrayList<Asteroid> prev = Main.asteroids;
+//        ArrayList<Asteroid> prev = Main.asteroids;
+        Asteroid helper = new Asteroid();
         for(Steppable s: steppables) {
-            System.out.println("haliak");
-            s.Step();
-            c.g.update();
+            if(s instanceof Asteroid)
+                helper = (Asteroid) s;
+            if(helper !=null){
+            if(Game.getInstance().c.g.getAsteroidViewByAsteroid(helper)!=null) {
+                s.Step();
+                c.g.update();
+            }
+            }
 
         }
-        ArrayList<Asteroid> after = Main.asteroids;
-        ArrayList<Integer> indexes = lookfordifference(prev,after);
-        for(int i =0; i<indexes.size();i++){
-            Main.asteroids.remove(i);
-            c.g.GetAsteroidView().remove(i);
-        }
+//        ArrayList<Asteroid> after = Main.asteroids;
+//        ArrayList<Integer> indexes = lookfordifference(prev,after);
+//        for(int i =0; i<indexes.size();i++){
+//            Main.asteroids.remove(i);
+//            c.g.GetAsteroidView().remove(i);
+//        }
 
 
     }
@@ -97,6 +150,24 @@ public class Game {
                     diff.add(i);
                 }
             }
+        //}
+//        //for(int i = 0; i < settlers.size(); i++) {
+//            currentSettler = settlers.get(0);
+//            SettlerView csv = null;
+//            for(int j = 0; j < c.g.settlers.size(); j++) {
+//                if(c.g.settlers.get(j).getSettler() == currentSettler) {
+//                    csv = c.g.settlers.get(j);
+//                    csv.Highlight();
+//                }
+//            }
+//            //do something();
+//        //}
+//
+//
+//        //Logger.getInstance().printReturnCommand();
+//        for(Asteroid a: Main.asteroids) {
+//            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setInSunstorm(false);
+//        }
         }
         return diff;
     }

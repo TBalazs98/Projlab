@@ -70,7 +70,7 @@ public class RobotView implements IDrawable {
 
 
 //        Game.getInstance().c.g.gamespace.add(l);
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
+//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
 
     }

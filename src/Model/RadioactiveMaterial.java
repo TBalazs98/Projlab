@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Main;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -52,11 +54,24 @@ public class RadioactiveMaterial extends Material {
 //            }
 
         //fuggveny lefutasa tagvaltozo lekerdezesevel
-        if(a.GetSunProximity() == true && a.getLayers() == 0) //amugy ez a 0 ide nem is kell, mert csak akkor hívodik meg a hit, ha a layers 0
+        if(a.GetSunProximity() == true && a.getLayers() == 0) { //amugy ez a 0 ide nem is kell, mert csak akkor hívodik meg a hit, ha a layers 0
             expose();
-        if(exposed >= 3) {
-            a.Explode();
+
+            Game.getInstance().c.g.getMaterialViewByMaterial(this).setImage();
         }
+        if(exposed == 3) {
+
+//            Game.getInstance().c.g.materials.remove(Game.getInstance().c.g.getMaterialViewByMaterial(this));
+//            System.out.println("INDEX OF RAD" + Main.materials.indexOf(this));
+            Main.materials.set(Main.materials.indexOf(this), null);
+            Game.getInstance().c.g.materials.remove(Game.getInstance().c.g.getMaterialViewByMaterial(this));
+
+            a.Explode();
+
+        }
+
+        Game.getInstance().c.g.gamespace.repaint();
+        Game.getInstance().c.g.gamespace.validate();
 
 
         //Logger.getInstance().printReturnCommand();

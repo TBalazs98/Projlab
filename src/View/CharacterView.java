@@ -36,7 +36,7 @@ public class CharacterView implements IDrawable{
         }
     }
 
-    private void Call(Settler s){
+    private void Call(Settler s) {
 //        SettlerView sv = null;
 //        for(int i = 0; i < g.settlers.size(); i++) {
 //            if(g.settlers.get(i).getSettler() == s) {
@@ -48,24 +48,30 @@ public class CharacterView implements IDrawable{
 //            g.settlers.add(sv);
 //        }
         SettlerView sv = new SettlerView(s);
-       // Game.c.g.GetSettlerView().get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
-        AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( s.getAsteroid());
-        sv.SetCoords(av.getX(),av.getY());
-        sv.Draw();
+        // Game.c.g.GetSettlerView().get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
+        AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid(s.getAsteroid());
+        if (av != null){
+            sv.SetCoords(av.getX(), av.getY());
+            sv.Draw();
+        }
     }
 
     private void Call(UFO u) {
         UfoView uv =Game.getInstance().c.g.getUfoViewByUfo(u);
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( u.getAsteroid());
-        uv.SetCoords(av.getX(),av.getY());
-        uv.Draw();
+        if(av!=null) {
+            uv.SetCoords(av.getX(), av.getY());
+            uv.Draw();
+        }
     }
 
     private void Call(Robot r) {
         RobotView rv = Game.getInstance().c.g.getRobotViewByRobot(r);
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( r.getAsteroid());
-        rv.SetCoords(av.getX(),av.getY());
-        rv.Draw();
+        if(av !=null) {
+            rv.SetCoords(av.getX(), av.getY());
+            rv.Draw();
+        }
     }
 
 

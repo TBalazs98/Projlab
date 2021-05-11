@@ -167,11 +167,12 @@ public class GUI extends JFrame implements ActionListener {
 
     public AsteroidView getAsteroidViewByAsteroid(Asteroid a){
         for (int i=0; i<this.asteroids.size();i++){
-            if(this.asteroids.get(i).getAsteroid()==a){
-               // System.out.println("fasz");
-                return this.asteroids.get(i);
+            if(this.asteroids.get(i)!=null) {
+                if (this.asteroids.get(i).getAsteroid() == a) {
+                    // System.out.println("fasz");
+                    return this.asteroids.get(i);
+                }
             }
-
         }
         return null;
     }
@@ -291,8 +292,8 @@ public class GUI extends JFrame implements ActionListener {
 
 
         st = new JPanel();
-        settings = new JButton(new ImageIcon("Files/Pictures/settingsbtn.png"));
-        settings.setRolloverIcon(new ImageIcon("Files/Pictures/settingsdarkbtn.png"));
+        settings = new JButton(new ImageIcon("Files/Pictures/bcustom_light.png"));
+        settings.setRolloverIcon(new ImageIcon("Files/Pictures/bcustom-game_dark.png"));
         SetButton(settings);
         st.add(settings);
         SetPanel(st);
@@ -391,7 +392,9 @@ public class GUI extends JFrame implements ActionListener {
     public void update() {
         //gamespace.removeAll();
         for(AsteroidView av: asteroids) {
-            av.Draw();
+                if (av.getAsteroid() != null) {
+                    av.Draw();
+                }
         }
 
         gamespace.repaint();

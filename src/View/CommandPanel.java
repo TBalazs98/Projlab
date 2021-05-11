@@ -41,32 +41,32 @@ public class CommandPanel extends JPanel implements ActionListener {
     public JButton getActionDone1(){return cpactionDone;}
 
     public void Buttons(){
-        scaling = Game.getInstance().c.g.GetWidth()/16;
-        int height = 45;
+        scaling = Game.getInstance().c.g.GetWidth()/20;
+        int height = 60;
 
 
-        build = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/buildbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-        build.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/builddarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        build = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_build.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        build.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_build (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         SetButton(build);
 
-        drill = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/drillbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-        drill.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/drilldarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        drill = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_drill.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        drill.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_drill (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         SetButton(drill);
 
-        move = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/movebtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-        move.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/movedarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        move = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_move.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        move.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_move (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         SetButton(move);
 
-        place = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/placebtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-        place.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/placedarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        place = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_place.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        place.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_place (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         SetButton(place);
 
-        mine = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/minebtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-        mine.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/minedarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        mine = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_mine.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        mine.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_mine (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         SetButton(mine);
 
-        nextsettler = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/minebtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-        nextsettler.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/minedarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        nextsettler = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_next.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+        nextsettler.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_next (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         SetButton(nextsettler);
 
 
@@ -101,33 +101,36 @@ public class CommandPanel extends JPanel implements ActionListener {
         ImageIcon p = null;
         scaling = 50;
 //        System.out.println("INVENTORY: " + Game.getInstance().c.selectedSettler);
-        for(Material m : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials()){
-            if(m.getName()== NormalMaterialName.IRON) {
-                p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+        if(Main.settlers.get(Game.getInstance().c.SelectedSettler())!=null) {
+            for (Material m : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials()) {
+                if (m.getName() == NormalMaterialName.IRON) {
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }
+                if (m.getName() == NormalMaterialName.COAL) {
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }
+                if (m.getName() == SublimableMaterialName.ICEWATER) {
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }
+                if (m.getName() == RadioactiveMaterialName.URAN) {
+                    RadioactiveMaterial rm = (RadioactiveMaterial) m;
+                    if (rm.GetExposure() == 0)
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    else if (rm.GetExposure() == 1)
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    else if (rm.GetExposure() == 2)
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }
+                inventory.add(new JLabel((p)));
             }
-            if(m.getName()==NormalMaterialName.COAL) {
-                p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            }
-            if(m.getName()== SublimableMaterialName.ICEWATER) {
-                p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            }
-            if(m.getName()== RadioactiveMaterialName.URAN) {
-                RadioactiveMaterial rm = (RadioactiveMaterial)m;
-                if(rm.GetExposure()==0)
-                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-                else if(rm.GetExposure()==1)
-                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-                else if(rm.GetExposure()==2)
-                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            }
-            inventory.add(new JLabel((p)));
-        }
 
-        for(TeleportGate t : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetGates()) {
-            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            inventory.add(new JLabel(p));
+            for (TeleportGate t : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetGates()) {
+                p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                inventory.add(new JLabel(p));
+            }
         }
         this.add(inventory);
+
     }
 
     @Override
