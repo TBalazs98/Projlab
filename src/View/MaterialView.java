@@ -90,12 +90,9 @@ public class MaterialView implements IDrawable {
     }
     public void Draw(){
         setImage();
-        for(AsteroidView av: Game.getInstance().c.g.GetAsteroidView()) {
-            if(av.getAsteroid().getMaterial() == material) {
-                x = av.getX()+45;
-                y = av.getY()+45;
-            }
-        }
+
+        AsteroidView av = Game.getInstance().c.getAsteroidViewByMaterialView(this);
+        SetCoords(av.getX(),av.getY());
         Game.getInstance().c.g.gamespace.add(l);
 
         //Game.getInstance().c.g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());

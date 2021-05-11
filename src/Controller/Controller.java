@@ -3,6 +3,7 @@ package Controller;
 import Model.*;
 import View.AsteroidView;
 import View.GUI;
+import View.MaterialView;
 import View.SettlerView;
 
 import javax.imageio.ImageIO;
@@ -496,6 +497,15 @@ public  class Controller {
 
         //lehet nem jó h melyik mi
         Main.Randomize = (datas.get(9) == 0);
+    }
+
+    public AsteroidView getAsteroidViewByMaterialView(MaterialView m){
+        for(int i=0;i<Main.asteroids.size();i++){
+            if(Main.asteroids.get(i).getMaterial()==m.getMaterial()){
+                return g.getAsteroidViewByAsteroid(Main.asteroids.get(i));
+            }
+        }
+        return null;
     }
 
 

@@ -28,30 +28,8 @@ public class AsteroidView implements IDrawable {
      */
     public AsteroidView(Asteroid a) {
         this.asteroid = a;
-        //if (asteroid.GetisEmpty()) {
 
-//        if(a.getLayers()>0) {
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//        }
-//        else if(a.getLayers() == 0) {
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//        }
         setImage();
-//        else if(!a.GetisEmpty()){
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling,scaling,Image.SCALE_SMOOTH));
-//        }
-            //as = new JButton(p );
-
-
-            //as.setRolloverIcon(new ImageIcon("Files/Pictures/explosion.png"));
-           /* as.setBorderPainted(false);
-            as.setContentAreaFilled(false);
-            as.setFocusPainted(false);
-            as.setOpaque(false);
-*/
-        //}
-
-//        getAsteroidCoordsListener(l,this);
 
 
     }
