@@ -85,12 +85,12 @@ public class InputManager {
                 }
             }
 
-            /*reader.readLine();      //ures sor beolvasasa, doksi szerint
+           reader.readLine();      //ures sor beolvasasa, doksi szerint
 
             while(cm.IsRunning()){      //addig amig a bemenetben nem talalja meg a stop-ot
                 line=reader.readLine();
                 cm.command(line,generateoutput);
-            }*/
+            }
             /*System.out.println("[Actual output]");
             cm.listMaterials(generateoutput);   //
             cm.listAsteroids(generateoutput);

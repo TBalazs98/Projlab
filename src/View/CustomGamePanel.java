@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class CustomGamePanel extends JPanel {
-    final private  ChoserPanel asteroid;
+    final private ChoserPanel asteroid;
     final private ChoserPanel settler;
     final private ChoserPanel robot;
     final private ChoserPanel ufo;
@@ -20,7 +20,7 @@ public class CustomGamePanel extends JPanel {
     final private ChoserPanel portal;
     final private JComboBox randbox;
     private int asteroidnumber = 12;
-    final private JButton save;
+    final private JButton saveButton;
     final private ArrayList<Integer> data = new ArrayList<>();
 
 
@@ -87,10 +87,15 @@ public class CustomGamePanel extends JPanel {
 
         this.add(random);
 
-        save = new JButton("Save settings");
-        save.addActionListener(new setListener());
-        save.setBorder(BorderFactory.createEmptyBorder(0, g.width/16, 0, g.width/16));
-        this.add(save);
+        saveButton = new JButton(new ImageIcon("Files/Pictures/button_save-game-settings.png"));
+        saveButton.setRolloverIcon(new ImageIcon("Files/Pictures/button_save-game-settings (1).png"));
+        saveButton.setBorderPainted(false);
+        saveButton.setContentAreaFilled(false);
+        saveButton.setFocusPainted(false);
+        saveButton.setOpaque(false);
+        saveButton.addActionListener(new setListener());
+        saveButton.setBorder(BorderFactory.createEmptyBorder(0, g.width/16, 0, g.width/16));
+        this.add(saveButton);
 
     }
 
@@ -128,7 +133,7 @@ public class CustomGamePanel extends JPanel {
     private class setListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == save){
+            if(e.getSource() == saveButton){
                 Game.getInstance().c.g.getContentPane().removeAll();
                 Game.getInstance().c.g.DrawMenu();
                 Game.getInstance().c.g.repaint();

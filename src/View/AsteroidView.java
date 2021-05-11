@@ -210,6 +210,9 @@ public class AsteroidView implements IDrawable {
         return isInsusntorm;
     }
 
+    /**
+     * Ha az aszteroida felrobban, akkor a robbanas effect jelenik meg a kepernyon
+     */
     public void setExploding() {
         this.exploding = true;
         this.asteroid.explodecount++;
