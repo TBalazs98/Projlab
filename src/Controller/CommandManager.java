@@ -647,9 +647,9 @@ public class CommandManager {
             if(a.GetNeighbourCount() != 0) {
                 ArrayList<String> neigh = new ArrayList<>();
                 for (DestinationObject o : a.GetNeighbours()) {
-                    if (Main.asteroids.indexOf(o) != -1)
+                    if (Main.asteroids.contains(o))             //Main.asteroids.indexOf(o) != -1
                         neigh.add(""+(Main.asteroids.indexOf(o) + 1));
-                    if (Main.teleportgates.indexOf(o) != -1)
+                    if (Main.teleportgates.contains(o))          //Main.teleportgates.indexOf(o) != -1
                         neigh.add(""+(Main.teleportgates.indexOf(o) + 1));
                 }
                 pw.print(String.join(",",neigh));

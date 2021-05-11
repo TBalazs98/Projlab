@@ -104,93 +104,44 @@ public class Main {
 
 
         GuiController gc= new GuiController(g);*/
-        //g.DrawMenu();
-        //c = new Controller();
- /*       Asteroid a = new Asteroid();
-        a.SetEmpty(true);
-        SublimableMaterial sm = new SublimableMaterial();
-        a.SetMaterial(null);
-        a.setLayer(0);
-        a.SetSunProximityManual(true);
-
-
-        Asteroid a2 = new Asteroid();
-        a2.SetEmpty(false);
-        SublimableMaterial sm2 = new SublimableMaterial();
-        a2.SetMaterial(sm2);
-        a2.setLayer(5);
-        a2.SetSunProximityManual(true);
-
-
-
-        Asteroid a3 = new Asteroid();
-        a3.SetEmpty(false);
-        SublimableMaterial sm3 = new SublimableMaterial();
-        a3.SetMaterial(sm3);
-        a3.setLayer(1);
-        a3.SetSunProximityManual(true);
-
-        TeleportGate tg=new TeleportGate();
-        tg.setPlaced(true);
-        tg.setAsteroid(a3);
-        tg.AddNeighbour(a2);
-
-        a3.setNeighbour(tg);
-
-        a3.setNeighbour(a2);
-        a3.setNeighbour(a);
-        a2.setNeighbour(a3);
-        a.setNeighbour(a3);
-
-//        a3.AddNeighbour(a2);
-//        a3.AddNeighbour(a);
-//        a2.AddNeighbour(a3);
-//        a.AddNeighbour(a3);
-
-
-
-
-        Settler s = new Settler();
-        s.setAsteroid(a);
-        a.setCharacter(s);
-
-
-        Settler s2 = new Settler();
-        s2.setAsteroid(a2);
-        a2.setCharacter(s2);
-
-        Settler s3 = new Settler();
-        s3.setAsteroid(a3);
-        a3.setCharacter(s3);
-
-        Settler s4 = new Settler();
-        s4.setAsteroid(a3);
-        a3.setCharacter(s4);
-
-//        asteroids.add(a);
-//        asteroids.add(a2);
-//        asteroids.add(a3);
-//        teleportgates.add(tg);
+//        //g.DrawMenu();
+//        //c = new Controller();
+//        Asteroid a = new Asteroid();
+//        a.SetEmpty(true);
+//        SublimableMaterial sm = new SublimableMaterial();
+//        a.SetMaterial(null);
+//        a.setLayer(0);
+//        a.SetSunProximityManual(true);
 //
-//        settlers.add(s);
-//        settlers.add(s2);
-//        settlers.add(s3);
-//        settlers.add(s4);
-
-        Material m = new Material();
-        m.setName(NormalMaterialName.COAL);
-
-        RadioactiveMaterial rm = new RadioactiveMaterial();
-        rm.setName(RadioactiveMaterialName.URAN);
-
-        /*SublimableMaterial rm = new SublimableMaterial();
-        rm.setName(SublimableMaterialName.ICEWATER);
 //
-        materials.add(m);
-        materials.add(rm);
+//        Asteroid a2 = new Asteroid();
+//        a2.SetEmpty(false);
+//        SublimableMaterial sm2 = new SublimableMaterial();
+//        a2.SetMaterial(sm2);
+//        a2.setLayer(5);
+//        a2.SetSunProximityManual(true);
+//
+//
+//
+//        Asteroid a3 = new Asteroid();
+//        a3.SetEmpty(false);
+//        SublimableMaterial sm3 = new SublimableMaterial();
+//        a3.SetMaterial(sm3);
+//        a3.setLayer(1);
+//        a3.SetSunProximityManual(true);
+//
+//        TeleportGate tg=new TeleportGate();
+//        tg.setPlaced(true);
+//        tg.setAsteroid(a3);
+//        tg.AddNeighbour(a2);
+//
+//        a3.setNeighbour(tg);
+//
+//        materials.add(m);
+//        materials.add(rm);
 
-        s.AddMaterial(m);
-        s.AddMaterial(rm);*/
+//        s.AddMaterial(m);
+//        s.AddMaterial(rm);
 
 
 

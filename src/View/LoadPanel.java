@@ -51,6 +51,7 @@ public class LoadPanel extends JPanel {
         this.add(new JScrollPane(table), BorderLayout.CENTER);
         this.add(also, BorderLayout.SOUTH);
         table.setModel(data);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
 public JPanel getPanel()
