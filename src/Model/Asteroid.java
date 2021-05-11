@@ -21,6 +21,8 @@ public class Asteroid implements DestinationObject, Steppable {
 
     private ArrayList<DestinationObject> neighbours;
 
+    public int explodecount = 0;
+
     /**
      * Az Asteroid osztaly publikus alapertelmezett konstruktora.
      */
@@ -418,15 +420,17 @@ public class Asteroid implements DestinationObject, Steppable {
         //this.neighbours.forEach(n -> n.HitByExplosion(this));
         //this.characters.forEach(c -> c.Explode());
 
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
-//        Game.getInstance().c.g.GetAsteroidView().remove(Game.getInstance().c.g.getAsteroidViewByAsteroid(this));
+//        Game.getInstance().c.g.GetAsteroidView().set(Game.getInstance().c.g.GetAsteroidView().indexOf(Game.getInstance().c.g.getAsteroidViewByAsteroid(this)),null);
         //Main.asteroids.remove(this);
-        Main.asteroids.set(Main.asteroids.indexOf(this), null);
+        this.material = null;
+//        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setExploding();
+//        Main.asteroids.set(Main.asteroids.indexOf(this), null);
 //        Game.getInstance().RemoveSteppabe(this);
         //Logger.getInstance().printReturnCommand();
     }

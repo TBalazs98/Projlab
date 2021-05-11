@@ -15,7 +15,7 @@ public  class AsteroidView implements IDrawable {
     public JLabel l = new JLabel();
     private int x, y;
     private boolean highlight = false;
-    int scaling = 130;
+    int scaling = 130, explodingcount = -1;
     private boolean isInsusntorm = false, exploding = false;
 
 
@@ -44,7 +44,7 @@ public  class AsteroidView implements IDrawable {
 */
         //}
 
-        getAsteroidCoordsListener(l,this);
+//        getAsteroidCoordsListener(l,this);
 
 
     }
@@ -80,8 +80,18 @@ public  class AsteroidView implements IDrawable {
         if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && isInsusntorm && highlight)
             p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollow_nearsun_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
-        if (exploding)
+        if(this.asteroid.explodecount >=2){
+            p = null;
+        }
+        if(this.asteroid.explodecount == 1){
             p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+            this.asteroid.explodecount++;
+        }
+//        System.out.println("ASZTEROID JHVGHSALÉD" + explodingcount);
+//        if (exploding && (explodingcount==0)){
+//            p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+//            explodingcount++;
+//        }
 
         l.setIcon(p);
         this.l.addMouseListener(new MouseListener() {
@@ -113,7 +123,7 @@ public  class AsteroidView implements IDrawable {
                     info.add(new JLabel("\nEMPTY"));
                 else {
                     info.add(new JLabel("\nM" + (Main.materials.indexOf(asteroid.getMaterial())+1) ));
-                    info.add(new JLabel("" +asteroid.getMaterial().name));
+//                    info.add(new JLabel("" +asteroid.getMaterial().name));
                 }
                 ArrayList<String> neigh = new ArrayList<>();
                 for (DestinationObject o : asteroid.GetNeighbours()) {
@@ -161,28 +171,39 @@ public  class AsteroidView implements IDrawable {
 //        setImage();
 //        l.setIcon(p);
 //        Game.getInstance().c.g.gamespace.add(l);
-        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-        CharacterView cv = new CharacterView(asteroid.getCharacters());
-        cv.Draw();
+            if(p == null){
+                l.setBounds(this.x,this.y,0,0);
+            }else {
+                l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+            }
+            CharacterView cv = new CharacterView(asteroid.getCharacters());
+            cv.Draw();
 
-        if(asteroid.getLayers() == 0) {
-            Material m = asteroid.getMaterial();
-            if(m != null) {
+            if (asteroid.getLayers() == 0) {
+                Material m = asteroid.getMaterial();
+                if (m != null) {
+                    MaterialView mv = new MaterialView(m);
+//                    mv.setImage();
+                    if (mv != null) {
+                        mv.SetCoords(x, y);
+                        mv.Draw();
+                    }
+                }
 
-                MaterialView mv = new MaterialView(m);
-                if(mv!= null) {
-                    mv.SetCoords(x, y);
-                    mv.Draw();
+            }
+
+            for (int i = 0; i < asteroid.GetNeighbours().size(); i++) {
+                if (asteroid.GetNeighbours().get(i) instanceof TeleportGate) {
+
+                    Game.getInstance().c.g.getTeleportGateViewByTeleportGate((TeleportGate) asteroid.GetNeighbours().get(i)).Draw();
                 }
             }
-        }
+        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
 
-        for(int i = 0; i < asteroid.GetNeighbours().size(); i++) {
-            if(asteroid.GetNeighbours().get(i) instanceof TeleportGate) {
+            Game.getInstance().c.g.repaint();
+            Game.getInstance().c.g.validate();
 
-                Game.getInstance().c.g.getTeleportGateViewByTeleportGate((TeleportGate)asteroid.GetNeighbours().get(i)).Draw();
-            }
-        }
+
     }
 
 
@@ -216,6 +237,13 @@ public  class AsteroidView implements IDrawable {
 
     public void setExploding() {
         this.exploding = true;
-        setImage();
+        this.asteroid.explodecount++;
+        l.setIcon(p);
+        Game.getInstance().c.g.repaint();
+        Game.getInstance().c.g.validate();
+    }
+
+    public boolean getExpoloding(){
+        return this.exploding;
     }
 }

@@ -119,19 +119,25 @@ public class Game {
 //    }
 
     public void NextRound() {
-        ArrayList<Asteroid> prev = Main.asteroids;
+//        ArrayList<Asteroid> prev = Main.asteroids;
+        Asteroid helper = new Asteroid();
         for(Steppable s: steppables) {
-            System.out.println("haliak");
-            s.Step();
-            c.g.update();
+            if(s instanceof Asteroid)
+                helper = (Asteroid) s;
+            if(helper !=null){
+            if(Game.getInstance().c.g.getAsteroidViewByAsteroid(helper)!=null) {
+                s.Step();
+                c.g.update();
+            }
+            }
 
         }
-        ArrayList<Asteroid> after = Main.asteroids;
-        ArrayList<Integer> indexes = lookfordifference(prev,after);
-        for(int i =0; i<indexes.size();i++){
-            Main.asteroids.remove(i);
-            c.g.GetAsteroidView().remove(i);
-        }
+//        ArrayList<Asteroid> after = Main.asteroids;
+//        ArrayList<Integer> indexes = lookfordifference(prev,after);
+//        for(int i =0; i<indexes.size();i++){
+//            Main.asteroids.remove(i);
+//            c.g.GetAsteroidView().remove(i);
+//        }
 
 
     }

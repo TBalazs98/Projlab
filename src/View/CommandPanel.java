@@ -101,33 +101,36 @@ public class CommandPanel extends JPanel implements ActionListener {
         ImageIcon p = null;
         scaling = 50;
 //        System.out.println("INVENTORY: " + Game.getInstance().c.selectedSettler);
-        for(Material m : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials()){
-            if(m.getName()== NormalMaterialName.IRON) {
-                p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+        if(Main.settlers.get(Game.getInstance().c.SelectedSettler())!=null) {
+            for (Material m : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials()) {
+                if (m.getName() == NormalMaterialName.IRON) {
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }
+                if (m.getName() == NormalMaterialName.COAL) {
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }
+                if (m.getName() == SublimableMaterialName.ICEWATER) {
+                    p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }
+                if (m.getName() == RadioactiveMaterialName.URAN) {
+                    RadioactiveMaterial rm = (RadioactiveMaterial) m;
+                    if (rm.GetExposure() == 0)
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    else if (rm.GetExposure() == 1)
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    else if (rm.GetExposure() == 2)
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }
+                inventory.add(new JLabel((p)));
             }
-            if(m.getName()==NormalMaterialName.COAL) {
-                p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            }
-            if(m.getName()== SublimableMaterialName.ICEWATER) {
-                p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            }
-            if(m.getName()== RadioactiveMaterialName.URAN) {
-                RadioactiveMaterial rm = (RadioactiveMaterial)m;
-                if(rm.GetExposure()==0)
-                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-                else if(rm.GetExposure()==1)
-                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp1.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-                else if(rm.GetExposure()==2)
-                    p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            }
-            inventory.add(new JLabel((p)));
-        }
 
-        for(TeleportGate t : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetGates()) {
-            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-            inventory.add(new JLabel(p));
+            for (TeleportGate t : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetGates()) {
+                p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                inventory.add(new JLabel(p));
+            }
         }
         this.add(inventory);
+
     }
 
     @Override

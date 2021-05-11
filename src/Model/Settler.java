@@ -186,7 +186,7 @@ public class Settler extends Worker implements drillable, moveable {
 //                Game.getInstance().c.g.settlers.indexOf(this).set(Game.getInstance().c.g.settlers.indexOf(sv.getSettler()), null);
 //                Game.getInstance().c.g.settlers.remove(this);
 //                Game.getInstance().c.g.GetSettlerView().remove(sv);//set(Game.getInstance().c.g.GetSettlerView().indexOf(sv), null);
-                Main.settlers.remove(this);//set(Main.settlers.indexOf(this), null);
+                Main.settlers.set(Main.settlers.indexOf(this), null);
 
 
                 //Logger.getInstance().printReturnCommand();

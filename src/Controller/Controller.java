@@ -76,24 +76,27 @@ public  class Controller {
         a=av.getAsteroid();
     }
 
-    public void HighlightSettlerStuff(){
+    public void HighlightSettlerStuff() {
         //Settler s=Main.settlers.get(SelectedSettler());
-       // SettlerView sv =Game.getInstance().c.g.getSettlerViewBySettler(s);
+        // SettlerView sv =Game.getInstance().c.g.getSettlerViewBySettler(s);
 
 
-        //HighlightEverythingExcept(g.GetSettlerView().get(SelectedSettler()));
-        HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(SelectedSettler())));
-        //HighAsteroid(s);
-        HighAsteroid(Main.settlers.get(SelectedSettler()));
-        //switchCommand(s);
-        //HighlightAsteroids();
+            if (Game.getInstance().c.g.getAsteroidViewByAsteroid(Main.settlers.get(SelectedSettler()).getAsteroid()).getExpoloding() != true) {
 
+                //HighlightEverythingExcept(g.GetSettlerView().get(SelectedSettler()));
+                HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(SelectedSettler())));
+                //HighAsteroid(s);
+                HighAsteroid(Main.settlers.get(SelectedSettler()));
+                //switchCommand(s);
+                //HighlightAsteroids();
+            }
 
-        //if(selectedSettler%settlers.size()!=0)
-        //NextSettler();
-        //sv.SelectHighlighted(false);
-       // else
-           // Game.getInstance().NextRound();
+            //if(selectedSettler%settlers.size()!=0)
+            //NextSettler();
+            //sv.SelectHighlighted(false);
+            // else
+            // Game.getInstance().NextRound();
+
     }
 
     /**
@@ -102,7 +105,9 @@ public  class Controller {
     public void NextSettler(){
 
         selectedSettler++;
-        HighlightSettlerStuff();
+        if (Main.settlers.get(SelectedSettler()) != null) {
+            HighlightSettlerStuff();
+        }
     }
 
     /**
@@ -114,6 +119,7 @@ public  class Controller {
             selectedSettler=0;
             Game.getInstance().NextRound();
         }
+
         return selectedSettler;
     }
 
@@ -219,9 +225,11 @@ public  class Controller {
 
     public void HighAsteroid(Settler sv){
         for(Asteroid a : Main.asteroids) {
-            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false, g);
-            System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
-            //Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImage();
+            if(a !=null) {
+                Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false, g);
+                System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
+                //Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImage();
+            }
         }
 
         for(TeleportGate tg : Main.teleportgates) {
@@ -299,6 +307,7 @@ public  class Controller {
         int materials = I+C+Ra+W;
 
         //Nyersanyagok leterhozasa
+        System.out.println("MATERIAL COUNTS" + I +C+Ra+W+A);
         for(int i = 0; i< I;i++){
             Material m = new Material();
             m.setName(NormalMaterialName.IRON);
