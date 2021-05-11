@@ -123,11 +123,11 @@ public class Game {
 
     public void NextRound() {
 //        ArrayList<Asteroid> prev = Main.asteroids;
-        Asteroid helper = new Asteroid();
-        for(Steppable s: steppables) {
-
+        if(Main.Randomize) {
+            for (Steppable s : steppables) {
                 s.Step();
                 c.g.update();
+            }
         }
 //        ArrayList<Asteroid> after = Main.asteroids;
 //        ArrayList<Integer> indexes = lookfordifference(prev,after);

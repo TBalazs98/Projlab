@@ -496,7 +496,7 @@ public  class Controller {
         }
 
         //lehet nem jó h melyik mi
-        Main.Randomize = (datas.get(9) == 0);
+        Main.Randomize = (datas.get(9)==1)?true:false;
     }
 
     public AsteroidView getAsteroidViewByMaterialView(MaterialView m){
