@@ -67,7 +67,7 @@ public void buildDetails(GUI g){
     int scaling = 90, height = 70;
 
     JButton buildrobot = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/robot.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-    buildrobot.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/builddarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+    buildrobot.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/selected_robot.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
     SetButton(buildrobot);
     buildrobot.addActionListener(new ActionListener() {
         @Override
@@ -91,7 +91,7 @@ public void buildDetails(GUI g){
     });
 
     JButton buildteleportgate = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-    buildteleportgate.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/drilldarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+    buildteleportgate.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/selected_teleportgate.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
     SetButton(buildteleportgate);
     buildteleportgate.addActionListener(new ActionListener() {
         @Override
@@ -101,7 +101,7 @@ public void buildDetails(GUI g){
     });
 
     JButton buildbase = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/base.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-    buildbase.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/movedarkbtn.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
+    buildbase.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/selected_base.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
     SetButton(buildbase);
     buildbase.addActionListener(new ActionListener() {
         @Override
