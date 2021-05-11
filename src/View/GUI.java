@@ -21,6 +21,7 @@ public class GUI extends JFrame implements ActionListener {
     public CommandPanel cp ;/*= new CommandPanel(this);*/
     public CustomGamePanel custompanel;
     public LoadPanel loadpanel;
+    public boolean isopened = false;
 
     private ArrayList<IDrawable> drawables;
     public  ArrayList<SettlerView> settlers=new ArrayList<>();

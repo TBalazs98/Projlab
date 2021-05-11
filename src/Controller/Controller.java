@@ -5,10 +5,14 @@ import View.AsteroidView;
 import View.GUI;
 import View.SettlerView;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -190,6 +194,39 @@ public  class Controller {
         Game.getInstance().c.g.dp.validate();
     }
 
+    public void SettlersHaveWon(){
+//        Game.getInstance().c.g.gamespace.removeAll();
+//        Game.getInstance().c.g.cp.removeAll();
+//        Game.getInstance().c.g.dp.removeAll();
+//
+//        Game.getInstance().c.g.inpudialog.add(new JLabel(new ImageIcon("Files/Pictures/teleportgate.jpg")));
+//        Game.getInstance().c.g.setContentPane(new JLabel(new ImageIcon("Files/Pictures/teleportgate.jpg")));
+//        System.out.println("NYERTÉÉÉÉÉÉÉL");
+        Game.getInstance().c.g.removeAll();
+        Game.getInstance().c.g.repaint();
+        Game.getInstance().c.g.validate();
+        Graphics paper = Game.getInstance().c.g.getGraphics();
+        paper.clearRect(0, 0, (int)g.getSize().getWidth(), (int)g.getSize().getHeight());
+        final BufferedImage image;
+        try {
+            image = ImageIO.read(new File("Files/Pictures/teleportgate_insane.png"));
+            paper.drawImage(image,0, 0, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        Game.getInstance().c.g.repaint();
+        Game.getInstance().c.g.validate();
+    }
+
+    public void SettlersLost(){
+        Game.getInstance().c.g.gamespace.removeAll();
+        Game.getInstance().c.g.gamespace.add(new JLabel(new ImageIcon("Files/Pictures/teleportgate_insane.png")));
+
+        Game.getInstance().c.g.repaint();
+        Game.getInstance().c.g.validate();
+    }
 
     public void HighlightEverythingExcept(SettlerView sv){
 

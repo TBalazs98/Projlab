@@ -50,8 +50,10 @@ public class Game {
     public void WinGame() {
         //Logger.getInstance().printCommandCall(this);
 
-        System.out.println("Settlers have won the game");
-        InputManager.write_to_output(true,"Settlers have won the game");
+//        System.out.println("Settlers have won the game");
+//        InputManager.write_to_output(true,"Settlers have won the game");
+
+        Game.getInstance().c.SettlersHaveWon();
 
         //Logger.getInstance().printReturnCommand();
     }
@@ -62,9 +64,10 @@ public class Game {
     public void LoseGame() {
         //Logger.getInstance().printCommandCall(this);
 
-        System.out.println("Settlers have lost the game");
-        InputManager.write_to_output(true,"Settlers have lost the game");
+//        System.out.println("Settlers have lost the game");
+//        InputManager.write_to_output(true,"Settlers have lost the game");
 
+        Game.getInstance().c.SettlersLost();
         //Logger.getInstance().printReturnCommand();
     }
 

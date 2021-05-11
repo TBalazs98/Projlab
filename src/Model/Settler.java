@@ -70,7 +70,7 @@ public class Settler extends Worker implements drillable, moveable {
             }
 
         }
-        Base base = new Base(setlersOnsameAsteroid);        //bazis epitese, atadva a sajat inventorynkat (ebben nezi meg a Base, hogy fel tud-e epulni)
+        Base base = new Base(setlersOnsameAsteroid);        //bazis epitese, atadva a sajat inventorynkat (ebben nezi meg a Base, hogy fel tud-e epulni)1
         /*if(base !=null){
            ArrayList<Integer> basecount = new ArrayList<>();
            basecount.add(3); basecount.add(3); basecount.add(3); basecount.add(3);
