@@ -45,7 +45,7 @@ public class RobotView implements IDrawable {
                 Game.getInstance().c.g.dp.removeAll();
                 JPanel info = new JPanel(new GridLayout(1,5));
                 info.add(new JLabel("[ROBOT]"));
-                info.add(new JLabel("\nR" + (Main.settlers.indexOf(r)+1)));
+                info.add(new JLabel("\nR" + (Main.robots.indexOf(r)+1)));
                 info.add(new JLabel("\nASTEROID:\nA" + (Main.asteroids.indexOf(r.getAsteroid()) +1) ));
 
                 Game.getInstance().c.g.dp.add(info);
@@ -70,7 +70,7 @@ public class RobotView implements IDrawable {
 
 
 //        Game.getInstance().c.g.gamespace.add(l);
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
+        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
 
     }

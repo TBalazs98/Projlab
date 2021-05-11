@@ -97,7 +97,8 @@ public  class Controller {
         Main.settlers.get(SelectedSettler()).Mine();      //todo ezt vissza
 //        Main.ab.StartStorm(Main.asteroids.get(0));
     }
-    public void HandlePlaceMaterial(){                      //todo ezzel mi a helyzet?
+    public void HandlePlaceMaterial(){
+        //todo ezzel mi a helyzet?
         //todo SelectedSettler írtás
 //        this.removeA ll();
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -117,16 +118,16 @@ public  class Controller {
         for(Material m : Main.settlers.get(SelectedSettler()).GetInventory().GetMaterials()) {
             db++;
             mat.add(m);
-            if (m.getName() == NormalMaterialName.IRON) {
+            if (m.name == NormalMaterialName.IRON) {
                 p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
             }
-            if (m.getName() == NormalMaterialName.COAL) {
+            if (m.name == NormalMaterialName.COAL) {
                 p = new ImageIcon(new ImageIcon("Files/Pictures/coal.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
             }
-            if (m.getName() == SublimableMaterialName.ICEWATER) {
+            if (m.name == SublimableMaterialName.ICEWATER) {
                 p = new ImageIcon(new ImageIcon("Files/Pictures/ice.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
             }
-            if (m.getName() == RadioactiveMaterialName.URAN) {
+            if (m.name == RadioactiveMaterialName.URAN) {
                 RadioactiveMaterial rm = (RadioactiveMaterial) m;
                 if (rm.GetExposure() == 0)
                     p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp0.png").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
@@ -143,10 +144,16 @@ public  class Controller {
 //                    Main.settlers.get(SelectedSettler()).GetInventory().Remove(mat.get(materials.indexOf(a)));
 //                    Main.materials.remove(mat.get(materials.indexOf(a)));
                     Main.settlers.get(SelectedSettler()).PlaceMaterial(m);
+                    Game.getInstance().c.g.cp.InventoryPanel();
+                    Game.getInstance().c.g.cp.repaint();
+                    Game.getInstance().c.g.cp.validate();
+                    Game.getInstance().c.g.dp.repaint();
+                    Game.getInstance().c.g.dp.validate();
                 }
             });
             materials.add(a);
             inventory.add(a);
+
         }
 
         for(TeleportGate t : Main.settlers.get(SelectedSettler()).GetGates()) {
@@ -158,6 +165,11 @@ public  class Controller {
                 public void actionPerformed(ActionEvent e) {
                     Main.settlers.get(SelectedSettler()).PlaceGate(tgate.get(tgate.indexOf(a)));
                     Main.teleportgates.remove(tgate.get(gates.indexOf(a)));
+                    Game.getInstance().c.g.cp.InventoryPanel();
+                    Game.getInstance().c.g.cp.repaint();
+                    Game.getInstance().c.g.cp.validate();
+                    Game.getInstance().c.g.dp.repaint();
+                    Game.getInstance().c.g.dp.validate();
 
                 }
             });
@@ -165,11 +177,14 @@ public  class Controller {
             inventory.add(a);
         }
         Game.getInstance().c.g.dp.add(inventory);
-        //NextSettler();
-        //  this.add(inventory);
-
+        Game.getInstance().c.g.cp.InventoryPanel();
+        Game.getInstance().c.g.cp.repaint();
+        Game.getInstance().c.g.cp.validate();
         Game.getInstance().c.g.dp.repaint();
         Game.getInstance().c.g.dp.validate();
+
+
+
     }
 
 
@@ -419,6 +434,21 @@ public  class Controller {
 
         //lehet nem jó h melyik mi
         Main.Randomize = (datas.get(9) == 0);
+    }
+
+    public void BuildRobot(int prev){
+        int CurrentNumberOfRobots = Main.robots.size();
+        if(CurrentNumberOfRobots > prev){
+            g.addRobot(Main.robots.get(Main.robots.size()-1));
+            Game.getInstance().AddSteppable(Main.robots.get(Main.robots.size()-1));
+        }
+        for(int i=0; i<g.GetAsteroidView().size() ;i++){
+            g.GetAsteroidView().get(i).Draw();
+
+        }
+        Game.getInstance().c.g.repaint();
+        Game.getInstance().c.g.validate();
+
     }
 
 

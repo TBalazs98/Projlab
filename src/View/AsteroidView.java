@@ -2,6 +2,7 @@ package View;
 import Controller.Main;
 import Model.*;
 import Model.Character;
+import Model.Robot;
 
 import javax.swing.*;
 import java.awt.*;
@@ -155,12 +156,25 @@ public  class AsteroidView implements IDrawable {
         return y;
     }
     public void Draw() {
-        p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        l.setIcon(p);
+     //   p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+       // l.setIcon(p);
 //        Game.getInstance().c.g.gamespace.add(l);
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-        CharacterView cv = new CharacterView(asteroid.getCharacters());
-        cv.Draw();
+        //CharacterView cv = new CharacterView(asteroid.getCharacters());
+
+        for(int i=0;i<asteroid.getCharacters().size();i++){
+            if(asteroid.getCharacters().get(i) instanceof Robot){
+                Game.getInstance().c.g.getRobotViewByRobot((Robot)asteroid.getCharacters().get(i)).Draw();
+            }
+
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+        }
+
+        //cv.Draw();
 
         if(asteroid.getLayers() == 0) {
             Material m = asteroid.getMaterial();

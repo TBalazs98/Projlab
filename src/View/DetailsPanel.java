@@ -147,7 +147,21 @@ public class DetailsPanel extends JPanel{
         buildrobot.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().Size());
+                for (int i=0; i<Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().Size();i++){
+                    System.out.println( Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials().get(i));
+                }
+                int PreviousNumberOfRobots = Main.robots.size();
                 Main.settlers.get(Game.getInstance().c.SelectedSettler()).BuildRobot();
+                Game.getInstance().c.BuildRobot(PreviousNumberOfRobots);
+                System.out.println(Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().Size());
+                for (int i=0; i<Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().Size();i++){
+                    System.out.println( Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials().get(i));
+                }
+                Game.getInstance().c.g.cp.InventoryPanel();
+                Game.getInstance().c.g.dp.repaint();
+                Game.getInstance().c.g.dp.validate();
+
             }
         });
 
@@ -171,7 +185,8 @@ public class DetailsPanel extends JPanel{
             }
         });
 
-
+        Game.getInstance().c.g.cp.repaint();
+        Game.getInstance().c.g.cp.validate();
         this.add(buildrobot);
         this.add(buildteleportgate);
         this.add(buildbase);

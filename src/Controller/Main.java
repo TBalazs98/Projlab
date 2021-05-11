@@ -186,8 +186,8 @@ public class Main {
         /*SublimableMaterial rm = new SublimableMaterial();
         rm.setName(SublimableMaterialName.ICEWATER);*/
 //
-        materials.add(m);
-        materials.add(rm);
+//        materials.add(m);
+//        materials.add(rm);
 
         s.AddMaterial(m);
         s.AddMaterial(rm);

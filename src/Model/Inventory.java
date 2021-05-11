@@ -138,7 +138,7 @@ public class Inventory {
     public Material GetMaterialByName(MaterialName m){
         for(Material mat : this.materials) {
             if (mat.name.equals(m)) {
-                Main.materials.remove(mat);
+               // Main.materials.remove(mat);
                 int n = 0;                          //segedvaltozo ahhoz, hogy mennyi keyhez tartozo value van
                 if (inventory.containsKey(m)) {      //muszaj ellenorizni, hogy letezik e mar, mert ha nem akkor
                     n = inventory.get(m) - 1;
