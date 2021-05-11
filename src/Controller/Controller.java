@@ -164,13 +164,18 @@ public  class Controller {
             a.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Main.settlers.get(SelectedSettler()).PlaceGate(tgate.get(tgate.indexOf(a)));
+                    Main.settlers.get(SelectedSettler()).PlaceGate(t);
                     Main.teleportgates.remove(tgate.get(gates.indexOf(a)));
+                    Game.getInstance().AddSteppable(t);
+                    Game.getInstance().c.g.addTeleportGate(t);
+                    Main.settlers.get(SelectedSettler()).getAsteroid().AddNeighbour(t);
+
                     Game.getInstance().c.g.cp.InventoryPanel();
                     Game.getInstance().c.g.cp.repaint();
                     Game.getInstance().c.g.cp.validate();
                     Game.getInstance().c.g.dp.repaint();
                     Game.getInstance().c.g.dp.validate();
+                    Game.getInstance().c.g.update();
 
                 }
             });
@@ -204,7 +209,8 @@ public  class Controller {
         }
 
         for(TeleportGate tg : Main.teleportgates) {
-            Game.getInstance().c.g.getTeleportGateViewByTeleportGate(tg).highlightt(false, g);
+            if(tg.GetisPlaced())
+                Game.getInstance().c.g.getTeleportGateViewByTeleportGate(tg).highlightt(false, g);
             //System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
             //Game.getInstance().c.g.getTeleportGateViewByTeleportGate(tg).setImage();
         }
@@ -212,9 +218,11 @@ public  class Controller {
         for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
             if(a instanceof Asteroid)
                 Game.getInstance().c.g.getAsteroidViewByAsteroid((Asteroid) a).highlight(true,g);
-            if(a instanceof TeleportGate)
-                Game.getInstance().c.g.getTeleportGateViewByTeleportGate((TeleportGate) a).highlightt(true,g);
-
+            if(a instanceof TeleportGate) {
+                TeleportGate t = (TeleportGate) a;
+                if(t.GetisPlaced())
+                Game.getInstance().c.g.getTeleportGateViewByTeleportGate((TeleportGate) a).highlightt(true, g);
+            }
         }
     }
 

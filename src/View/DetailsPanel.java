@@ -30,28 +30,13 @@ public class DetailsPanel extends JPanel{
 
     public void moveDetails(GUI g){
         this.removeAll();
-        //Game.getInstance().c.g.GetAsteroidView().get(0).highlight(false,Game.getInstance().c.g);
-//        int set;
-//        if (Game.getInstance().c.selectedSettler == (Main.settlers.size())-2)
-//            set = 0;
-//        else
-//            set = Game.getInstance().c.selectedSettler + 1;
 
-        System.out.println("move details selected szam "+Game.getInstance().c.SelectedSettler());
+//        System.out.println("move details selected szam "+Game.getInstance().c.SelectedSettler());
         Game.getInstance().c.MoveSetSettler(Main.settlers.get(Game.getInstance().c.SelectedSettler()));
         Game.getInstance().c.DoTheMove();
 
-        //Game.getInstance().c.HighAsteroid(Main.settlers.get(Game.getInstance().c.SelectedSettler()));
-        //HighAsteroid(Main.settlers.get(SelectedSettler()));
+//        System.out.println("---"+Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetNeighbours().contains(Game.getInstance().c.a));
 
-        //Game.getInstance().c.HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(Game.getInstance().c.SelectedSettler())));
-        //HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(SelectedSettler())));
-
-        //Game.getInstance().c.HighlightSettlerStuff();
-        System.out.println("---"+Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetNeighbours().contains(Game.getInstance().c.a));
-       // Game.getInstance().c.NextSettler();
-
-        //Game.getInstance().c.stepsettlers();
 
 
 
@@ -96,7 +81,14 @@ public void buildDetails(GUI g){
     buildteleportgate.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+
             Main.settlers.get(Game.getInstance().c.SelectedSettler()).BuildGate();
+
+
+            Game.getInstance().c.g.cp.InventoryPanel();
+            Game.getInstance().c.g.dp.repaint();
+            Game.getInstance().c.g.dp.validate();
+
         }
     });
 
@@ -107,6 +99,11 @@ public void buildDetails(GUI g){
         @Override
         public void actionPerformed(ActionEvent e) {
             Main.settlers.get(Game.getInstance().c.SelectedSettler()).BuildBase();
+
+            Game.getInstance().c.g.cp.InventoryPanel();
+            Game.getInstance().c.g.dp.repaint();
+            Game.getInstance().c.g.dp.validate();
+
         }
     });
 

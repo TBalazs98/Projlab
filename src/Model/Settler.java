@@ -130,7 +130,7 @@ public class Settler extends Worker implements drillable, moveable {
         //Logger.getInstance().printCommandCall(this);
 
         Robot r = new Robot(inventory, asteroid);       //Robot epitese, atadva a sajat inventorynkat (ebben nezi meg a Robot, hogy fel tud-e epulni)
-        if(r !=null){
+        if(r.getAsteroid() !=null){
             Main.robots.add(r);
             this.inventory.Remove(this.inventory.GetMaterialByName(NormalMaterialName.IRON));
             this.inventory.Remove(this.inventory.GetMaterialByName(NormalMaterialName.COAL));

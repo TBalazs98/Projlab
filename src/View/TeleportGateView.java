@@ -18,7 +18,7 @@ import java.util.Random;
 public class TeleportGateView implements IDrawable{
     private TeleportGate tg;
     private Icon p;
-    private JLabel l;
+    private JLabel l = new JLabel();
     private int x,y;
     private boolean highlight=false;
     private boolean firstDraw = true;
@@ -28,14 +28,7 @@ public class TeleportGateView implements IDrawable{
         this.tg=tg;
        // int scaling =130;
        // p=new ImageIcon("Files/Pictures/teleportgate.jpg");
-        if(tg.GetIsHit()) {
-            p=new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-        }
-        else {
-            p=new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-        }
-
-        l=new JLabel(p);
+        setImage();
         getTeleportCoordsListener(l,this);
         l.addMouseListener(new MouseListener() {
             @Override
@@ -106,11 +99,12 @@ public class TeleportGateView implements IDrawable{
     }
 
     public void Draw() {
+        setImage();
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( tg.GetAsteroid());
         SetCoords(av.getX(),av.getY());
 
         //Game.getInstance().c.g.gamespace.add(l);
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
+        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
 
 
 //        System.out.println("Asteroid: " + tg.GetAsteroid() + " Párja: " + ((tg.GetPair() == null) ? (" nincs párja") :(" " + tg.GetPair().GetAsteroid())));
@@ -124,10 +118,8 @@ public class TeleportGateView implements IDrawable{
     }
 
     public void setImage(){
-
         int scaling = 25;
         if(!highlight && this.tg.GetIsHit() == false)
-
             p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
         if(!highlight && this.tg.GetIsHit() == true)
             p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
