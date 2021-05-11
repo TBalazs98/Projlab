@@ -180,12 +180,9 @@ public  class AsteroidView implements IDrawable {
             if(asteroid.getCharacters().get(i) instanceof Model.Robot){
                 Game.getInstance().c.g.getRobotViewByRobot((Model.Robot)asteroid.getCharacters().get(i)).Draw();
             }
-
-            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
-            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
-            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
-            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
-            //TODO KIBASZOTT FONTOS TODO TODO TODO TODO
+            if(asteroid.getCharacters().get(i) instanceof UFO){
+                Game.getInstance().c.g.getUfoViewByUfo((UFO)asteroid.getCharacters().get(i)).Draw();
+            }
         }
 
         //cv.Draw();
