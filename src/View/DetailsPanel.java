@@ -147,7 +147,9 @@ public class DetailsPanel extends JPanel{
         buildrobot.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int PreviousNumberOfRobots = Main.robots.size();
                 Main.settlers.get(Game.getInstance().c.SelectedSettler()).BuildRobot();
+                Game.getInstance().c.BuildRobot(PreviousNumberOfRobots);
             }
         });
 

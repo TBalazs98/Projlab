@@ -192,6 +192,7 @@ public  class AsteroidView implements IDrawable {
                 super.mouseClicked(e);
                 System.out.println("x = "+av.x+ "y = " + av.y);
                 Game.getInstance().c.MoveSetAsteroid(av);
+                Game.getInstance().c.MoveSetDestination(av.asteroid);
 
             }
         });

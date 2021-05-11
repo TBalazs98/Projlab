@@ -144,6 +144,24 @@ public class Game {
                     diff.add(i);
                 }
             }
+        //}
+//        //for(int i = 0; i < settlers.size(); i++) {
+//            currentSettler = settlers.get(0);
+//            SettlerView csv = null;
+//            for(int j = 0; j < c.g.settlers.size(); j++) {
+//                if(c.g.settlers.get(j).getSettler() == currentSettler) {
+//                    csv = c.g.settlers.get(j);
+//                    csv.Highlight();
+//                }
+//            }
+//            //do something();
+//        //}
+//
+//
+//        //Logger.getInstance().printReturnCommand();
+//        for(Asteroid a: Main.asteroids) {
+//            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setInSunstorm(false);
+//        }
         }
         return diff;
     }

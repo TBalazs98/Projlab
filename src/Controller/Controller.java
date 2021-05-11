@@ -18,6 +18,7 @@ public  class Controller {
     public int selectedSettler=0;
     public Settler s=new Settler();
     public Asteroid a = new Asteroid();
+    public ArrayList<DestinationObject> d = new ArrayList<>();
 
     // TODO
     //      Minden felesleges NextSettler hívást, plusszolást akármit ki kell írtani
@@ -33,10 +34,17 @@ public  class Controller {
         System.out.println("neigh index"+s.getAsteroid().GetNeighbourIndex(a));
 
         System.out.println("-- leptem : Eddig itt voltam"+s.getAsteroid());
-        s.Move(s.getAsteroid().GetNeighbourIndex(a));
+        //s.Move(s.getAsteroid().GetNeighbourIndex(a));
+        s.Move(s.getAsteroid().GetNeighbourIndex(d.get(0)));
         System.out.println("++ leptem : ide erkeztem"+s.getAsteroid());
         //NextSettler();      //ezt kell hülyebiztosan lekezelni
         g.DrawSettlers();
+    }
+
+    public void MoveSetDestination(DestinationObject ddo){
+        System.out.println("valasztottam aszteroidat"+ddo);
+        d.clear();
+        d.add(ddo);
     }
 
     public void MoveSetSettler(Settler ss){
@@ -222,6 +230,17 @@ public  class Controller {
         for(int i=0; i<Main.materials.size();i++){
             g.addMaterial(Main.materials.get(i));
         }
+    }
+
+    public void BuildRobot(int prev){
+        int CurrentNumberOfRobots = Main.robots.size();
+        if(CurrentNumberOfRobots > prev){
+            g.addRobot(Main.robots.get(Main.robots.size()-1));
+        }
+        for(int i=0; i<g.GetAsteroidView().size() ;i++){
+            g.GetAsteroidView().get(i).Draw();
+        }
+
     }
 
     public void CreateCustomMap(){

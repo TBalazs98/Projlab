@@ -36,7 +36,7 @@ public class TeleportGateView implements IDrawable{
         }
 
         l=new JLabel(p);
-
+        getTeleportCoordsListener(l,this);
         l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -90,6 +90,19 @@ public class TeleportGateView implements IDrawable{
     }
     public int getY() {
         return y;
+    }
+
+    public void getTeleportCoordsListener(JLabel l, TeleportGateView tgv) {
+        l.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println("x = "+tgv.x+ "y = " + tgv.y);
+                Game.getInstance().c.MoveSetDestination(tgv.tg);
+               // Game.getInstance().c.MoveSetAsteroid(av);
+
+            }
+        });
     }
 
     public void Draw() {
