@@ -306,11 +306,12 @@ public  class Controller {
 
     }
 
+
     public void CreateCustomMap(){
         g.GetAsteroidView().clear();
         g.GetSettlerView().clear();
         Main.asteroids.clear();
-        this.settlers.clear();
+        settlers.clear();
         Main.settlers.clear();
         Main.ufos.clear();
         Main.robots.clear();
@@ -495,8 +496,7 @@ public  class Controller {
             }
         }
 
-        //lehet nem jó h melyik mi
-        Main.Randomize = (datas.get(9)==1)?true:false;
+        Main.Randomize = datas.get(9) == 1;
     }
 
     public AsteroidView getAsteroidViewByMaterialView(MaterialView m){

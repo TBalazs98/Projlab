@@ -28,7 +28,7 @@ public class GUI extends JFrame implements ActionListener {
     private ArrayList<AsteroidView> asteroids = new ArrayList<>();
     private ArrayList<RobotView> robots = new ArrayList<>();
     public  ArrayList<UfoView> ufos=new ArrayList<>();
-    private ArrayList<TeleportGateView> teleportgates = new ArrayList<>();    //#todo
+    public ArrayList<TeleportGateView> teleportgates = new ArrayList<>();    //#todo
     public  ArrayList<MaterialView> materials=new ArrayList<>();
     private Coordinates[][] coords;
     private final int coordswidth;
@@ -70,11 +70,17 @@ public class GUI extends JFrame implements ActionListener {
 
     }
 
+    public void clearCoords()
+    {
+        for(int i=0; i<coordswidth;i++)
+            for(int j=0; j<coordsheight;j++)
+                coords[j][i].setToggled(false);
+    }
 
     private Coordinates getRandEmptyCoord() {
         int x = gen.nextInt(coordsheight);
         int y = gen.nextInt(coordswidth);
-        while(coords[x][y].isToggled() == true) {
+        while(coords[x][y].isToggled()) {
             x = gen.nextInt(coordsheight);
             y = gen.nextInt(coordswidth);
         }
@@ -95,21 +101,23 @@ public class GUI extends JFrame implements ActionListener {
 
 
     public void DrawAll(){
-        //gamespace.add(settlers.get(0).l);
-        //region helo
-//        Game.getInstance().c.InitViews(this);
+
         this.setLayout(new FlowLayout());
-        //gamespace = new JLayeredPane();
+
+        gamespace.removeAll();
         gamespace.setPreferredSize(new Dimension(width,height-200));
+
         dp = new DetailsPanel();
+
         cp = new CommandPanel();
+
         JPanel controls = new JPanel();
         controls.setBackground(new Color(0,0,0,64));
         controls.setLayout(new FlowLayout());
         gamespace.setLayout(null);
-//        gamespace.add(inpudialog);
+
         this.add(gamespace, BorderLayout.CENTER);
-        //endregion
+
 
         /**
          * RAJZOLASOK IDE gamespacebe
@@ -118,44 +126,28 @@ public class GUI extends JFrame implements ActionListener {
         for(int i=0; i<asteroids.size();i++){
             Coordinates coordinates = getLonelyCoord();
             coordinates.toggle();
-
             asteroids.get(i).SetCoords(coordinates.getX(),coordinates.getY());
             gamespace.add(asteroids.get(i).l);
             asteroids.get(i).Draw();
         }
+
         for(int i=0; i<this.settlers.size();i++){
             settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             gamespace.add(settlers.get(i).l);
             settlers.get(i).Draw();
         }
-//        for(int i = 0; i < materials.size(); i++) {
-//            //gamespace.add(materials.get(i).l);
-//            materials.get(i).Draw();
-//        }
-
-//        for(int i = 0; i < this.teleportgates.size();i++){
-//            teleportgates.get(i).Draw();
-//        }
 
         Game.getInstance().c.HighlightSettlerStuff();
 
-
-        //materials.get(0).Draw();
-
-
-
-
-//region buzisagok
         this.add(dp, BorderLayout.PAGE_END);
         controls.add(cp);
         controls.add(dp);
         this.add(controls, BorderLayout.PAGE_END);
 
         this.setJMenuBar(bar);
-        //this.pack();
         this.setVisible(true);
-//endregion
+
     }
 
     public void DrawSettlers(){
