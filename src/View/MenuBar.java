@@ -15,7 +15,7 @@ public class MenuBar extends JMenuBar {
     GUI gui;
     static boolean gamesaved = false;
     public MenuBar(GUI g){
-        file = new JMenu("Game");
+        file = new JMenu("Game Options");
         save = new JMenuItem("Save Game");
         exit = new JMenuItem("Exit to Main Menu");
         gui = g;
@@ -34,31 +34,32 @@ public class MenuBar extends JMenuBar {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             if (!gamesaved) {
                 int n = JOptionPane.showConfirmDialog(
                         gui, "If you exit without saving the game, the state of your current game progress will be lost. Do you still want to Exit?",
                         "Exit Warning",
                         JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
-                    gui.getContentPane().removeAll();
-                    gui.DrawMenu();
-                    Game.getInstance().c.g.startgame.setEnabled(true);
-                    gui.repaint();
-                    gui.validate();
-                    gamesaved = false;
+                    exitMenu();
                 }
             }
                 else
                 {
-                    gui.getContentPane().removeAll();
-                    gui.DrawMenu();
-                    Game.getInstance().c.g.startgame.setEnabled(true);
-                    gui.repaint();
-                    gui.validate();
-                    gamesaved = false;
+                    exitMenu();
                 }
             }
+
+        private void exitMenu() {
+            gui.getContentPane().removeAll();
+            gui.DrawMenu();
+            Game.getInstance().c.g.startgame.setEnabled(true);
+            gui.repaint();
+            gui.validate();
+            gamesaved = false;
+            Game.getInstance().c.g.startgame.setEnabled(false);
         }
+    }
 
 
     private static class saveListener implements ActionListener{
@@ -92,7 +93,5 @@ public class MenuBar extends JMenuBar {
             d.setVisible(true);
         }
     }
-
-
 
 }
