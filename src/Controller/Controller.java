@@ -232,6 +232,17 @@ public  class Controller {
         }
     }
 
+    public void BuildRobot(int prev){
+        int CurrentNumberOfRobots = Main.robots.size();
+        if(CurrentNumberOfRobots > prev){
+            g.addRobot(Main.robots.get(Main.robots.size()-1));
+        }
+        for(int i=0; i<g.GetAsteroidView().size() ;i++){
+            g.GetAsteroidView().get(i).Draw();
+        }
+
+    }
+
     public void CreateCustomMap(){
         Main.asteroids.clear();
         this.settlers.clear();
