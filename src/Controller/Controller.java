@@ -18,6 +18,7 @@ public  class Controller {
     public int selectedSettler=0;
     public Settler s=new Settler();
     public Asteroid a = new Asteroid();
+    public ArrayList<DestinationObject> d = new ArrayList<>();
 
     // TODO
     //      Minden felesleges NextSettler hívást, plusszolást akármit ki kell írtani
@@ -33,10 +34,17 @@ public  class Controller {
         System.out.println("neigh index"+s.getAsteroid().GetNeighbourIndex(a));
 
         System.out.println("-- leptem : Eddig itt voltam"+s.getAsteroid());
-        s.Move(s.getAsteroid().GetNeighbourIndex(a));
+        //s.Move(s.getAsteroid().GetNeighbourIndex(a));
+        s.Move(s.getAsteroid().GetNeighbourIndex(d.get(0)));
         System.out.println("++ leptem : ide erkeztem"+s.getAsteroid());
         //NextSettler();      //ezt kell hülyebiztosan lekezelni
         g.DrawSettlers();
+    }
+
+    public void MoveSetDestination(DestinationObject ddo){
+        System.out.println("valasztottam aszteroidat"+ddo);
+        d.clear();
+        d.add(ddo);
     }
 
     public void MoveSetSettler(Settler ss){

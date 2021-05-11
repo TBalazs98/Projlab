@@ -29,6 +29,7 @@ public class SettlerView implements IDrawable{
         s = _s;
 
 
+
         l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -84,27 +85,24 @@ public class SettlerView implements IDrawable{
     }
 
     public void SetCoords(int x, int y){
-        this.x = x;
-        this.y = y;
+        int offsetX = rnd.nextInt(20);
+        int offsetY = rnd.nextInt(20);
+        this.x = x + offsetX;
+        this.y = y + offsetY;
     }
 
     public void Draw() {
-        if(firstDraw) {
+
             AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( s.getAsteroid());
             SetCoords(av.getX(),av.getY());
-            int offsetX = rnd.nextInt(20);
-            int offsetY = rnd.nextInt(20);
-            x = x + offsetX;
-            y = y + offsetY;
-            firstDraw = false;
-        }
+
 
        // x = Game.getInstance().c.g.getX()+offsetX+10;
         //y = Game.getInstance().c.g.getY()+offsetY+10;
         //g.gamespace.add(l);
 
         //Game.getInstance().c.g.gamespace.add(l);
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
+        //Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
 
 
         //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
