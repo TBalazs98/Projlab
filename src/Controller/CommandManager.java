@@ -730,6 +730,7 @@ public class CommandManager {
 
                 pw.print(String.join(",", mat));
             }
+            pw.print("\n");
         }
         pw.close();
     }
