@@ -291,8 +291,8 @@ public class GUI extends JFrame implements ActionListener {
 
 
         st = new JPanel();
-        settings = new JButton(new ImageIcon("Files/Pictures/settingsbtn.png"));
-        settings.setRolloverIcon(new ImageIcon("Files/Pictures/settingsdarkbtn.png"));
+        settings = new JButton(new ImageIcon("Files/Pictures/bcustom_light.png"));
+        settings.setRolloverIcon(new ImageIcon("Files/Pictures/bcustom-game_dark.png"));
         SetButton(settings);
         st.add(settings);
         SetPanel(st);

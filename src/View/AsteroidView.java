@@ -154,6 +154,7 @@ public  class AsteroidView implements IDrawable {
     public int getY() {
         return y;
     }
+
     public void Draw() {
         p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
         l.setIcon(p);

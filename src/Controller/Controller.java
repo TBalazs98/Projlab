@@ -25,11 +25,18 @@ public  class Controller {
     //                      A settler ++ olását csak a NextSettler() végzi
     //       Az aktuális Settler helyes lekérdezését csak és kizárólag a SelectedSettler végzi!!
 
+    /**
+     * Controller osztaly publikus konstruktora
+     */
     public Controller(){
         g=new GUI(this);
         g.DrawMenu();
 //        InitViews(g);
     }
+
+    /**
+     * A Settlerek mozgatasanak megjeleniteset kezelo metodus
+     */
     public void DoTheMove(){
         System.out.println("neigh index"+s.getAsteroid().GetNeighbourIndex(a));
 
@@ -41,17 +48,29 @@ public  class Controller {
         g.DrawSettlers();
     }
 
+    /**
+     * A kivalasztott DestinationObjecten megjelenitjuk a Settlert
+     * @param ddo a DestinationObject, ahova szeretnenk leptetni Settlerunket
+     */
     public void MoveSetDestination(DestinationObject ddo){
         System.out.println("valasztottam aszteroidat"+ddo);
         d.clear();
         d.add(ddo);
     }
 
+    /**
+     * Kivalasztott jelenlegi Settler, melyet szeretnenk mozgatni
+     * @param ss
+     */
     public void MoveSetSettler(Settler ss){
         System.out.println("valasztottam settlert"+ss);
         s=ss;
     }
 
+    /**
+     * Kivalasztott jelenlegi Asteroid, meylre szeretnenk lepni
+     * @param av Valasztott aszteroida
+     */
     public void MoveSetAsteroid(AsteroidView av){
         System.out.println("valasztottam aszteroidat"+av);
         a=av.getAsteroid();
@@ -77,12 +96,19 @@ public  class Controller {
            // Game.getInstance().NextRound();
     }
 
+    /**
+     * A sorban kovetkezo Settler
+     */
     public void NextSettler(){
 
         selectedSettler++;
         HighlightSettlerStuff();
     }
 
+    /**
+     * Az eppen kivalasztott Settler tombbeli sorszamat adja vissza
+     * @return a kivalasztott Settler tombbeli sorszama
+     */
     public int SelectedSettler(){
         if(selectedSettler==(Main.settlers.size())){
             selectedSettler=0;
@@ -90,9 +116,17 @@ public  class Controller {
         }
         return selectedSettler;
     }
+
+    /**
+     * A Setter Drill metodusanak kezelese
+     */
     public void HandleDrill(){
         Main.settlers.get(SelectedSettler()).Drill();
     }
+
+    /**
+     * A Setter Mine metodusanak kezelese
+     */
     public void HandleMine(){
         Main.settlers.get(SelectedSettler()).Mine();      //todo ezt vissza
 //        Main.ab.StartStorm(Main.asteroids.get(0));
@@ -309,26 +343,26 @@ public  class Controller {
         }
 
         if(A > 1) {
-            int rand_int, randd_int;
+            Random randd = new Random();
+            int rand_neightbour, randd_int;
             for (int i = 0; i < A; i++) {
-                Random randd = new Random();
                  randd_int = randd.nextInt(A/3)+1;
+               // System.out.println(rand_int);
                 for(int j=0; j<(randd_int);j++) {
                     Random rand = new Random();
-                    rand_int = rand.nextInt(A);
+                    rand_neightbour = rand.nextInt(A);
                     int db = 0;
                     System.out.println(i);
                     System.out.println(Main.asteroids.get(i).GetNeighbourCount());
                     if (Main.asteroids.get(i).GetNeighbours() != null) {
                         for (DestinationObject o : Main.asteroids.get(i).GetNeighbours()) {
-                            if (o == Main.asteroids.get(rand_int)) {
+                            if (o == Main.asteroids.get(rand_neightbour)) {
                                 db++;
                             }
                         }
                     }
-
                     if (db == 0)
-                        Main.asteroids.get(i).AddNeighbour(Main.asteroids.get(rand_int));
+                        Main.asteroids.get(i).AddNeighbour(Main.asteroids.get(rand_neightbour));
                 }
             }
         }
