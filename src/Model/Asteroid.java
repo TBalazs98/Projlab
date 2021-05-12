@@ -296,6 +296,8 @@ public class Asteroid implements DestinationObject, Steppable {
     public int GetRandNeighbour() {
         //Logger.getInstance().printCommandCall(this);
         Random rand = new Random();
+        if(neighbours.size() == 0)
+            return -1;
         int n = rand.nextInt(neighbours.size());
         //Logger.getInstance().printReturnCommand(n);
         return n;

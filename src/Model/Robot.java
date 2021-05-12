@@ -128,7 +128,13 @@ public class Robot extends Worker implements drillable, Steppable{
         //fuggveny lefutasa tagvaltozo lekerdezesevel
 
         int id = this.asteroid.GetRandNeighbour();
-        Move(id);
+        if(id != -1) {
+            System.out.println("IDE AKAROK MENNI: " + id);
+            Move(id);
+            Game.getInstance().c.g.gamespace.repaint();
+            Game.getInstance().c.g.gamespace.validate();
+        } else
+            Die();
 
         //Logger.getInstance().printReturnCommand();
     }
@@ -137,8 +143,13 @@ public class Robot extends Worker implements drillable, Steppable{
      * A robot halalanak bekovetkezeset lekezelo metodus
      */
     public void Die(){
-        Main.robots.remove(this);
+//        Main.robots.remove(this);
         this.asteroid.Remove(this);
+        Game.getInstance().c.g.getRobotViewByRobot(this).l.setIcon(null);
+        Game.getInstance().RemoveSteppabe(this);
+        Main.robots.set(Main.robots.indexOf(this), null);
+        Game.getInstance().c.g.gamespace.repaint();
+        Game.getInstance().c.g.gamespace.validate();
     }
 
 //    public Robot copy() {

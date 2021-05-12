@@ -212,8 +212,10 @@ public class AsteroidView implements IDrawable {
                 Material m = asteroid.getMaterial();
                 if (m != null) {
                     MaterialView mv = Game.getInstance().c.g.getMaterialViewByMaterial(m);
-                    mv.SetCoords(x, y);
-                    mv.Draw();
+                    if(mv!=null) {
+                        mv.SetCoords(x, y);
+                        mv.Draw();
+                    }
                 }
 
             }

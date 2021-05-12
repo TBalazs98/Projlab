@@ -125,8 +125,10 @@ public class Game {
 //        ArrayList<Asteroid> prev = Main.asteroids;
         if(Main.Randomize) {
             for (Steppable s : steppables) {
-                s.Step();
-                c.g.update();
+//                if(s!=null) {
+                    s.Step();
+                    c.g.update();
+//                }
             }
         }
 //        ArrayList<Asteroid> after = Main.asteroids;

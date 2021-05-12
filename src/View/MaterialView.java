@@ -101,7 +101,7 @@ public class MaterialView implements IDrawable {
             l.setBounds(this.x,this.y,0,0);
         }else
         l.setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
-        Game.getInstance().c.g.gamespace.add(l,1);
+        Game.getInstance().c.g.gamespace.add(l,4);
         Game.getInstance().c.g.repaint();
         Game.getInstance().c.g.validate();
     }

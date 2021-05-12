@@ -95,6 +95,9 @@ public  class Controller {
 
         selectedSettler++;
         while(Main.settlers.get(SelectedSettler())==null) {
+            if(Main.settlers.size()==0){
+                Game.getInstance().LoseGame();
+            }
             selectedSettler++;
         }
         HighlightSettlerStuff();

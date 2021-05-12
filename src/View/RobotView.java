@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class RobotView implements IDrawable {
     private Icon p;
-    private JLabel l;
+    public JLabel l;
     private int x,y;
     private Robot r;
     private Random rnd = new Random();

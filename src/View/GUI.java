@@ -153,9 +153,11 @@ public class GUI extends JFrame implements ActionListener {
 
     public void DrawSettlers(){
         for(int i=0; i<this.settlers.size();i++){
-            settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
-            System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
-            settlers.get(i).Draw();
+            if(settlers.get(i)!=null) {
+                settlers.get(i).SetCoords(getAsteroidViewByAsteroid(settlers.get(i).getSettler().getAsteroid()).getX(), getAsteroidViewByAsteroid(settlers.get(i).getSettler().getAsteroid()).getY());
+                System.out.println("x=" + getAsteroidViewByAsteroid(settlers.get(i).getSettler().getAsteroid()).getX() + "y=" + getAsteroidViewByAsteroid(settlers.get(i).getSettler().getAsteroid()).getY());
+                settlers.get(i).Draw();
+            }
         }
     }
 
