@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
+/**
+ * Egyedi jatek beallitasa
+ */
 public class CustomGamePanel extends JPanel {
     final private CustomChooserPanel asteroid;
     final private CustomChooserPanel settler;
@@ -24,6 +27,12 @@ public class CustomGamePanel extends JPanel {
     final private ArrayList<Integer> data = new ArrayList<>();
 
 
+    /**
+     * Konstruktor
+     * @param g
+     * @param x
+     * @param y
+     */
     public CustomGamePanel(GUI g, int x,int  y){
         this.setPreferredSize(new Dimension(g.height/2,g.height/2+g.height/4));
         this.setOpaque(true);
@@ -39,15 +48,15 @@ public class CustomGamePanel extends JPanel {
         asteroid = new CustomChooserPanel(g, vector, "Asteroids", this);
         this.add(asteroid);
 
-        vector = vector_zero(1,40);
+        vector = vector_zero(2,20);
         settler = new CustomChooserPanel(g, vector, "Settlers", this);
         this.add(settler);
 
-        vector = vector_zero(0,40);
+        vector = vector_zero(0,20);
         robot = new CustomChooserPanel(g, vector, "Robots", this);
         this.add(robot);
 
-        vector = vector_zero(0,40);
+        vector = vector_zero(0,20);
         ufo = new CustomChooserPanel(g, vector, "UFOs", this);
         this.add(ufo);
 
@@ -99,6 +108,12 @@ public class CustomGamePanel extends JPanel {
 
     }
 
+    /**
+     * Vector feltoltese szamokkal a ket ertek kozott
+     * @param min
+     * @param max
+     * @return
+     */
     private Vector<Integer> vector_zero(int min, int max){
         Vector<Integer> vector = new Vector<>();
 
@@ -109,6 +124,11 @@ public class CustomGamePanel extends JPanel {
     }
 
 
+    /**
+     * portal szam
+     * @param max
+     * @return
+     */
     private Vector<Integer> vector_portal(int max){
         Vector<Integer> vector = new Vector<>();
 
@@ -119,6 +139,9 @@ public class CustomGamePanel extends JPanel {
     }
 
 
+    /**
+     * Material szam frissitese
+     */
     public void update(){
         asteroidnumber = (int)asteroid.getSelected();
 
@@ -130,6 +153,9 @@ public class CustomGamePanel extends JPanel {
         uran.update(vector);
     }
 
+    /**
+     * ertekek beallitasa
+     */
     private class setListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -165,6 +191,10 @@ public class CustomGamePanel extends JPanel {
         return asteroid;
     }
 
+    /**
+     * adat visszaadasa
+     * @return
+     */
     public ArrayList<Integer> GetCreatecount(){
         return this.data;
     }

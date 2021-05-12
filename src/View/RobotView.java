@@ -11,6 +11,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
 
+/**
+ * Robot megjelenitese
+ */
 public class RobotView implements IDrawable {
     private Icon p;
     public JLabel l;
@@ -24,7 +27,7 @@ public class RobotView implements IDrawable {
         p=new ImageIcon(new ImageIcon("Files/Pictures/robot.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
         l=new JLabel(p);
 
-        l.addMouseListener(new MouseListener() {
+        /*l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -58,10 +61,12 @@ public class RobotView implements IDrawable {
                 Game.getInstance().c.g.dp.repaint();
                 Game.getInstance().c.g.dp.validate();
             }
-        });
-//        Game.getInstance().c.g.gamespace.add(l);
+        });*/
     }
 
+    /**
+     * Kirajzolas
+     */
     @Override
     public void Draw() {
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( r.getAsteroid());
@@ -73,6 +78,12 @@ public class RobotView implements IDrawable {
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
 
     }
+
+    /**
+     * Koordinatak beallitas
+     * @param x
+     * @param y
+     */
     public void SetCoords(int x, int y){
         int offsetX = rnd.nextInt(10)+50;
         int offsetY = rnd.nextInt(10)+50;
