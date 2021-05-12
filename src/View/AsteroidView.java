@@ -209,6 +209,10 @@ public class AsteroidView implements IDrawable {
         Game.getInstance().c.g.validate();
     }
 
+    /**
+     * Lekerdezhetjuk, hogy a jatek objektum (aszteroida) robban-e
+     * @return visszaadja, hogy felrobban-e
+     */
     public boolean getExpoloding(){
         return this.exploding;
     }
