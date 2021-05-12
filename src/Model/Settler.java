@@ -178,16 +178,9 @@ public class Settler extends Worker implements drillable, moveable {
         asteroid.Remove(this);                  //levesszuk az adott Settlert az aszteroidarol (mert meghalt)
         AsteroidBelt.getInstance().SetSettlersAlive();  //Es atallitjuk a jelenleg eletben levo Settlereket
         this.inventory.CharacterDied();
-//        Controller.settlers.set(Controller.settlers.indexOf(this), null);
-//        ArrayList<SettlerView> help = Game.getInstance().c.g.GetSettlerView();
-//        for (int i = 0; i < Game.getInstance().c.g.settlers.size(); i++) {
-//            sv = help.get(i);
-//            if (sv != null && sv.getSettler() == this) {
-//                Game.getInstance().c.g.settlers.indexOf(this).set(Game.getInstance().c.g.settlers.indexOf(sv.getSettler()), null);
-//                Game.getInstance().c.g.settlers.remove(this);
+
         this.setAsteroid(null);
         Game.getInstance().c.g.getSettlerViewBySettler(this).l.setIcon(null);
-//        Main.settlers.set(Main.settlers.indexOf(this),null);
         Main.settlers.remove(this);
 
 

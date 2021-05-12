@@ -8,10 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * A jatek adatainak betolteseert felelos osztaly
+ */
 public class GameData extends AbstractTableModel {
 
     private ArrayList<String> games;
 
+    /**
+     * A GameData publikus konstruktora
+     */
     public GameData(){
         try {
             File dir_File=new File ("Files");
@@ -56,7 +62,6 @@ public class GameData extends AbstractTableModel {
         String currgame = (games.get(rowIndex));
 
         switch(columnIndex){
-            case 0: return currgame;
             default: return currgame;
         }
     }
@@ -64,8 +69,6 @@ public class GameData extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         switch (column) {
-            case 0:
-                return "Saved games";
             default:
                 return "Saved games";
         }
