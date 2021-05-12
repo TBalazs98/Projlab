@@ -19,6 +19,10 @@ public class Coordinates {
         toggled = false;
     }
 
+    /**
+     * Beallitja a toogled erteket, hogy a terulet foglalva legyen mas jatek objektum szamara
+     * @param istoogled igaz hogyha lefoglaljuk azt a teruletet
+     */
     public void setToggled(boolean istoogled)
     {
         toggled = istoogled;
@@ -28,10 +32,16 @@ public class Coordinates {
         return toggled;
     }
 
+    /**
+     * @return X koordinatat megkapjuk
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * @return Y koordinatat megkapjuk
+     */
     public int getY() {
         return y;
     }

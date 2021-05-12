@@ -15,6 +15,9 @@ import java.awt.event.MouseListener;
 import java.net.http.WebSocket;
 import java.util.Random;
 
+/**
+ * Teleportgate megjelenitese.
+ */
 public class TeleportGateView implements IDrawable{
     private TeleportGate tg;
     private Icon p;
@@ -26,11 +29,9 @@ public class TeleportGateView implements IDrawable{
 
     public TeleportGateView(TeleportGate tg){
         this.tg=tg;
-       // int scaling =130;
-       // p=new ImageIcon("Files/Pictures/teleportgate.jpg");
         setImage();
         getTeleportCoordsListener(l,this);
-        l.addMouseListener(new MouseListener() {
+        /*l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -68,10 +69,14 @@ public class TeleportGateView implements IDrawable{
                 Game.getInstance().c.g.dp.repaint();
                 Game.getInstance().c.g.dp.validate();
             }
-        });
-//        Game.getInstance().c.g.gamespace.add(l);
+        });*/
     }
 
+    /**
+     * Koordinatak beallitasa
+     * @param x
+     * @param y
+     */
     public void SetCoords(int x, int y){
         int offsetX = rnd.nextInt(20)+10;
         int offsetY = rnd.nextInt(20)+100;
@@ -92,31 +97,38 @@ public class TeleportGateView implements IDrawable{
                 super.mouseClicked(e);
                 System.out.println("x = "+tgv.x+ "y = " + tgv.y);
                 Game.getInstance().c.MoveSetDestination(tgv.tg);
-               // Game.getInstance().c.MoveSetAsteroid(av);
 
             }
         });
     }
 
+    /**
+     * Kirajzolas
+     */
     public void Draw() {
         setImage();
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( tg.GetAsteroid());
         SetCoords(av.getX(),av.getY());
 
-        //Game.getInstance().c.g.gamespace.add(l);
-//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
 
         Game.getInstance().c.g.gamespace.add(l,1);
-//        System.out.println("Asteroid: " + tg.GetAsteroid() + " Párja: " + ((tg.GetPair() == null) ? (" nincs párja") :(" " + tg.GetPair().GetAsteroid())));
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
     }
 
+    /**
+     * Kijeloles beallitasa
+     * @param b
+     * @param g
+     */
     public void highlightt(boolean b,GUI g){
         highlight=b;
         setImage();
-        //System.out.println("faszssss");
+
     }
 
+    /**
+     * Kep beallitasa
+     */
     public void setImage(){
         int scaling = 25;
         if(!highlight && this.tg.GetIsHit() == false)
@@ -128,15 +140,7 @@ public class TeleportGateView implements IDrawable{
             p = new ImageIcon(new ImageIcon("Files/Pictures/selected_teleportgate.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
         l.setIcon(p);
-//        if(highlight==true) {
-//            int scaling = 25;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate_insane.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//            l.setIcon(p);
-//        }else {
-//            int scaling = 25;
-//            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-//            l.setIcon(p);
-//        }
+
 
     }
     public TeleportGate getTg(){return this.tg;}

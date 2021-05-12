@@ -11,6 +11,9 @@ import java.awt.event.MouseListener;
 import java.util.Random;
 
 
+/**
+ * Settler megjelenitese.
+ */
 public class SettlerView implements IDrawable{
 
     private Settler s;
@@ -30,7 +33,7 @@ public class SettlerView implements IDrawable{
 
 
 
-        l.addMouseListener(new MouseListener() {
+        /*l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -79,11 +82,15 @@ public class SettlerView implements IDrawable{
                 Game.getInstance().c.g.dp.repaint();
                 Game.getInstance().c.g.dp.validate();
             }
-        });
+        });*/
 
-//        Game.getInstance().c.g.gamespace.add(l);
     }
 
+    /**
+     * Koordinatak beallitasa.
+     * @param x
+     * @param y
+     */
     public void SetCoords(int x, int y){
         int offsetX = rnd.nextInt(20);
         int offsetY = rnd.nextInt(20);
@@ -91,43 +98,37 @@ public class SettlerView implements IDrawable{
         this.y = y + offsetY;
     }
 
+    /**
+     * Kirajzolas
+     */
     public void Draw() {
 
             AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( s.getAsteroid());
             SetCoords(av.getX(),av.getY());
 
 
-       // x = Game.getInstance().c.g.getX()+offsetX+10;
-        //y = Game.getInstance().c.g.getY()+offsetY+10;
-        //g.gamespace.add(l);
-
-        //Game.getInstance().c.g.gamespace.add(l);
-//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
-
-
-        //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
-       // g.gamespace.getComponent(index).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
-        //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         if(p == null){
             l.setBounds(this.x,this.y,0,0);
         }else {
             l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
         }
-        //System.out.println(g.GetAsteroidView().indexOf(s.getAsteroid()));
-        //index = Arrays.asList(container.getComponents()).indexOf(container.getComponentAt(x, y));
+
 
     }
 
+    /**
+     * Settler aszteroida mozgatasa
+     * @param l
+     * @param sv
+     * @param g
+     */
     public static void MoveToAsteroidListener(JLabel l, SettlerView sv,GUI g){
         l.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("settler"+e.getX());
-                //for(AsteroidView av : g.GetAsteroidView()){
-                 //  av.getAsteroidCoordsListener(l,av);
-                    //System.out.println("settler x = "+sv.x+ "settler y = " + sv.y);
-              //  }
+
             }
         });
     }
@@ -143,6 +144,10 @@ public class SettlerView implements IDrawable{
         currentlySelected = b;
         SetPicture();
     }
+
+    /**
+     * Kep beallitasa
+     */
     public void SetPicture() {
         if (this.currentlySelected == true) {
             Icon pp = new ImageIcon(new ImageIcon("Files/Pictures/selectedsus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
@@ -153,7 +158,6 @@ public class SettlerView implements IDrawable{
         }
         if (Game.getInstance().c.g.getAsteroidViewByAsteroid(s.getAsteroid()).getExpoloding())
             l.setIcon(null);
-//            Game.getInstance().c.g.settlers.remove(this);
 
     }
 }

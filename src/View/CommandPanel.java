@@ -53,7 +53,7 @@ public class CommandPanel extends JPanel implements ActionListener {
         button.setOpaque(false);
         button.addActionListener(this);
         if(Main.settlers.get(Game.getInstance().c.SelectedSettler()) != null) {
-            if ((Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().getLayers() > 0 && Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetisEmpty() != true))
+            if ((Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().getLayers() > 0 && !Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetisEmpty()))
                 button.setEnabled(false);
             else {
                 button.setEnabled(true);
