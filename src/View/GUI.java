@@ -105,7 +105,7 @@ public class GUI extends JFrame implements ActionListener {
         this.setLayout(new FlowLayout());
 
         gamespace.removeAll();
-        gamespace.setPreferredSize(new Dimension(width,height-200));
+        gamespace.setPreferredSize(new Dimension(width,height-250));
 
         dp = new DetailsPanel();
 

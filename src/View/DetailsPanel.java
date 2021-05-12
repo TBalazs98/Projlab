@@ -121,6 +121,8 @@ public void buildDetails(GUI g){
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
         button.setOpaque(false);
+        button.setBackground(Color.BLACK);
+        button.setBackground(Color.GRAY);
 
     }
 }

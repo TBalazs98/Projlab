@@ -3,28 +3,31 @@ package View;
 import Controller.Main;
 import Model.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class CommandPanel extends JPanel implements ActionListener {
     private JButton cpactionDone = new JButton("DOIT");
     private JPanel buttons;
     private JButton build, drill, move, mine, place, nextsettler;
-    private int scaling;
+    private int scaling = 60;
     private boolean next = false;
-    JPanel inventory = new JPanel();
+    JPanel inventory = new JPanel(new FlowLayout(FlowLayout.CENTER));;
 
 
 
     CommandPanel() {
-        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+        this.setLayout(new GridLayout(2,1));
         this.setPreferredSize(new Dimension(Game.getInstance().c.g.width / 2, 200));
         this.setBackground(Color.GRAY);
-        String[] data = {"Build", "Mine", "Dig", "Place", "Move"};
 
-       Buttons();
+        Buttons();
         InventoryPanel();
 
 
@@ -102,7 +105,8 @@ public class CommandPanel extends JPanel implements ActionListener {
         SetButton(nextsettler);
 
 
-        buttons = new JPanel(new FlowLayout());
+        buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttons.setPreferredSize(new Dimension(Game.getInstance().c.g.getWidth()/2,60));
         buttons.add(move);
         buttons.add(drill);
         buttons.add(mine);
@@ -117,25 +121,20 @@ public class CommandPanel extends JPanel implements ActionListener {
 
     }
 
-
-    //  TODO TODO TODO ITT A VÉGTELEN SELECTEDSETTLERT KI KELL CSERÉLNI  Game.getInstance().c.SelectedSettler() - re
-    //                                  @Klau approve pls
-    //      Minden felesleges NextSettler hívást, plusszolást akármit ki kell írtani
-    //                      A settler ++ olását csak a NextSettler() végzi
-    //       Az aktuális Settler helyes lekérdezését csak és kizárólag a SelectedSettler végzi!!
-
     public void InventoryPanel() {
         inventory.removeAll();
-        inventory = new JPanel(new GridLayout(1,13));
+        inventory.repaint();
 
-        //inventory.setPreferredSize(new Dimension(Game.getInstance().c.g.getWidth(),50));
+        inventory.setPreferredSize(new Dimension(Game.getInstance().c.g.getWidth()/2,70));
         inventory.setBackground(Color.GRAY);
-        inventory.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-        ImageIcon p = null;
-        scaling = 50;
+//        inventory.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+        ImageIcon  p =null;
+        scaling = 60;
+        int db = 0;
 //        System.out.println("INVENTORY: " + Game.getInstance().c.selectedSettler);
         if(Main.settlers.get(Game.getInstance().c.SelectedSettler())!=null) {
             for (Material m : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials()) {
+                db++;
                 if (m.name == NormalMaterialName.IRON) {
                     p = new ImageIcon(new ImageIcon("Files/Pictures/iron.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
                 }
@@ -154,19 +153,39 @@ public class CommandPanel extends JPanel implements ActionListener {
                     else if (rm.GetExposure() == 2)
                         p = new ImageIcon(new ImageIcon("Files/Pictures/uran_exp2.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
                 }
-                inventory.add(new JLabel((p)));
+                JButton btn = new JButton(p);
+                setbtn(btn);
+                inventory.add(btn);
             }
 
             for (TeleportGate t : Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetGates()) {
+                db++;
                 p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-                inventory.add(new JLabel(p));
+                JButton btn = new JButton(p);
+                setbtn(btn);
+                inventory.add(btn);
+//                inventory.add(btn);
             }
+        }
+        for(int i = 0; i < (13-db);i++){
+            JButton btn = new JButton();
+            setbtn(btn);
+            inventory.add(btn);
         }
         this.add(inventory);
         this.repaint();
         this.validate();
-    }
 
+
+    }
+    public void setbtn(JButton btn){
+        btn.setBorderPainted(false);
+        btn.setContentAreaFilled(false);
+        btn.setFocusPainted(false);
+        btn.setOpaque(true);
+        btn.setPreferredSize(new Dimension(60,60));
+        btn.setBackground(Color.DARK_GRAY);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == move){
@@ -210,6 +229,8 @@ public class CommandPanel extends JPanel implements ActionListener {
             Game.getInstance().c.NextSettler();
         }
         this.removeAll();
+        inventory.removeAll();
+        buttons.removeAll();
         Buttons();
         if(next) {
             setButtonsOff();

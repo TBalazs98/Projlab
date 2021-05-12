@@ -24,6 +24,7 @@ public  class Controller {
     public Settler s=new Settler();
     public Asteroid a = new Asteroid();
     public ArrayList<DestinationObject> d = new ArrayList<>();
+    private JPanel inventory;
 
     // TODO
     //      Minden felesleges NextSettler hívást, plusszolást akármit ki kell írtani
@@ -94,13 +95,14 @@ public  class Controller {
     public void NextSettler(){
 
         selectedSettler++;
-        while(Main.settlers.get(SelectedSettler())==null) {
-            if(Main.settlers.size()==0){
-                Game.getInstance().LoseGame();
+        if(Main.settlers.isEmpty()){
+            Game.getInstance().LoseGame();
+        }else {
+            while (Main.settlers.get(SelectedSettler()) == null) {
+                selectedSettler++;
             }
-            selectedSettler++;
+            HighlightSettlerStuff();
         }
-        HighlightSettlerStuff();
     }
 
     public int SelectedSettler(){
@@ -131,13 +133,13 @@ public  class Controller {
         ArrayList<JButton> gates = new ArrayList<>();
         ArrayList<TeleportGate> tgate = new ArrayList<>();
         ArrayList<Material> mat = new ArrayList<>();
-
         int db = 0;
-        JPanel inventory = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        inventory = new JPanel(new FlowLayout(FlowLayout.CENTER));
         inventory.setBackground(Color.GRAY);
 
         ImageIcon p = null;
-        int scalingx= 50, scalingy = 50;
+        int scalingx= 60, scalingy = 60;
         for(Material m : Main.settlers.get(SelectedSettler()).GetInventory().GetMaterials()) {
             db++;
             mat.add(m);
@@ -167,41 +169,42 @@ public  class Controller {
 //                    Main.settlers.get(SelectedSettler()).GetInventory().Remove(mat.get(materials.indexOf(a)));
 //                    Main.materials.remove(mat.get(materials.indexOf(a)));
                     Main.settlers.get(SelectedSettler()).PlaceMaterial(m);
+                    a.setIcon(null);
                     Game.getInstance().c.g.cp.InventoryPanel();
-                    Game.getInstance().c.g.cp.repaint();
-                    Game.getInstance().c.g.cp.validate();
-                    Game.getInstance().c.g.dp.repaint();
-                    Game.getInstance().c.g.dp.validate();
-                }
+                    inventory.removeAll();
+                        }
             });
+            setbtn(a);
             materials.add(a);
             inventory.add(a);
 
         }
 
         for(TeleportGate t : Main.settlers.get(SelectedSettler()).GetGates()) {
+            db++;
             p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scalingx, scalingy, Image.SCALE_SMOOTH));
             tgate.add(t);
             JButton a = new JButton(p);
+            setbtn(a);
             a.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     Main.settlers.get(SelectedSettler()).PlaceGate(t);
                     Main.teleportgates.remove(tgate.get(gates.indexOf(a)));
                     Game.getInstance().AddSteppable(t);
+                    a.setIcon(null);
                     Game.getInstance().c.g.addTeleportGate(t);
                     Main.settlers.get(SelectedSettler()).getAsteroid().AddNeighbour(t);
-
-                    Game.getInstance().c.g.cp.InventoryPanel();
-                    Game.getInstance().c.g.cp.repaint();
-                    Game.getInstance().c.g.cp.validate();
-                    Game.getInstance().c.g.dp.repaint();
-                    Game.getInstance().c.g.dp.validate();
-                    Game.getInstance().c.g.update();
+                    inventory.removeAll();
 
                 }
             });
             gates.add(a);
+            inventory.add(a);
+        }
+        for(int i = 0; i < (13-db);i++){
+            JButton a = new JButton();
+            setbtn(a);
             inventory.add(a);
         }
         Game.getInstance().c.g.dp.add(inventory);
@@ -539,6 +542,12 @@ public  class Controller {
             }
         }
         return null;
+    }
+
+    public void setbtn(JButton btn){
+        btn.setOpaque(true);
+        btn.setPreferredSize(new Dimension(60,60));
+        btn.setBackground(Color.DARK_GRAY);
     }
 
 

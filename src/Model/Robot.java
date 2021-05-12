@@ -146,8 +146,7 @@ public class Robot extends Worker implements drillable, Steppable{
 //        Main.robots.remove(this);
         this.asteroid.Remove(this);
         Game.getInstance().c.g.getRobotViewByRobot(this).l.setIcon(null);
-        Game.getInstance().RemoveSteppabe(this);
-        Main.robots.set(Main.robots.indexOf(this), null);
+        Main.robots.remove(this);
         Game.getInstance().c.g.gamespace.repaint();
         Game.getInstance().c.g.gamespace.validate();
     }
