@@ -53,7 +53,7 @@ public void buildDetails(GUI g){
 
     JButton buildrobot = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/robot.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
     buildrobot.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/selected_robot.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-    SetButton(buildrobot);
+//    SetButton(buildrobot);
     buildrobot.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -64,10 +64,6 @@ public void buildDetails(GUI g){
             int PreviousNumberOfRobots = Main.robots.size();
             Main.settlers.get(Game.getInstance().c.SelectedSettler()).BuildRobot();
             Game.getInstance().c.BuildRobot(PreviousNumberOfRobots);
-            System.out.println(Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().Size());
-            for (int i=0; i<Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().Size();i++){
-                System.out.println( Main.settlers.get(Game.getInstance().c.SelectedSettler()).GetInventory().GetMaterials().get(i));
-            }
             Game.getInstance().c.g.cp.InventoryPanel();
             Game.getInstance().c.g.dp.repaint();
             Game.getInstance().c.g.dp.validate();

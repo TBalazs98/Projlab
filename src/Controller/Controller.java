@@ -95,13 +95,17 @@ public  class Controller {
     public void NextSettler(){
 
         selectedSettler++;
-        if(Main.settlers.isEmpty()){
+        if(Main.settlers.size()==0){
             Game.getInstance().LoseGame();
         }else {
             while (Main.settlers.get(SelectedSettler()) == null) {
+                if(Main.settlers.size()==0){
+                    Game.getInstance().LoseGame();
+                    break;
+                }
                 selectedSettler++;
-            }
-            HighlightSettlerStuff();
+                }
+                HighlightSettlerStuff();
         }
     }
 
@@ -119,12 +123,10 @@ public  class Controller {
         Main.settlers.get(SelectedSettler()).Drill();
     }
     public void HandleMine(){
-        Main.settlers.get(SelectedSettler()).Mine();      //todo ezt vissza
+        Main.settlers.get(SelectedSettler()).Mine();
 //        Main.ab.StartStorm(Main.asteroids.get(0));
     }
     public void HandlePlaceMaterial(){
-        //todo ezzel mi a helyzet?
-        //todo SelectedSettler írtás
 //        this.removeA ll();
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -170,8 +172,13 @@ public  class Controller {
 //                    Main.materials.remove(mat.get(materials.indexOf(a)));
                     Main.settlers.get(SelectedSettler()).PlaceMaterial(m);
                     a.setIcon(null);
-                    Game.getInstance().c.g.cp.InventoryPanel();
                     inventory.removeAll();
+                    Game.getInstance().c.g.update();
+                    Game.getInstance().c.g.cp.InventoryPanel();
+                    Game.getInstance().c.g.cp.repaint();
+                    Game.getInstance().c.g.cp.validate();
+                    Game.getInstance().c.g.dp.repaint();
+                    Game.getInstance().c.g.dp.validate();
                         }
             });
             setbtn(a);
@@ -196,6 +203,12 @@ public  class Controller {
                     Game.getInstance().c.g.addTeleportGate(t);
                     Main.settlers.get(SelectedSettler()).getAsteroid().AddNeighbour(t);
                     inventory.removeAll();
+                    Game.getInstance().c.g.update();
+                    Game.getInstance().c.g.cp.InventoryPanel();
+                    Game.getInstance().c.g.cp.repaint();
+                    Game.getInstance().c.g.cp.validate();
+                    Game.getInstance().c.g.dp.repaint();
+                    Game.getInstance().c.g.dp.validate();
 
                 }
             });
@@ -216,13 +229,6 @@ public  class Controller {
     }
 
     public void SettlersHaveWon(){
-//        Game.getInstance().c.g.gamespace.removeAll();
-//        Game.getInstance().c.g.cp.removeAll();
-//        Game.getInstance().c.g.dp.removeAll();
-//
-//        Game.getInstance().c.g.inpudialog.add(new JLabel(new ImageIcon("Files/Pictures/teleportgate.jpg")));
-//        Game.getInstance().c.g.setContentPane(new JLabel(new ImageIcon("Files/Pictures/teleportgate.jpg")));
-//        System.out.println("NYERTÉÉÉÉÉÉÉL");
         Game.getInstance().c.g.removeAll();
         Game.getInstance().c.g.repaint();
         Game.getInstance().c.g.validate();
@@ -230,8 +236,8 @@ public  class Controller {
         paper.clearRect(0, 0, (int)g.getSize().getWidth(), (int)g.getSize().getHeight());
         final BufferedImage image;
         try {
-            image = ImageIO.read(new File("Files/Pictures/teleportgate_insane.png"));
-            paper.drawImage(image,0, 0, null);
+            image = ImageIO.read(new File("Files/Pictures/win.jpg"));
+            paper.drawImage(image,0, 0,(int)g.getSize().getWidth(), (int)g.getSize().getHeight(), null);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -249,8 +255,8 @@ public  class Controller {
         paper.clearRect(0, 0, (int)g.getSize().getWidth(), (int)g.getSize().getHeight());
         final BufferedImage image;
         try {
-            image = ImageIO.read(new File("Files/Pictures/teleportgate_insane.png"));
-            paper.drawImage(image,0, 0, null);
+            image = ImageIO.read(new File("Files/Pictures/lost.jpg"));
+            paper.drawImage(image,0, 0,(int)g.getSize().getWidth(), (int)g.getSize().getHeight(), null);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -274,9 +280,11 @@ public  class Controller {
 
     public void HighAsteroid(Settler sv){
         for(Asteroid a : Main.asteroids) {
-            Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false, g);
-            System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
-            //Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImage();
+            if (a != null) {
+                Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false, g);
+                System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
+                //Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImage();
+            }
         }
 
         for(TeleportGate tg : Main.teleportgates) {

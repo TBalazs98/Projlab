@@ -129,7 +129,7 @@ public class Settler extends Worker implements drillable, moveable {
     public void BuildRobot() {
         //Logger.getInstance().printCommandCall(this);
 
-        Robot r = new Robot(inventory, asteroid);       //Robot epitese, atadva a sajat inventorynkat (ebben nezi meg a Robot, hogy fel tud-e epulni)
+        Model.Robot r = new Robot(inventory, asteroid);       //Robot epitese, atadva a sajat inventorynkat (ebben nezi meg a Robot, hogy fel tud-e epulni)
         if(r.getAsteroid() !=null){
             Main.robots.add(r);
             this.inventory.Remove(this.inventory.GetMaterialByName(NormalMaterialName.IRON));
@@ -187,6 +187,7 @@ public class Settler extends Worker implements drillable, moveable {
 //                Game.getInstance().c.g.settlers.remove(this);
         this.setAsteroid(null);
         Game.getInstance().c.g.getSettlerViewBySettler(this).l.setIcon(null);
+//        Main.settlers.set(Main.settlers.indexOf(this),null);
         Main.settlers.remove(this);
 
 

@@ -407,16 +407,18 @@ public class Asteroid implements DestinationObject, Steppable {
 //        AsteroidBelt.getInstance().getAsteroids().remove(this);
         this.material = null;
 
-        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setExploding();
-        Game.getInstance().c.g.gamespace.repaint();
-        Game.getInstance().c.g.gamespace.validate();
+
         int n = characters.size();
         for(int i = n - 1; i >= 0; i--) {
             characters.get(i).Explode();
         }
         for(DestinationObject o : this.neighbours) {
+            if(o!=null)
             o.HitByExplosion(this);
         }
+        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setExploding();
+        Game.getInstance().c.g.gamespace.repaint();
+        Game.getInstance().c.g.gamespace.validate();
         //this.neighbours.forEach(n -> n.HitByExplosion(this));
         //this.characters.forEach(c -> c.Explode());
 
@@ -432,6 +434,7 @@ public class Asteroid implements DestinationObject, Steppable {
 //        Main.asteroids.set(Main.asteroids.indexOf(this), null);
 //        Game.getInstance().RemoveSteppabe(this);
         //Logger.getInstance().printReturnCommand();
+//        Main.asteroids.remove(this);
         Game.getInstance().c.g.gamespace.repaint();
         Game.getInstance().c.g.gamespace.validate();
     }
