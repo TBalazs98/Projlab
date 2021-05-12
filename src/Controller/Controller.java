@@ -48,8 +48,17 @@ public  class Controller {
 
     public void MoveSetDestination(DestinationObject ddo){
         System.out.println("valasztottam aszteroidat"+ddo);
-        d.clear();
-        d.add(ddo);
+        System.out.println("fas");
+        if(Main.settlers.get(SelectedSettler()).getAsteroid().GetNeighbours().contains(ddo)){
+            System.out.println("asdasd");
+            d.clear();
+            d.add(ddo);
+        }else{
+            d.clear();
+            d.add(Main.settlers.get(SelectedSettler()).getAsteroid().GetNeighbours().get(Main.settlers.get(SelectedSettler()).getAsteroid().GetRandNeighbour()) );
+            //Ha nem jo celt jelolunk akkor random szomszedot fog kijelolni
+        }
+
     }
 
     public void MoveSetSettler(Settler ss){

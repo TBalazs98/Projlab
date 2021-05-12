@@ -39,7 +39,28 @@ public class CommandPanel extends JPanel implements ActionListener {
         button.addActionListener(this);
     }
 
-    public JButton getActionDone1(){return cpactionDone;}
+    public void SetButtonMine(JButton button) {
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setOpaque(false);
+        //button.setPreferredSize(new Dimension(this.getWidth()/5,70));
+        button.addActionListener(this);
+        if( (Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().getLayers()>0 && Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetisEmpty()!=true))
+            button.setEnabled(false);
+    }
+    public void SetButtonDrill(JButton button) {
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setOpaque(false);
+        //button.setPreferredSize(new Dimension(this.getWidth()/5,70));
+        button.addActionListener(this);
+        if(Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().getLayers()<=0)
+            button.setEnabled(false);
+    }
+
+
 
     public void Buttons(){
         scaling = Game.getInstance().c.g.GetWidth()/20;
@@ -52,7 +73,7 @@ public class CommandPanel extends JPanel implements ActionListener {
 
         drill = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_drill.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         drill.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_drill (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-        SetButton(drill);
+        SetButtonDrill(drill);
 
         move = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_move.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         move.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_move (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
@@ -64,7 +85,7 @@ public class CommandPanel extends JPanel implements ActionListener {
 
         mine = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_mine.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         mine.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_mine (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
-        SetButton(mine);
+        SetButtonMine(mine);
 
         nextsettler = new JButton(new ImageIcon(new ImageIcon("Files/Pictures/button_next.png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));
         nextsettler.setRolloverIcon(new ImageIcon(new ImageIcon("Files/Pictures/button_next (1).png").getImage().getScaledInstance(scaling, height, Image.SCALE_SMOOTH)));

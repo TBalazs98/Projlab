@@ -30,8 +30,22 @@ public class AsteroidView implements IDrawable {
         this.asteroid = a;
 
         setImage();
+        getAsteroidCoordsListener(l,this);
 
 
+    }
+    public void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
+        l.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println("x = "+av.x+ "y = " + av.y);
+                Game.getInstance().c.MoveSetAsteroid(av);
+                Game.getInstance().c.MoveSetDestination(av.asteroid);
+
+
+            }
+        });
     }
 
     /**
