@@ -69,7 +69,7 @@ public class CustomGamePanel extends JPanel {
         this.add(iron);
 
         vector = vector_zero(0,asteroidnumber/4);
-        water = new CustomChooserPanel(g, vector, "Water", this);
+        water = new CustomChooserPanel(g, vector, "IceWater", this);
         this.add(water);
 
         vector = vector_zero(0,asteroidnumber/4);
@@ -86,7 +86,7 @@ public class CustomGamePanel extends JPanel {
 
         randbox = new JComboBox(rand);
         JPanel random = new JPanel();
-        JLabel label = new JLabel("Random");
+        JLabel label = new JLabel("Randomize enviroment");
         label.setHorizontalAlignment(JLabel.CENTER);
         random.setPreferredSize(new Dimension(g.height/4,g.height/2+g.height/4));
         random.setLayout(new GridLayout(1,2));
