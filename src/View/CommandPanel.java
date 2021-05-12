@@ -46,8 +46,13 @@ public class CommandPanel extends JPanel implements ActionListener {
         button.setOpaque(false);
         //button.setPreferredSize(new Dimension(this.getWidth()/5,70));
         button.addActionListener(this);
-        if( (Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().getLayers()>0 && Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetisEmpty()!=true))
-            button.setEnabled(false);
+        if(Main.settlers.get(Game.getInstance().c.SelectedSettler()) != null) {
+            if ((Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().getLayers() > 0 && Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().GetisEmpty() != true))
+                button.setEnabled(false);
+            else {
+                button.setEnabled(true);
+            }
+        }
     }
     public void SetButtonDrill(JButton button) {
         button.setBorderPainted(false);
@@ -56,8 +61,13 @@ public class CommandPanel extends JPanel implements ActionListener {
         button.setOpaque(false);
         //button.setPreferredSize(new Dimension(this.getWidth()/5,70));
         button.addActionListener(this);
-        if(Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().getLayers()<=0)
-            button.setEnabled(false);
+        if(Main.settlers.get(Game.getInstance().c.SelectedSettler()) != null) {
+            if (Main.settlers.get(Game.getInstance().c.SelectedSettler()).getAsteroid().getLayers() <= 0)
+                button.setEnabled(false);
+            else {
+                button.setEnabled(true);
+            }
+        }
     }
 
 

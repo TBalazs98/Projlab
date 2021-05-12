@@ -67,7 +67,7 @@ public class UfoView implements IDrawable{
                 Game.getInstance().c.g.dp.validate();
             }
         });
-        Game.getInstance().c.g.gamespace.add(l);
+//        Game.getInstance().c.g.gamespace.add(l);
     }
 
     public void SetCoords(int x, int y){
@@ -83,8 +83,9 @@ public class UfoView implements IDrawable{
 
 
         //Game.getInstance().c.g.gamespace.add(l);
+        Game.getInstance().c.g.gamespace.add(l,1);
 
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
+//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
     }
 

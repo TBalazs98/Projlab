@@ -69,7 +69,7 @@ public class TeleportGateView implements IDrawable{
                 Game.getInstance().c.g.dp.validate();
             }
         });
-        Game.getInstance().c.g.gamespace.add(l);
+//        Game.getInstance().c.g.gamespace.add(l);
     }
 
     public void SetCoords(int x, int y){
@@ -104,9 +104,9 @@ public class TeleportGateView implements IDrawable{
         SetCoords(av.getX(),av.getY());
 
         //Game.getInstance().c.g.gamespace.add(l);
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
+//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
 
-
+        Game.getInstance().c.g.gamespace.add(l,1);
 //        System.out.println("Asteroid: " + tg.GetAsteroid() + " Párja: " + ((tg.GetPair() == null) ? (" nincs párja") :(" " + tg.GetPair().GetAsteroid())));
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
     }
@@ -137,6 +137,7 @@ public class TeleportGateView implements IDrawable{
 //            p = new ImageIcon(new ImageIcon("Files/Pictures/teleportgate.jpg").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 //            l.setIcon(p);
 //        }
+
     }
     public TeleportGate getTg(){return this.tg;}
 

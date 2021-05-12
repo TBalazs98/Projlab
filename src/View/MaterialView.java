@@ -17,7 +17,6 @@ public class MaterialView implements IDrawable {
     public MaterialView(Material m){
         this.material = m;
         setImage();
-        Game.getInstance().c.g.gamespace.add(l);
     }
 
     public void SetCoords(int x, int y){
@@ -97,12 +96,12 @@ public class MaterialView implements IDrawable {
         //Game.getInstance().c.g.gamespace.add(l);
 
         //Game.getInstance().c.g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
+//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
         if(p == null){
             l.setBounds(this.x,this.y,0,0);
         }else
         l.setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
-
+        Game.getInstance().c.g.gamespace.add(l,1);
         Game.getInstance().c.g.repaint();
         Game.getInstance().c.g.validate();
     }

@@ -18,8 +18,8 @@ public class AsteroidView implements IDrawable {
     public JLabel l = new JLabel();
     private int x, y;
     private boolean highlight = false;
-    int scaling = 130, explodingcount = -1;
-    private boolean isInsusntorm = false, exploding = false;
+    int scaling = 130, isInsusntorm = -1;
+    private boolean exploding = false, sunstorming = false;
 
 
     /**
@@ -53,35 +53,69 @@ public class AsteroidView implements IDrawable {
      * megjeleniteset az info panelben itt vegezzuk el.
      */
     public void setImage(){
-        if (this.asteroid.getLayers() > 0 && !this.asteroid.GetSunProximity() && !isInsusntorm && !highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        if (this.asteroid.getLayers() > 0 && !this.asteroid.GetSunProximity() && !isInsusntorm && highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+        if (this.asteroid.getLayers() > 0){
+            if(!this.asteroid.GetSunProximity()) {
+                if ((this.asteroid.isInsusntorm == 0)){
+                    if(!highlight){
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    } else
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/selected_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }else {
+                    if(!highlight){
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    }else {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/selected_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    }
+                }
+            }else  if(this.asteroid.GetSunProximity()) {
+                if ((this.asteroid.isInsusntorm == 0)) {
+                    if (!highlight) {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    } else {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/selected_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    }
 
-        if (this.asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && !isInsusntorm && !highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        if (this.asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && !isInsusntorm && highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                }else {
+                    if (!highlight) {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/nearsun_and_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
 
-        if (this.asteroid.getLayers() == 0 && !this.asteroid.GetSunProximity() && !isInsusntorm && !highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        if (this.asteroid.getLayers() == 0 && !this.asteroid.GetSunProximity() && !isInsusntorm && highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-
-        if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && !isInsusntorm && !highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/hollow_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && !isInsusntorm && highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollow_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-
-        if (this.asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && isInsusntorm && !highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/nearsun_and_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        if (this.asteroid.getLayers() > 0 && this.asteroid.GetSunProximity() && isInsusntorm && highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_nearsun_and_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-
-        if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && isInsusntorm && !highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/hollow_nearsun_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
-        if (this.asteroid.getLayers() == 0 && this.asteroid.GetSunProximity() && isInsusntorm && highlight)
-            p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollow_nearsun_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    } else {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/selected_nearsun_and_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    }
+                }
+            }
+        }
+        if (this.asteroid.getLayers() == 0) {
+            if (!this.asteroid.GetSunProximity()) {
+                if ((this.asteroid.isInsusntorm == 0)) {
+                    if (!highlight) {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    } else {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollowasteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    }
+                } else {
+                    if (!highlight) {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/hollow_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    } else {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollow_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    }
+                }
+            } else {
+                if ((this.asteroid.isInsusntorm == 0)) {
+                    if (!highlight) {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/hollow_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    } else {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollow_nearsun_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    }
+                } else {
+                    if (!highlight) {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/hollow_nearsun_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    } else {
+                        p = new ImageIcon(new ImageIcon("Files/Pictures/selected_hollow_nearsun_sunstorm_asteroid.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
+                    }
+                }
+            }
+        }
 
         if(this.asteroid.explodecount >=2){
             p = null;
@@ -90,6 +124,8 @@ public class AsteroidView implements IDrawable {
             p = new ImageIcon(new ImageIcon("Files/Pictures/explosion.png").getImage().getScaledInstance(scaling, scaling, Image.SCALE_SMOOTH));
             this.asteroid.explodecount++;
         }
+        this.asteroid.isInsusntorm = 0;
+        this.sunstorming = false;
 
         l.setIcon(p);
         this.l.addMouseListener(new MouseListener() {
@@ -216,12 +252,12 @@ public class AsteroidView implements IDrawable {
 
     public Asteroid getAsteroid(){ return asteroid; }
 
-    public void setInSunstorm(boolean bool) {
-        this.isInsusntorm = bool;
-    }
-
-    public boolean getisInSunstorm(){
-        return isInsusntorm;
+    public void setInSunstorm() {
+        this.sunstorming = true;
+        this.asteroid.isInsusntorm++;
+        l.setIcon(p);
+        Game.getInstance().c.g.repaint();
+        Game.getInstance().c.g.validate();
     }
 
     /**
@@ -237,5 +273,9 @@ public class AsteroidView implements IDrawable {
 
     public boolean getExpoloding(){
         return this.exploding;
+    }
+
+    public boolean getSunstorming(){
+        return this.sunstorming;
     }
 }

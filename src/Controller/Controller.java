@@ -94,11 +94,16 @@ public  class Controller {
     public void NextSettler(){
 
         selectedSettler++;
-        if(Main.settlers.get(SelectedSettler())!=null)
+        while(Main.settlers.get(SelectedSettler())==null) {
+            selectedSettler++;
+        }
         HighlightSettlerStuff();
     }
 
     public int SelectedSettler(){
+        if(Main.settlers.size()==0){
+            Game.getInstance().LoseGame();
+        }
         if(selectedSettler==(Main.settlers.size())){
             selectedSettler=0;
             Game.getInstance().NextRound();
@@ -231,8 +236,19 @@ public  class Controller {
     }
 
     public void SettlersLost(){
-        Game.getInstance().c.g.gamespace.removeAll();
-        Game.getInstance().c.g.gamespace.add(new JLabel(new ImageIcon("Files/Pictures/teleportgate_insane.png")));
+        Game.getInstance().c.g.removeAll();
+        Game.getInstance().c.g.repaint();
+        Game.getInstance().c.g.validate();
+        Graphics paper = Game.getInstance().c.g.getGraphics();
+        paper.clearRect(0, 0, (int)g.getSize().getWidth(), (int)g.getSize().getHeight());
+        final BufferedImage image;
+        try {
+            image = ImageIO.read(new File("Files/Pictures/teleportgate_insane.png"));
+            paper.drawImage(image,0, 0, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         Game.getInstance().c.g.repaint();
         Game.getInstance().c.g.validate();
@@ -241,10 +257,12 @@ public  class Controller {
     public void HighlightEverythingExcept(SettlerView sv){
 
        for(int i=0; i<Game.getInstance().c.g.GetSettlerView().size();i++){
-           if(Game.getInstance().c.g.GetSettlerView().get(i)==sv)
-               Game.getInstance().c.g.GetSettlerView().get(i).SelectHighlighted(true);
-           else
-               Game.getInstance().c.g.GetSettlerView().get(i).SelectHighlighted(false);
+           if(Game.getInstance().c.g.GetSettlerView().get(i).getSettler().getAsteroid()!=null) {
+               if (Game.getInstance().c.g.GetSettlerView().get(i) == sv)
+                   Game.getInstance().c.g.GetSettlerView().get(i).SelectHighlighted(true);
+               else
+                   Game.getInstance().c.g.GetSettlerView().get(i).SelectHighlighted(false);
+           }
        }
     }
 
@@ -505,7 +523,10 @@ public  class Controller {
             }
         }
 
-        Main.Randomize = datas.get(9) == 1;
+        //lehet nem jó h melyik mi
+        Main.Randomize = (datas.get(9)==1)?true:false;
+
+        Game.getInstance().AddSteppable(Main.ab);
     }
 
     public AsteroidView getAsteroidViewByMaterialView(MaterialView m){

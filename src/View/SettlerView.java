@@ -15,7 +15,7 @@ public class SettlerView implements IDrawable{
 
     private Settler s;
     private Icon p;
-    public JLabel l;
+    public JLabel l = new JLabel();
     private int x,y;
     private Random rnd = new Random();
     boolean currentlySelected =false;
@@ -102,14 +102,17 @@ public class SettlerView implements IDrawable{
         //g.gamespace.add(l);
 
         //Game.getInstance().c.g.gamespace.add(l);
-        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
+//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 0);
 
 
         //g.gamespace.getComponent(1).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
        // g.gamespace.getComponent(index).setBounds(this.x,this.y,p.getIconWidth(),p.getIconWidth());
         //g.gamespace.getComponent(compnum).setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
-
-        l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        if(p == null){
+            l.setBounds(this.x,this.y,0,0);
+        }else {
+            l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
+        }
         //System.out.println(g.GetAsteroidView().indexOf(s.getAsteroid()));
         //index = Arrays.asList(container.getComponents()).indexOf(container.getComponentAt(x, y));
 
@@ -140,18 +143,17 @@ public class SettlerView implements IDrawable{
         currentlySelected = b;
         SetPicture();
     }
-    public void SetPicture(){
-        if(this.currentlySelected==true){
-           Icon pp= new ImageIcon(new ImageIcon("Files/Pictures/selectedsus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+    public void SetPicture() {
+        if (this.currentlySelected == true) {
+            Icon pp = new ImageIcon(new ImageIcon("Files/Pictures/selectedsus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
             l.setIcon(pp);
-        }else {
-            p= new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        } else {
+            p = new ImageIcon(new ImageIcon("Files/Pictures/sus.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
             l.setIcon(p);
         }
-        if(Game.getInstance().c.g.getAsteroidViewByAsteroid(s.getAsteroid()).getExpoloding())
+        if (Game.getInstance().c.g.getAsteroidViewByAsteroid(s.getAsteroid()).getExpoloding())
             l.setIcon(null);
 //            Game.getInstance().c.g.settlers.remove(this);
+
     }
-
-
 }

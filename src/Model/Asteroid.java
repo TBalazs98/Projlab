@@ -21,7 +21,7 @@ public class Asteroid implements DestinationObject, Steppable {
 
     private ArrayList<DestinationObject> neighbours;
 
-    public int explodecount = 0;
+    public int explodecount = 0, isInsusntorm = 0;
 
     /**
      * Az Asteroid osztaly publikus alapertelmezett konstruktora.
@@ -360,15 +360,9 @@ public class Asteroid implements DestinationObject, Steppable {
      *Az aszteroidat napvihar eri el.
      */
     public void HitBySunstorm() {
-
-        for(int i = 0; i < Game.getInstance().c.g.GetAsteroidView().size();i++){
-            if(Game.getInstance().c.g.GetAsteroidView().get(i).getAsteroid() == this) {
-                Game.getInstance().c.g.GetAsteroidView().get(i).setInSunstorm(true);
-                System.out.println(Game.getInstance().c.g.GetAsteroidView().get(i).getisInSunstorm());
-            }
-        }
-        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setImage();
-
+        Game.getInstance().c.g.getAsteroidViewByAsteroid(this).setInSunstorm();
+        Game.getInstance().c.g.gamespace.repaint();
+        Game.getInstance().c.g.gamespace.validate();
         //Logger.getInstance().printCommandCall(this);
         if((layers != 0) || (!isEmpty)) {
             int n = characters.size();
@@ -384,6 +378,8 @@ public class Asteroid implements DestinationObject, Steppable {
                 }
             }
         }
+        Game.getInstance().c.g.gamespace.repaint();
+        Game.getInstance().c.g.gamespace.validate();
 //
     }
 

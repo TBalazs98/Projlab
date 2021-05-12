@@ -127,14 +127,15 @@ public class GUI extends JFrame implements ActionListener {
             Coordinates coordinates = getLonelyCoord();
             coordinates.toggle();
             asteroids.get(i).SetCoords(coordinates.getX(),coordinates.getY());
-            gamespace.add(asteroids.get(i).l);
+            gamespace.add(asteroids.get(i).l,2);
             asteroids.get(i).Draw();
         }
 
         for(int i=0; i<this.settlers.size();i++){
             settlers.get(i).SetCoords(getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX(),getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
             System.out.println("x=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getX() + "y=" +getAsteroidViewByAsteroid( settlers.get(i).getSettler().getAsteroid()).getY());
-            gamespace.add(settlers.get(i).l);
+//            gamespace.add(settlers.get(i).l);
+            gamespace.add(settlers.get(i).l,1);
             settlers.get(i).Draw();
         }
 
