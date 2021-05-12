@@ -1,6 +1,7 @@
 package View;
 
 import Controller.InputManager;
+import Controller.Main;
 import Model.Game;
 
 import javax.swing.*;
@@ -67,9 +68,24 @@ public JPanel getPanel()
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
+                Game.getInstance().c.g.gamespace.removeAll();
+                Game.getInstance().c.g.materials.clear();
+                Game.getInstance().c.g.ufos.clear();
+                Game.getInstance().c.g.teleportgates.clear();
+                Game.getInstance().c.g.GetAsteroidView().clear();
+                Game.getInstance().c.g.GetSettlerView().clear();
+                Main.asteroids.clear();
+                Game.getInstance().c.g.settlers.clear();
+                Main.settlers.clear();
+                Main.ufos.clear();
+                Main.robots.clear();
+                Main.materials.clear();
+                Main.teleportgates.clear();
+                Game.getInstance().c.g.clearCoords();
                 InputManager.FromFileInput(chosen,false);
                 Game.getInstance().c.g.remove(getPanel());
                 Game.getInstance().c.InitViews( Game.getInstance().c.g);
+                System.out.println(Game.getInstance().c.g.GetAsteroidView().size());
                 Game.getInstance().c.g.DrawAll();
                 Game.getInstance().c.g.repaint();
                 Game.getInstance().c.g.validate();

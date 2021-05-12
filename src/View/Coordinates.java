@@ -11,6 +11,11 @@ public class Coordinates {
         toggled = false;
     }
 
+    public void setToggled(boolean istoogled)
+    {
+        toggled = istoogled;
+    }
+
     public boolean isToggled() {
         return toggled;
     }

@@ -612,7 +612,7 @@ public class CommandManager {
      * Elmenti a jatekallast a megadott fajlba
      * @param filename a bemenetrol beolvasott fajlnev
      */
-    public static void saveMap (String filename){
+    public static void saveMap(String filename){
         int M = Main.materials.size();
         int A = Main.asteroids.size();
         int T = Main.teleportgates.size();
@@ -732,6 +732,9 @@ public class CommandManager {
             }
             pw.print("\n");
         }
+        pw.println();
+        pw.println("setRandomize " +((Main.Randomize)?"on":"off"));
+        pw.println("stop");
         pw.close();
     }
 
