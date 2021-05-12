@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class CustomGamePanel extends JPanel {
-    final private ChoserPanel asteroid;
-    final private ChoserPanel settler;
-    final private ChoserPanel robot;
-    final private ChoserPanel ufo;
-    final private ChoserPanel coal;
-    final private ChoserPanel iron;
-    final private ChoserPanel water;
-    final private ChoserPanel uran;
-    final private ChoserPanel portal;
+    final private CustomChooserPanel asteroid;
+    final private CustomChooserPanel settler;
+    final private CustomChooserPanel robot;
+    final private CustomChooserPanel ufo;
+    final private CustomChooserPanel coal;
+    final private CustomChooserPanel iron;
+    final private CustomChooserPanel water;
+    final private CustomChooserPanel uran;
+    final private CustomChooserPanel portal;
     final private JComboBox randbox;
     private int asteroidnumber = 12;
     final private JButton saveButton;
@@ -36,39 +36,39 @@ public class CustomGamePanel extends JPanel {
         //int maximumasteroids = (int) Math.floor(x * y * 0.37);
 
         Vector<Integer> vector = vector_zero(12,24);
-        asteroid = new ChoserPanel(g, vector, "Asteroids", this);
+        asteroid = new CustomChooserPanel(g, vector, "Asteroids", this);
         this.add(asteroid);
 
         vector = vector_zero(1,40);
-        settler = new ChoserPanel(g, vector, "Settlers", this);
+        settler = new CustomChooserPanel(g, vector, "Settlers", this);
         this.add(settler);
 
         vector = vector_zero(0,40);
-        robot = new ChoserPanel(g, vector, "Robots", this);
+        robot = new CustomChooserPanel(g, vector, "Robots", this);
         this.add(robot);
 
         vector = vector_zero(0,40);
-        ufo = new ChoserPanel(g, vector, "UFOs", this);
+        ufo = new CustomChooserPanel(g, vector, "UFOs", this);
         this.add(ufo);
 
         vector = vector_zero(0,asteroidnumber/4);
-        coal = new ChoserPanel(g, vector, "Coal", this);
+        coal = new CustomChooserPanel(g, vector, "Coal", this);
         this.add(coal);
 
         vector = vector_zero(0,asteroidnumber/4);
-        iron = new ChoserPanel(g, vector, "Iron", this);
+        iron = new CustomChooserPanel(g, vector, "Iron", this);
         this.add(iron);
 
         vector = vector_zero(0,asteroidnumber/4);
-        water = new ChoserPanel(g, vector, "Water", this);
+        water = new CustomChooserPanel(g, vector, "Water", this);
         this.add(water);
 
         vector = vector_zero(0,asteroidnumber/4);
-        uran = new ChoserPanel(g, vector, "Uran", this);
+        uran = new CustomChooserPanel(g, vector, "Uran", this);
         this.add(uran);
 
         vector = vector_portal(6);
-        portal = new ChoserPanel(g, vector, "Portals", this);
+        portal = new CustomChooserPanel(g, vector, "Portals", this);
         this.add(portal);
 
         Vector<Boolean> rand = new Vector<>();
@@ -161,7 +161,7 @@ public class CustomGamePanel extends JPanel {
         }
     }
 
-    public ChoserPanel getAsteroid(){
+    public CustomChooserPanel getAsteroid(){
         return asteroid;
     }
 

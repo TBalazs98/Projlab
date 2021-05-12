@@ -6,11 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class ChoserPanel extends JPanel {
+/**
+ * Az egyeni jatekok letrehozasakor az egyeni jatek objektumok ertekeinek beallitasaert felelos JPanel leszarmazott panel osztaly
+ */
+public class CustomChooserPanel extends JPanel {
     private JComboBox<Integer> box;
     final private CustomGamePanel panel;
 
-    public ChoserPanel(GUI g, Vector<Integer> list, String text, CustomGamePanel p){
+    public CustomChooserPanel(GUI g, Vector<Integer> list, String text, CustomGamePanel p){
         panel = p;
 
         this.setPreferredSize(new Dimension(g.height/4,g.height/2+g.height/4));
@@ -27,6 +30,10 @@ public class ChoserPanel extends JPanel {
     }
 
 
+    /**
+     * A jatek ojektum ertekeinek frissitese
+     * @param list a jatek objektumok ertekeinek listaja
+     */
     public void update(Vector<Integer> list){
         box.removeAllItems();
         for(int i : list){

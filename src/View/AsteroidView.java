@@ -39,7 +39,6 @@ public class AsteroidView implements IDrawable {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println("x = "+av.x+ "y = " + av.y);
                 Game.getInstance().c.MoveSetAsteroid(av);
                 Game.getInstance().c.MoveSetDestination(av.asteroid);
 
@@ -128,57 +127,6 @@ public class AsteroidView implements IDrawable {
         this.sunstorming = false;
 
         l.setIcon(p);
-        this.l.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) { }
-
-            @Override
-            public void mousePressed(MouseEvent e) { }
-
-            @Override
-            public void mouseReleased(MouseEvent e) { }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                Game.getInstance().c.g.dp.removeAll();
-                JPanel info = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                info.add(new JLabel("[ASTEROID]"));
-                info.add(new JLabel("\nA" + (Main.asteroids.indexOf(asteroid)+1)));
-                info.add(new JLabel("\nLAYERS: " + asteroid.getLayers()));
-                info.add(new JLabel("\nSUNPORIMITY:" + ((asteroid.GetSunProximity()? "\nNEAR SUN" : "\nFAR FROM SUN"))));
-                info.add(new JLabel("\nMATERIAL:"));
-                if (asteroid.GetisEmpty())
-                    info.add(new JLabel("\nEMPTY"));
-                else {
-                    info.add(new JLabel("\nM" + (Main.materials.indexOf(asteroid.getMaterial())+1) ));
-                }
-                ArrayList<String> neigh = new ArrayList<>();
-                for (DestinationObject o : asteroid.GetNeighbours()) {
-                    if (Main.asteroids.contains(o))
-                        neigh.add("\nA" + (Main.asteroids.indexOf(o) + 1));
-                    if (Main.teleportgates.contains(o))
-                        neigh.add("\nG" + (Main.teleportgates.indexOf(o) + 1));
-                }
-                info.add(new JLabel("\nNEIGHBOURS:"));
-                if(neigh.size() == 0){
-                    info.add(new JLabel("\nNO NEIGHBOUR"));
-                }
-                else {
-                    for (String s : neigh)
-                        info.add(new JLabel("\n" + s));
-                }
-                Game.getInstance().c.g.dp.add(info);
-                Game.getInstance().c.g.dp.repaint();
-                Game.getInstance().c.g.dp.validate();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                Game.getInstance().c.g.dp.removeAll();
-                Game.getInstance().c.g.dp.repaint();
-                Game.getInstance().c.g.dp.validate();
-            }
-        });
     }
 
     public void SetCoords(int x, int y) {
@@ -229,18 +177,6 @@ public class AsteroidView implements IDrawable {
             Game.getInstance().c.g.validate();
     }
 
-//    public void getAsteroidCoordsListener(JLabel l, AsteroidView av) {
-//        l.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                super.mouseClicked(e);
-//                System.out.println("x = "+av.x+ "y = " + av.y);
-//                Game.getInstance().c.MoveSetAsteroid(av);
-//                Game.getInstance().c.MoveSetDestination(av.asteroid);
-//
-//            }
-//        });
-//    }
 
     /**
      * Az aszteoirda kijeloltsegenek beallitasaiert felelos metodus
@@ -277,7 +213,4 @@ public class AsteroidView implements IDrawable {
         return this.exploding;
     }
 
-    public boolean getSunstorming(){
-        return this.sunstorming;
-    }
 }
