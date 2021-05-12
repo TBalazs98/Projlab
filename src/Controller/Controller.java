@@ -26,32 +26,28 @@ public  class Controller {
     public ArrayList<DestinationObject> d = new ArrayList<>();
     private JPanel inventory;
 
-    // TODO
-    //      Minden felesleges NextSettler hívást, plusszolást akármit ki kell írtani
-    //                      A settler ++ olását csak a NextSettler() végzi
-    //       Az aktuális Settler helyes lekérdezését csak és kizárólag a SelectedSettler végzi!!
-
+    /**
+     * Controller konstruktor
+     */
     public Controller(){
         g=new GUI(this);
         g.DrawMenu();
-//        InitViews(g);
     }
-    public void DoTheMove(){
-        System.out.println("neigh index"+s.getAsteroid().GetNeighbourIndex(a));
 
-        System.out.println("-- leptem : Eddig itt voltam"+s.getAsteroid());
-        //s.Move(s.getAsteroid().GetNeighbourIndex(a));
+    /**
+     * A mozgas megvalositasaert felelos metodus
+     */
+    public void DoTheMove(){
         s.Move(s.getAsteroid().GetNeighbourIndex(d.get(0)));
-        System.out.println("++ leptem : ide erkeztem"+s.getAsteroid());
-        //NextSettler();      //ezt kell hülyebiztosan lekezelni
         g.DrawSettlers();
     }
 
+    /**
+     * Kivalaszt egy destination objectet, ahova a settler mozoghat
+     * @param ddo cel Destination object
+     */
     public void MoveSetDestination(DestinationObject ddo){
-        System.out.println("valasztottam aszteroidat"+ddo);
-        System.out.println("fas");
         if(Main.settlers.get(SelectedSettler()).getAsteroid().GetNeighbours().contains(ddo)){
-            System.out.println("asdasd");
             d.clear();
             d.add(ddo);
         }else{
@@ -62,38 +58,33 @@ public  class Controller {
 
     }
 
+    /**
+     * Kivalasztja a mozgatando settlert
+     * @param ss Mozgatando settler
+     */
     public void MoveSetSettler(Settler ss){
-        System.out.println("valasztottam settlert"+ss);
         s=ss;
     }
-
+    /**
+     * Kivalaszt egy asteroid objectet, ahova a settler mozoghat
+     * @param av cel AsteroidaView
+     */
     public void MoveSetAsteroid(AsteroidView av){
-        System.out.println("valasztottam aszteroidat"+av);
         a=av.getAsteroid();
     }
 
+    /**
+     * A jelenleg kivalasztott settlerhez kapcsolodoan kijeloli a destination objecteket es a settlereket
+     */
     public void HighlightSettlerStuff(){
-        //Settler s=Main.settlers.get(SelectedSettler());
-       // SettlerView sv =Game.getInstance().c.g.getSettlerViewBySettler(s);
-
-
-        //HighlightEverythingExcept(g.GetSettlerView().get(SelectedSettler()));
         HighlightEverythingExcept(Game.getInstance().c.g.getSettlerViewBySettler(Main.settlers.get(SelectedSettler())));
-        //HighAsteroid(s);
         HighAsteroid(Main.settlers.get(SelectedSettler()));
-        //switchCommand(s);
-        //HighlightAsteroids();
-
-
-        //if(selectedSettler%settlers.size()!=0)
-        //NextSettler();
-        //sv.SelectHighlighted(false);
-       // else
-           // Game.getInstance().NextRound();
     }
 
+    /**
+     * Lepteti a settlert
+     */
     public void NextSettler(){
-
         selectedSettler++;
         if(Main.settlers.size()==0){
             Game.getInstance().LoseGame();
@@ -109,6 +100,10 @@ public  class Controller {
         }
     }
 
+    /**
+     *
+     * @return Visszaadja az aktualisan kijelolt settler indexet
+     */
     public int SelectedSettler(){
         if(Main.settlers.size()==0){
             Game.getInstance().LoseGame();
@@ -119,17 +114,24 @@ public  class Controller {
         }
         return selectedSettler;
     }
+
+    /**
+     * A Drilleles levezenyleseert felelos metodus
+     */
     public void HandleDrill(){
         Main.settlers.get(SelectedSettler()).Drill();
     }
+
+    /**
+     * A Mineolas levezenyleseert felelos metodus
+     */
     public void HandleMine(){
         Main.settlers.get(SelectedSettler()).Mine();
-//        Main.ab.StartStorm(Main.asteroids.get(0));
     }
+    /**
+     * A PlaceMaterial levezenyleseert felelos metodus
+     */
     public void HandlePlaceMaterial(){
-//        this.removeA ll();
-//        this.setLayout(new FlowLayout(FlowLayout.LEFT));
-
         Game.getInstance().c.g.dp.removeAll();
         ArrayList<JButton> materials = new ArrayList<>();
         ArrayList<JButton> gates = new ArrayList<>();
@@ -167,9 +169,6 @@ public  class Controller {
             a.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-//                    Main.settlers.get(SelectedSettler()).PlaceMaterial(mat.get(materials.indexOf(a)));
-//                    Main.settlers.get(SelectedSettler()).GetInventory().Remove(mat.get(materials.indexOf(a)));
-//                    Main.materials.remove(mat.get(materials.indexOf(a)));
                     Main.settlers.get(SelectedSettler()).PlaceMaterial(m);
                     a.setIcon(null);
                     inventory.removeAll();
@@ -228,6 +227,9 @@ public  class Controller {
         Game.getInstance().c.g.dp.validate();
     }
 
+    /**
+     * Ez a metodus hivodik meg, ha a jatekos nyert
+     */
     public void SettlersHaveWon(){
         Game.getInstance().c.g.removeAll();
         Game.getInstance().c.g.repaint();
@@ -246,7 +248,9 @@ public  class Controller {
         Game.getInstance().c.g.repaint();
         Game.getInstance().c.g.validate();
     }
-
+    /**
+     * Ez a metodus hivodik meg, ha a jatekos vesztett
+     */
     public void SettlersLost(){
         Game.getInstance().c.g.removeAll();
         Game.getInstance().c.g.repaint();
@@ -266,8 +270,11 @@ public  class Controller {
         Game.getInstance().c.g.validate();
     }
 
+    /**
+     * Ez a metodus minden settlernel kikapcsolja a highlightot, kiveve annal, aki eppen ki van valasztva
+     * @param sv Aktualis SettlerView
+     */
     public void HighlightEverythingExcept(SettlerView sv){
-
        for(int i=0; i<Game.getInstance().c.g.GetSettlerView().size();i++){
            if(Game.getInstance().c.g.GetSettlerView().get(i).getSettler().getAsteroid()!=null) {
                if (Game.getInstance().c.g.GetSettlerView().get(i) == sv)
@@ -278,20 +285,21 @@ public  class Controller {
        }
     }
 
+    /**
+     * Ez a metodus highlightol minden olyan destination objectet ami a settler aszteroidajaval szomszedos
+     * @param sv aktualis Settler
+     */
     public void HighAsteroid(Settler sv){
         for(Asteroid a : Main.asteroids) {
             if (a != null) {
                 Game.getInstance().c.g.getAsteroidViewByAsteroid(a).highlight(false, g);
-                System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
-                //Game.getInstance().c.g.getAsteroidViewByAsteroid(a).setImage();
             }
         }
 
         for(TeleportGate tg : Main.teleportgates) {
             if(tg.GetisPlaced())
                 Game.getInstance().c.g.getTeleportGateViewByTeleportGate(tg).highlightt(false, g);
-            //System.out.println(Game.getInstance().c.g.getAsteroidViewByAsteroid(a).getAsteroid().getLayers());
-            //Game.getInstance().c.g.getTeleportGateViewByTeleportGate(tg).setImage();
+
         }
 
         for(DestinationObject a : sv.getAsteroid().GetNeighbours()){
@@ -305,6 +313,10 @@ public  class Controller {
         }
     }
 
+    /**
+     * A model objektumok alapjan inicializal egy view objektumot es hozzaadja a tombokhoz
+     * @param g GUI
+     */
     public void InitViews(GUI g){
         for(int i=0; i<Main.settlers.size();i++){
             g.addSettler(Main.settlers.get(i));
@@ -321,9 +333,7 @@ public  class Controller {
             g.addUfo(Main.ufos.get(i));
             Game.getInstance().AddSteppable(Main.ufos.get(i));
         }
-        //System.out.println("TELEPORTGATES SIZE" + Main.teleportgates.size());
         for(int i=0; i<Main.teleportgates.size();i++){
-            //System.out.println("TeleportgateIIII" + i);
             g.addTeleportGate(Main.teleportgates.get(i));
             Game.getInstance().AddSteppable(Main.teleportgates.get(i));
         }
@@ -332,6 +342,10 @@ public  class Controller {
         }
     }
 
+    /**
+     * Robot epites levezenyleseert felelos metodus
+     * @param prev robot epites elotti robotok szama
+     */
     public void BuildRobot(int prev){
         int CurrentNumberOfRobots = Main.robots.size();
         if(CurrentNumberOfRobots > prev){
@@ -347,7 +361,9 @@ public  class Controller {
 
     }
 
-
+    /**
+     * Egyeni palya letrehozasaert felelos metodus
+     */
     public void CreateCustomMap(){
         g.GetAsteroidView().clear();
         g.GetSettlerView().clear();
@@ -424,8 +440,6 @@ public  class Controller {
                     Random rand = new Random();
                     rand_int = rand.nextInt(A);
                     int db = 0;
-                    System.out.println(i);
-                    System.out.println(Main.asteroids.get(i).GetNeighbourCount());
                     if (Main.asteroids.get(i).GetNeighbours() != null) {
                         for (DestinationObject o : Main.asteroids.get(i).GetNeighbours()) {
                             if (o == Main.asteroids.get(rand_int)) {
@@ -445,9 +459,7 @@ public  class Controller {
 
         //TeleportGate letrehozas, par beallitas es elhelyezes aszteroidan
         if(T > 0) {
-            System.out.println("Teleportgate count: " + T);
             for (int i = 0; i < T; i++) {
-                System.out.println(i);
                 TeleportGate t = new TeleportGate();
                 Main.teleportgates.add(t);
                 Game.getInstance().c.g.addTeleportGate(t);
@@ -457,21 +469,16 @@ public  class Controller {
                 int j = 0;
                 if (T % 2 == 0) {
                     while (j < T) {
-                        System.out.println("T1: " + j);
                         Main.teleportgates.get(j).setPair(Main.teleportgates.get(++j));
-                        System.out.println("T2: " + j);
                         Main.teleportgates.get(j).setPair(Main.teleportgates.get(j - 1));
                         j++;
                     }
                 } else {
                     while (j < (T - 1)) {
-                        System.out.println("T1: " + j);
                         Main.teleportgates.get(j).setPair(Main.teleportgates.get(++j));
-                        System.out.println("T2: " + j);
                         Main.teleportgates.get(j).setPair(Main.teleportgates.get(j-1));
                         j++;
                     }
-                    System.out.println("T3: " + j);
                     Main.teleportgates.get(j).setPlaced(true);
                 }
 
@@ -499,7 +506,7 @@ public  class Controller {
         }
         //TeleportGate END.
 
-        //Settler letrehozas, lehejezes
+        //Settler letrehozas, lehelyezes
         for(int i = 0; i < S;i++){
             Settler s = new Settler();
             Random rand = new Random();
@@ -511,7 +518,7 @@ public  class Controller {
 
         }
 
-        //Robot letrehozas, lehejezes
+        //Robot letrehozas, lehelyezes
         if(R > 0) {
             for (int i = 0; i < R; i++) {
                 Model.Robot r = new Model.Robot();
@@ -524,7 +531,7 @@ public  class Controller {
             }
         }
 
-        //UFO letrehozas, lehejezes
+        //UFO letrehozas, lehelyezes
         if(U > 0) {
             for (int i = 0; i < U; i++) {
                 UFO u = new UFO();
@@ -537,12 +544,17 @@ public  class Controller {
             }
         }
 
-        //lehet nem jó h melyik mi
+
         Main.Randomize = (datas.get(9)==1)?true:false;
 
         Game.getInstance().AddSteppable(Main.ab);
     }
 
+    /**
+     * Megkeres egy material(view)-t hoz tartozo aszteroidaview-t a materialhoz tartozo aszteroida alapjan
+     * @param m Materialview
+     * @return AsteroidView
+     */
     public AsteroidView getAsteroidViewByMaterialView(MaterialView m){
         for(int i=0;i<Main.asteroids.size();i++){
             if(Main.asteroids.get(i).getMaterial()==m.getMaterial()){
@@ -552,6 +564,10 @@ public  class Controller {
         return null;
     }
 
+    /**
+     * A gombok egyseges kinezet megjelenitesere szolgal
+     * @param btn
+     */
     public void setbtn(JButton btn){
         btn.setOpaque(true);
         btn.setPreferredSize(new Dimension(60,60));
