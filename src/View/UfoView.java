@@ -12,6 +12,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
 
+/**
+ * Ufo grafikus megjeleniteset valositja meg.
+ */
 public class UfoView implements IDrawable{
     private Icon p;
     private JLabel l;
@@ -24,7 +27,7 @@ public class UfoView implements IDrawable{
         p=new ImageIcon(new ImageIcon("Files/Pictures/ufo.png").getImage().getScaledInstance(20, 30, Image.SCALE_SMOOTH));
         l=new JLabel(p);
 
-        l.addMouseListener(new MouseListener() {
+        /*l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -66,26 +69,34 @@ public class UfoView implements IDrawable{
                 Game.getInstance().c.g.dp.repaint();
                 Game.getInstance().c.g.dp.validate();
             }
-        });
-//        Game.getInstance().c.g.gamespace.add(l);
+        });*/
     }
 
+    /**
+     * Koordinatak beallitasa.
+     * @param x
+     * @param y
+     */
     public void SetCoords(int x, int y){
         int offsetX = rnd.nextInt(31)+50;
         int offsetY = rnd.nextInt(31)+50;
         this.x = x+offsetX;
         this.y = y+offsetY;
     }
+
+    /**
+     * Kirajzolas.
+     */
     @Override
     public void Draw() {
         AsteroidView av = Game.getInstance().c.g.getAsteroidViewByAsteroid( u.getAsteroid());
         SetCoords(av.getX(),av.getY());
 
 
-        //Game.getInstance().c.g.gamespace.add(l);
+
         Game.getInstance().c.g.gamespace.add(l,1);
 
-//        Game.getInstance().c.g.gamespace.setComponentZOrder(l, 1);
+
         l.setBounds(this.x, this.y, p.getIconWidth(), p.getIconWidth());
     }
 

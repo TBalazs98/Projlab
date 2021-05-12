@@ -14,6 +14,11 @@ public class MenuBar extends JMenuBar {
     private JMenuItem exit;
     GUI gui;
     static boolean gamesaved = false;
+
+    /**
+     * Konstruktor
+     * @param g GUI
+     */
     public MenuBar(GUI g){
         file = new JMenu("Game Options");
         save = new JMenuItem("Save Game");
@@ -30,6 +35,9 @@ public class MenuBar extends JMenuBar {
         this.setVisible(true);
     }
 
+    /**
+     * Exitgame listener
+     */
     private class exitListener implements ActionListener{
 
         @Override
@@ -50,6 +58,9 @@ public class MenuBar extends JMenuBar {
                 }
             }
 
+        /**
+         * Exitmenu
+         */
         private void exitMenu() {
             gui.getContentPane().removeAll();
             gui.DrawMenu();
@@ -61,7 +72,9 @@ public class MenuBar extends JMenuBar {
         }
     }
 
-
+    /**
+     * Savegame listener
+     */
     private static class saveListener implements ActionListener{
 
         @Override
