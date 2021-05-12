@@ -128,12 +128,4 @@ public class AsteroidBelt implements Steppable{
         return asteroids;
     }
 
-
-//    public AsteroidBelt copy() {
-//        AsteroidBelt copy = new AsteroidBelt();
-//        for(Asteroid a: asteroids) {
-//            copy.AddAsteroid(a.copy());
-//        }
-//        return copy;
-//    }
 }

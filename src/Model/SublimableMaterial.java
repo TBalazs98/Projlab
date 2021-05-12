@@ -44,7 +44,6 @@ public class SublimableMaterial extends Material {
         //fuggveny lefutasa tagvaltozo lekerdezesevel
         if(a.GetSunProximity() == true) {
             a.RemoveMaterial(this);
-//            Main.materials.remove(this);
 
             Main.materials.set(Main.materials.indexOf(this), null);
             Game.getInstance().c.g.getMaterialViewByMaterial(this).l.setIcon(null);

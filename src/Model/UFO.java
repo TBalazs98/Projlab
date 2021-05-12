@@ -66,11 +66,5 @@ public class UFO extends Character implements Steppable, mine{
         this.asteroid.Remove(this);
     }
 
-//    public UFO copy() {
-//        UFO copy = new UFO();
-//        copy.inventory = this.inventory.copy();
-//        copy.setAsteroid(asteroid);
-//        return copy;
-//    }
 
 }

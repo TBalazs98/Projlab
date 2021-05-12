@@ -61,8 +61,6 @@ public class RadioactiveMaterial extends Material {
         }
         if(exposed == 3) {
 
-//            Game.getInstance().c.g.materials.remove(Game.getInstance().c.g.getMaterialViewByMaterial(this));
-//            System.out.println("INDEX OF RAD" + Main.materials.indexOf(this));
             Main.materials.set(Main.materials.indexOf(this),null);
             Game.getInstance().c.g.getMaterialViewByMaterial(this).setImage();
             Game.getInstance().c.g.materials.remove(Game.getInstance().c.g.getMaterialViewByMaterial(this));
