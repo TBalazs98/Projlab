@@ -19,9 +19,6 @@ public class Main {
      * Jelenleg a Test nevu tesztosztalyunk segitsegevel ellenorizzuk modellunk helyesseget.
      */
 
-
-    //public static GUI g = new GUI();
-   // public static Controller c;
     public static Game game = Game.getInstance();
     public static AsteroidBelt ab = AsteroidBelt.getInstance();
     public static boolean Randomize = false;
@@ -79,80 +76,9 @@ public class Main {
 
         //ProtoTest pt = new ProtoTest();
        // pt.menu();
-//        ArrayList<String> asd = new ArrayList<>();
-//        asd = InputManager.GenerateOutput("1in");
-//        for (int i=0;i<5;i++){
-//            System.out.println("\n");
-//        }
-//        for(int i=0; i< asd.size();i++){
-//            System.out.println(asd.get(i));
-//        }
 
-        //ProtoTest.menu();
-        /*Asteroid a1 = new Asteroid();
-        Asteroid a2 = new Asteroid();
-        Settler s1 = new Settler();
-        Settler s2 = new Settler();
-        Settler s3 = new Settler();
-        Settler s4 = new Settler();
-        asteroids.add(a1);
-        asteroids.add(a2);
-        settlers.add(s1);
-        settlers.add(s2);
-        settlers.add(s3);
-        settlers.add(s4);
-
-
-        GuiController gc= new GuiController(g);*/
-//        //g.DrawMenu();
-//        //c = new Controller();
-//        Asteroid a = new Asteroid();
-//        a.SetEmpty(true);
-//        SublimableMaterial sm = new SublimableMaterial();
-//        a.SetMaterial(null);
-//        a.setLayer(0);
-//        a.SetSunProximityManual(true);
-//
-//
-//        Asteroid a2 = new Asteroid();
-//        a2.SetEmpty(false);
-//        SublimableMaterial sm2 = new SublimableMaterial();
-//        a2.SetMaterial(sm2);
-//        a2.setLayer(5);
-//        a2.SetSunProximityManual(true);
-//
-//
-//
-//        Asteroid a3 = new Asteroid();
-//        a3.SetEmpty(false);
-//        SublimableMaterial sm3 = new SublimableMaterial();
-//        a3.SetMaterial(sm3);
-//        a3.setLayer(1);
-//        a3.SetSunProximityManual(true);
-//
-//        TeleportGate tg=new TeleportGate();
-//        tg.setPlaced(true);
-//        tg.setAsteroid(a3);
-//        tg.AddNeighbour(a2);
-//
-//        a3.setNeighbour(tg);
-//
-//        materials.add(m);
-//        materials.add(rm);
-
-//        s.AddMaterial(m);
-//        s.AddMaterial(rm);
-
-
-
-        //System.out.println(Main.materials.get(1).name);
         game.StartGame();
-        //game.c.isNeighbour(s,a2);
-
-
-
 
     }
-
 
 }
